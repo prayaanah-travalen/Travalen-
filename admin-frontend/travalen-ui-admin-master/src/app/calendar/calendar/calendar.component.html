@@ -1,0 +1,128 @@
+<div class="calender">
+    <div class="container-fluid">
+        <div class="first-section">
+            <div class="row">
+                <div class="col-lg-4">
+                    <p class="heading-calender">Calender</p>
+                </div>
+                <div class="col-lg-4">
+                    <select class="dropdown" id="dropdown" name="dropdown">
+                        <option value="option1">All Rooms</option>
+                        <option value="option2">Standard Rooms</option>
+                        <option value="option3">Dueluex Rooms</option>
+                    </select>
+                </div>
+                <div class="col-lg-4">
+                    <!-- <input class="text" type="text" name="Booking Date" placeholder="10 Sept 2023 - 10 Oct 2023"> -->
+                    <mat-form-field>
+                        <!-- <mat-label>Enter a date range</mat-label> -->
+                        <mat-date-range-input [rangePicker]="picker">
+                          <input matStartDate placeholder="Start date" [(ngModel)]="firstDay">
+                          <input matEndDate placeholder="End date" [(ngModel)]="lastDay" (dateChange)="dateChange()">
+                        </mat-date-range-input>
+                        <!-- <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint> -->
+                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-date-range-picker #picker></mat-date-range-picker>
+                      </mat-form-field>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-right">
+
+            <div class="calendar-div">
+
+                <div class="month-year">
+                    {{currentMonth | uppercase }} {{currentYear}}
+                </div>
+
+                <div class="cdk-virtual-scroll-data-source">
+                    <cdk-virtual-scroll-viewport orientation="horizontal" itemSize="60" minBufferPx="400" maxBufferPx="1000"
+                        class="date-viewport" (scrolledIndexChange)="changeMonth($event)">
+                        <div *cdkVirtualFor="let item of items" class="date-item">
+                            <div class="item" (click)="select(item)" [ngClass]="{'is-active':item===selectedDate}">
+                                <span class="weekName">{{returnWeekDay(item)}}</span>
+                                <span> {{item | date:'d'}}</span>
+                            </div>
+                        </div>
+                    </cdk-virtual-scroll-viewport>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+           <div class="mt-3 table-div" *ngFor="let dt of data">
+            <h3>{{dt.roomName}}</h3>
+            <div class="display-flex calendar-grid">
+                <div class="cal">  
+                    <div>Room Status</div>
+                    <div>Rooms to Sell</div>
+                    <div>Net Booked</div>
+                    <div>Standard Rate</div>
+                    <div>Non Refundable Rate</div>
+                    <div>Weekly Rate</div>
+                </div>
+                <div class="cal" *ngFor="let dt1 of dt.data">
+                    <div [ngClass]="dt1.status">{{dt1.status? dt1.status : 'NA'}}</div>
+                    <div [ngClass]="dt1.status !== 'BOOKED' ? dt1.status : ''">{{dt1.roomsToSell - dt1.netBooked}}</div>
+                    <div [ngClass]="dt1.status !== 'BOOKED' ? dt1.status : ''">{{dt1.netBooked ? dt1.netBooked : '00'}}</div>
+                    <div [ngClass]="dt1.status !== 'BOOKED' ? dt1.status : ''">{{dt1.standardRate ? dt1.standardRate : '00'}}</div>
+                    <div [ngClass]="dt1.status !== 'BOOKED' ? dt1.status : ''">{{dt1.nonRefundableRate ? dt1.nonRefundableRate : '00'}}</div>
+                    <div [ngClass]="dt1.status !== 'BOOKED' ? dt1.status : ''">{{dt1.weeklyRate ? dt1.weeklyRate : '00'}}</div>
+                </div>
+            </div>
+           
+                <!-- <table>  -->
+                    <!-- <tr>
+                        <th>Room Status</th>
+                        <td> 00</td>
+                    </tr>
+                    <tr>
+                        <th>Rooms to Sell</th>
+                        <td> 00</td>
+                    </tr>
+                    <tr>
+                        <th>Net Booked</th>
+                        <td> 00</td>
+                    </tr>
+                    <tr>
+                        <th>Standard Rate</th>
+                        <td> 00</td>
+                    </tr>
+                    <tr>
+                        <th>Non Refundable Rate</th>
+                        <td> 00</td>
+                    </tr>
+                    <tr>
+                        <th>Wekly Rate</th>
+                        <td> 00</td>
+                    </tr> -->
+
+                    <!-- <tr>
+                        
+                        <td>  
+                            <tr><th>Room Status</th></tr>
+                            <tr><th>Rooms to Sell</th></tr>
+                            <tr><th>Net Booked</th></tr>
+                            <tr><th>Standard Rate</th></tr>
+                            <tr><th>Non Refundable Rate</th></tr>
+                            <tr><th>Weekly Rate</th></tr>
+                        </td>
+                        <td *ngFor="let dt1 of dt.data">
+                            <tr><td>{{dt1.status}}</td></tr>
+                            <tr><td>{{dt1.roomsToSell - dt1.netBooked}}</td></tr>
+                            <tr><td>{{dt1.netBooked}}</td></tr>
+                            <tr><td>{{dt1.standardRate}}</td></tr>
+                            <tr><td>{{dt1.nonRefundableRate}}</td></tr>
+                            <tr><td>{{dt1.weeklyRate}}</td></tr>
+                        </td>
+                    </tr> -->
+                   
+                
+
+                <!-- </table> -->
+           </div>
+
+        </div>
+    </div>
+</div>

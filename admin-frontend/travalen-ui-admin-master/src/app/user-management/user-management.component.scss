@@ -1,0 +1,61 @@
+.content {
+    background: #fff;
+    padding: 20px;
+    height: 600px;
+}
+
+input {
+    width: 100%;
+    // margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #aca5a5;
+    display: block;
+}
+
+input:focus {
+    outline: none;
+}
+
+.Ph-No {
+    height: 50px;
+    border-radius: 5px;
+}
+
+.Ph-No-text {
+   border: none;
+    outline: none;
+    width: 85%;
+    height: 50px;
+    border-radius: 0 5px 5px 0;
+    color: #98A2B3;
+    padding: 15px;
+    display: inline;
+ 
+}
+
+.code {
+    width: 70px;
+    padding: 15px 0px;
+    border: none;
+    color: #F7F7FD;
+    background: #C5C0DB;
+    border-radius: 5px 0 0 5px;
+}
+
+.phone-div {
+    border: 1px solid #aca5a5;
+    border-radius: 5px;
+}
+
+button
+{
+    color: white;
+    background-color: #1EDD8D;
+    border: none;
+    outline: none;
+    font-weight: bold;
+    border-radius: 5px;
+    margin-top: 20px;
+    padding: 10px 20px;
+}

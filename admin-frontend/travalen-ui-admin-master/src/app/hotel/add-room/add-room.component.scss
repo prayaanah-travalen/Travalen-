@@ -1,0 +1,155 @@
+// Add-Room
+.add-room-modal
+{
+    width: 100%;
+    height: 670px;
+    background: #ffff;
+    padding: 20px;
+    overflow: scroll;
+}
+.add-room
+{
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: 10px;
+}
+.labels
+{
+    color:  #98A2B3;
+    margin-top: 8px;
+}
+.text
+{
+    border: none;
+    outline: none;
+    width: 100%;
+    height: 50px;
+    border-radius: 5px;
+    background-color:whitesmoke;
+    color: #98A2B3;
+    padding-left: 15px;
+}
+.room-tags
+{
+    height: 25vh;
+    // width: 50vh;
+    border-radius: 5px;
+    background-color: whitesmoke;
+}
+.add
+{
+    border: none;
+    outline: none;
+    height: 50px;
+    width: 200px;
+    margin-left: 35px;
+    margin-top: 20px;
+}
+.add-btn-border
+{
+    height: 50px;
+    width: 80px;
+    background-color: white;
+    margin-left: 35px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.add-btn
+{
+    width: 70px;
+    height: 35px;
+    color: white;
+    background-color: #1EDD8D;
+    border: none;
+    outline: none;
+    font-weight: bold;
+    border-radius: 5px;
+}
+.dotted-img-box
+{
+    // width: 104vh;
+    height: 25vh;
+    border: 2px dotted #D9D9D9;
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.img-box
+{
+    width: 20vh;
+    height: 8vh;
+}
+.upload-img
+{
+    color: #98A2B3;   
+}
+.btn-div
+{
+    float: right;
+    width: 40vh;
+    margin-left: 40px;
+    margin-top: 30px;
+}
+.btn-discard
+{
+    width: 100px;
+    height: 50px;
+    border: 2px solid  #98A2B3;
+    outline: none;
+    border-radius: 5px;
+    color:  #98A2B3 ;
+    font-weight: bold; 
+    background-color: white;  
+   
+}
+.btn-add-room
+{
+    width: 150px;
+    height: 50px;
+    color: white;
+    background-color: #1EDD8D;
+    border: none;
+    outline: none;
+    font-weight: bold;
+    border-radius: 5px;
+    margin-left: 20px; 
+    float: right;
+}
+
+input
+{
+    padding: 15px;
+}
+
+::ng-deep .mat-form-field-infix {
+    width: 100% !important;
+    border-radius: 5px !important;
+    line-height: 24px !important;
+    border: 1px solid rgba(0,0,0,.42) !important;
+    padding: 0 !important;
+
+}
+
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-underline {
+    display: none;
+}
+
+::ng-deep .mat-form-field {
+    width: 100% !important;
+}
+
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-label{
+    padding-left: 10px;
+}
+
+.mat-select {
+    padding: 10px !important;
+}
+.dropdown {
+    border: 1px solid #d3cdcd;
+    padding: 10px;
+    border-radius: 5px;
+  }

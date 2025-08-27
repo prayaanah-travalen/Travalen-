@@ -1,0 +1,158 @@
+<!-- Landing -->
+<div class="landing">
+    <!-- <div class="container-fluid> -->
+    <div class="bg-img" style="background-image: url(./assets/images/bg.png)">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+                <img src="./assets/images/logo.png" class="logo">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav  ms-auto">
+                        <li class="nav-item" style="padding-right: 10px;">
+                            <a class="nav-link active"
+                                style="color: white; font-weight:700; font-size: 16px; line-height:20px;"
+                                aria-current="page" href="#">Already
+                                have a Account?</a>
+                        </li>
+                        <li class="nav-item">
+                            <button class="btn-sign-in" (click)="signIn()">Sign In</button>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Profile</a></li>
+                                <li><a class="dropdown-item" href="#">Terms & Policies</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Log Out</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+       
+        <div class="first-section">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="fs-para-one">
+                        <p class="fs-p-1">List Your Hotel on Travalen.in</p>
+                    </div>
+                    <div class="fs-para-two">
+                        <p class="fs-p-2">Welcome to our Admin Portal, where you can easily manage and update
+                            information
+                            about your hotels. Whether you're adding a new property or making changes to existing
+                            ones,
+                            our user-friendly platform makes it a breeze.</p>
+                    </div>
+                    <button class="btn" (click)="createAccount()">Get Started Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+    <div class="second-section">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="ss-para-one">
+                    <p class="ss-p-1">Why Choose Us ?</p>
+                </div>
+                <div class="ss-para-two">
+                    <p class="ss-p-2">At Travalen.in, we understand that managing a hotel can be both rewarding and
+                        challenging. That's
+                        why we've developed a comprehensive and user-friendly Hotel Admin Portal to simplify the
+                        process
+                        and help you achieve your business goals.</p>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="img-box">
+                    <img src="./assets/images/Rectangle 592.png" class="second-section-img">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="third-section">
+        <div class="vertical-line"></div> 
+        <div class="inner-third-section">
+            <p class="ts-para-one">Here's why you should choose us.</p>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <img src="./assets/images/Easy-to-Use Interface Icon.png" class="icon">
+                        </div>
+                        <div class="col-lg-10">
+                            <p class="ts-small-para">Easy-to-Use Interface</p>
+                            <p class="ts-long-para">Our Hotel Admin Portal is designed with simplicity in mind. We believe
+                                that hotel owners
+                                and managers should be able to effortlessly navigate and manage their properties online.</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <img src="./assets/images/Increased Visibility Icon.png" class="icon">
+                        </div>
+                        <div class="col-lg-10">
+                            <p class="ts-small-para">Increased Visibility</p>
+                            <p class="ts-long-para">We provide you with a platform to showcase your property to travelers
+                                from all corners of
+                                the
+                                world. This increased visibility can lead to higher occupancy rates and more bookings.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <img src="./assets/images/Robust Features Icon.png" class="icon">
+                        </div>
+                        <div class="col-lg-10">
+                            <p class="ts-small-para">Robust Features</p>
+                            <p class="ts-long-para">Our Hotel Admin Portal offers a range of powerful features to enhance
+                                your hotel's online
+                                presence.
+                                You can easily manage room availability, rates, and even set dynamic pricing based on
+                                demand. </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <img src="./assets/images/Trust and Reliability Icon.png" class="icon">
+                        </div>
+                        <div class="col-lg-10">
+                            <p class="ts-small-para">Trust and Reliability</p>
+                            <p class="ts-long-para">You can trust us to provide a secure and dependable platform for your
+                                hotel management
+                                needs.</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <img src="./assets/images/Your Success is Our Priority Icon.png" class="icon">
+                        </div>
+                        <div class="col-lg-10">
+                            <p class="ts-small-para">Your Success is Our Priority</p>
+                            <p class="ts-long-para">Ultimately, your success is our top priority. We're committed to helping
+                                you grow your
+                                hotel
+                                business by providing the tools and support you need to thrive in today's competitive
+                                market.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    <div class="footer">
+        <img src="./assets/images/footer.png" class="footer">
+    </div>
+    <!-- </div> -->
+</div>

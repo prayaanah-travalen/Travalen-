@@ -1,0 +1,159 @@
+// Landing
+.bg-img {
+    width: 100%;
+    // height: 100vh;
+    padding-left: 70px;
+    padding-right: 70px;
+    padding-top: 20px;
+    padding-bottom: 165px;
+
+}
+
+// Navbar
+.logo {
+    width: 122.18px;
+    height: 42px;
+}
+
+.btn-sign-in {
+    width: 100px;
+    height: 48px;
+    border: 1px solid white;
+    color: white;
+    border-radius: 5px;
+    gap: 10px;
+    background: rgba(0, 0, 0, 0);
+    padding: 14px, 32px, 14px, 32px;
+}
+
+// First-Section
+.fs-para-one {
+    // width: 18%;
+    // height: 20vh;
+    margin-top: 140px;
+}
+
+.fs-p-1 {
+    color: white;
+    font-weight: 700;
+    font-size: 35px;
+    line-height: 1.5;
+}
+
+.fs-para-two {
+    // width: 47%;
+    // height: 20vh;
+}
+
+.fs-p-2 {
+    color: white;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.btn {
+    // width: 15%;
+    height: 69px;
+    margin-top: 30px;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: 700;
+    background-color: white;
+    color: rgb(0, 132, 255);
+}
+
+// Second-Section
+.second-section {
+    width: 100%;
+    // height: 100vh;
+    padding-left: 70px;
+    padding-right: 165px;
+}
+
+.img-box {
+    width: 100%;
+    // height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.second-section-img {
+    width: 100%;
+    // height: 55vh;
+}
+
+.ss-para-one {
+    // width: 60%;
+    // height: 8vh;
+    margin-top: 240px;
+}
+
+.ss-p-1 {
+    color: #2C2C2C;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 46.87px;
+}
+
+.ss-para-two {
+    width: 100%;
+    // height: 20vh;
+}
+
+.ss-p-2 {
+    color: #2C2C2C;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 26.04px;
+}
+
+// Third-section
+.third-section {
+    width: 100%;
+    // height: 100vh;
+    padding-top: 50px;
+    background-color: whitesmoke;
+}
+.inner-third-section {
+    padding-left: 70px;
+    padding-right: 70px;
+}
+.vertical-line {
+    width: 100%;
+    height: 1px;
+    background-color: red;
+    box-sizing: border-box;
+}
+
+.ts-para-one {
+    margin-top: 30px;
+    color: black;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 46.87px;
+}
+
+.icon {
+    margin-top: 30px;
+}
+
+.ts-small-para {
+    margin-top: 30px;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 41.66px;
+}
+
+.ts-long-para {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 26.04px;
+}
+
+// Footer
+.footer {
+    width: 100%;
+    height: 50vh;
+}

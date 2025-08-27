@@ -1,0 +1,36 @@
+.content {
+    background: #fff;
+    padding: 20px;
+}
+
+button
+{
+    color: white;
+    background-color: #1EDD8D;
+    border: none;
+    outline: none;
+    font-weight: bold;
+    border-radius: 5px;
+    // margin-top: 20px;
+    padding: 10px 20px;
+}
+
+table {
+    width: 100%;
+}
+
+.inactivate button {
+    background-color: red !important;
+
+}
+
+.a {
+    color: #1EDD8D;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+table button {
+    padding: 5px 10px;
+}
+

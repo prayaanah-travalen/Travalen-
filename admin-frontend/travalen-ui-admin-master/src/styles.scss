@@ -1,0 +1,34 @@
+/* You can add global styles to this file, and also import other style files */
+@import '@angular/cdk/overlay-prebuilt.css';
+
+.display-flex {
+    display: flex;
+}
+.space-between {
+    justify-content: space-between;
+}
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.error {
+    border: 1px solid red !important;
+    border-radius: 5px !important;
+}
+
+.error-text {
+    color: red !important;
+}
+
+.pr-10 {
+    padding-right: 10px;
+}
+
+.justify-right {
+    justify-content: right;
+}
+
+.mr-10{
+    margin-right: 10px;
+}

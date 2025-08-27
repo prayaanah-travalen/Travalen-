@@ -1,0 +1,149 @@
+<!-- Add-Room-Modal -->
+<div class="add-room-modal">
+    <div class="container-fluid">
+        <form [formGroup]="roomForm">
+            <div class="row">
+                <p class="add-room">Add Room</p>
+                <div class="col-lg-6">
+                    <label class="labels">Room Name<br>  </label>
+                    <input class="text" type="text" placeholder="Enter room name" name="roomname" formControlName="roomName">
+                
+                </div>
+                <div class="col-lg-6">
+                    <label class="labels">Room Price / per night<br> </label>
+                    <input class="text" type="text" placeholder="Enter room price" name="roomprice" formControlName="price">
+                
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <label class="labels">Cost for Extra Bed Adult<br>  </label>
+                    <input class="text" type="text" placeholder="Enter price" name="extraBedCostAdult" formControlName="extraBedCostAdult">
+                
+                </div>
+                <div class="col-lg-6">
+                    <label class="labels">Cost for Extra Bed Child<br> </label>
+                    <input class="text" type="text" placeholder="Enter price" name="extraBedCostChild" formControlName="extraBedCostChild">
+                
+                </div>
+            </div>
+            <div class="row">
+            
+                <div class="col-lg-6">
+                    <label class="labels">Price Slab</label>
+                    <mat-form-field>
+                        <mat-label>Select priceslab</mat-label>
+                        <mat-select formControlName="priceSlab" [ngClass]="submitted && (roomForm.controls['priceSlab'].errors || !roomForm.controls['priceSlab'].valid) ? 'error'  : '' " >
+                          <mat-option *ngFor="let price of priceSlabList" [value]="price.id">{{price.priceSlab}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                </div>
+                <div class="col-lg-6">
+                    <label class="labels">Bed Type</label>
+                    <mat-form-field>
+                        <mat-label>Select bed type</mat-label>
+                        <mat-select formControlName="bedType" >
+                          <mat-option value="king">King</mat-option>
+                          <mat-option value="king">Queen</mat-option>
+                          <mat-option value="king">Double</mat-option>
+                          <mat-option value="king">Single</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <label class="labels">Room Tags<br>   </label>
+                    <div class="room-tags">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <input class="add" type="text" placeholder="Search RoomTags" name="amenities" formControlName="roomTag">
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="add-btn-border">
+                                    <button  class="amenity-btn add-btn" (click)="addRoomTag()" >Add</button>
+                                </div> 
+                            </div>
+                        </div>
+                        <div class="p-3">
+                            <mat-chip-list #chipList>
+                                <mat-chip *ngFor="let tag of roomTagList" [selectable]="selectable"
+                                          [removable]="removable" (removed)="removeRoomTag(tag)">
+                                          {{tag}}
+                                  <!-- <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon> -->
+                                  <i matChipRemove class="fa fa-close mt-2"></i>
+                                </mat-chip>
+                            </mat-chip-list>
+                        </div>
+                    </div>
+                
+                </div>
+                <div class="col-lg-6">
+                    <label class="labels">Room Amenities<br></label>
+                    <div class="room-tags p-2">
+                        <!-- <div class="row"> -->
+                            <!-- <div class="col-lg-6">
+                                <input class="add" type="text" placeholder="Search Amenities" name="amenities"  formControlName="amenity">
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="add-btn-border">
+                                    <button (click)="addAminity()" class="amenity-btn add-btn">Add</button>
+                                </div> 
+                            </div> -->
+                            <div class="col-lg-12 ">
+                                <mat-select class="dropdown" (selectionChange)="addAminity($event.value)">
+                                    <mat-option *ngFor="let amenity of amenities" [value]="amenity">{{amenity.description}}</mat-option>
+                                
+                                </mat-select>
+                            </div>
+                        <!-- </div> -->
+                        <div class="p-3">
+                            <mat-chip-list #chipList>
+                                <mat-chip *ngFor="let amenity of amenityList" [selectable]="selectable"
+                                          [removable]="removable" (removed)="removeAmenity(amenity)">
+                                          {{amenity}}
+                                  <!-- <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon> -->
+                                  <i matChipRemove class="fa fa-close mt-2"></i>
+                                </mat-chip>
+                            </mat-chip-list>
+                        </div>
+                       
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <label class="labels">No of Rooms<br> </label>
+                    <input [ngClass]="submitted && (roomForm.controls['noOfRooms'].errors || !roomForm.controls['noOfRooms'].valid) ? 'error text'  : 'text' " type="text" placeholder="Enter No Of rooms" name="noOfRooms" formControlName="noOfRooms">
+                
+                </div>
+                <div class="col-lg-6">
+                    <label class="labels">Additional Package<br> </label>
+                    <mat-form-field>
+                        <mat-label>Select Package</mat-label>
+                        <mat-select formControlName="package"  [ngClass]="submitted && (roomForm.controls['package'].errors || !roomForm.controls['package'].valid) ? 'error'  : '' ">
+                          <mat-option *ngFor="let pack of roomPackage" [value]="pack.parameterId">{{pack.description}}</mat-option>
+                         
+                        </mat-select>
+                      </mat-form-field>
+                
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <app-file-upload (imageEmitter)="imageEmitter($event)" (deletedImageEmitter)="deletedImage($event)" [savedImage]="savedImages"></app-file-upload>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="btn-div">
+                        <button class="btn-discard" (click)="close()">Discard</button>
+                        <button class="btn-add-room" (click)="saveRoom()"> Save Room </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

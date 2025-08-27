@@ -1,0 +1,359 @@
+/* first-section */
+
+.title {
+  font-size: 25px;
+  font-weight: bold;
+  padding-left: 50px;
+  padding-top: 80px;
+  color: #ffffff;
+  line-height: 1.5;
+}
+.mini-title {
+  font-size: 18px;
+  line-height: 0.1px;
+  padding-left: 50px;
+  color: #ffffff;
+  padding-bottom: 50px;
+}
+.first-section {
+  height: 69vh;
+  background: url("~src/assets/images/home-banner.png") no-repeat center;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.booking {
+  width: 80%;
+  background-color: white;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+  margin-bottom: 25px;
+  margin-left: 35px;
+  margin-top: 76px;
+  z-index: 2;
+  position: absolute;
+}
+.first-right-section {
+  z-index: 1;
+}
+.location {
+  color: #969696;
+  padding: 15px 0;
+  font-size: 17px;
+  font-weight: 400;
+  margin: 0;
+  display: flex;
+}
+
+.from-date {
+  margin-top: 20px;
+  color: #000000;
+  font-weight: bold;
+}
+.btn.btn-primary.search {
+  background-color: #1edd8d;
+  border: none;
+  margin: 13px 10px;
+  float: right;
+}
+.heading-photo {
+  width: 200px;
+  height: 220px;
+  // float: right;
+  // margin-top: 20px;
+  // margin-right: 10px;
+  // margin-bottom: 10px;
+}
+.heading-photo1 {
+  width: 200px;
+  height: 180px;
+  // margin-top: 90px;
+  // float: right;
+  // margin-bottom: 50px;
+  // margin-right: 10px;
+}
+.heading-photo2 {
+  width: 200px;
+  height: 430px;
+  // float: right;
+  // margin-right: 15px;
+  // margin-top: 90px;
+}
+.vertical-line {
+  opacity: 0.5;
+  border: 0.5px solid #e0e8f3;
+  transform: rotate(90deg);
+}
+.fa-solid.fa-location-dot{
+  color: #1edd8d;
+  padding-right: 5px;
+}
+.fa-solid.fa-calendar-days{
+  color: #1edd8d;
+  padding-right: 5px;
+}
+.fa-solid.fa-user{
+  color: #1edd8d;
+  padding-right: 5px;
+}
+
+/* popular destination */
+
+// Third Section
+.offer-contents {
+  width: 98%;
+  // padding-bottom: 50px;
+  margin: 0 30px 100px 30px;
+}
+.heading {
+  color: #3c3c3c;
+  font-size: 25px;
+  // padding-left: 60px;
+  font-weight: bold;
+  margin: 0;
+}
+.mini-heading {
+  // padding-left: 60px;
+  color: #969696;
+  font-size: 18px;
+  padding: 15px 0;
+}
+
+.offer-img {
+  width: 200px;
+  height: 280px;
+}
+.first-part {
+  width: 200px;
+  height: 280px;
+  border-radius: 10px;
+}
+.second-part {
+  background-color: #1edd8d;
+  width: 250px;
+  height: 280px;
+  border-radius: 0px 10px 10px 0px;
+}
+.second-part-heading {
+  font-size: 18px;
+  font-weight: 500;
+  padding: 10px;
+  color: #3c3c3c;
+  margin: 0;
+}
+.second-part-content {
+  font-size: 12px;
+  text-align: left;
+  justify-content: center;
+  font-weight: 300;
+  color: #ffffff;
+  padding: 10px;
+  margin: 0;
+}
+.coupn-code {
+  background-color: white;
+  width: 90%;
+  height: 30px;
+  margin: 10px;
+  border-radius: 5px;
+  text-align: center;
+}
+.coupn-code-number {
+  text-decoration: none;
+  font-weight: 600;
+  color: #1edd8d;
+}
+.content-copy-img {
+  float: right;
+  padding: 5px;
+  padding-right: 5px;
+  background-color: #87ffcd;
+  border-radius: 0px 5px 5px 0px;
+}
+.carousel {
+  display: grid;
+  grid-auto-flow: column;
+  scroll-behavior: auto;
+  gap: 1.2rem;
+  overflow-y: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  // margin-left: 45px;
+}
+.carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.cards {
+  scroll-snap-align: start;
+  border-radius: 30px;
+  min-height: 250px;
+  min-width: 455px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+}
+
+// get in touch section
+
+// footer
+
+
+.date-picker {
+  width:100%;
+}
+
+.label {
+  margin-top: 5px;
+}
+
+.location-input{
+  border: none;
+  color:#969696;
+}
+
+.location-input:focus{
+  outline: none;
+}
+
+.location-input::placeholder{
+  color: #969696;
+  padding: 15px 0;
+  font-size: 17px;
+  font-weight: 400;
+  margin: 0;
+  display: flex;
+}
+
+::ng-deep .mat-chip.mat-standard-chip {
+  background-color: #83f1c3 !important;
+  color:  #625f5f !important;
+}
+
+::ng-deep .mat-standard-chip {
+   
+  min-height: 27px !important;
+  font-size: 12px !important;
+}
+
+.selected-disp {
+  padding: 0 15px 15px;
+}
+
+
+.guest-overlay {
+  width: 200px;
+  border: solid 1px #ccc;
+  border-radius: 5px;
+  background: #fff;
+  padding: 15px;
+  margin: 0;
+}
+
+
+.guest-overlay input {
+  width: 60px;
+  border: 1px solid #D9D9D9;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+input:focus{
+  outline: none;
+}
+
+.guest-overlay button {
+  background-color: #1edd8d;
+  border: none;
+  float: right;
+  color: #fff;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+  color: inherit;
+}
+
+.disp-none{
+  display: none;
+}
+
+.heading-photo-div {
+  position: absolute;
+  margin-left: 62%;
+  top: 8%;
+}
+.heading-photo1-div {
+  position: absolute;
+  margin-left: 62%;
+  /* margin-top: -174px; */
+  margin-top: 13%;
+}
+
+.heading-photo2-div{
+  position: absolute;
+  margin-left: 76%;
+  /* margin-top: -174px; */
+  top: 23%;
+}
+
+@media (min-width:320px)  and (max-device-width : 480px) { /* smartphones, iPhone, portrait 480x320 phones */ 
+  .heading-photo-div{
+    display: none;
+  }
+  .heading-photo1-div{
+    display: none;
+  }
+  .heading-photo2-div {
+    display: none;
+  }
+  .first-section {
+    height: 90vh;
+   
+  }
+  .booking {
+    margin-left: 12px;
+  }
+  .mini-title{
+    line-height: 1.5;
+    padding-bottom: 0px;
+  }
+}
+@media (min-width:481px)  and (max-device-width : 641px)  { /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */ 
+
+  .heading-photo-div{
+    display: none;
+  }
+  .heading-photo1-div{
+    display: none;
+  }
+  .heading-photo2-div {
+    display: none;
+  }
+  .first-section {
+    height: 90vh;
+   
+  }
+  .booking {
+    margin-left: 12px;
+  }
+}
+@media (min-width:641px)  { /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */ 
+
+}
+@media (min-width:961px)  { /* tablet, landscape iPad, lo-res laptops ands desktops */ 
+
+
+}
+@media (min-width:1025px) { /* big landscape tablets, laptops, and desktops */ 
+
+}
+@media (min-width:1281px) { /* hi-res laptops and desktops */ 
+
+}

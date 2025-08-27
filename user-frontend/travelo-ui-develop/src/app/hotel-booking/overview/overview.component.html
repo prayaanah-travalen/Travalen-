@@ -1,0 +1,188 @@
+<app-navbar></app-navbar>
+<div class="first-section mt-5">
+    <div class="container-fluid">
+        <div class="alert alert-danger mt-2" role="alert" *ngIf="error">
+            {{message}}
+        </div>
+        <div class="alert alert-success mt-2" role="alert" *ngIf="payment && !error ">
+            {{message}}
+        </div>
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div *ngFor="let booking of bookingRequest.bookingDetails">
+                            <div class="hotel-details" *ngFor="let room of booking.hotel.rooms">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <img  [src]="booking.hotel.images[0].image.changingThisBreaksApplicationSecurity" class="img-one">
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <div class="row">
+                                                <div class="col-lg-8">
+                                                    <p class="para-one">{{booking.hotel.hotelName}}</p>
+                                                    <p class="para-two"><img src="./assets/images/Group 126.png">{{booking.hotel.location.location}}</p>
+                                                    <img src="./assets/images/Group 125.png" class="logo-one">
+                                                    <p class="para-three">{{room.roomName}}</p>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <p class="rate">4.6</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+              
+                    </div>
+                    <div class="col-lg-12">
+                
+
+                        <div class="second-section">
+                        <div class="container-fluid">
+                            <div class="row">
+                            <div class="col-md-12">
+                            
+                                <div class="container mt-4 mb-4">
+                                    <p class="head-two">Guest Details</p>
+                                    <p class="head-three">Bokking For : {{bookingRequest.bookingFor | titlecase}}</p>
+                                    <div class="row">
+                                        <div class="col-md-6 mt-3">
+                                            <label class="labels">First Name</label><br>
+                                            <input class="input" type="text" [value]="bookingRequest.guestDetails?.firstName" disabled>
+                                        </div>
+                                        <div class="col-md-6 mt-3">
+                                            <label class="labels">Last Name</label><br>
+                                            <input class="input" type="text" [value]="bookingRequest.guestDetails?.lastName" disabled>
+                                        </div>
+                                        <div class="col-md-6 mt-3">
+                                            <label class="labels">Email Address</label><br>
+                                            <input class="input" type="text" [value]="bookingRequest.guestDetails?.email" disabled>
+                                        </div>
+                                        <div class="col-md-6 mt-3">
+                                            <label class="labels">Mobile Number</label><br>
+                                            <input class="input" type="text" [value]="bookingRequest.guestDetails?.phone" disabled>
+                                        </div>
+                                        <!-- <div class="col-md-12">
+                                            <label class="labels">Additional  Requirements</label><br>
+                                            <input class="long-input" type="text">
+                                        </div> -->
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+        
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="right-side-section">
+                    <div class="">
+                        <!-- first-row -->
+                            <div class="row p-3 text-center">
+                                <p class="head-one">Reservation Summary</p>
+                                <!-- <div class="col-md-3">
+                                   <p class="one">Amount</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <p class="two">&#8377; {{bookingRequest.priceSlab}}</p>
+                                 </div>
+                                 <div class="col-md-3">
+                                    <p class="one">Tax</p>
+                                 </div>
+                                 <div class="col-md-3">
+                                    <p class="two">&#8377; {{sgst + cgst}}</p>
+                                 </div> -->
+                                 
+                            </div>
+                            <mat-divider></mat-divider>
+                        <!-- second-row -->
+                        <div class="row p-3">
+                            <div class="col-md-6">
+                                <p class="one">No. Guests</p>
+                                <p class="three">{{bookingRequest.adults}} Adults {{bookingRequest.children}} Child</p>
+                            </div>
+                
+                            <div class="col-md-6">
+                                <p class="one">Rooms</p>
+                                <p class="three">1 + Extra Bed</p>
+                            </div>
+                            
+                        </div> 
+                        <mat-divider></mat-divider>
+                        <!-- third-row -->
+                        <div class="row  p-3">
+                            <div *ngFor="let booking of bookingRequest.bookingDetails">
+                                <div class="mb-3" *ngFor="let room of booking.hotel.rooms">
+                                    <p class="one">{{booking.hotel.hotelName}}</p>
+                                    <p class="five">{{room.roomName}}</p>
+                                    <div class="display-flex">
+                                        <div class="col-md">
+                                            <div class="sub">Check In</div>
+                                            <div>
+                                                <div class="three">{{booking.checkIn }}</div>
+                                                <div class="four">{{booking.hotel.checkInTime}}</div>
+                                            </div>
+                                          
+                                        </div>
+                                        <span class="divider"></span>
+                                        <div class="col-md">
+                                            <div class="sub">Check Out</div>
+                                            <div>
+                                                <div class="three">{{booking.checkOut }}</div>
+                                                <div class="four">{{booking.hotel.checkOutTime}}</div>
+                                            </div>
+                                          
+                                        </div>
+                                    </div>
+                                    
+                                  
+                                </div>
+                            </div>
+                           
+                        </div>
+                        <mat-divider></mat-divider>
+                        <div class="row  p-3">
+                            <div class="display-flex space-between">
+                                <span class="sub">Amount </span>
+                                <span class="tax-value">₹ {{bookingRequest.priceSlab}}</span>
+                            </div>
+                            <div class="display-flex space-between mt-2">
+                                <span class="sub">SGST 8% </span>
+                                <span class="tax-value">₹ {{sgst}}</span>
+                            </div>
+                            <div class="display-flex space-between mt-2">
+                                <span class="sub">CGST 8% </span>
+                                <span class="tax-value">₹ {{cgst}}</span>
+                            </div>
+                        </div>
+                        <mat-divider></mat-divider>
+                        <div  class="row  p-3">
+                            <div class="display-flex space-between">
+                                <span class="sub">Total </span>
+                                <span class="tax-value">₹ {{bookingRequest.priceSlab ? (bookingRequest.priceSlab + cgst + sgst) : 0}}</span>
+                            </div>
+                        </div>
+                        <!-- fifth-row -->
+                        <!-- <div class="row">
+                            <div class="col-md-12">
+                                <label class="one">Enter Coupon Code</label><br>
+                                <input class="code-input" type="text">
+                            </div>
+                        </div>  -->
+                    </div> 
+                </div> 
+
+            </div>
+        </div>
+    </div>
+  </div>
+
+  
+<app-footer></app-footer>

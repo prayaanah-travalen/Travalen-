@@ -1,0 +1,52 @@
+.content {
+
+    padding: 20px;
+}
+
+label
+{
+    color:  #98A2B3; 
+    font-weight: 400;
+    margin-top: 15px;
+}
+
+input {
+
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid #cac5c5;
+    padding: 10px;
+    margin-top: 5px;
+}
+
+button
+{
+    color: white;
+    background-color: #1EDD8D;
+    border: none;
+    outline: none;
+    font-weight: bold;
+    border-radius: 5px;
+    margin-top: 20px;
+    padding: 10px 20px;
+}
+
+.price-mngmt{
+    background: #ffff;
+    padding: 20px;
+}
+
+table{
+    width: 100%;
+}
+
+a{
+    color: red !important;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.edit {
+    color: #1EDD8D !important;
+    margin-right: 15px;
+}

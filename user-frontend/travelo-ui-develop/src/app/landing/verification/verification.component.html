@@ -1,0 +1,20 @@
+ <!-- Verification PopUp -->
+	<div class="border-two text-center">
+		<div class="">
+			<h1 class="head-two">Verify Code</h1>
+			<p class="head-three">Enter the confirmation code sent via mobile number</p>
+		</div>
+		<div>
+			<div class="container">
+				<div class="row">
+					<div class="col-md">
+						<ng-otp-input  (onInputChange)="onOtpChange($event)" [config]="{length:6, inputClass:'inner'}"></ng-otp-input>
+					</div>
+				</div>
+				<div class="error-text mt-3">{{error}}</div>
+			</div>
+			<button class="btn-two" (click)="verifyOtp()" [disabled]="otp.length < 6">Verify</button>
+		
+		</div>
+
+	</div> 

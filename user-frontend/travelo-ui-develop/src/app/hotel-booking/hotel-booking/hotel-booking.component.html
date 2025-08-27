@@ -1,0 +1,221 @@
+<!-- navbar -->
+<app-navbar></app-navbar>
+
+<!-- Hotel Details -->
+
+<div class="first-section pt-4">
+    <div class="container-fluid">
+        <div class="row content">
+            <div class="col-lg-8">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div *ngIf="bookingRequest.bookingDetails.length;else message">
+                            <div *ngFor="let booking of bookingRequest.bookingDetails">
+                                <div class="hotel-details" *ngFor="let room of booking.hotel.rooms">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-lg-3">
+                                                <img [src]="booking.hotel.images[0].image.changingThisBreaksApplicationSecurity" class="img-one">
+                                            </div>
+                                            <div class="col-lg-9 mt-2">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="display-flex space-between">
+                                                            <div>
+                                                                <p class="para-one">{{booking.hotel.hotelName}}</p>
+                                                                <p class="para-two">
+                                                                    <img src="./assets/images/Group 126.png">
+                                                                    {{booking.hotel.location.location}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <p class="rate">4.6</p>
+                                                            </div>
+                                                        
+                                                        </div>
+                                                    
+                                                    
+                                                        <img src="./assets/images/Group 125.png" class="logo-one">
+                                                        <p class="para-three">{{room.roomName}}</p>
+                                                    </div>
+                                                    <!-- <div class="col-lg-4">
+                                                        <p class="rate">4.6</p>
+                                                    </div> -->
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="btn">
+                                                            <button class="btn-remove " (click)="removeHotels(booking.hotel)">Remove</button>
+                                                            <button class="btn-change ">Change Dates</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <ng-template #message>
+                            <div class="pt-4 pb-4">
+                                No hotels are added for the reservation. Please click <a [routerLink]="['/hotels']">here</a> to continue with the booking
+                            </div>
+                        </ng-template>
+                       
+                    </div>
+                    <div class="col-lg-12">
+                        <!-- Guest Details -->
+
+                        <div class="second-section">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <form [formGroup]="guestForm">
+                                            <div class="container">
+                                                <p class="head-two">Guest Details</p>
+                                                <p class="head-three">Bokking For</p>
+                                                <label><input type="radio" name="bookingFor" value="myself" formControlName="bookingFor">Myself</label>
+                                                <label><input class="guest" type="radio" name="bookingFor" value="guest" formControlName="bookingFor">Guest</label>
+                                                <div class="row">
+                                                    <div class="col-md-6 mt-2">
+                                                        <label class="labels">First Name</label><br>
+                                                        <input [value]="guestForm.controls['firstName'].value" [ngClass]="guestForm.controls['firstName'].errors || !guestForm.controls['firstName'].valid ? 'error input' : 'input'" type="text" formControlName="firstName">
+                                                    </div>
+                                                    <div class="col-md-6 mt-2">
+                                                        <label class="labels">Last Name</label><br>
+                                                        <input  [value]="guestForm.controls['lastName'].value"   [ngClass]="guestForm.controls['lastName'].errors || !guestForm.controls['lastName'].valid ? 'error input' : 'input'" type="text" formControlName="lastName">
+                                                    </div>
+                                                    <div class="col-md-6 mt-2">
+                                                        <label class="labels">Email Address</label><br>
+                                                        <input [value]="guestForm.controls['email'].value"  [ngClass]="guestForm.controls['email'].errors || !guestForm.controls['email'].valid ? 'error input' : 'input'" type="text" formControlName="email">
+                                                    </div>
+                                                    <div class="col-md-6 mt-2">
+                                                        <label class="labels">Mobile Number</label><br>
+                                                        <input [value]="guestForm.controls['mobile'].value"  [ngClass]="guestForm.controls['mobile'].errors || !guestForm.controls['mobile'].valid ? 'error input' : 'input'" type="text" formControlName="mobile">
+                                                    </div>
+                                                    <!-- <div class="col-md-12 mt-2">
+                                                        <label class="labels">Additional Requirements</label><br>
+                                                        <input class="long-input" type="text">
+                                                    </div> -->
+                                                </div>
+                                                <!-- <button class="btn-submit" (click)="submitGuest()">Submit</button> -->
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- Reservation Summary -->
+            <div class="col-lg-4">
+                <div class="right-side-section">
+                    <div class="">
+                        <!-- first-row -->
+                        <div class="row p-3">
+                            <p class="head-one">Reservation Summary</p>
+                            <div class="col-md-3">
+                                <p class="one">Amount</p>
+                            </div>
+                            <div class="col-md-9">
+                                <span class="two mr-10"> ₹ {{bookingRequest.priceSlab}}</span> <span class="three">+GST</span>
+                            </div>
+                            <!-- <div class="col-md-3">
+                                <p class="one">Tax</p>
+                            </div>
+                            <div class="col-md-3">
+                                <p class="two">&#8377; 500</p>
+                            </div> -->
+                          
+                        </div>
+                        <mat-divider></mat-divider>
+                        <!-- second-row -->
+                        <div class="row p-3">
+                            <div class="col-md-6">
+                                <p class="one">No. Guests</p>
+                                <p class="three">2 Adults 1 Child</p>
+                            </div>
+
+                            <div class="col-md-6">
+                                <p class="one">Rooms</p>
+                                <p class="three">1 + Extra Bed</p>
+                            </div>
+                            
+                        </div>
+                        <mat-divider></mat-divider>
+                        <!-- third-row -->
+                        <div class="row p-3">
+                            <div *ngIf="bookingRequest">
+                                <div *ngFor="let booking of bookingRequest.bookingDetails">
+                                    <div class="mb-3" *ngFor="let room of booking.hotel.rooms">
+                                        <p class="one">{{booking.hotel.hotelName}}</p>
+                                        <p class="five">{{room.roomName}}</p>
+                                        <div class="display-flex">
+                                            <div class="col-md">
+                                                <div class="sub">Check In</div>
+                                                <div>
+                                                    <span class="three">{{booking.checkIn}}</span>
+                                                    <span class="four">{{booking.hotel.checkInTime}}</span>
+                                                </div>
+                                            
+                                            </div>
+                                            <span class="divider"></span>
+                                            <div class="col-md">
+                                                <div class="sub">Check Out</div>
+                                                <div>
+                                                    <span class="three">{{booking.checkOut}}</span>
+                                                    <span class="four">{{booking.hotel.checkOutTime}}</span>
+                                                </div>
+                                            
+                                            </div>
+                                        </div>
+                                        
+                                    
+                                    </div>
+                                </div>
+                            </div>
+                           
+                        </div>
+                        <!-- forth-row -->
+                       
+                        <!-- fifth-row -->
+                        <!-- <div class="row">
+                            <div class="col-md-12">
+                                <label class="one">Enter Coupon Code</label><br>
+                                <input class="code-input" type="text">
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+                <div class="book-now">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="display-flex">
+                                    <input type="checkbox" name="topping" [value]="policyAccepted" (change)="policyAccepted = !policyAccepted">
+                                    <div class="policy-label">
+                                        <span style="color: #969696;">Agree, to the</span>
+                                        <span style="color:  #6699CC;" (click)="Policies()" class="cursor-pointer">Terms and Conditions.</span>
+                                    </div>
+                                  
+                                </div>
+                                <span *ngIf="policyError" class="error-text">Please accept Terms and Conditions</span>
+                                <button class="btn-booknow" (click)="bookNow()" [disabled]="!bookingRequest || !policyAccepted || !bookingRequest.bookingDetails.length">Book Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Footer -->
+
+<app-footer></app-footer>

@@ -1,0 +1,54 @@
+<!-- Destination -->
+<div class="Destination">
+    <div class="container-fluid">
+        <!-- First-section -->
+        <div class="row">
+            <div class="col-lg-6">
+                <p class="heading-Destination">Destination</p>
+            </div>
+            <div class="col-lg-6">
+                <div class="outer">
+                    <button class="btn-Destination" (click)="addDestination()"><img src="./assets/images/Add.png">Add Destination</button>
+                </div>
+            </div>
+        </div>
+       
+        <div class="row pb-3" *ngFor="let dest of destinations">
+            <div class="col-lg-3">
+                <!-- <label class="labels">Images</label><br> -->
+                <img [src]="dest.image">
+            </div>
+            <div class="col-lg-9">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label class="labels">Destination Name</label><br>
+                        <input class="text" type="text" name="Destination" [value]="dest.name">
+                    </div>
+                    <div class="col-lg-6">
+                        <label class="labels">Location</label><br>
+                        <input class="text" type="text" name="Location" [value]="dest.location">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <label class="labels">Description</label><br>
+                        <!-- <input class="long-text" type="text" name="Destination"> -->
+                        <div class="long-text">{{dest.description}}</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="btn">
+                            <!-- <button class="btn-edit">Edit</button> -->
+                            <button class="btn-delete" (click)="delete(dest)">Delete</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <hr class="mt-3">
+        </div>
+
+    </div>
+</div> 
+

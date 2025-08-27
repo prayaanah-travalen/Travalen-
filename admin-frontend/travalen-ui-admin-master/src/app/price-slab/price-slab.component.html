@@ -1,0 +1,82 @@
+<div class="container-fluid">
+  <!-- <div class="price-mngmt">
+    <form [formGroup]="priceForm">
+    <div class="">
+      <label class="labels">Price Range</label>
+      <div>
+        <input [ngClass]="priceForm.controls['price'].errors || !priceForm.controls['price'].valid ? 'error text'  : 'text' " type="text" name="price" formControlName="price">
+      </div>
+    </div>
+    <div class="">
+      <label class="labels">Maximum Allowed Guests</label>
+      <div>
+        <input [ngClass]="priceForm.controls['guests'].errors || !priceForm.controls['guests'].valid ? 'error text'  : 'text' " type="text" name="guests" formControlName="guests">
+      </div>
+    </div>
+    <div class="">
+      <label class="labels">Maximum Allowed Rooms</label>
+      <div>
+        <input [ngClass]="priceForm.controls['rooms'].errors || !priceForm.controls['rooms'].valid ? 'error text'  : 'text' " type="text" name="room" formControlName="rooms">
+      </div>
+    </div>
+    <div class="">
+      <label class="labels">No: of Nights</label>
+      <div>
+        <input [ngClass]="priceForm.controls['nights'].errors || !priceForm.controls['nights'].valid ? 'error text'  : 'text' " type="text" name="nights" formControlName="nights">
+      </div>
+    </div>
+    <div>
+      <button (click)="save()">Save</button>
+    </div>
+  </form>
+  </div> -->
+
+  <button (click)="add()">Create Price Slab</button>
+
+
+  <div class="price-mngmt mt-3">
+    <table mat-table [dataSource]="priceSlabList" class="mat-elevation-z8">
+
+      <!--- Note that these columns can be defined in any order.
+                      The actual rendered columns are set as a property on the row definition" -->
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef> Price </th>
+        <td mat-cell *matCellDef="let element"> {{element.priceSlab}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="maxGuests">
+        <th mat-header-cell *matHeaderCellDef> Max No. Guests </th>
+        <td mat-cell *matCellDef="let element"> {{element.maxAllowedGuest}} </td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="maxRooms">
+        <th mat-header-cell *matHeaderCellDef> Max No. Rooms </th>
+        <td mat-cell *matCellDef="let element"> {{element.maxAllowedRoom}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="nights">
+        <th mat-header-cell *matHeaderCellDef> Max No. Nights </th>
+        <td mat-cell *matCellDef="let element"> {{element.noOfNights}} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef> </th>
+        <td mat-cell *matCellDef="let element">
+          <a class="edit" (click)="edit(element)">Edit</a> 
+          <a (click)="delete(element)">Delete</a> 
+        
+        </td>
+      </ng-container>
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+
+</div>

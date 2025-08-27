@@ -1,0 +1,7 @@
+<div class="date-picker-container">
+    <mat-datepicker-toggle matSuffix [for]="picker" class="date-picker-wrap"></mat-datepicker-toggle>
+    <a  (click)="picker.open()">{{displayLabel}}</a>
+    <input [matDatepicker]="picker" value="" [readOnly]="true" class="date-input" [min]="tillDateDisable" [max]="maxDateEnable"   (dateChange)="dateChange($event)">
+
+    <mat-datepicker #picker></mat-datepicker>
+</div>

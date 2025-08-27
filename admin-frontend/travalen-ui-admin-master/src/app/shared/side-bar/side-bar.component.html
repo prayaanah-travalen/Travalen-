@@ -1,0 +1,51 @@
+<div class="row">
+    <div class="col-lg-12">
+        <!-- <div class="">
+            <img src="./assets/images/color logo.png" class="img-one">
+        </div> -->
+        <div class="left-side">
+            <div class="list" *ngIf="isSuperAdmin || isHotelAdmin || isAdmin">
+                 <span class="">
+                    <!-- <img src="./assets/images/Dashboard.png" class="img-two">  -->
+                </span> 
+                <a class="color" routerLink="dashboard"><i class="fa-solid fa-table-columns"></i>Dashboard</a>
+            </div>
+            <div class="list" *ngIf="isSuperAdmin || isHotelAdmin || isAdmin">
+                <span class="">
+                    <!-- <img src="./assets/images/Hotel-Details.png" class="img-two"> -->
+                </span>
+                <a class="color"  routerLink="hotel-profiles"> <i class="fa-solid fa-hotel"></i>Hotel Details</a>
+            </div>
+            <div class="list" *ngIf="isSuperAdmin || isHotelAdmin || isAdmin || isBookingAdmin">
+                <span class="">
+                    <!-- <img src="./assets/images/Booking.png" class="img-two"> -->
+                </span>
+                <a class="color" routerLink="booking"><i class="fa-solid fa-suitcase"></i>Booking</a>
+            </div>
+            <div class="list" *ngIf="isSuperAdmin || isHotelAdmin || isAdmin">
+                <span class="">
+                    <!-- <img src="./assets/images/Calender.png" class="img-two"> -->
+                </span>
+                <a class="color" routerLink="calendar"><i class="fa-solid fa-calendar-days"></i>Calender</a>
+            </div>
+            <div class="list" *ngIf="isSuperAdmin || isAdmin">
+                <span class="">
+                    <!-- <img src="./assets/images/Booking.png" class="img-two"> -->
+                </span>
+                <a class="color" routerLink="priceSlab"><i class="fa-solid fa-suitcase"></i>Price Slab</a>
+            </div>
+            <div class="list" *ngIf="isSuperAdmin || isAdmin">
+                <span class="">
+                    <!-- <img src="./assets/images/Destination.png" class="img-two"> -->
+                </span>
+                <a class="color" routerLink="Destination"><i class="fa-solid fa-compass"></i>Destination</a>
+            </div>
+            <div class="list" *ngIf="isSuperAdmin || isAdmin">
+                <span class="">
+                    <!-- <img src="./assets/images/Destination.png" class="img-two"> -->
+                </span>
+                <a class="color" routerLink="userManagement/internalUser"><i class="fa-solid fa-compass"></i>User Management</a>
+            </div>
+        </div>
+    </div>
+</div>

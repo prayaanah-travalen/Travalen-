@@ -1,0 +1,307 @@
+// create-account
+.account-container {
+    background: #ffff;
+    height: 675px;
+    overflow: auto;
+}
+
+.img {
+    height: 100%;
+    width:100%;
+}
+
+.create-acc-first-section {
+    padding: 20px;
+
+}
+
+.create-acc-para-one {
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 46.87px;
+    margin-top: 100px;
+}
+
+.create-acc-para-two {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20.83px;
+    color: #98A2B3;
+    margin-top: 20px;
+}
+
+.labels {
+    color: #98A2B3;
+    margin-top: 20px;
+}
+
+.text {
+    border: none;
+    outline: none;
+    width: 100%;
+    height: 50px;
+    border-radius: 5px;
+    background-color: whitesmoke;
+    color: #98A2B3;
+    padding-left: 15px;
+}
+
+input::placeholder {
+    color: #98A2B3;
+}
+
+.create-acc-btn-one {
+    width: 100%;
+    height: 50px;
+    border: none;
+    outline: none;
+    background-color: #1EDD8D;
+    color: white;
+    font-size: large;
+    font-weight: 500;
+    border-radius: 4px;
+    padding: 14px, 32px, 14px, 32px;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+hr {
+    margin-top: 50px;
+}
+
+.create-acc-btn-two {
+    width: 100%;
+    height: 50px;
+    background-color: white;
+    outline: none;
+    font-size: large;
+    font-weight: 500;
+    border: 1px solid #33b981;
+    border-radius: 4px;
+    color: #33b981;
+    margin-top: 10px;
+}
+
+// contact-details
+.contact-details {
+    // width: 70%;
+    // height: 100vh;
+}
+
+.contact-details-first-section {
+    padding: 20px;
+}
+
+.contact-details-para-one {
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 46.87px;
+    margin-top: 100px;
+}
+
+.contact-details-para-two {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20.83px;
+    color: #98A2B3;
+    margin-top: 20px;
+}
+
+.Ph-No {
+    height: 50px;
+    border-radius: 5px;
+}
+
+.Ph-No-text {
+    border: none;
+    outline: none;
+    width: 76%;
+    height: 50px;
+    border-radius: 0 5px 5px 0;
+    background-color: whitesmoke;
+    color: #98A2B3;
+    padding: 15px;
+}
+
+.contact-details-btn-one {
+    width: 100%;
+    height: 50px;
+    border: none;
+    outline: none;
+    background-color: #1EDD8D;
+    color: white;
+    font-size: large;
+    font-weight: 500;
+    border-radius: 4px;
+    padding: 14px, 32px, 14px, 32px;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+// create-password
+.create-password {
+    // width: 70%;
+    // height: 100vh;
+}
+
+.create-pswd-first-section {
+    padding: 20px;
+}
+
+.create-pswd-para-one {
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 46.87px;
+    margin-top: 100px;
+}
+
+.create-pswd-para-two {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20.83px;
+    color: #98A2B3;
+    margin-top: 20px;
+}
+.pswd-text
+{
+    border: none;
+    outline: none;
+    width: 89%;
+    // height: 50px;
+    border-radius: 5px;
+    background-color: whitesmoke;
+    color: #98A2B3;
+    padding: 15px;
+}
+.eye-box {
+    // height: 50px;
+    // display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0 5px 5px 0;
+    background-color: whitesmoke;
+}
+
+.eye-box button {
+    border: none;
+    background: inherit;
+}
+
+.pass {
+    background: whitesmoke;
+}
+
+.eye {
+    height: 20px;
+}
+
+.create-pswd-btn-one {
+    width: 100%;
+    height: 50px;
+    border: none;
+    outline: none;
+    background-color: #1EDD8D;
+    color: white;
+    font-size: large;
+    font-weight: 500;
+    border-radius: 4px;
+    padding: 14px, 32px, 14px, 32px;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+// otp
+.otp {
+    // width: 70%;
+    // height: 100vh;
+}
+
+.otp-first-section {
+    padding: 20px;
+}
+
+.otp-para-one {
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 46.87px;
+    margin-top: 100px;
+}
+
+.otp-para-two {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20.83px;
+    color: #98A2B3;
+    margin-top: 20px;
+}
+
+.outer {
+    margin-top: 100px;
+}
+
+.inner {
+    height: 50px;
+    width: 80px;
+    background-color: whitesmoke;
+    border-radius: 10px;
+    border: 1px solid #98A2B3;
+    padding: 15px;
+}
+
+.otp-btn-one {
+    width: 100%;
+    height: 50px;
+    border: none;
+    outline: none;
+    background-color: #1EDD8D;
+    color: white;
+    font-size: large;
+    font-weight: 500;
+    border-radius: 4px;
+    padding: 14px, 32px, 14px, 32px;
+    gap: 10px;
+    margin-top: 100px;
+
+}
+
+
+::ng-deep .otp-input {
+    height: 38px !important;
+    width: 42px !important;
+    background-color: whitesmoke !important;
+    border-radius: 10px !important;
+    border: 1px solid  #1EDD8D !important;
+    font-size: 18px !important;
+}
+
+::ng-deep .otp-input:focus {
+    outline: none;
+}
+
+.code {
+    width: 70px;
+    padding: 15px 0px;
+    border: none;
+    color: #F7F7FD;
+    background: #C5C0DB;
+    border-radius: 5px 0 0 5px;
+
+}
+
+select:focus{
+    outline: none;
+}
+.error-message {
+    color: #ff4d4f;
+    font-size: 12px;
+    margin-top: 4px;
+    margin-bottom: 8px;
+}
+//to make every input field black
+input{
+    color: black !important;
+}
+
+
+
+  

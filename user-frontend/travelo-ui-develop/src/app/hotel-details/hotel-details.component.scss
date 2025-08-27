@@ -1,0 +1,561 @@
+/* navbar */
+
+
+//   payment-select-section
+
+.location {
+  color: #969696;
+  padding: 10px;
+  font-size: 12px;
+  margin: 0;
+}
+.location-icon {
+  width: 15px;
+  margin: 0;
+}
+.fa-solid.fa-pencil{
+  background-color: #1edd8d;
+  padding: 5px;
+  border-radius: 50%;
+  float: right;
+  margin-bottom: 10px;
+  color: white;
+}
+.path {
+  color: #969696;
+  margin: 30px 0;
+  // margin-left: 90px;
+  font-size: 12px;
+}
+.fa-solid.fa-money-bill-transfer{
+  color: #1edd8d;
+  padding-right: 5px;
+}
+.fa-solid.fa-money-bill-transfer{
+  color: #1edd8d;
+  padding-right: 5px;
+}
+//   booking
+
+.booking {
+  // width: 80%;
+  background-color: white;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+  margin-bottom: 25px;
+  // margin-left: 55px;
+  margin-top: 10px;
+  // z-index: 2;
+  // position: absolute;
+}
+// .first-right-section {
+//   z-index: 1;
+// }
+.location {
+  color: #969696;
+  padding: 15px;
+  font-size: 12px;
+  margin: 0;
+}
+.location-icon {
+  width: 15px;
+  margin: 0;
+}
+.from-date {
+  margin-top: 20px;
+  color: #000000;
+  font-weight: bold;
+}
+.btn.btn-primary.search {
+  background-color: #1edd8d;
+  border: none;
+  margin: 10px;
+  float: right;
+}
+.fa-solid.fa-location-dot{
+  color: #1edd8d;
+  padding-right: 5px;
+}
+.fa-solid.fa-calendar-days{
+  color: #1edd8d;
+  padding-right: 5px;
+}
+.fa-solid.fa-user{
+  color: #1edd8d;
+  padding-right: 5px;
+}
+
+
+.body {
+  width: 98%;
+}
+.curosel {
+  padding: 0px;
+  border-radius: 5px 5px 5px 5px;
+  padding-left: 30px;
+  height: 100%;
+  margin-left: 15px;
+}
+.carosel-img {
+  height: 97px;
+  width: 97px;
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+//   right-body-section
+.right-body-section {
+  position: relative;
+  width: 100%;
+}
+.heading-whispering {
+  font-weight: 500;
+  font-size: 18px;
+  margin: 0;
+  padding-left: 10px;
+}
+.heading-whispering-rating {
+  position: absolute;
+  right: 0;
+  top: 0;
+  background-color: #87ffcd;
+  font-weight: 500;
+  font-size: 12px;
+  border-radius: 5px;
+  padding: 5px 20px;
+}
+.cards-propety-location {
+  padding-top: 5px;
+  color: #969696;
+  padding-left: 10px;
+}
+.box {
+  border-radius: 10px;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+  height: 290px;
+  width: 100%;
+}
+.box-heading {
+  font-weight: 500;
+  font-size: 18px;
+  padding-left: 10px;
+  padding-top: 10px;
+  color: #3c3c3c;
+}
+.box-content {
+  color: #969696;
+  font-size: 12px;
+  justify-content: center;
+  padding: 10px;
+  height: auto;
+}
+.map-img {
+  height: 120px;
+  width: 100%;
+  margin-bottom: 15px;
+}
+.btn.btn-outline-primary {
+  border-color: #1edd8d;
+  color: #1edd8d;
+  margin-top: 30px;
+  width: 100%;
+}
+.btn.btn-outline-secondary {
+  color: white;
+  background-color: #1edd8d;
+  border: none;
+  width: 100%;
+  margin-top: 35px;
+}
+
+// fecility-portion
+.fecility {
+  border-radius: 10px;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+  width: 93%;
+  // margin-left: 50px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+.amenity {
+  font-size: 10px;
+  font-weight: 500;
+  padding-top: 15px;
+  color: #969696;
+}
+.fecility-icon {
+  font-weight: 300;
+  font-size: 10px;
+  padding-top: 15px;
+  color: #969696;
+  font-weight: 500;
+  margin: 0;
+}
+.see-more {
+  font-size: 12px;
+  font-weight: 500;
+  padding-top: 15px;
+  color: #969696;
+  float: right;
+}
+.fa-solid.fa-utensils{
+  color: #1edd8d;
+  padding-right: 5px;
+}
+.fa-solid.fa-square-parking{
+  color: #1edd8d;
+  padding-right: 5px;
+}
+.fa-solid.fa-shirt{
+  color: #1edd8d;
+  padding-right: 5px;
+}
+.fa-solid.fa-basketball{
+  color: #1edd8d;
+  padding-right: 5px;
+}
+.fa-solid.fa-wifi{
+  color: #1edd8d;
+  padding-right: 5px;
+}
+.fa-solid.fa-dumbbell{
+  color: #1edd8d;
+  padding-right: 5px;
+}
+.fa-solid.fa-bell-concierge{
+  color: #1edd8d;
+  padding-right: 5px;
+}
+.fa-solid.fa-person-swimming{
+  color: #1edd8d;
+  padding-right: 5px;
+}
+
+// select-room-portion
+.select-room-portion {
+  // width: 93%;
+  // margin-left: 50px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+.select-room {
+  font-size: 20px;
+  font-weight: 500;
+  color: #3c3c3c;
+}
+.selected-room {
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+  width: 100%;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+.selected-room-not-available {
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+  width: 100%;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  background-color: #ededed;
+}
+.selected-room-img {
+  width: 100%;
+  height: 150px;
+  padding: 10px;
+}
+.cottage {
+  font-size: 20px;
+  font-weight: 500;
+  color: #3c3c3c;
+  padding-top: 10px;
+  margin: 0;
+}
+.cottage-heading {
+  position: relative;
+}
+.btn.btn-primary.btn-sm {
+  position: absolute;
+  right: 10px;
+  top: 0;
+  margin-top: 10px;
+  background-color: #1edd8d;
+  font-size: 12px;
+  border: none;
+}
+.add-on {
+  font-size: 12px;
+  font-weight: 400;
+  color: #969696;
+  margin-right: 10px;
+}
+.more {
+  font-size: 12px;
+  font-weight: 500;
+  padding-top: 12px;
+  color: #969696;
+  float: right;
+  padding-right: 10px;
+}
+
+.near-destination {
+  font-size: 18px;
+  font-weight: 500;
+  color: #3c3c3c;
+  padding: 10px;
+}
+.destination-details {
+  width: 100%;
+  padding: 10px;
+  position: relative;
+}
+.destination-img {
+  width: 115px;
+  // height: 66px;
+}
+.destination-content {
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 400;
+  color: #969696;
+  width: 80%;
+}
+.distance {
+  font-weight: 400;
+  // bottom: 0;
+  // right: 0;
+  margin-right: 10px;
+  // position: absolute;
+  font-size: 12px;
+}
+
+.user {
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+  width: 100%;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  height: auto;
+}
+.user-heading {
+  font-size: 18px;
+  font-weight: 500;
+  color: #3c3c3c;
+  padding: 10px;
+  margin: 0;
+}
+.user-rating {
+  font-size: 20px;
+  font-weight: 500;
+  background-color: #1edd8d;
+  padding: 10px;
+  width: 50px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+}
+.excellent {
+  font-size: 15px;
+  font-weight: 500;
+  color: #1edd8d;
+  margin: 0;
+}
+.excellent-review {
+  font-size: 12px;
+  font-weight: 500;
+  color: #969696;
+}
+.selected-disp {
+  padding: 5px 14px 15px;
+}
+::ng-deep .mat-chip.mat-standard-chip {
+  background-color: #83f1c3 !important;
+  color:  #625f5f !important;
+}
+
+::ng-deep .mat-standard-chip {
+   
+  min-height: 27px !important;
+  font-size: 12px !important;
+  border-radius: 5px !important;
+}
+.guests {
+  margin-right: 10px;
+}
+
+.loc-chips {
+  padding-left: 15px;
+  
+}
+
+.carrousel {
+  display: grid;
+  grid-auto-flow: column;
+  scroll-behavior: auto;
+  gap: 1.2rem;
+  overflow-y: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  // margin-left: 50px;
+}
+.carrousel::-webkit-scrollbar {
+  display: none;
+}
+.card {
+  scroll-snap-align: start;
+  border-radius: 30px;
+  min-height: 250px;
+  min-width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+}
+.popular-img {
+  width: 300px;
+  height: 250px;
+  border-radius: 10px;
+}
+.contents {
+  width: 98%;
+  padding-bottom: 50px;
+  margin-bottom: 100px;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+}
+
+.htl-images {
+  // height: 415px;
+  overflow: scroll;
+}
+
+.htl-img-w {
+  width: 100%;
+  max-height: 397px
+
+}
+
+::ng-deep .mat-form-field-type-mat-date-range-input .mat-form-field-infix {
+  width: 0px !important;
+}
+
+::ng-deep .mat-icon-button {
+  display: none !important;
+}
+
+::ng-deep .mat-date-range-input-separator {
+  display: none !important;
+}
+
+
+.price-slab{
+  margin: 13px 0px 4px;
+  // margin: 4px;
+  // background-color: #6cedb7;
+  border-radius: 6px;
+  border: 1px solid #fff;
+  overflow: hidden;
+  float: left;
+  border-radius: 5px;
+}
+
+.price-slab label {
+  float: left; 
+  line-height: 2.0em;
+  width: 6.0em; 
+  // height: 2.5em;
+}
+
+.price-slab label span {
+  text-align: center;
+  // padding: 3px 0;
+  display: block;
+}
+
+.price-slab label input {
+  position: absolute;
+  display: none;
+  color: #969696;
+  font-size: 12px;
+}
+/* selects all of the text within the input element and changes the color of the text */
+.price-slab label input + span{
+  color: #969696;
+  font-size: 12px !important;
+}
+
+
+/* This will declare how a selected input will look giving generic properties */
+.price-slab input:checked + span {
+    color: #969696;
+    font-size: 12px !important;
+    // text-shadow: 0 0  6px rgba(0, 0, 0, 0.8);
+}
+
+.action input:checked + span{
+  background-color: #87FFCD;
+  color:#000 !important;
+}
+
+.price-slab-container {
+ 
+  color: #969696;
+  padding: 10px;
+  font-size: 17px;
+  font-weight: 400;
+  margin: 0;
+  display: flex;
+}
+
+.pay-booking {
+  // width: 70%;
+  background-color: white;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 3px 3px 20px 3px rgba(1, 1, 0, 0.1);
+  // margin-bottom: 25px;
+  // margin-left: 30px;
+  margin-top: 10px;
+}
+
+.content {
+  margin: 0 30px;
+}
+
+.amenity-container {
+  background-color: white;
+  padding: 20px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+  margin: 30px 0;
+}
+
+.room-add-sub {
+  width: 73px;
+  border: 1px solid #1edd8d;
+  border-radius: 5px;
+  position: absolute;
+  right: 10px;
+  top: 0;
+  margin-top: 10px;
+}
+
+.room-add-sub input {
+  width: 30px;
+  border: none;
+  text-align: center;
+  color: #1edd8d;
+}
+
+.room-add-sub button {
+  border: none;
+  background: none;
+  color: #1edd8d;
+}
+
+.room-add-sub input:focus {
+ outline: none;
+}
+
+.no-room{
+  background-color: #EDEDED;
+}

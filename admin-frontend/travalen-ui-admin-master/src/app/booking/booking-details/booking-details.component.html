@@ -1,0 +1,77 @@
+<div class="">
+<div class="booking-details">
+    <div class="row">
+        <p class="heading-booking-details">Booking Details</p>
+        <div class="row pb-3">
+            <div class="col-lg-6">
+                <label class="labels">Name</label>
+                <input class="text" type="text" name="Name" [value]="booking.guestDetails?.firstName " disabled>
+            </div>
+            <div class="col-lg-6">
+                <label class="labels">Booking Date</label>
+                <input class="text" type="text" name="Booking Date" [value]="booking.bookingDate" disabled>
+            </div>
+           
+        </div>
+        <div class="row pb-3">
+            <div class="col-lg-6">
+                <label class="labels">Contact</label>
+                <input class="text" type="text" name="Contact" [value]="booking.guestDetails?.phone" disabled>
+            </div>
+            <div class="col-lg-6">
+                <label class="labels">Email</label>
+                <input class="text" type="text" name="Email" [value]="booking.guestDetails?.email" disabled>
+            </div>
+        </div>
+
+        <div class="row pb-3">
+            <div class="col-lg-6">
+                <label class="labels">Adults</label>
+                <input class="text" type="text" name="Adults" [value]="booking.adults" disabled>
+            </div>
+            <div class="col-lg-6">
+                <label class="labels">Children</label>
+                <input class="text" type="text" name="Children" [value]="booking.children" disabled>
+            </div>
+        </div>
+
+    
+        <div class="row pb-3">
+            <div class="col-lg-6">
+                <label class="labels">Check In Date</label>
+                <input class="text" type="text" name="Check In Date" [value]="booking.checkIn" disabled>
+            </div>
+            <div class="col-lg-6">
+                <label class="labels">Check Out Date</label>
+                <input class="text" type="text" name="Check Out Date" [value]="booking.checkOut" disabled>
+            </div>
+           
+        </div>
+        <div class="" *ngFor="let htl of booking.bookingDetails">
+            <mat-divider></mat-divider>
+            <div class=" row pb-3 pt-3">
+                <div class="col-lg-6">
+                    <label class="labels">Hotel Name</label>
+                    <input class="text" type="text" name="Htel Id" [value]="htl.hotel.hotelName" disabled>
+                </div>
+                <div class="col-lg-6">
+                    <label class="labels">Location</label>
+                    <input class="text" type="text" name="Htel Id" [value]="htl.hotel.location.location" disabled>
+                </div>
+            </div>
+            <div class=" row pb-3">
+                <div class="col-lg-6">
+                    <label class="labels">Hotel Id</label>
+                    <input class="text" type="text" name="Htel Id" [value]="htl.hotel.hotelCode" disabled>
+                </div>
+                <div class="col-lg-6">
+                    <label class="labels">No Of Rooms</label>
+                    <input class="text" type="text" name="Htel Id" [value]="htl.noOfRooms" disabled>
+                </div>
+            </div>
+        </div>
+
+       
+    </div>
+</div>
+</div>

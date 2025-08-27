@@ -1,0 +1,94 @@
+package com.app.travelo.model.entity;
+
+import lombok.*;
+
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+@Getter
+@Setter
+@Entity
+@Builder
+@AllArgsConstructor
+@EqualsAndHashCode
+@NoArgsConstructor
+@Table(name = "hotel")
+public class HotelEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "hotel_code")
+    private Long hotelCode;
+
+    @Column(name = "hotel_name")
+    private String hotelName;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "location_id")
+    private LocationEntity location;
+
+    @Column(name = "email")
+    private String email;
+
+
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "postal_code")
+    private  String postalCode;
+
+    @Column(name = "city")
+    private  String city;
+
+    @Column(name = "state")
+    private  String state;
+
+    @Column(name = "country")
+    private String country;
+
+    @Column(name = "star_rating")
+    private String starRating;
+
+    @Column(name= "about")
+    private String about;
+
+    @Column(name= "property_rule")
+    private String propertyRule;
+
+    @Column(name= "website_link")
+    private String websiteLink;
+
+    @Column(name= "latitude")
+    private String latitude;
+
+    @Column(name= "longitude")
+    private String longitude;
+
+    @Column(name= "availability")
+    private Boolean availability;
+
+    @Column(name= "availability", insertable = false, updatable = false)
+    private Boolean active;
+
+    @OneToMany(mappedBy = "hotelCode", cascade = CascadeType.ALL)
+    private List<HotelImageEntity> hotelImages;
+
+    @OneToMany(mappedBy = "hotelCode" , cascade = CascadeType.ALL)
+    private List<HotelRoomEntity> rooms;
+
+    @OneToMany(mappedBy = "hotelCode", cascade = CascadeType.ALL)
+    private List<HotelAmenityEntity> amenities;
+
+    @ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "users_hotel",
+            joinColumns = { @JoinColumn(name = "hotel_code") },
+            inverseJoinColumns = { @JoinColumn(name = "user_id") }
+    )
+    Set< UserEntity > user = new HashSet< UserEntity>();
+
+    @OneToOne(mappedBy = "hotel", cascade = CascadeType.ALL)
+    private FinanceEntity finance;
+
+}

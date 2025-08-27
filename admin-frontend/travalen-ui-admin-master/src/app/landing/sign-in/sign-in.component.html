@@ -1,0 +1,62 @@
+<!-- sign in -->
+<form [formGroup]="userForm" (ngSubmit)="showPasswordSection()">
+    <div class="sign-in" *ngIf="showEmailSec">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="sign-in-first-section">
+                        <img src="./assets/images/color logo.png">
+                        <p class="sign-in-para-one">Sign in.</p>
+                        <p class="sign-in-para-two">Sign in to manage your account.</p>
+                        <label class="labels">Enter Your Email Address</label><br>
+                        <input  [ngClass]="userForm.controls['email'].touched && (userForm.controls['email'].errors || !userForm.controls['email'].valid) ? 'error text'  : 'text' "  type="text" placeholder="name@example.com" formControlName="email">
+                        <div class="error-message" *ngIf="userForm.controls['email'].errors?.['required'] && userForm.controls['email'].touched">
+                            Email is required
+                        </div>
+                        <div class="error-message" *ngIf="userForm.controls['email'].errors?.['email'] && userForm.controls['email'].touched">
+                            Please enter a valid email address
+                        </div>
+                        <button type="submit" class="sign-in-btn-one">Continue</button>
+                        <hr>
+                        <button class="sign-in-btn-two" (click)="createAccount()">Create an Account</button>
+                    </div>
+                </div>
+                <div class="col-lg-6 p-0">
+                    <img src="./assets/images/Group.png" class="img">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- password -->
+    <div class="password" *ngIf="showPasswordSec">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="pswd-first-section">
+                        <img src="./assets/images/color logo.png">
+                        <p class="pswd-para-one">Password.</p>
+                        <p class="pswd-para-two">Enter your password to sign in.</p>
+                        <label class="labels">Password</label><br>
+                        <div class="pass">
+                            <input [ngClass]="userForm.controls['password'].touched && (userForm.controls['password'].errors || !userForm.controls['password'].valid) ? 'error pswd-text'  : 'pswd-text' "
+                                [type]="showPass ? 'text' : 'password'" placeholder="Enter a Password" formControlName="password">
+                            <span class="eye-box">
+                                <button type="button" (click)="showPass = !showPass">
+                                <img [src]="showPass ? './assets/images/eye on.png' : './assets/images/eye off.png'" class="eye">
+                                </button>
+                            </span>
+                        </div>
+                        <div class="error-message" *ngIf="userForm.controls['password'].errors?.['required'] && userForm.controls['password'].touched">
+                            Password is required
+                        </div>
+                        <button type="submit" class="pswd-btn-one" (click)="signIn()">Sign In</button>
+                        <a class="pswd-para-three" (click)="forgotPassword()">Forget Password?</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 p-0">
+                    <img src="./assets/images/Group.png" class="img">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

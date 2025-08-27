@@ -1,0 +1,345 @@
+<div>
+	<mat-tab-group  animationDuration="0ms">
+		<mat-tab label="Hotel Details">
+			<div class="">
+				<form [formGroup]="hotelForm">
+					<div class="col-lg-12">
+						<div class="hotel-details-long-bar">
+							<div class="row">
+								<div class="col-lg-6">
+									<h4 class="long-bar-hotel-details">Hotel Details</h4>
+								</div>
+								<div class="col-lg-6">
+									<button *ngIf="hotelAction === 'MODIFY'" class="btn-edit-details" (click)="hotelAction = 'ADD';disableEnableForm()"><img src="./assets/images/Edit.png" >Edit
+										Details</button>
+								</div>
+							</div>
+							<!-- first section -->
+							<div class="row">
+								<div class="col-lg-4">
+									<label class="labels">Hotel Name</label>
+									<input class="text" [ngClass]="hotelAction !== 'MODIFY' && (hotelForm.controls['hotelName'].errors || !hotelForm.controls['hotelName'].valid) ? 'error text'  : 'text' " type="text" name="hotelname" formControlName="hotelName">
+									
+								</div>
+								<div class="col-lg-4">
+									<label class="labels">Contact Address</label>
+									<input class="text" type="text" name="contactaddress"  formControlName="address" [ngClass]="hotelAction !== 'MODIFY' && (hotelForm.controls['address'].errors || !hotelForm.controls['address'].valid) ? 'error text'  : 'text' ">
+									
+								</div>
+								<div class="col-lg-4">
+									<label class="labels">Email Address</label>
+									<input class="text" type="text" name="emailaddress"  formControlName="email" [ngClass]="hotelAction !== 'MODIFY' && (hotelForm.controls['email'].errors || !hotelForm.controls['email'].valid) ? 'error text'  : 'text' ">
+									
+								</div>
+							</div>
+							<!-- second section -->
+							<div class="second">
+								<div class="row">
+									<div class="col-lg-8">
+										<div class="second-section">
+											<div class="row">
+												<div class="col-lg-6">
+													<label class="labels">Website Link</label>
+													<input class="text" type="text" name="websitelink" formControlName="websiteLink">
+												
+												</div>
+												<div class="col-lg-6">
+													<label class="labels">Hotel Location	</label>
+													<input class="text" type="text" name="hotellocation" formControlName="location" [ngClass]="hotelAction !== 'MODIFY' && (hotelForm.controls['location'].errors || !hotelForm.controls['location'].valid) ? 'error text'  : 'text' ">
+												
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-lg-6">
+													<label class="labels">Latitude</label>
+													<input class="text" type="text" name="latitude" formControlName="latitude">
+												
+												</div>
+												<div class="col-lg-6">
+													<label class="labels">Longitude</label>
+													<input class="text" type="text" name="longitude" formControlName="longitude" [ngClass]="hotelAction !== 'MODIFY' && (hotelForm.controls['location'].errors || !hotelForm.controls['location'].valid) ? 'error text'  : 'text' ">
+												
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-lg-12">
+												<div class="about-hotel">
+													<label class="labels">About Hotel</label>
+													<textarea class="long-text" type="text" name="hotelname" formControlName="about"></textarea>
+													
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-lg-12">
+												<div class="about-hotel">
+													<label class="labels">Property Rules</label>
+													<textarea class="long-text" type="text" name="hotelname" formControlName="propertyRule"></textarea>
+												
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-lg-8">
+												<label class="labels">Images</label>
+													<div class="images-container">
+														<div class="row">
+															<div class="col-md mt-3" *ngFor="let image of hotel?.images">
+																<img [src]="image.image">
+															</div>
+												
+															</div>
+														</div>
+													</div>
+											</div>
+									
+									</div>
+									<div class="col-lg-4">
+										<label class="labels">Amenities</label>
+										<div class="amenities">
+											<div class="display-flex mb-3">
+												<!-- <input class="" type="text" name="aminities" placeholder="Enter amenity" formControlName="amenity">
+												<button (click)="addAminity()" class="amenity-btn">Add</button> -->
+												<mat-select class="dropdown" (selectionChange)="addAminity($event.value)" [disabled]="hotelAction === 'MODIFY'">
+													<mat-option *ngFor="let amenity of amenities" [value]="amenity">{{amenity.description}}</mat-option>
+												   
+												  </mat-select>
+											</div>
+											<mat-chip-list #chipList  [disabled]="hotelAction === 'MODIFY'">
+												<mat-chip *ngFor="let amenity of amenityList" [selectable]="selectable"
+															[removable]="removable" (removed)="removeAmenity(amenity)">
+															{{amenity}}
+													<!-- <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon> -->
+													<i matChipRemove class="fa fa-close mt-2"></i>
+												</mat-chip>
+												</mat-chip-list>
+										</div>
+										
+									</div>
+								</div>
+								<div class="row" >
+									<app-file-upload [disabled]="hotelAction === 'MODIFY'" (imageEmitter)="imageEmitter($event)" (deletedImageEmitter)="deletedImage($event)" [savedImage]="savedImages"></app-file-upload>
+								</div>
+								<div  class="row justify-right" ><button  class="btn-edit-details" (click)="saveHotel()">Save Hotel</button></div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</mat-tab>
+		<mat-tab label="Room Details" [disabled]="hotel === undefined || hotel.hotelCode === null">
+			<div class="">
+				<div class="col-lg-12">
+					<div class="room-details-long-bar">
+						<div class="row">
+							<div class="col-lg-8">
+								<h4 class="heading-room-details">Room Details</h4>
+							</div>
+							<div class="col-lg-2">
+								<div class="row">
+									<div class="col-lg-2">
+										<div class="search-box">
+											<i class="fas fa-search"></i>
+										</div>
+									</div>
+									<div class="col-lg-10">
+										<input class="search-text" type="search" placeholder="Search"
+											aria-label="Search">
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-2">
+								<button class="btn-add-room" (click)="addRoom()"><img src="./assets/images/Add.png">Add
+									Room</button>
+							</div>
+						</div>
+						<!-- second-row -->
+						<div *ngFor="let room of hotel?.rooms">
+							<div class="row">
+								<div class="col-lg-4">
+									<div>
+										<label class="labels">Room Name</label>
+										<input class="text" type="text" name="hotelname" [value]="room.roomName" disabled>
+									</div>
+									<div>
+										<label class="labels">Room Price / per night</label>
+										<input class="text" type="text" name="hotelname" [value]="room.price" disabled>
+									</div>
+								</div>
+								<div class="col-lg-8">
+									<label class="labels">Room Tags</label>
+									<div class="room-tags">
+										<div class="display-flex">
+											<div class="" *ngFor="let rmTag of room.roomTags">
+												<p class="tags">{{rmTag}}</p>
+											</div>
+											
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- third-row -->
+							<div class="row">
+								<div class="col-lg-4">
+									<label class="labels">Amenities</label>
+									<div class="amenities">
+										<div class="display-flex">
+											<div class=""  *ngFor="let amnty of room.amenities">
+												<p class="tags">{{amnty}}</p>
+											</div>
+											
+										</div>
+	
+									</div>
+								</div>
+								<div class="col-lg-8">
+									<label class="labels">Images</label>
+									<div class="images-container">
+										<!-- <div class="inner-images"> -->
+											<div class="row">
+												<div class="col-md mt-3" *ngFor="let image of room.roomImages">
+													<img [src]="image.image">
+												</div>
+												
+											</div>
+										<!-- </div> -->
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-4">
+									<div>
+										<label class="labels">No of Rooms</label>
+										<input class="text" type="text" name="hotelname" [value]="room.noOfRooms" disabled>
+									</div>
+									<div>
+										<label class="labels">Price Slab<br>	</label>
+										<div class="priceSlab">
+											<span *ngFor="let price of room.priceSlab">{{price.priceSlabId.priceSlab}}</span>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<label class="labels">Additional Package</label><br> 
+									<mat-form-field>
+								
+										<mat-select [value]="room.roomPackage"  disabled>
+										  <mat-option *ngFor="let pack of roomPackage" [value]="pack.parameterId">{{pack.description}}</mat-option>
+										 
+										</mat-select>
+									  </mat-form-field>
+								
+								</div>
+							</div>
+							<!-- forth row -->
+							<div class="row">
+								<div class="col-lg-12">
+									<div class="btn">
+										<button class="btn-edit" (click)="editRoom(room)">Edit</button>
+										<button class="btn-delete" (click)="deleteRoom(room.hotelRoomId)">Delete</button>
+									</div>
+								</div>
+							</div>
+							<hr>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</mat-tab>
+		<mat-tab label="Finances" [disabled]="hotel === undefined || hotel.hotelCode === null">
+			<div class="">
+				<form [formGroup]="financeForm">
+					<div class="col-lg-12">
+						<div class="finances-long-bar">
+							<h4 class="heading-finances">Finances</h4>
+							<p class="para-one">NOTE: The payment will be processed in INR.</p>
+							<div class="finances">
+								<div class="row">
+									<div class="col-lg-6">
+										<label class="labels">Bank Country/Region</label><br>
+										<input class="text" type="text" name="Bank Country/Region" formControlName="country" >
+										<label class="labels">SWIFT Code</label><br>
+										<input class="text" type="text" name="SWIFT Code" formControlName="swiftCode" >
+										<label class="labels">Account Number</label><br>
+										<input class="text" type="text" name="Account Number" formControlName="accountNumber" >
+										<label class="labels">PAN</label><br>
+										<input class="text" type="text" name="pan" formControlName="pan" >
+									</div>
+									<div class="col-lg-6">
+										<label class="labels">Bank Name</label><br>
+										<input class="text" type="text" name="Bank Name" formControlName="bankName" >
+										<label class="labels">IFSC/Bank Code</label><br>
+										<input class="text" type="text" name="IFSC/Bank Code" formControlName="ifsc" >
+										<label class="labels">Account Holder Name</label><br>
+										<input class="text" type="text" name="Account Holder Name" formControlName="accountHolderName" >
+									</div>
+								</div> 
+							</div>
+							<div class="para-box">
+								<div class="row">
+									<div class="col-lg-12">
+										<p class="para-two">Due to regulations established by the Indian government, we need your GST registration and PAN details. By submitting this information, you confirm that your PAN and state registration are accurate.</p>
+										<p class="para-two">IMPORTANT: As of 04/03/2019, any changes in your GST registration will only br taken into account from the moment you enter these details into our system. Note that it is not possible to apply any changes with a retroactive effect. This may have implication on the taxes we collect and pay to the tax authorities, that are applicable to your reservation (i.e. GST or TCS).</p> 
+									</div>
+								</div>
+							</div>
+							<p class="para-three">Are you registered for GST purposes?</p>
+							<label><input type="radio" name="registeredForGst"  value="yes" formControlName="registeredForGst" >Yes</label>
+							<label><input type="radio" name="registeredForGst" value="no" class="radio" formControlName="registeredForGst" >No</label>
+							<div class="trade">
+								<div class="row">
+									<div class="col-lg-6">
+										<label class="labels">Trade Name</label><br>
+										<input class="text" type="text" name="Trade Name" formControlName="tradeName" >
+									</div>
+									<div class="col-lg-6">
+										<label class="labels">GSTIN</label><br>
+										<input class="text" type="text" name="GSTIN" formControlName="gstIn" >
+									</div>
+								</div>
+							</div>
+							<div class="row mt-3 justify-right">
+								<button class="btn-edit" (click)="saveFinance()">Save</button>
+			
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</mat-tab>
+		<mat-tab label="Finances" [disabled]="hotel === undefined || hotel.hotelCode === null">
+			<div class="">
+				<form [formGroup]="financeForm">
+					<div class="col-lg-12">
+						<div class="finances-long-bar">
+							<h4 class="heading-finances">Contact person</h4>
+						
+							<div class="finances">
+								<div class="row">
+									<div class="col-lg-6">
+										<label class="labels">First Name</label><br>
+										<input class="text" type="text" name="Bank Country/Region" formControlName="firstName" >
+										<label class="labels">last Name</label><br>
+										<input class="text" type="text" name="Bank Country/Region" formControlName="lastName" >
+										<label class="labels">Phone No</label><br>
+										<input class="text" type="text" name="SWIFT Code" formControlName="Phone" >
+										<label class="labels">Whatsapp Number</label><br>
+										<input class="text" type="text" name="Account Number" formControlName="whatsapp" >
+										<label class="labels">Designation</label><br>
+										<input class="text" type="text" name="pan" formControlName="designation" >
+										<label class="labels">Email</label><br>
+										<input class="text" type="text" name="pan" formControlName="email" >
+									</div>
+								
+								</div> 
+							</div>
+
+						</div>
+					</div>
+				</form>
+			</div>
+		</mat-tab>
+	</mat-tab-group>
+</div>

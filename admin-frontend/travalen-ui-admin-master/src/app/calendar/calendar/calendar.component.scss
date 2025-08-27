@@ -1,0 +1,224 @@
+.calender
+{
+    width: 100%;
+    height: 85vh;
+    background-color: white;
+    padding: 20px;
+}
+.heading-calender
+{
+    font-weight: bold;
+    font-size: 21px;
+    margin-top: 15px;
+}
+.dropdown
+{
+    width: 100%;
+    height: 40px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    margin-top: 10px;  
+    background-color:whitesmoke;
+    padding-left: 15px;
+}
+.text
+{
+    width: 100%;
+    height: 40px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    margin-top: 10px;  
+    background-color:whitesmoke;
+    padding-left: 15px;
+}
+.calender-box
+{
+    width: 80%;
+    // height: 100px;
+    float: right;
+    // border: 1px solid black;
+    margin-top: 15px;
+}
+
+.calendar-div {
+    border-left: 1px solid #98A2B3;
+    padding-left: 10px;
+    width: 80%;
+
+}
+
+
+
+// .wrapper {
+//     display: flex;
+//     flex-direction: row;
+//     justify-content: center;
+//   }
+
+//   .calendar {
+//     width: calc(100% - 40px);
+//     overflow-x: scroll;
+//     overflow-y: hidden;
+//   }
+
+//   .horizontal {
+//     display: flex;
+//     flex-direction: row;
+//     flex-wrap: nowrap;
+//   }
+//   .day {
+//     & > div {
+//       pointer-events: none;
+//     }
+//     & + .day {
+//       margin-left: 24px;
+//     }
+//   }
+
+//   .active{
+//     background-color: red;
+//   }
+
+
+.mobileDatePicker{
+    display:flex;
+  }
+  .cdk-virtual-scroll-data-source .date-viewport {
+    height: 89px;
+    width: 100%;
+    overflow-y:hidden;
+    // box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+  }
+  
+  .cdk-virtual-scroll-data-source .date-viewport .cdk-virtual-scroll-content-wrapper {
+    display: flex;
+    flex-direction: row;
+  
+  }
+  
+  .cdk-virtual-scroll-data-source .date-item {
+    height: 100%;
+    /* writing-mode: horizontal-tb; */
+    padding: 0 10px;
+    border-right: 1px solid #98A2B3;
+  }
+  
+  .item{
+    margin:.2rem 0rem;
+    cursor:pointer;
+    display:flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items:center;
+    font-family: Lato;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 21px;
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    color:#000000;
+  }
+  
+  .is-active{
+   background: #005AD2; 
+   color: white !important;
+  }
+  
+  .weekName{
+    font-size:1rem;
+    color:#C1C0C9;
+  }
+  
+  .month{
+    padding: 0 1.5rem;
+    background: #4A4A4A;
+    border-radius: 5px 0px 0px 5px;
+    color:white;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    width:30px !important;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+  }
+  
+  .monthIcon{
+    margin-top:.2rem;
+  }
+
+  .month-year {
+    color: #98A2B3;
+
+  }
+
+  // th {
+  //   padding: 10px 15px;
+  // }
+
+  table {
+    background: #f5f5f582;
+    width: 100%;
+  }
+
+  tr {
+    border-bottom: 2px solid #ffff;
+    line-height: 2rem;
+  }
+  th,td {
+    padding: 5px;
+  }
+
+  // .cal{
+  //   margin: 10px 15px;
+  // }
+
+  .cal div {
+    padding: 7px 15px;
+    border-bottom: 2px solid #ffff;
+  }
+
+  .calendar-grid{
+    background: #f5f5f582;
+  }
+
+  .mat-form-field-appearance-legacy .mat-form-field-underline {
+    display: none !important;
+  }
+
+  .mat-form-field-infix{
+    display: flex !important;
+  }
+
+  .mat-date-range-input {
+    padding-top: 14px ;
+  }
+ .mat-form-field-appearance-legacy .mat-form-field-infix {
+    padding: 0 !important;
+  }
+
+  .mat-form-field-type-mat-date-range-input .mat-form-field-infix {
+    border: 1px solid whitesmoke !important;
+    border-radius: 5px !important;
+  }
+
+
+  .BOOKED {
+    background-color: #73E6BC;
+  }
+    .CANCELLED {
+      background-color: red;
+    }
+    .POSTPONED {
+      background-color: rgb(241, 135, 135);
+    }
+    .FAILED {
+      background-color: red;
+    }
+    .CLOSED{
+      background-color: #809dec;
+    }
+  

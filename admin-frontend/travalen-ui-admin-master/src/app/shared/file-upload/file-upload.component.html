@@ -1,0 +1,56 @@
+<!-- <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)" 
+    (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+        <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+          Optional custom content that replaces the the entire default content.
+          <button type="button" (click)="openFileSelector()">Browse Files</button>
+        </ng-template>
+    </ngx-file-drop>
+    <div class="upload-table">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                </tr>
+            </thead>
+            <tbody class="upload-name-style">
+                <tr *ngFor="let item of files; let i=index">
+                    <td><strong>{{ item.relativePath }}</strong></td>
+                </tr>
+            </tbody>
+        </table>
+    </div> -->
+
+    <!-- <div class="dropdiv" [class.processing]="processing" 
+  (dragover)="onDragOver($event)" (drop)="onDropSuccess($event)">
+	<label class="custom-file-upload">
+      <input (change)="onChange($event)" type="file"/>
+      Add Attachment...
+  </label>
+</div>
+
+<div class="progress" [class.processing]="processing">
+  Processing...
+</div> -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="dotted-img-box"  [class.processing]="processing" 
+        (dragover)="onDragOver($event)" (drop)="onDropSuccess($event)">
+            <div class="img-box">
+                <label class="custom-file-upload">
+                    <input (change)="onChange($event)" type="file"  [disabled]="disabled" />
+                    <img src="./assets/images/Upload.png" classs="download" style="margin-left: 65px;" >
+                    <p class="upload-img">Upload Images Here</p>
+                </label>
+               
+            </div>
+        </div>
+    </div>
+</div>
+<div class="display-flex mt-3">
+    <div *ngFor="let images of imagePreviewList" class="preview-container">
+        <img [src]="images.url" class="img-preview">
+        <div class="close-btn" *ngIf="!disabled"><a (click)="remove(images)" ><i matChipRemove class="fa fa-close"></i></a> </div>
+     
+    </div>
+</div>

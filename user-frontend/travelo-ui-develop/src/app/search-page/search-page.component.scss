@@ -1,0 +1,409 @@
+/* navbar */
+
+
+//   payment-select-section
+
+.pay-booking {
+  // width: 70%;
+  background-color: white;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 3px 3px 20px 3px rgba(1, 1, 0, 0.1);
+  margin-bottom: 25px;
+  // margin-left: 30px;
+  margin-top: 10px;
+}
+.location {
+  color: #969696;
+  padding: 10px;
+  font-size: 17px;
+  margin: 0;
+  display: flex;
+}
+
+.fa-solid.fa-money-bill-transfer{
+  color: #1edd8d;
+  padding-right: 5px;
+}
+.fa-solid.fa-money-bill-transfer{
+  color: #1edd8d;
+  padding-right: 5px;
+}
+.location-icon {
+  width: 15px;
+  margin: 0;
+}
+.fa-solid.fa-pencil {
+  background-color: #1edd8d;
+  padding: 5px;
+  border-radius: 50%;
+  float: right;
+  // margin-bottom: 10px;
+  color: white;
+}
+.path {
+  color: #969696;
+  margin: 30px;
+  // margin-left: 90px;
+  font-size: 14px;
+}
+
+//   body-content
+// body-content-left
+.search-filter {
+  background-color: white;
+  height: 100%;
+  border-radius: 10px;
+  // box-shadow: 3px 3px 3px 3px rgba(1, 1, 0.1, 0.1);
+  box-shadow: 3px 3px 20px 3px rgba(1, 1, 0, 0.1);
+  // margin-left: 45px;
+  // width: 80%;
+  // padding: 15px;
+  padding: 0 10px;
+}
+.filter {
+  font-size: 18px;
+  font-weight: 500;
+  padding: 10px;
+  color: #3c3c3c;
+}
+.search {
+  font-size: 12px;
+  float: right;
+  padding: 15px;
+  font-weight: 400;
+  color: #1edd8d;
+}
+.place {
+  font-size: 12px;
+  font-weight: 500;
+  background-color: #1edd8d;
+  border-radius: 5px;
+  padding: 5px;
+  width: auto;
+}
+.fa-solid.fa-location-dot{
+  color: #1edd8d;
+  padding-right: 5px;
+}
+.fa-solid.fa-calendar-days{
+  color: #1edd8d;
+  padding-right: 5px;
+}
+.fa-solid.fa-user{
+  color: #1edd8d;
+  padding-right: 5px;
+}
+.fa-solid.fa-hotel{
+  color: #1edd8d;
+  padding-right: 5px;
+}
+// body-content-right
+.properties {
+  width: 100%;
+}
+.prefer {
+  width: 10%;
+  font-size: 12px;
+  font-weight: 500;
+  color: #1edd8d;
+}
+.prefer2 {
+  width: 10%;
+  font-size: 10px;
+  font-weight: 500;
+  color: #d9d9d9;
+  padding-top: 5px;
+}
+.result {
+  width: 65%;
+  padding-top: 15px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #1edd8d;
+}
+.sort {
+  width: 35%;
+  font-size: 12px;
+  font-weight: 500;
+  color: #d9d9d9;
+  padding-top: 15px;
+  padding-left: 30px;
+  margin-bottom: 30px;
+}
+.card-border {
+  // box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 1px 1px 20px 3px rgba(0, 0, 0, 0.1);
+  // width: 270px;
+  margin-bottom: 30px;
+  border-radius: 10px;
+}
+.cards-propety {
+  // background: url("~src/assets/image/Rectangle 36.png") no-repeat center;
+  width: 100%;
+  height: 180px;
+  // border-radius: 5px;
+  position: relative;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+}
+.cards-propety-location {
+  position: absolute;
+  bottom: 0;
+  margin: 0;
+  color: #969696;
+  padding: 10px;
+  font-size: 12px;
+}
+.name {
+  font-size: 12px;
+  font-weight: 500;
+  padding-top: 5px;
+  margin: 0;
+}
+.rating {
+  font-size: 12px;
+  font-weight: 500;
+  padding-top: 5px;
+  color: #1edd8d;
+  margin: 0;
+  float: right;
+  // padding-right: 10px;
+  // padding-bottom: 5px;
+}
+.view-button {
+  background-color: #1edd8d;
+  border: none;
+  width: 50px;
+  height: 25px;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 500;
+  color: white;
+  padding: 3px;
+  float: right;
+  cursor: pointer;
+  // margin-right: 9px;
+}
+
+/* Popular-Destination */
+
+// get in touch section
+
+// footer
+
+.hotel-image {
+    width: 100%;
+    height: 180px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+.hotel-details {
+  padding: 0 15px;
+}
+
+.content {
+  margin: 0 30px;
+}
+
+.property-cotainer {
+  padding-left: 30px;
+}
+
+.price-slab{
+  margin: 4px;
+  // background-color: #6cedb7;
+  border-radius: 6px;
+  border: 1px solid #fff;
+  overflow: hidden;
+  float: left;
+  border-radius: 5px;
+}
+
+.price-slab label {
+  float: left; 
+  line-height: 2.0em;
+  width: 6.0em; 
+  // height: 2.5em;
+}
+
+.price-slab label span {
+  text-align: center;
+  // padding: 3px 0;
+  display: block;
+}
+
+.price-slab label input {
+  position: absolute;
+  display: none;
+  color: #969696;
+  font-size: 12px;
+}
+/* selects all of the text within the input element and changes the color of the text */
+.price-slab label input + span{color: #969696;}
+
+
+/* This will declare how a selected input will look giving generic properties */
+.price-slab input:checked + span {
+    color: #969696;
+    // text-shadow: 0 0  6px rgba(0, 0, 0, 0.8);
+}
+
+.action input:checked + span{
+  background-color: #87FFCD;
+  color:#000 !important;
+}
+
+.price-slab-container {
+ 
+  color: #969696;
+  padding: 10px;
+  font-size: 17px;
+  font-weight: 400;
+  margin: 0;
+  display: flex;
+}
+
+.price-slab-container .location {
+  padding: 0px !important;
+}
+
+.location-input{
+  border: none;
+  color:#969696;
+  padding-top: 3px;
+}
+
+.location-input:focus{
+  outline: none;
+}
+
+.location-input::placeholder{
+  color: #969696;
+  padding: 15px 0;
+  font-size: 17px;
+  font-weight: 400;
+  margin: 0;
+  display: flex;
+}
+
+::ng-deep .mat-chip.mat-standard-chip {
+  background-color: #83f1c3 !important;
+  color:  #625f5f !important;
+}
+
+::ng-deep .mat-standard-chip {
+   
+  min-height: 27px !important;
+  font-size: 12px !important;
+  border-radius: 5px !important;
+}
+
+.selected-disp {
+  padding: 5px 14px 15px;
+}
+
+.icon-image {
+  width: 26px;
+  height: 26px;
+}
+
+.filter-list {
+  padding: 10px;
+}
+ 
+.location i{
+  font-size: 18px;
+  margin-top: 2px;
+}
+
+.guests {
+  margin-right: 10px;
+}
+
+.pt-10{
+  padding-top: 10px;
+}
+
+::ng-deep .date-picker-container .mat-icon-button {
+  width:24px;
+  height: 29px;
+}
+
+
+
+.guest-overlay {
+  width: 200px;
+  border: solid 1px #ccc;
+  border-radius: 5px;
+  background: #fff;
+  padding: 15px;
+  margin: 0;
+}
+
+.guest-overlay input {
+  width: 60px;
+  border: 1px solid #D9D9D9;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+input:focus{
+  outline: none;
+}
+
+.guest-overlay button, .price-overlay button {
+  background-color: #1edd8d;
+  border: none;
+  float: right;
+  color: #fff;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+  color: inherit;
+}
+
+.disp-none{
+  display: none;
+}
+
+.price-overlay{
+  width: 275px;
+  border: solid 1px #ccc;
+  border-radius: 5px;
+  background: #fff;
+  padding: 15px;
+  margin: 0;
+}
+
+.price-overlay mat-form-field {
+  width: 100px;
+}
+.plus-sign{
+  margin: 15px;
+}
+
+.total-budget {
+  background-color: #87FFCD;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 13px;
+}
+
+.totalPrice {
+  background-color: #87FFCD;
+  color: #000 !important;
+  padding: 5px 10px;
+  margin: 10px;
+  border-radius: 5px;
+}
+
+.filter-list i {
+  color:#1edd8d;
+}

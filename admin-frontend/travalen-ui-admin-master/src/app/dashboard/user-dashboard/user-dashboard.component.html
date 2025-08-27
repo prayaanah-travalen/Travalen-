@@ -1,0 +1,148 @@
+<!-- user-dashboard -->
+<!-- first-section -->
+<div class="dashboard">
+    <div class="container-fluid">
+        <div class="user-dashboard">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="column">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <p>Total no.of booking</p>
+                                <p class="total-one">{{_bookings.length}}</p>
+                                <!-- <p class="total-two">+324</p> -->
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="circle-booking">
+                                    <i class="fa-solid fa-suitcase-rolling" ></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+                <div class="col-lg-3">
+                    <div class="column">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <p>Today's Check In</p>
+                                <p class="total-one">{{todaysCheckIn}}</p>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="circle-checkin">
+                                    <i class="fa-solid fa-arrow-down"></i>
+                                </div>
+                            </div>
+                        </div>  
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="column">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <p>Today's Check Out</p>
+                                <p class="total-one">{{todaysCheckOut}}</p>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="circle-checkout">
+                                    <i class="fa-solid fa-arrow-up"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="column">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <p>Available Rooms</p>
+                                <p class="total-one">0</p>
+                                <p class="total-two">0</p>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="circle-rooms">
+                                    <i class="fa-solid fa-bed"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- second-section -->
+        <div class="table">
+            <div class="row">
+                <div class="col-lg-6">
+                    <p class="recent-bookings">Recent Bookings</p>
+                </div>
+                <div class="col-lg-6">
+                    <div class="view-all">
+                        <!-- <p>View All</p> -->
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="booking">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="booking-table">
+                            <table>
+                                <tr>
+                                    <th><input type="checkbox"></th>
+                                    <th>Name</th>
+                                    <th>Booking Date</th>
+                                    <th>Phone Number</th>
+                                    <th>No.of Adults</th>
+                                    <th>No.of Children</th>
+                                    <th>Room Type</th>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            <table mat-table [dataSource]="_bookings" class="mat-elevation-z8">
+
+                <!--- Note that these columns can be defined in any order.
+                      The actual rendered columns are set as a property on the row definition" -->
+              
+                <!-- Position Column -->
+                <ng-container matColumnDef="name">
+                  <th mat-header-cell *matHeaderCellDef> Name </th>
+                  <td mat-cell *matCellDef="let element"> <a (click)="bookingDetails(element)">{{element.guestDetails.firstName}} {{element.guestDetails.lastName}}</a> </td>
+                </ng-container>
+              
+                <!-- Name Column -->
+                <ng-container matColumnDef="location">
+                  <th mat-header-cell *matHeaderCellDef> Location </th>
+                  <td mat-cell *matCellDef="let element"> <span *ngFor="let loc of element.location">{{loc.location}} <span *ngIf=" element.location &&  element.location.length > 1">|</span></span> </td>
+                </ng-container>
+              
+                <!-- Weight Column -->
+                <ng-container matColumnDef="bookingDate">
+                  <th mat-header-cell *matHeaderCellDef> Booking Date </th>
+                  <td mat-cell *matCellDef="let element"> {{element.bookingDate}} </td>
+                </ng-container>
+                
+                <ng-container matColumnDef="phone">
+                    <th mat-header-cell *matHeaderCellDef> Phone </th>
+                    <td mat-cell *matCellDef="let element"> {{element.guestDetails.phone}} </td>
+                  </ng-container>
+                
+              
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="noOfGuests">
+                  <th mat-header-cell *matHeaderCellDef> No Of Guests </th>
+                  <td mat-cell *matCellDef="let element">{{element.adults}} Adult(s) {{element.children}} Child(ren)</td>
+                </ng-container>
+
+                <ng-container matColumnDef="roomType">
+                    <th mat-header-cell *matHeaderCellDef> No of Hotels </th>
+                    <td mat-cell *matCellDef="let element">{{element.bookingDetails.length}} </td>
+                  </ng-container>
+              
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+              
+        </div>
+    </div>
+</div> 

@@ -1,0 +1,31 @@
+<div class="price-mngmt">
+    <form [formGroup]="priceForm">
+    <div class="">
+      <label class="labels">Price Range</label>
+      <div>
+        <input [ngClass]="priceForm.controls['price'].errors || !priceForm.controls['price'].valid ? 'error text'  : 'text' " type="text" name="price" formControlName="price">
+      </div>
+    </div>
+    <div class="">
+      <label class="labels">Maximum Allowed Guests</label>
+      <div>
+        <input [ngClass]="priceForm.controls['guests'].errors || !priceForm.controls['guests'].valid ? 'error text'  : 'text' " type="text" name="guests" formControlName="guests">
+      </div>
+    </div>
+    <div class="">
+      <label class="labels">Maximum Allowed Rooms</label>
+      <div>
+        <input [ngClass]="priceForm.controls['rooms'].errors || !priceForm.controls['rooms'].valid ? 'error text'  : 'text' " type="text" name="room" formControlName="rooms">
+      </div>
+    </div>
+    <div class="">
+      <label class="labels">No: of Nights</label>
+      <div>
+        <input [ngClass]="priceForm.controls['nights'].errors || !priceForm.controls['nights'].valid ? 'error text'  : 'text' " type="text" name="nights" formControlName="nights">
+      </div>
+    </div>
+    <div class="display-flex space-between">
+        <button class="" (click)="close()">Cancel</button> <button (click)="save()">Save</button>
+    </div>
+  </form>
+  </div>

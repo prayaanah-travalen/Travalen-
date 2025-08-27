@@ -1,0 +1,53 @@
+img {
+    position: fixed;
+    left: 51%;
+    top: 50.5%;
+    width: 32px;
+    z-index: 9999;
+}
+
+.width100 {
+    width: 100%;
+    justify-content: center;
+}
+
+::ng-deep .mat-progress-spinner svg {
+    // width: 83px !important;
+    height: 70px !important;
+}
+
+.mat-progress-spinner {
+    margin: auto;
+    vertical-align: middle;
+}
+
+.overlay-container {
+    position: fixed;
+    z-index: 9999;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    // background: rgba(0,0,0,.288);
+    
+}
+
+.spinner-container{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    position: absolute;
+    z-index: 1000;
+    background: rgba(0,0,0,.288);
+}
+
+.spinner {
+    top: 48%;
+    left: 2%;
+}
+
+::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+    stroke: #07877B !important;
+    stroke-width: 5% !important;
+}

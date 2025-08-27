@@ -1,0 +1,60 @@
+<div class="container-fluid">
+    <div class="content">
+        <form [formGroup]="userForm">
+            <div class="row">
+                <div class="p-3">
+                    <div class="pb-3">
+                        <label class="labels">First Name</label>
+                        <input
+                          [ngClass]="userForm.controls['fname'].errors || !userForm.controls['fname'].valid ? 'error text'  : 'text' "
+                          type="text" placeholder="First Name" formControlName="fname">
+                    </div>
+                    <div class="pb-3">
+                            <label class="labels">Last Name</label>
+                            <input
+                            [ngClass]="userForm.controls['lname'].errors || !userForm.controls['lname'].valid ? 'error text'  : 'text' "
+                            type="text" placeholder="Last Name" formControlName="lname">
+                    </div>
+                    <div class="pb-3">
+                        <label class="labels">Email Address</label>
+                        <input
+                          [ngClass]="!toModify && (userForm.controls['email'].errors || !userForm.controls['email'].valid) ? 'error text'  : 'text' "
+                          type="text" placeholder="name@example.com" formControlName="email">
+                  
+                    </div>
+                  
+                    <div class="pb-3">
+                        <label>Phone</label>
+                        <div class="phone-div">
+                        
+                            <span>
+                            <select formControlName="countryCode"
+                                [ngClass]="userForm.controls['countryCode'].errors || !userForm.controls['countryCode'].valid ? 'error code'  : 'code' ">
+                                <option *ngFor="let code of countryCodes" [value]="code.dial_code">{{code.dial_code}}</option>
+                            </select>
+                            </span>
+                            <input class="Ph-No-text"
+                            [ngClass]="userForm.controls['phone'].errors || !userForm.controls['phone'].valid ? 'error Ph-No-text'  : 'Ph-No-text' "
+                            type="text" placeholder="Phone Number" formControlName="phone">
+                        </div>
+                    </div>
+                    <div class="pb-3">
+                        <mat-form-field>
+                        <mat-label>Role</mat-label>
+                        <mat-select  multiple (selectionChange)="roleChangeEvent($event.value)" [(ngModel)]="selectedRles"  [ngModelOptions]="{standalone: true}">
+                            <mat-option *ngFor="let role of roles" [value]="role.roleId">{{role.roleName}}</mat-option>
+                        </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div>
+                        <button (click)="createUser()">Save</button>
+                    </div>
+                    <div class="error-text">{{error}}</div>
+            
+                </div>
+            </div>
+        </form>
+    </div>
+ 
+</div>

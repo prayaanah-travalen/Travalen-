@@ -1,0 +1,36 @@
+<!-- popular-destination -->
+
+<div class="container-fluid mt-5">
+  <div class="contents">
+    <p class="heading">Popular Destinations</p>
+    <p class="mini-heading">Most Popular destinations around Kerala, from historical places to natural wonders</p>
+    
+    <!-- <div class="" *ngIf="popularDest.length === 0">
+      <div class="carrousel">
+        <article class="card">
+          <img src="./assets/image/gallery.png" class="popular-img">
+        </article>
+        <article class="card">
+          <img src="./assets/image/gallery (1).png" class="popular-img">
+        </article>
+        <article class="card">
+          <img src="./assets/image/gallery (2).png" class="popular-img">
+        </article>
+        <article class="card">
+          <img src="./assets/image/gallery (3).png" class="popular-img">
+        </article>
+       
+      </div>
+    </div> -->
+
+    <div class="" *ngIf="popularDest.length >= 0">
+      <div class="carrousel">
+        <article class="card" *ngFor="let dest of popularDest">
+          <!-- <img [src]="'data:image/png;base64,'+dest.image" class="popular-img"> -->
+          <img [src]="dest.image" class="popular-img">
+        </article>
+      </div>
+    </div>
+  </div>
+</div>
+

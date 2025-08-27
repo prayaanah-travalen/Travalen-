@@ -1,0 +1,30 @@
+<!-- footer -->
+<div class="text-center footer text-center">
+  <div class="container p-4">
+    <div class="row text-md-start mt-2">
+      <div class="col-md-6">
+        <a [routerLink]="['/landing']"><img src="./assets/image/footer-logo.png" class="logo" /></a>
+        <!-- <span>
+          <img src="./assets/image/insta-icon.png" class="footer-icon" />
+          <img src="./assets/image/fb-icon.png" class="footer-icon" />
+          <img src="./assets/image/twitter-icon.png" class="footer-icon" />
+        </span> -->
+      </div>
+      <div class="col-md-6">
+      <span>
+  <ul class="list-inline" style="font-size: 14px;">
+    <li class="list-inline-item"><a [routerLink]="['/landing']">Home</a></li>
+    <!-- <li class="list-inline-item"><a>Services</a></li> -->
+    <li class="list-inline-item"><a [routerLink]="['/landing']">About</a></li>
+    <li class="list-inline-item"><a (click)="terms()">Terms</a></li>
+    <li class="list-inline-item"><a (click)="privacy()">Privacy Policy</a></li>
+    <li class="list-inline-item"><a (click)="refund()">Refund Policy</a></li>
+  </ul>
+</span>
+
+      </div>
+    </div>
+  </div>
+  <hr />
+  <p class="copyright">Designed and Developed by 2024 <i class="fa-regular fa-copyright"></i> QinCore Labs Pvt Ltd.</p>
+</div>

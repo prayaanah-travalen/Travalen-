@@ -1,0 +1,333 @@
+<!-- navbar -->
+<app-navbar></app-navbar>
+
+<!-- payment-select-section -->
+<div class="container-fluid">
+  <div class="content">
+    <div class="row">
+      <div class="col-md-6 ">
+        <div class="pay-booking">
+          <div class="row">
+            <div class="col-md-9">
+              <div class="row">
+                <div class="col-md">
+                  <a>
+                    <p class="location mt-1"><i class="fa-solid fa-money-bill-transfer"></i> Budget </p>
+                  </a>
+                </div>
+    
+                <div class="col-md" *ngFor="let price of priceSlabs">
+                  <div class="price-slab action mt-2">
+                    <label class="cursor-pointer">
+                      <input type="checkbox" [value]="price.id" (change)="selectPrice(price)"
+                        [checked]="selectedPriceSlabIds.indexOf(price.id) >= 0">
+                      <span><i class="fa-solid fa-indian-rupee-sign"></i>{{price.priceSlab}}</span>
+                    </label>
+                  </div>
+    
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="row">
+                <div class="col-md display-flex">
+                  <a class="location" (click)="triggerCustomPrice()" cdkOverlayOrigin #trigger1="cdkOverlayOrigin"><i class="fa-solid fa-pencil"></i></a>
+                  <ng-template cdkConnectedOverlay [cdkConnectedOverlayOrigin]="trigger1"  [cdkConnectedOverlayOpen]="isCustomPriceOpen" >
+                    <div class="price-overlay ">
+                      <div class="display-flex">
+                        <div>
+                          <mat-form-field>
+                            <mat-label>Price Slab</mat-label>
+                            <mat-select [(ngModel)]="priceSlab1">
+                              <mat-option *ngFor="let price of priceSlabs" [value]="price.priceSlab">{{price.priceSlab}}</mat-option>
+                            
+                            </mat-select>
+                          </mat-form-field>
+                         </div>
+                         <span class="plus-sign">+</span>
+                         <div>
+                          <mat-form-field>
+                            <mat-label>Price Slab</mat-label>
+                            <mat-select [(ngModel)]="priceSlab2">
+                              <mat-option *ngFor="let price of priceSlabs" [value]="price.priceSlab">{{price.priceSlab}}</mat-option>
+                            
+                            </mat-select>
+                          </mat-form-field>
+                         </div>
+                      </div>
+                      <div class="display-flex space-between">
+                        <div class="total-budget">Total Budget: {{priceSlab1 + priceSlab2}}</div>
+                        <button class="pull-right" (click)="continueCustomPrice()">Continue</button>
+                      </div>
+                     
+                    </div>
+                </ng-template>
+                <div class="totalPrice" *ngIf="selectedPriceSlab.length > 1">
+                  {{selectedPriceSlab[0].priceSlab + selectedPriceSlab[1].priceSlab}}
+                </div>  
+                </div>
+                <!-- <div class="col-md-10" *ngIf="selectedPriceSlab.length > 1">
+                  <div class="totalPrice">
+                    {{selectedPriceSlab[0].priceSlab + selectedPriceSlab[1].priceSlab}}
+                  </div>  
+                </div> -->
+              </div>
+            </div>
+          </div>
+          <!-- <div class="row">
+            <div class="col-md">
+              <a>
+                <p class="location mt-1"><i class="fa-solid fa-money-bill-transfer"></i> Budget </p>
+              </a>
+            </div>
+
+            <div class="col-md" *ngFor="let price of priceSlabs">
+              <div class="price-slab action mt-2">
+                <label class="cursor-pointer">
+                  <input type="checkbox" [value]="price.id" (change)="selectPrice(price)"
+                    [checked]="selectedPriceSlabIds.indexOf(price.id) >= 0">
+                  <span><i class="fa-solid fa-indian-rupee-sign"></i>{{price.priceSlab}}</span>
+                </label>
+              </div>
+
+            </div>
+            <div class="col-md display-flex">
+              <a class="location" (click)="triggerCustomPrice()" cdkOverlayOrigin #trigger1="cdkOverlayOrigin"><i class="fa-solid fa-pencil"></i></a>
+              <ng-template cdkConnectedOverlay [cdkConnectedOverlayOrigin]="trigger1"  [cdkConnectedOverlayOpen]="isCustomPriceOpen" >
+                <div class="price-overlay ">
+                  <div class="display-flex">
+                    <div>
+                      <mat-form-field>
+                        <mat-label>Price Slab</mat-label>
+                        <mat-select [(ngModel)]="priceSlab1">
+                          <mat-option *ngFor="let price of priceSlabs" [value]="price.priceSlab">{{price.priceSlab}}</mat-option>
+                        
+                        </mat-select>
+                      </mat-form-field>
+                     </div>
+                     <span class="plus-sign">+</span>
+                     <div>
+                      <mat-form-field>
+                        <mat-label>Price Slab</mat-label>
+                        <mat-select [(ngModel)]="priceSlab2">
+                          <mat-option *ngFor="let price of priceSlabs" [value]="price.priceSlab">{{price.priceSlab}}</mat-option>
+                        
+                        </mat-select>
+                      </mat-form-field>
+                     </div>
+                  </div>
+                  <div class="display-flex space-between">
+                    <div class="total-budget">Total Budget: {{priceSlab1 + priceSlab2}}</div>
+                    <button class="pull-right" (click)="continueCustomPrice()">Continue</button>
+                  </div>
+                 
+                </div>
+            </ng-template>
+
+            </div>
+            <div class="col-md" *ngIf="selectedPriceSlab.length > 1">
+              <span class="totalPrice">
+                {{selectedPriceSlab[0].priceSlab + selectedPriceSlab[1].priceSlab}}
+              </span>  
+            </div>
+          </div> -->
+        </div>
+      </div>
+      <div class="col-md-6 p-0 text-right">
+        <p class="path"><a [routerLink]="['/home']">Home</a><i class="fa-solid fa-chevron-left"></i> Hotels in {{selectedLocationNames}}</p>
+      </div>
+    </div>
+
+    <div class="row ">
+      <!-- body-content-left -->
+      <div class="col-md-3 ">
+        <form [formGroup]="searchForm">
+          <div class="search-filter">
+            <div class="row">
+              <div class="col-6">
+                <div class="filter ">Search Filters</div>
+              </div>
+              <!-- <div class="col-6"><a class="search" (click)="search()">Search</a></div> -->
+              <!-- <div class="error-text text-right mb-2" role="alert" *ngIf="!searchForm.valid"> 
+                Please select all fields
+              </div> -->
+              <mat-divider></mat-divider>
+              <div class="filter-list">
+                <!-- <p class="location"><img src="./assets/image/location_on.png"> Location </p> -->
+                <div class="location mt-1">
+                  <!-- <img class="icon-image" src="./assets/image/location_on.png"> -->
+                  <i class="fa-solid fa-location-dot"></i>
+                  <div>
+                    <input type="text" placeholder="Location" formControlName="location" [matAutocomplete]="auto"
+                      class="location-input">
+                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelectionChange($event)">
+                      <mat-option *ngFor="let loc of filteredLocations | async" [value]="loc">
+                        {{loc.location}}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </div>
+                  
+                </div>
+                <div [ngClass]="selectedLocation.length ? 'selected-disp' : ''">
+                  <mat-chip-list #chipList>
+                    <mat-chip *ngFor="let location of selectedLocation" [selectable]="selectable"
+                      [removable]="removable" (removed)="remove(location)">
+                      {{location.location}}
+                      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                    </mat-chip>
+                  </mat-chip-list>
+                </div>
+                <div class="error-text  mb-2" role="alert" *ngIf="!searchForm.valid && searchForm.controls['location'].errors"> 
+                  Please select location
+                </div>
+              </div>
+              <mat-divider></mat-divider>
+              <div class="filter-list">
+                <div class="location">
+                  <div class="date-picker">
+                    <app-date-picker (dateEmitter)="dateEmitter($event, 'checkin')" [displayLabel]="'Check In'"
+                      [tillDateDisable]="tillDateDisable" [maxDateEnable]="maxDateEnable"> </app-date-picker>
+                  </div>
+                </div>
+                <div class="selected-disp">{{searchForm.value.checkIn}}</div>
+                <div class="error-text mb-2" role="alert" *ngIf="!searchForm.valid && searchForm.controls['checkIn'].errors"> 
+                  {{checkinDateError}}
+                </div>
+               
+                
+              </div>
+              <mat-divider></mat-divider>
+              <div class="filter-list">
+                <div class="location">
+                  <div class="date-picker">
+                    <app-date-picker (dateEmitter)="dateEmitter($event, 'checkout')" [displayLabel]="'Check Out'"
+                      [tillDateDisable]="tillDateDisable" [maxDateEnable]="maxDateEnable"> </app-date-picker>
+                  </div>
+                </div>
+                <div class="selected-disp">{{searchForm.value.checkOut}}</div>
+                <div class="error-text mb-2" role="alert" *ngIf="!searchForm.valid && searchForm.controls['checkOut'].errors"> 
+                  Check-out date is required.
+                </div>
+              </div>
+              <mat-divider></mat-divider>
+              <div class="filter-list">
+                <div class="location">
+                  <a class=" mt-1" (click)="openNoOfGuest()"><i class="fa-solid fa-user" cdkOverlayOrigin
+                      #trigger="cdkOverlayOrigin"></i> No. Guests </a>
+                  <ng-template cdkConnectedOverlay [cdkConnectedOverlayOrigin]="trigger"
+                    [cdkConnectedOverlayOpen]="isNoOfGuestOpen">
+                    <div class="guest-overlay ">
+                      <div class="display-flex space-between mb-2">
+                        <label>Adults</label> <input type="text" [value]="searchForm.value.adults"
+                          formControlName="adults" min="1">
+                      </div>
+                      <div class="display-flex space-between mb-2">
+                        <label>Children</label> <input type="text" [value]="searchForm.value.children"
+                          formControlName="children" min="1">
+                      </div>
+                      <button class="pull-right" (click)="continue()">Continue</button>
+                    </div>
+                  </ng-template>
+                </div>
+                <div class="selected-disp">
+                  <span class="guests">{{searchForm.value.adults}} Adults</span>
+                  <span>{{searchForm.value.children}} Child<span
+                      *ngIf="searchForm.value.children && searchForm.value.children > 1">ren</span></span>
+                </div>
+              </div>
+              <mat-divider></mat-divider>
+              <div class="filter-list">
+                <div class="location">
+                  <i class="fa-solid fa-hotel"></i>
+                  Hotels Selected
+                </div>
+                <div class="selected-disp">
+                  <mat-chip-list #chipList>
+                    <mat-chip *ngFor="let htl of seletedHotels" [selectable]="selectable" [removable]="removable"
+                      (removed)="removeHotels(htl)">
+                      {{htl.hotelName}}
+                      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                    </mat-chip>
+                  </mat-chip-list>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </form>
+      </div>
+      <!-- body-content-right -->
+      <div class="col-md-9 property-cotainer">
+        <div class="properties">
+          <!-- <div class="row">
+            <div class="prefer">Munnar</div>
+            <div class="prefer2">Ooty</div>
+            <br />
+          </div> -->
+          <div class="row result">
+            <div class="col-md">Results: {{hotelList.length}} Properties found</div>
+          </div>
+          <div class="row mt-3">
+
+            <!-- <div class="sort">Sort By</div> -->
+            <div class="col-md-4" *ngFor="let hotel of hotelList">
+              <div class="card-border">
+                <div class="cards-propety">
+                  <img [src]="hotel.images.length ? hotel.images[0].image : ''" class="hotel-image">
+                  <p class="cards-propety-location">
+                    <img src="./assets/image/location_on.png" class="location-icon" />
+                    {{hotel.location.location}}
+                  </p>
+                </div>
+                <div class="row hotel-details">
+                  <div class="col-9">
+                    <p class="name">{{hotel.hotelName}}</p>
+                  </div>
+                  <div class="col-3">
+                    <p class="rating">{{hotel.starRating}}</p>
+                  </div>
+                  <div class="col-8">
+                    <div class="row ">
+                      <div class="col-md">
+                        <img src="./assets/image/restaurant.png" class="location-icon" />
+                      </div>
+                      <div class="col-md">
+                        <img src="./assets/image/local_parking.png" class="location-icon" />
+                      </div>
+                      <div class="col-md">
+                        <img src="./assets/image/laundry.png" class="location-icon" />
+                      </div>
+                      <div class="col-md">
+                        <img src="./assets/image/language.png" class="location-icon" />
+                      </div>
+                      <div class="col-md">
+                        <img src="./assets/image/Group 72.png" class="location-icon" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <p class="view-button" (click)="showHotelDetails(hotel.hotelCode)">View</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<app-reservation *ngIf="showReservation"></app-reservation>
+
+<!-- Popular destination -->
+<app-popular-destination></app-popular-destination>
+
+<!-- get in touch section -->
+<app-get-in-touch></app-get-in-touch>
+
+<!-- footer -->
+<app-footer></app-footer>

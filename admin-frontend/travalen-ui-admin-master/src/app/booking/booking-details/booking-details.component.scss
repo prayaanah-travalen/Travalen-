@@ -1,0 +1,100 @@
+// Booking
+.booking {
+    width: 100%;
+    height: 100vh;
+    background-color: white;
+    padding: 20px;
+}
+
+.heading-booking {
+    font-weight: bold;
+    font-size: 21px;
+}
+
+.search-text {
+    width: 100%;
+    height: 35px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    background-color: whitesmoke;
+    // padding-left: 15px;
+}
+
+.search-box {
+    height: 35px;
+    width: 60px;
+    background-color: whitesmoke;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #98A2B3;
+    margin-top: 10px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.date {
+    width: 150px;
+    height: 40px;
+    background-color: whitesmoke;
+    margin-top: 10px;
+}
+
+.btn-download {
+    width: 160px;
+    height: 40px;
+    color: white;
+    background-color: #1EDD8D;
+    border: none;
+    outline: none;
+    font-weight: bold;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+// Booking-List
+.booking-list {
+    width: 100%;
+    height: 50vh;
+    background-color: whitesmoke;
+    margin-top: 10px;
+}
+
+// Booking-Details
+.booking-details {
+    // width: 100%;
+    height: 650px;
+    border: 1px solid #98A2B3;
+    border-radius: 5px;
+    // margin-top: 10px;
+    padding: 20px;
+    overflow: auto;
+    background: #fff;
+}
+
+.heading-booking-details {
+    font-weight: bold;
+    font-size: 21px;
+    // margin: 10px;
+}
+
+.labels {
+    color: #98A2B3;
+}
+
+.text {
+    width: 100%;
+    height: 40px;
+    border: 1px solid #98A2B3;
+    outline: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    // background-color: whitesmoke;
+    padding-left: 15px;
+}
+
+table {
+    width: 100%;
+  }
