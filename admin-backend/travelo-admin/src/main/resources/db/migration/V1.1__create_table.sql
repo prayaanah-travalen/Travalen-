@@ -22,7 +22,7 @@ create table hotel (
     last_updated_time TIMESTAMP,
     last_updated_by varchar(20),
     CONSTRAINT PK_HOTEL  PRIMARY KEY ( hotel_code ),
-    CONSTRAINT FK_LOCATION FOREIGN KEY (location_id) REFERENCES travalen.location(location_id)
+    CONSTRAINT FK_LOCATION FOREIGN KEY (location_id) REFERENCES location(location_id)
 );
 
 create table room(
@@ -46,7 +46,7 @@ create table hotel_room(
     last_updated_time TIMESTAMP,
     last_updated_by varchar(20),
     CONSTRAINT PK_HOTEL_ROOM PRIMARY KEY (hotel_room_id),
-    CONSTRAINT FK_HOTEL_CODE FOREIGN KEY (hotel_code) REFERENCES travalen.hotel(hotel_code)
+    CONSTRAINT FK_HOTEL_CODE FOREIGN KEY (hotel_code) REFERENCES hotel(hotel_code)
 );
 
 create table hotel_availabilty(
@@ -59,7 +59,7 @@ create table hotel_availabilty(
     last_updated_time TIMESTAMP,
     last_updated_by varchar(20),
     CONSTRAINT PK_HOTEL_AVAILABILITY PRIMARY KEY (id),
-    CONSTRAINT FK_HOTEL_CODE FOREIGN KEY (hotel_code) REFERENCES travalen.hotel(hotel_code)
+    CONSTRAINT FK_HOTEL_CODE FOREIGN KEY (hotel_code) REFERENCES hotel(hotel_code)
 );
 
 create table room_availabilty(
@@ -72,7 +72,7 @@ create table room_availabilty(
     last_updated_time TIMESTAMP,
     last_updated_by varchar(20),
     CONSTRAINT PK_HOTEL_ROOM_AVAILABILITY PRIMARY KEY (id),
-    CONSTRAINT FK_HOTEL_CODE FOREIGN KEY (hotel_room_id) REFERENCES travalen.hotel_room(hotel_room_id)
+    CONSTRAINT FK_HOTEL_CODE FOREIGN KEY (hotel_room_id) REFERENCES hotel_room(hotel_room_id)
 );
 
 create table hotel_api(
@@ -85,7 +85,7 @@ create table hotel_api(
     last_updated_time TIMESTAMP,
     last_updated_by varchar(20),
     CONSTRAINT PK_HOTEL_API PRIMARY KEY (hotel_ap_id),
-    CONSTRAINT FK_HOTEL_CODE FOREIGN KEY (hotel_code) REFERENCES travalen.hotel(hotel_code)
+    CONSTRAINT FK_HOTEL_CODE FOREIGN KEY (hotel_code) REFERENCES hotel(hotel_code)
 );
 
 create table hotel_image(
@@ -98,7 +98,7 @@ create table hotel_image(
     last_updated_time TIMESTAMP,
     last_updated_by varchar(20),
     CONSTRAINT PK_HOTEL_IMAGE PRIMARY KEY (image_id),
-    CONSTRAINT FK_HOTEL_CODE FOREIGN KEY (hotel_code) REFERENCES travalen.hotel(hotel_code)
+    CONSTRAINT FK_HOTEL_CODE FOREIGN KEY (hotel_code) REFERENCES hotel(hotel_code)
 );
 
 create table room_image(
@@ -111,7 +111,7 @@ create table room_image(
     last_updated_time TIMESTAMP,
     last_updated_by varchar(20),
     CONSTRAINT PK_HOTEL_ROOM_IMAGE PRIMARY KEY (image_id),
-    CONSTRAINT FK_HOTEL_CODE FOREIGN KEY (hotel_room_id) REFERENCES travalen.hotel_room(hotel_room_id)
+    CONSTRAINT FK_HOTEL_CODE FOREIGN KEY (hotel_room_id) REFERENCES hotel_room(hotel_room_id)
 );
 
 create table role(
@@ -177,7 +177,7 @@ create table booking(
     last_updated_time TIMESTAMP,
     last_updated_by varchar(20),
     CONSTRAINT PK_BOOKING PRIMARY KEY (booking_id),
-    CONSTRAINT FK_GUEST FOREIGN KEY (guest_id) REFERENCES travalen.guest_details(guest_id)
+    CONSTRAINT FK_GUEST FOREIGN KEY (guest_id) REFERENCES guest_details(guest_id)
 );
 
 create table booking_details(
@@ -192,8 +192,8 @@ create table booking_details(
     last_updated_time TIMESTAMP,
     last_updated_by varchar(20),
     CONSTRAINT PK_BOOKING_DETAILS PRIMARY KEY (booking_detail_id),
-    CONSTRAINT FK_HOTEL_CODE FOREIGN KEY (hotel_room_id) REFERENCES travalen.hotel_room(hotel_room_id),
-    CONSTRAINT FK_BOOKING FOREIGN KEY (booking_id) REFERENCES travalen.booking(booking_id)
+    CONSTRAINT FK_HOTEL_CODE FOREIGN KEY (hotel_room_id) REFERENCES hotel_room(hotel_room_id),
+    CONSTRAINT FK_BOOKING FOREIGN KEY (booking_id) REFERENCES booking(booking_id)
 );
 
 
@@ -206,7 +206,7 @@ create table hotel_amenity(
     last_updated_time TIMESTAMP,
     last_updated_by varchar(20),
     CONSTRAINT PK_AMENITY_ID PRIMARY KEY (amenity_id),
-    CONSTRAINT FK_HOTEL_CODE FOREIGN KEY (hotel_code) REFERENCES travalen.hotel(hotel_code)
+    CONSTRAINT FK_HOTEL_CODE FOREIGN KEY (hotel_code) REFERENCES hotel(hotel_code)
 );
 
 create table room_amenity(
@@ -218,7 +218,7 @@ create table room_amenity(
     last_updated_time TIMESTAMP,
     last_updated_by varchar(20),
     CONSTRAINT PK_ROOM_AMENITY_ID PRIMARY KEY (amenity_id),
-    CONSTRAINT FK_HOTEL_CODE FOREIGN KEY (hotel_room_id) REFERENCES travalen.hotel_room(hotel_room_id)
+    CONSTRAINT FK_HOTEL_CODE FOREIGN KEY (hotel_room_id) REFERENCES hotel_room(hotel_room_id)
 );
 
 create table room_tags(
@@ -230,7 +230,7 @@ create table room_tags(
     last_updated_time TIMESTAMP,
     last_updated_by varchar(20),
     CONSTRAINT PK_ROOM_TAG_ID PRIMARY KEY (room_tag_id),
-    CONSTRAINT FK_HOTEL_CODE FOREIGN KEY (hotel_room_id) REFERENCES travalen.hotel_room(hotel_room_id)
+    CONSTRAINT FK_HOTEL_CODE FOREIGN KEY (hotel_room_id) REFERENCES hotel_room(hotel_room_id)
 );
 
 create table offers(
@@ -265,9 +265,9 @@ create table rooms_price_slab(
     last_updated_time TIMESTAMP,
     last_updated_by varchar(20),
     CONSTRAINT PK_ROOMS_PRICE_SLAB PRIMARY KEY (id),
-    CONSTRAINT FK_HOTEL_ROOM_CODE FOREIGN KEY (hotel_room_id) REFERENCES travalen.hotel_room(hotel_room_id),
-    CONSTRAINT FK_PRICE_SLAB_ID FOREIGN KEY (price_slab_id) REFERENCES travalen.price_slab(id),
-    CONSTRAINT FK_HOTEL_CODE FOREIGN KEY (hotel_code) REFERENCES travalen.hotel(hotel_code)
+    CONSTRAINT FK_HOTEL_ROOM_CODE FOREIGN KEY (hotel_room_id) REFERENCES hotel_room(hotel_room_id),
+    CONSTRAINT FK_PRICE_SLAB_ID FOREIGN KEY (price_slab_id) REFERENCES price_slab(id),
+    CONSTRAINT FK_HOTEL_CODE FOREIGN KEY (hotel_code) REFERENCES hotel(hotel_code)
 );
 
 create table popular_destination(
@@ -304,7 +304,7 @@ create table payment(
     last_updated_time TIMESTAMP,
     last_updated_by varchar(20),
     CONSTRAINT PK_PAYMENT_ID PRIMARY KEY (id),
-    CONSTRAINT FK_BOOKING FOREIGN KEY (booking_id) REFERENCES travalen.booking(booking_id)
+    CONSTRAINT FK_BOOKING FOREIGN KEY (booking_id) REFERENCES booking(booking_id)
 );
 
 create table users_hotel(
@@ -329,5 +329,5 @@ create table finance(
     last_updated_time TIMESTAMP,
     last_updated_by varchar(20),
     CONSTRAINT PK_FINANCE_ID PRIMARY KEY (id),
-    CONSTRAINT FK_HOTEL_CODE FOREIGN KEY (hotel_code) REFERENCES travalen.hotel(hotel_code)
+    CONSTRAINT FK_HOTEL_CODE FOREIGN KEY (hotel_code) REFERENCES hotel(hotel_code)
 );
