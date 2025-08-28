@@ -1,5 +1,5 @@
 
-ALTER table travalen.users
+ALTER table users
 ADD column if not exists hotel_name varchar(50),
 ADD column if not exists contact_person varchar(50),
 ADD column if not exists whatsapp_number varchar(50),
