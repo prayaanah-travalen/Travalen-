@@ -7,7 +7,7 @@ ADD column if not exists contact_number varchar(50),
 ADD column if not exists designation varchar(50)
 ;
 
-ALTER table travalen.hotel
+ALTER table hotel
 ADD column if not exists active BOOLEAN not null
 ;
 
