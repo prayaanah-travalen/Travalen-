@@ -1,5 +1,5 @@
 
-insert into travalen.common_parameter(parameter_id,parameter_group,parameter,description, available) values
+insert into common_parameter(parameter_id,parameter_group,parameter,description, available) values
 ('RAMN0001','ROOM_AMENITIES','coffee_maker','Coffee maker', true),
 ('RAMN0002','ROOM_AMENITIES','tea_maker','Tea maker', true),
 ('RAMN0003','ROOM_AMENITIES','mini_fridge','Mini fridge', true),
