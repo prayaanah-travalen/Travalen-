@@ -1,9 +1,9 @@
-create table travalen.location( location_id BIGSERIAL NOT NULL,
+create table location( location_id BIGSERIAL NOT NULL,
     location varchar(100),
     CONSTRAINT PK_LOCATION  PRIMARY KEY ( location_id )
 );
 
-create table travalen.hotel (
+create table hotel (
     hotel_code BIGSERIAL NOT NULL,
     hotel_name varchar(50),
     email varchar(50),
@@ -25,13 +25,13 @@ create table travalen.hotel (
     CONSTRAINT FK_LOCATION FOREIGN KEY (location_id) REFERENCES travalen.location(location_id)
 );
 
-create table travalen.room(
+create table room(
     room_code BIGSERIAL NOT NULL,
     room_type varchar(50),
     bed_type varchar(50),
 CONSTRAINT PK_ROOM_CODE PRIMARY KEY(room_code));
 
-create table travalen.hotel_room(
+create table hotel_room(
     hotel_room_id BIGSERIAL NOT NULL,
     hotel_code bigint,
     room_name varchar(50),
@@ -49,7 +49,7 @@ create table travalen.hotel_room(
     CONSTRAINT FK_HOTEL_CODE FOREIGN KEY (hotel_code) REFERENCES travalen.hotel(hotel_code)
 );
 
-create table travalen.hotel_availabilty(
+create table hotel_availabilty(
     id BIGSERIAL NOT NULL,
     hotel_code bigint,
     available_from TIMESTAMP,
@@ -62,7 +62,7 @@ create table travalen.hotel_availabilty(
     CONSTRAINT FK_HOTEL_CODE FOREIGN KEY (hotel_code) REFERENCES travalen.hotel(hotel_code)
 );
 
-create table travalen.room_availabilty(
+create table room_availabilty(
     id BIGSERIAL NOT NULL,
     hotel_room_id bigint,
     available_from TIMESTAMP,
@@ -75,7 +75,7 @@ create table travalen.room_availabilty(
     CONSTRAINT FK_HOTEL_CODE FOREIGN KEY (hotel_room_id) REFERENCES travalen.hotel_room(hotel_room_id)
 );
 
-create table travalen.hotel_api(
+create table hotel_api(
     hotel_ap_id BIGSERIAL NOT NULL,
     hotel_code bigint,
     api_name varchar(50),
@@ -88,7 +88,7 @@ create table travalen.hotel_api(
     CONSTRAINT FK_HOTEL_CODE FOREIGN KEY (hotel_code) REFERENCES travalen.hotel(hotel_code)
 );
 
-create table travalen.hotel_image(
+create table hotel_image(
     image_id BIGSERIAL NOT NULL,
     hotel_code bigint,
     image bytea,
@@ -101,7 +101,7 @@ create table travalen.hotel_image(
     CONSTRAINT FK_HOTEL_CODE FOREIGN KEY (hotel_code) REFERENCES travalen.hotel(hotel_code)
 );
 
-create table travalen.room_image(
+create table room_image(
     image_id BIGSERIAL NOT NULL,
     hotel_room_id bigint,
     image bytea,
@@ -114,7 +114,7 @@ create table travalen.room_image(
     CONSTRAINT FK_HOTEL_CODE FOREIGN KEY (hotel_room_id) REFERENCES travalen.hotel_room(hotel_room_id)
 );
 
-create table travalen.role(
+create table role(
     role_id BIGSERIAL NOT NULL,
     role_name varchar(50),
     registration_time TIMESTAMP,
@@ -124,7 +124,7 @@ create table travalen.role(
     CONSTRAINT PK_ROLE PRIMARY KEY (role_id)
 );
 
-create table travalen.users(
+create table users(
     user_id BIGSERIAL NOT NULL,
     user_type varchar(20),
     first_name varchar(50),
@@ -142,14 +142,14 @@ create table travalen.users(
     CONSTRAINT PK_USER PRIMARY KEY (user_id)
 );
 
-create table travalen.users_role(
+create table users_role(
     id BIGSERIAL NOT NULL,
     role_id bigint,
     user_id bigint,
     CONSTRAINT PK_USER_ROLE_ID PRIMARY KEY (id)
 );
 
-create table travalen.guest_details(
+create table guest_details(
     guest_id BIGSERIAL NOT NULL,
     first_name varchar(50),
     last_name varchar(50),
@@ -162,7 +162,7 @@ create table travalen.guest_details(
     CONSTRAINT PK_GUEST_ID PRIMARY KEY (guest_id)
 );
 
-create table travalen.booking(
+create table booking(
     booking_id BIGSERIAL NOT NULL,
     no_of_hotels varchar(50),
     guest_id bigint,
@@ -180,7 +180,7 @@ create table travalen.booking(
     CONSTRAINT FK_GUEST FOREIGN KEY (guest_id) REFERENCES travalen.guest_details(guest_id)
 );
 
-create table travalen.booking_details(
+create table booking_details(
     booking_detail_id BIGSERIAL NOT NULL,
     booking_id bigint,
     hotel_room_id bigint,
@@ -197,7 +197,7 @@ create table travalen.booking_details(
 );
 
 
-create table travalen.hotel_amenity(
+create table hotel_amenity(
     amenity_id BIGSERIAL NOT NULL,
     amenity varchar(50),
     hotel_code bigint,
@@ -209,7 +209,7 @@ create table travalen.hotel_amenity(
     CONSTRAINT FK_HOTEL_CODE FOREIGN KEY (hotel_code) REFERENCES travalen.hotel(hotel_code)
 );
 
-create table travalen.room_amenity(
+create table room_amenity(
     amenity_id BIGSERIAL NOT NULL,
     amenity varchar(50),
     hotel_room_id bigint,
@@ -221,7 +221,7 @@ create table travalen.room_amenity(
     CONSTRAINT FK_HOTEL_CODE FOREIGN KEY (hotel_room_id) REFERENCES travalen.hotel_room(hotel_room_id)
 );
 
-create table travalen.room_tags(
+create table room_tags(
     room_tag_id BIGSERIAL NOT NULL,
     room_tag varchar(50),
     hotel_room_id bigint,
@@ -233,7 +233,7 @@ create table travalen.room_tags(
     CONSTRAINT FK_HOTEL_CODE FOREIGN KEY (hotel_room_id) REFERENCES travalen.hotel_room(hotel_room_id)
 );
 
-create table travalen.offers(
+create table offers(
     offers_id BIGSERIAL NOT NULL,
     offer_details varchar(50),
     registration_time TIMESTAMP,
@@ -243,7 +243,7 @@ create table travalen.offers(
     CONSTRAINT PK_OFFERS_ID PRIMARY KEY (offers_id)
 );
 
-create table travalen.price_slab(
+create table price_slab(
     id BIGSERIAL NOT NULL,
     price_slab integer,
     max_allowed_guest integer,
@@ -255,7 +255,7 @@ create table travalen.price_slab(
     CONSTRAINT PK_ID PRIMARY KEY (id)
 );
 
-create table travalen.rooms_price_slab(
+create table rooms_price_slab(
     id BIGSERIAL NOT NULL,
     price_slab_id bigint,
     hotel_code bigint,
@@ -270,7 +270,7 @@ create table travalen.rooms_price_slab(
     CONSTRAINT FK_HOTEL_CODE FOREIGN KEY (hotel_code) REFERENCES travalen.hotel(hotel_code)
 );
 
-create table travalen.popular_destination(
+create table popular_destination(
     popular_dest_id BIGSERIAL NOT NULL,
     location varchar(50),
     image varchar(50),
@@ -282,7 +282,7 @@ create table travalen.popular_destination(
     CONSTRAINT PK_POPULAR_DEST_ID PRIMARY KEY (popular_dest_id)
 );
 
-create table travalen.payment(
+create table payment(
     id BIGSERIAL NOT NULL,
     payment_id varchar(50) NOT NULL,
     parent_payment_id varchar(50),
@@ -307,12 +307,12 @@ create table travalen.payment(
     CONSTRAINT FK_BOOKING FOREIGN KEY (booking_id) REFERENCES travalen.booking(booking_id)
 );
 
-create table travalen.users_hotel(
+create table users_hotel(
     hotel_code bigint,
     user_id bigint
 );
 
-create table travalen.finance(
+create table finance(
     id BIGSERIAL NOT NULL,
     country varchar(50) NOT NULL,
     bank_name varchar(50),
