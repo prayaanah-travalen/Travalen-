@@ -1,5 +1,5 @@
 
-insert into travalen.common_parameter(parameter_id,parameter_group,parameter,description, available) values
+insert into common_parameter(parameter_id,parameter_group,parameter,description, available) values
 ('AMN0001','AMENITIES','rooms','Rooms', true),
 ('AMN0002','AMENITIES','restaurant','Restaurant', true),
 ('AMN0003','AMENITIES','indoor_play_area','Indoor Play Area', true),

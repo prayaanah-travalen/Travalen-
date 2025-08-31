@@ -1,3 +1,3 @@
-ALTER table travalen.hotel
+ALTER table hotel
 ADD availability boolean;
 

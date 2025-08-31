@@ -4,11 +4,19 @@
 
 export const environment = {
   production: false,
+<<<<<<< HEAD
   // baseURl: "http://localhost:5000/api/",
   // baseURl:"https://admin.travalen.in.s3-website-us-east-1.amazonaws.com/landing"
   // baseURl: "http://travalen-admin.ap-south-1.elasticbeanstalk.com/api/",
     // baseURl: "https://admin.travalen.in/",
     baseURl: "https://admin-api.travalen.in/api/",
+=======
+  baseURl: "https://admin-api.travalen.in/api/"
+  // baseURl: "http://localhost:8091/api/",
+  // baseURl:"https://admin.travalen.in.s3-website-us-east-1.amazonaws.com/landing"
+  // baseURl: "http://travalen-admin.ap-south-1.elasticbeanstalk.com/api/",
+  // baseURl: "https://admin.travalen.in/",
+>>>>>>> 9994edb531d3ed89e984ed2c1b442e08cd490c0b
 
 };
 
