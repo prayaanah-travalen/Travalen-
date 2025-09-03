@@ -38,7 +38,8 @@
         (dragover)="onDragOver($event)" (drop)="onDropSuccess($event)">
             <div class="img-box">
                 <label class="custom-file-upload">
-                    <input (change)="onChange($event)" type="file"  [disabled]="disabled" />
+                    <!-- <input (change)="onChange($event)" type="file"  [disabled]="disabled" /> -->
+                    <input (change)="onChange($event)" type="file" multiple [disabled]="disabled" />
                     <img src="./assets/images/Upload.png" classs="download" style="margin-left: 65px;" >
                     <p class="upload-img">Upload Images Here</p>
                 </label>

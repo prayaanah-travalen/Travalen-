@@ -8,6 +8,10 @@ import { ToastrModule } from 'ngx-toastr';
 import { LoaderInterceptorService } from './shared/app-loader/services/loader-interceptor.service';
 import { LoaderService } from './shared/app-loader/services/loader.service';
 import { AppLoaderModule } from './shared/app-loader/app-loader.module';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
+
 
 @NgModule({
   declarations: [
@@ -21,6 +25,8 @@ import { AppLoaderModule } from './shared/app-loader/app-loader.module';
     HttpClientModule,
     ToastrModule.forRoot(),
     AppLoaderModule,
+    MatProgressSpinnerModule,
+    MatSnackBarModule
     // NgbModule
   ],
   providers: [

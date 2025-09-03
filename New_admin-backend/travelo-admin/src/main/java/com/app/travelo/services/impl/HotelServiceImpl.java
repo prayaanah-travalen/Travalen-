@@ -89,6 +89,7 @@ public class HotelServiceImpl implements HotelService {
                     .starRating(hotel.getStarRating())
                     .about(hotel.getAbout())
                     .email(hotel.getEmail())
+                    .websiteLink(hotel.getWebsiteLink())
                     .user(getUserDetails())
                     .latitude(hotel.getLatitude())
                     .longitude(hotel.getLongitude())

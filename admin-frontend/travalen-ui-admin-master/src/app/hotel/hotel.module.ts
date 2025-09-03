@@ -13,6 +13,9 @@ import { FileUploadComponent } from '../shared/file-upload/file-upload.component
 import {MatSelectModule} from '@angular/material/select';
 import { HotelListComponent } from './hotel-list/hotel-list.component';
 import {MatTableModule} from '@angular/material/table';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 
 @NgModule({
   declarations: [
@@ -34,7 +37,9 @@ import {MatTableModule} from '@angular/material/table';
     NgFor,
     FileUploadComponent,
     MatSelectModule,
-    MatTableModule
+    MatTableModule,
+    MatProgressSpinnerModule,
+    MatSnackBarModule
   ]
 })
 export class HotelEditModule { }
