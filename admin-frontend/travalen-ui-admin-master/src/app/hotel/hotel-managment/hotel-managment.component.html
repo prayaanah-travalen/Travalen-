@@ -146,15 +146,131 @@
   
 	  <!-- ROOM DETAILS TAB -->
 	  <!-- <mat-tab label="Room Details" [disabled]="!hotel?.hotelCode"> -->
-		<mat-tab label="Room Details" [disabled]="!isHotelLoaded">
+		<!-- <mat-tab label="Room Details" [disabled]="!isHotelLoaded">
 		<div>
 		  <div class="col-lg-12">
 			<div class="room-details-long-bar">
-			  <!-- Room content remains the same, no nested forms -->
+			  
 			</div>
 		  </div>
 		</div>
-	  </mat-tab>
+	  </mat-tab> -->
+	  <!-- ROOM DETAILS TAB -->
+<mat-tab label="Room Details" [disabled]="!isHotelLoaded">
+	<div class="col-lg-12">
+	  <div class="room-details-long-bar">
+		<!-- Header Row -->
+		<div class="row">
+		  <div class="col-lg-8">
+			<h4 class="heading-room-details">Room Details</h4>
+		  </div>
+		  <div class="col-lg-2">
+			<div class="row">
+			  <div class="col-lg-2">
+				<div class="search-box">
+				  <i class="fas fa-search"></i>
+				</div>
+			  </div>
+			  <div class="col-lg-10">
+				<input class="search-text" type="search" placeholder="Search" aria-label="Search">
+			  </div>
+			</div>
+		  </div>
+		  <div class="col-lg-2">
+			<button class="btn-add-room" (click)="addRoom()">
+			  <img src="./assets/images/Add.png">Add Room
+			</button>
+		  </div>
+		</div>
+  
+		<!-- Room List -->
+		<div *ngFor="let room of hotel?.rooms">
+		  <div class="row">
+			<div class="col-lg-4">
+			  <div>
+				<label class="labels">Room Name</label>
+				<input class="text" type="text" [value]="room.roomName" disabled>
+			  </div>
+			  <div>
+				<label class="labels">Room Price / per night</label>
+				<input class="text" type="text" [value]="room.price" disabled>
+			  </div>
+			</div>
+			<div class="col-lg-8">
+			  <label class="labels">Room Tags</label>
+			  <div class="room-tags">
+				<div class="display-flex">
+				  <div *ngFor="let rmTag of room.roomTags">
+					<p class="tags">{{rmTag}}</p>
+				  </div>
+				</div>
+			  </div>
+			</div>
+		  </div>
+  
+		  <!-- Amenities & Images -->
+		  <div class="row">
+			<div class="col-lg-4">
+			  <label class="labels">Amenities</label>
+			  <div class="amenities">
+				<div class="display-flex">
+				  <div *ngFor="let amnty of room.amenities">
+					<p class="tags">{{amnty}}</p>
+				  </div>
+				</div>
+			  </div>
+			</div>
+			<div class="col-lg-8">
+			  <label class="labels">Images</label>
+			  <div class="images-container">
+				<div class="row">
+				  <div class="col-md mt-3" *ngFor="let image of room.roomImages">
+					<img [src]="image.image">
+				  </div>
+				</div>
+			  </div>
+			</div>
+		  </div>
+  
+		  <!-- No of Rooms & Price Slab -->
+		  <div class="row">
+			<div class="col-lg-4">
+			  <div>
+				<label class="labels">No of Rooms</label>
+				<input class="text" type="text" [value]="room.noOfRooms" disabled>
+			  </div>
+			  <div>
+				<label class="labels">Price Slab</label>
+				<div class="priceSlab">
+				  <span *ngFor="let price of room.priceSlab">{{price.priceSlabId.priceSlab}}</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col-lg-6">
+			  <label class="labels">Additional Package</label><br>
+			  <mat-form-field>
+				<mat-select [value]="room.roomPackage" disabled>
+				  <mat-option *ngFor="let pack of roomPackage" [value]="pack.parameterId">{{pack.description}}</mat-option>
+				</mat-select>
+			  </mat-form-field>
+			</div>
+		  </div>
+  
+		  <!-- Edit & Delete Buttons -->
+		  <div class="row">
+			<div class="col-lg-12">
+			  <div class="btn">
+				<button class="btn-edit" (click)="editRoom(room)">Edit</button>
+				<button class="btn-delete" (click)="deleteRoom(room.hotelRoomId)">Delete</button>
+			  </div>
+			</div>
+		  </div>
+		  <hr>
+		</div>
+	  </div>
+	</div>
+  </mat-tab>
+  
   
 	  <!-- FINANCES TAB -->
 	  <!-- <mat-tab label="Finances" [disabled]="!hotel?.hotelCode"> -->
