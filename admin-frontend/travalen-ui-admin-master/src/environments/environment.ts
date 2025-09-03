@@ -10,7 +10,7 @@ export const environment = {
   // baseURl: "http://travalen-admin.ap-south-1.elasticbeanstalk.com/api/",
     // baseURl: "https://admin.travalen.in/",
     baseURl: "https://admin-api.travalen.in/api/",
-
+  
 
 };
 
