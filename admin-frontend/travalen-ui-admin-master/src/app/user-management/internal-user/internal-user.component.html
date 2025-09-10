@@ -1,11 +1,13 @@
-<div class="container-fluid">
-  
-    <div class="content mt-3">
-        <div class="mb-3">
-            <button (click)="add()">Add Admin User</button>
-        </div>
-      <table mat-table [dataSource]="users" class="mat-elevation-z8">
-  
+<div class="container-fluid admin-container">
+  <div class="content mt-3">
+    <div class="mb-3 actions">
+      <button (click)="add()">Add Admin User</button>
+    </div>
+
+    <div class="table-responsive">
+      <table mat-table [dataSource]="users" class="mat-elevation-z8 desktop-table">
+
+        <!-- Columns same as before -->
         <ng-container matColumnDef="fname">
           <th mat-header-cell *matHeaderCellDef> First Name </th>
           <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
@@ -15,13 +17,12 @@
           <th mat-header-cell *matHeaderCellDef> Last Name </th>
           <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
         </ng-container>
-  
 
         <ng-container matColumnDef="email">
           <th mat-header-cell *matHeaderCellDef> Email </th>
           <td mat-cell *matCellDef="let element"> {{element.emailId}} </td>
         </ng-container>
-  
+
         <ng-container matColumnDef="phone">
           <th mat-header-cell *matHeaderCellDef> Phone</th>
           <td mat-cell *matCellDef="let element">{{element.phoneNo}}</td>
@@ -36,25 +37,37 @@
           <th mat-header-cell *matHeaderCellDef> Status</th>
           <td mat-cell *matCellDef="let element">{{element.status | titlecase}}</td>
         </ng-container>
-  
-        
+
         <ng-container matColumnDef="action">
-          <th mat-header-cell *matHeaderCellDef> </th>
-          <td mat-cell *matCellDef="let element">
-            <span class="inactivate pr-10">
-              <button (click)="inactivate(element)" *ngIf="element.status === 'ACTIVE'">Inactivate</button>
-              <button (click)="activate(element)"  *ngIf="element.status === 'INACTIVE'">Activate</button>
-            </span>
-            <span><button (click)="update(element)">Update</button></span>
+          <th mat-header-cell *matHeaderCellDef>          Action          </th>
+          <td mat-cell *matCellDef="let element" class="action-buttons">
+            <button (click)="inactivate(element)" *ngIf="element.status === 'ACTIVE'" class="inactivate">Inactivate</button>
+            <button (click)="activate(element)" *ngIf="element.status === 'INACTIVE'" class="activate">Activate</button>
+            <button (click)="update(element)" class="update">Update</button>
           </td>
         </ng-container>
 
-       
-  
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
+
+      <!-- Mobile stacked view -->
+      <div class="mobile-table">
+        <div *ngFor="let user of users" class="mobile-row">
+          <div class="mobile-cell"><span class="label">First Name:</span> {{user.firstName}}</div>
+          <div class="mobile-cell"><span class="label">Last Name:</span> {{user.lastName}}</div>
+          <div class="mobile-cell"><span class="label">Email:</span> {{user.emailId}}</div>
+          <div class="mobile-cell"><span class="label">Phone:</span> {{user.phoneNo}}</div>
+          <div class="mobile-cell"><span class="label">Roles:</span> <span *ngFor="let role of user.role">{{role.roleName}} </span></div>
+          <div class="mobile-cell"><span class="label">Status:</span> {{user.status | titlecase}}</div>
+          <div class="mobile-cell action-buttons">
+            <button (click)="inactivate(user)" *ngIf="user.status === 'ACTIVE'" class="inactivate">Inactivate</button>
+            <button (click)="activate(user)" *ngIf="user.status === 'INACTIVE'" class="activate">Activate</button>
+            <button (click)="update(user)" class="update">Update</button>
+          </div>
+        </div>
+      </div>
+
     </div>
-  
   </div>
-  
+</div>

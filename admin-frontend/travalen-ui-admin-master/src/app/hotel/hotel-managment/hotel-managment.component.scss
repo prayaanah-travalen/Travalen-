@@ -255,7 +255,7 @@
 {
     width: 100px;
     height: 50px;
-    border: 2px solid  #1EDD8D;
+    border: 2px solid ;
     outline: none;
     border-radius: 5px;
     color:  #1EDD8D;
@@ -372,24 +372,80 @@
     border-radius: 5px;
   }
 
+//   .btn-cancel {
+//     margin-left: 10px;
+//     background-color: #625f5f;
+//     color: #333; 
+//     border: 1px solid #ccc;
+//     padding: 8px 16px; 
+//     cursor: pointer;
+//     font-size: 14px;
+//     transition: background-color 0.2s ease, color 0.2s ease;
+//   }
+  
+//   .btn-cancel:hover {
+//     background-color: red; 
+//     color: #000;
+//   }
+  
+//   .btn-cancel:active {
+//     background-color: #d6d6d6; 
+//   }
+  
+/* Container for action buttons */
+.btn-group-actions {
+    display: flex;
+    gap: 15px;             /* space between buttons */
+    margin-top: 20px;      /* spacing from content above */
+  }
+  
+  /* Common button styles */
+  .btn-edit-details,
   .btn-cancel {
-    margin-left: 10px;
-    background-color: #625f5f; /* Light gray background */
-    color: #333; /* Dark text */
-    border: 1px solid #ccc; /* Gray border */
-    padding: 8px 16px; /* Some padding */
-    border-radius: 4px; /* Slightly rounded corners */
+    padding: 10px 22px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 6px;
     cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.2s ease, color 0.2s ease;
+    transition: all 0.3s ease;
+  }
+  
+  /* Primary action button (Save/Update) */
+  .btn-edit-details {
+    background-color: #1EDD8D;   /* blue */
+    border: 2px solid #1EDD8D;
+    color: #fff;
+  }
+  
+  .btn-edit-details:hover {
+    background-color: #1EDD8D;   /* darker blue on hover */
+    border-color: #1EDD8D;
+  }
+  
+  /* Secondary action button (Cancel) */
+  .btn-cancel {
+    background-color: #fff;
+    border: 2px solid #9ca3af;   /* neutral grey */
+    color: #374151;
   }
   
   .btn-cancel:hover {
-    background-color: red; /* Slightly darker on hover */
-    color: #000;
+    background-color: #f3f4f6;   /* light grey */
   }
   
-  .btn-cancel:active {
-    background-color: #d6d6d6; /* Darker when clicked */
+  /* Success Snackbar */
+.snackbar-success {
+    background-color: #22c55e !important; /* green-500 */
+    color: #fff !important;
+    font-weight: 500;
+    border-radius: 6px;
+  }
+  
+  /* Error Snackbar */
+  .snackbar-error {
+    background-color: #dc2626 !important; /* red-600 */
+    color: #fff !important;
+    font-weight: 500;
+    border-radius: 6px;
   }
   

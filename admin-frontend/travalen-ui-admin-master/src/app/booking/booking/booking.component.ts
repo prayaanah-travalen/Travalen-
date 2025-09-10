@@ -5,12 +5,18 @@ import { BookingService } from 'src/app/data-access/services/booking.service';
 import { BookingDetailsComponent } from '../booking-details/booking-details.component';
 import { MatMenuTrigger } from '@angular/material/menu';
 
+
 @Component({
   selector: 'app-booking',
   templateUrl: './booking.component.html',
-  styleUrls: ['./booking.component.scss']
+  styleUrls: ['./booking.component.scss'],
+
 })
 export class BookingComponent implements OnInit {
+  firstDay!: Date | null;
+  lastDay!: Date | null;
+
+ 
 
   bookings: Booking[] = [];
   displayedColumns: string[] = ['name','location', 'bookingDate', 'phone', 'noOfGuests','roomType','status', 'payment'];
@@ -29,6 +35,7 @@ export class BookingComponent implements OnInit {
 
   getBookings() {
     this.bookingService.getBookings().subscribe(resp=>{
+      this.allBookings = resp || [];
       this.bookings = resp;
     })
   }
@@ -93,5 +100,44 @@ export class BookingComponent implements OnInit {
     })
   }
 
+  allBookings: any[] = []; 
 
+  dateChange() {
+    this.filterBookings();
+    if (this.firstDay && this.lastDay) {
+      const start = new Date(this.firstDay).setHours(0, 0, 0, 0);
+      const end = new Date(this.lastDay).setHours(23, 59, 59, 999);
+  
+      this.bookings = this.allBookings.filter(b => {
+        const bookingDate = new Date(b.bookingDate).getTime(); // use bookingDate field
+        return bookingDate >= start && bookingDate <= end;
+      });
+    } else {
+      this.bookings = [...this.allBookings]; // reset when cleared
+    }
+  }
+
+
+  searchText: string = '';
+
+filterBookings() {
+  this.bookings = this.allBookings.filter(b => {
+    const bookingDate = new Date(b.bookingDate.replace(/-/g,'/')).getTime();
+    const start = this.firstDay ? new Date(this.firstDay).setHours(0,0,0,0) : null;
+    const end = this.lastDay ? new Date(this.lastDay).setHours(23,59,59,999) : null;
+
+    // Filter by date range
+    const dateMatch = (!start || !end) || (bookingDate >= start && bookingDate <= end);
+
+    // Filter by search text
+    const searchMatch = this.searchText
+      ? b.guestDetails.firstName.toLowerCase().includes(this.searchText.toLowerCase()) ||
+        b.guestDetails.lastName.toLowerCase().includes(this.searchText.toLowerCase())
+      : true;
+
+    return dateMatch && searchMatch;
+  });
+}
+
+  
 }

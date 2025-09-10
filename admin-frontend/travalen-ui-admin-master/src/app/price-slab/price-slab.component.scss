@@ -1,46 +1,50 @@
-.content {
-
-    padding: 20px;
-}
-
-label
-{
-    color:  #98A2B3; 
-    font-weight: 400;
-    margin-top: 15px;
-}
-
-input {
-
-    outline: none;
-    border-radius: 5px;
-    border: 1px solid #cac5c5;
+.price-container {
     padding: 10px;
-    margin-top: 5px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-button
-{
+.actions {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 15px;
+}
+
+button {
     color: white;
     background-color: #1EDD8D;
     border: none;
     outline: none;
     font-weight: bold;
     border-radius: 5px;
-    margin-top: 20px;
     padding: 10px 20px;
+    cursor: pointer;
 }
 
-.price-mngmt{
-    background: #ffff;
-    padding: 20px;
+.price-mngmt {
+    background: #fff;
+    padding: 15px;
+    border-radius: 5px;
+    overflow-x: auto;
 }
 
-table{
+.table-responsive {
     width: 100%;
+    overflow-x: auto;
 }
 
-a{
+table {
+    width: 100%;
+    min-width: 600px; /* ensures table scrolls on very small screens */
+    border-collapse: collapse;
+}
+
+th, td {
+    text-align: left;
+    padding: 10px;
+}
+
+a {
     color: red !important;
     text-decoration: none;
     cursor: pointer;
@@ -48,5 +52,39 @@ a{
 
 .edit {
     color: #1EDD8D !important;
-    margin-right: 15px;
+    margin-right: 10px;
+}
+
+/* Input and Labels (if you re-enable the form) */
+label {
+    color: #98A2B3;
+    font-weight: 400;
+    display: block;
+    margin-top: 15px;
+}
+
+input {
+    width: 100%;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid #cac5c5;
+    padding: 10px;
+    margin-top: 5px;
+    box-sizing: border-box;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .actions {
+        justify-content: center;
+    }
+
+    button {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    th, td {
+        padding: 8px;
+    }
 }

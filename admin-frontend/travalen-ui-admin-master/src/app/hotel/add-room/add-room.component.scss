@@ -1,12 +1,21 @@
 // Add-Room
-.add-room-modal
-{
+// .add-room-modal
+// {
+//     width: 100%;
+//     height: 670px;
+//     background: #ffff;
+//     padding: 20px;
+//     overflow: scroll;
+// }
+.add-room-modal {
     width: 100%;
-    height: 670px;
-    background: #ffff;
+    max-height: 90vh;   /* responsive, max 90% of viewport height */
+    background: #fff;
     padding: 20px;
-    overflow: scroll;
-}
+    overflow-y: auto;   /* only vertical scroll if needed */
+    border-radius: 8px; /* optional, looks nicer */
+  }
+  
 .add-room
 {
     font-weight: bold;
@@ -86,38 +95,38 @@
 {
     color: #98A2B3;   
 }
-.btn-div
-{
-    float: right;
-    width: 40vh;
-    margin-left: 40px;
-    margin-top: 30px;
-}
-.btn-discard
-{
-    width: 100px;
-    height: 50px;
-    border: 2px solid  #98A2B3;
-    outline: none;
-    border-radius: 5px;
-    color:  #98A2B3 ;
-    font-weight: bold; 
-    background-color: white;  
+// .btn-div
+// {
+//     float: right;
+//     width: 40vh;
+//     margin-left: 40px;
+//     margin-top: 30px;
+// }
+// .btn-discard
+// {
+//     width: 100px;
+//     height: 50px;
+//     border: 2px solid  #98A2B3;
+//     outline: none;
+//     border-radius: 5px;
+//     color:  #98A2B3 ;
+//     font-weight: bold; 
+//     background-color: white;  
    
-}
-.btn-add-room
-{
-    width: 150px;
-    height: 50px;
-    color: white;
-    background-color: #1EDD8D;
-    border: none;
-    outline: none;
-    font-weight: bold;
-    border-radius: 5px;
-    margin-left: 20px; 
-    float: right;
-}
+// }
+// .btn-add-room
+// {
+//     width: 150px;
+//     height: 50px;
+//     color: white;
+//     background-color: #1EDD8D;
+//     border: none;
+//     outline: none;
+//     font-weight: bold;
+//     border-radius: 5px;
+//     margin-left: 20px; 
+//     float: right;
+// }
 
 input
 {
@@ -153,3 +162,71 @@ input
     padding: 10px;
     border-radius: 5px;
   }
+  /* Button container */
+.btn-div {
+    display: flex;
+    justify-content: flex-end; /* align buttons to the right */
+    gap: 15px; /* space between buttons */
+    margin-top: 30px;
+    margin-right: 10px; /* little padding from right edge */
+    flex-wrap: wrap; /* allow stacking on small screens */
+  }
+  
+  /* Discard button */
+  .btn-discard {
+    width: 120px;
+    height: 50px;
+    border: 2px solid #98A2B3;
+    border-radius: 5px;
+    background-color: white;
+    color: #98A2B3;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .btn-discard:hover {
+    background-color: #f1f1f1;
+  }
+  
+  /* Save button */
+  .btn-add-room {
+    width: 150px;
+    height: 50px;
+    background-color: #1EDD8D;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .btn-add-room:hover {
+    background-color: #17c47a;
+  }
+  
+  /* Mobile responsiveness */
+  @media (max-width: 576px) {
+    .btn-div {
+      justify-content: center; /* center buttons on mobile */
+    }
+    .btn-discard, .btn-add-room {
+      flex: 1 1 100%; /* full width on small screens */
+      max-width: 100%;
+    }
+  }
+  
+
+  
+  /* Mobile responsiveness */
+  @media (max-width: 576px) {
+    .btn-div {
+      justify-content: center; /* center buttons on small screens */
+    }
+    .btn-discard, .btn-add-room {
+      flex: 1 1 100%; /* full width buttons */
+      max-width: 100%;
+    }
+  }
+  

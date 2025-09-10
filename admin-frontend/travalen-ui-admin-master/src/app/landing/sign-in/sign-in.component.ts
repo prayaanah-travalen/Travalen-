@@ -61,7 +61,7 @@ export class SignInComponent implements OnInit {
         this.dialogRef.close();
         this.router.navigateByUrl("/travalen/dashboard");
       } else {
-        this.error = resp.message;
+        this.error = resp.message || "Invalid email or password. Please try again.";
       }
     });
 

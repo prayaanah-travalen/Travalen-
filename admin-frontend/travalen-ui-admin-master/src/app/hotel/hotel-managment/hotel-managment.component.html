@@ -129,14 +129,22 @@
 				  </div>
   
 				  <!-- Action Buttons -->
-				  <div class="row justify-right">
+				  <!-- <div class="row justify-right">
 					<button *ngIf="hotelAction === 'ADD'" class="btn-edit-details" (click)="saveHotel()">Save Hotel</button>
 					<div *ngIf="hotelAction === 'EDIT'" class="btn-group">
 					  <button class="btn-edit-details" (click)="updateHotel()">Update Hotel</button>
 					  <button class="btn-cancel" (click)="cancelEdit()">Cancel</button>
 					</div>
+				  </div> -->
+				  <div class="row justify-content-end">
+					<button *ngIf="hotelAction === 'ADD'" class="btn-edit-details" (click)="saveHotel()">Save Hotel</button>
+				  
+					<div *ngIf="hotelAction === 'EDIT'" class="btn-group-actions">
+					  <button class="btn-edit-details" (click)="updateHotel()">Update Hotel</button>
+					  <button class="btn-cancel" (click)="cancelEdit()">Cancel</button>
+					</div>
 				  </div>
-  
+				  
 				</div>
 			  </div>
 			</div>
@@ -265,6 +273,7 @@
 			  </div>
 			</div>
 		  </div>
+		  
 		  <hr>
 		</div>
 	  </div>
@@ -307,7 +316,8 @@
   
 				<!-- GST & Trade Info -->
 				<div class="para-box">
-				  <p class="para-two">Due to regulations established by the Indian government...</p>
+					<p class="para-two">Due to regulations established by the Indian government, we need your GST registration and PAN details. By submitting this information, you confirm that your PAN and state registration are accurate.</p>
+				  <p class="para-two">IMPORTANT: As of 04/03/2019, any changes in your GST registration will only br taken into account from the moment you enter these details into our system. Note that it is not possible to apply any changes with a retroactive effect. This may have implication on the taxes we collect and pay to the tax authorities, that are applicable to your reservation (i.e. GST or TCS).</p>
 				</div>
   
 				<p class="para-three">Are you registered for GST purposes?</p>

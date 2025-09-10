@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AppAuthGuard } from './app.auth.guard';
+import { LayoutComponent } from './layout/layout/layout.component';
 
 const routes: Routes = [
   { 
@@ -21,6 +22,9 @@ const routes: Routes = [
   // canActivate:[AppAuthGuard]
   }
 ];
+
+
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

@@ -9,7 +9,8 @@ import { LayoutRoutingModule } from './layout-routing.module';
 
 @NgModule({
   declarations: [
-    LayoutComponent
+    LayoutComponent,
+    
   ],
   imports: [
     CommonModule,

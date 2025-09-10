@@ -1,36 +1,141 @@
-.content {
-    background: #fff;
-    padding: 20px;
+.admin-container {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
 }
 
-button
-{
+.content {
+    background: #fff;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.actions {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 15px;
+}
+
+/* General buttons */
+button {
     color: white;
     background-color: #1EDD8D;
     border: none;
     outline: none;
     font-weight: bold;
     border-radius: 5px;
-    // margin-top: 20px;
-    padding: 10px 20px;
+    padding: 8px 15px;
+    cursor: pointer;
+    font-size: 13px;
 }
 
+.inactivate { background-color: red !important; }
+.update { background-color: #1EDD8D; }
+.activate { background-color: #4CAF50; }
+
+/* Table styling */
 table {
     width: 100%;
+    min-width: 600px; 
+    border-collapse: collapse;
 }
 
-.inactivate button {
-    background-color: red !important;
-
+th, td {
+    text-align: left;
+    padding: 10px;
+    word-break: break-word;
 }
 
-.a {
-    color: #1EDD8D;
-    text-decoration: none;
-    cursor: pointer;
+/* Header row: full bold line */
+table.mat-table tr.mat-header-row th {
+    border-bottom: 3px solid #000;
 }
 
-table button {
-    padding: 5px 10px;
+/* Body rows: line under all except Action */
+table.mat-table tr.mat-row td {
+    border-bottom: 1px solid #ccc;
 }
 
+/* Action column */
+th.mat-header-cell.mat-column-action {
+    text-align: center;
+    white-space: nowrap;
+}
+
+td.mat-cell.mat-column-action {
+    display: flex;
+    flex-direction: column; /* stack buttons vertically */
+    justify-content: center;
+    align-items: center;     /* center buttons horizontally */
+    gap: 5px;                /* space between buttons */
+    white-space: nowrap;
+    border-bottom: none; 
+    min-width: 120px;
+    max-width: 150px;        /* keep column narrow */
+    padding: 5px 0;
+}
+
+/* Mobile view */
+.mobile-table {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .desktop-table {
+        display: none;
+    }
+
+    .mobile-table {
+        display: block;
+    }
+
+    .mobile-row {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 15px;
+        padding: 10px;
+        background: #f9f9f9;
+    }
+
+    .mobile-cell {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 8px;
+    }
+
+    .mobile-cell .label {
+        font-weight: bold;
+        margin-right: 5px;
+        white-space: nowrap;
+    }
+
+    .mobile-cell span {
+        word-break: break-word;
+    }
+
+    .action-buttons {
+        display: flex;
+        flex-direction: column; /* vertical stack on mobile too */
+        gap: 5px;
+    }
+
+    .action-buttons button {
+        padding: 4px 8px;
+        font-size: 12px;
+        width: 100%;
+    }
+}
+
+/* Smaller buttons for laptop, desktop, and tablet */
+@media (min-width: 769px) {
+    button {
+        padding: 5px 10px;  
+        font-size: 12px;    
+    }
+
+    .action-buttons button {
+        padding: 5px 8px;  
+        font-size: 12px;
+        width: 100%;        /* full width inside Action column */
+    }
+}

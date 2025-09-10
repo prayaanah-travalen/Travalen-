@@ -1,18 +1,44 @@
-// create-account
+input, select {
+    width: 100%;
+    height: 48px;
+    padding: 12px 14px;
+    border: 1px solid #D1D5DB;
+    border-radius: 8px;
+    background-color: #F9FAFB;
+    font-size: 15px;
+    color: #111827;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  input:focus, select:focus {
+    border-color: #1EDD8D;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(30, 221, 141, 0.2);
+    outline: none;
+  }
+  
+  input::placeholder {
+    color: #9CA3AF;
+  }
+  
+
+
+
+
+/* create-account */
 .account-container {
     background: #ffff;
-    height: 675px;
+    height: 100vh; /* Use viewport height instead of fixed 675px */
     overflow: auto;
 }
 
 .img {
     height: 100%;
-    width:100%;
+    width: 100%;
 }
 
 .create-acc-first-section {
     padding: 20px;
-
 }
 
 .create-acc-para-one {
@@ -32,7 +58,19 @@
 
 .labels {
     color: #98A2B3;
-    margin-top: 20px;
+    margin-top: 15px; /* Reduced from 20px */
+}
+
+@media (max-width: 768px) {
+    .labels {
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .labels {
+        margin-top: 8px;
+    }
 }
 
 .text {
@@ -60,8 +98,7 @@ input::placeholder {
     font-size: large;
     font-weight: 500;
     border-radius: 4px;
-    padding: 14px, 32px, 14px, 32px;
-    gap: 10px;
+    padding: 14px 32px;
     margin-top: 30px;
 }
 
@@ -82,21 +119,66 @@ hr {
     margin-top: 10px;
 }
 
-// contact-details
+/* contact-details - UPDATED SECTION */
 .contact-details {
-    // width: 70%;
-    // height: 100vh;
+    height: 100vh; /* Use full viewport height */
+    overflow-y: auto; /* Allow scrolling if needed */
 }
 
 .contact-details-first-section {
     padding: 20px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Better space distribution */
+}
+
+@media (max-width: 992px) {
+    .contact-details-first-section {
+        padding: 18px;
+        justify-content: flex-start; /* Reset for smaller screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .contact-details-first-section {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-details-first-section {
+        padding: 12px;
+    }
 }
 
 .contact-details-para-one {
     font-weight: 700;
     font-size: 36px;
     line-height: 46.87px;
-    margin-top: 100px;
+    margin-top: 40px; /* Reduced from 80px */
+}
+
+@media (max-width: 992px) {
+    .contact-details-para-one {
+        margin-top: 30px; /* Reduced from 60px */
+    }
+}
+
+@media (max-width: 768px) {
+    .contact-details-para-one {
+        margin-top: 30px;
+        font-size: 32px;
+        line-height: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-details-para-one {
+        margin-top: 20px;
+        font-size: 28px;
+        line-height: 36px;
+    }
 }
 
 .contact-details-para-two {
@@ -104,7 +186,23 @@ hr {
     font-size: 16px;
     line-height: 20.83px;
     color: #98A2B3;
-    margin-top: 20px;
+    margin-top: 15px; /* Reduced from 20px */
+}
+
+@media (max-width: 768px) {
+    .contact-details-para-two {
+        margin-top: 15px;
+        font-size: 15px;
+        line-height: 19px;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-details-para-two {
+        margin-top: 10px;
+        font-size: 14px;
+        line-height: 18px;
+    }
 }
 
 .Ph-No {
@@ -133,15 +231,46 @@ hr {
     font-size: large;
     font-weight: 500;
     border-radius: 4px;
-    padding: 14px, 32px, 14px, 32px;
-    gap: 10px;
-    margin-top: 30px;
+    padding: 14px 32px;
+    margin-top: 20px; /* Reduced from 30px */
+    margin-bottom: 20px; /* Reduced from 30px */
 }
 
-// create-password
+@media (max-width: 768px) {
+    .contact-details-btn-one {
+        margin-top: 15px;
+        margin-bottom: 30px;
+        height: 45px;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-details-btn-one {
+        margin-top: 12px;
+        margin-bottom: 25px;
+        height: 45px;
+    }
+}
+
+/* Alternative approach - Form content wrapper for better control */
+.contact-form-content {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 40px); /* Account for padding */
+    justify-content: space-between;
+}
+
+@media (max-width: 992px) {
+    .contact-form-content {
+        min-height: auto;
+        justify-content: flex-start;
+    }
+}
+
+/* create-password */
 .create-password {
-    // width: 70%;
-    // height: 100vh;
+    /* width: 70%;
+    height: 100vh; */
 }
 
 .create-pswd-first-section {
@@ -162,20 +291,18 @@ hr {
     color: #98A2B3;
     margin-top: 20px;
 }
-.pswd-text
-{
+
+.pswd-text {
     border: none;
     outline: none;
     width: 89%;
-    // height: 50px;
     border-radius: 5px;
     background-color: whitesmoke;
     color: #98A2B3;
     padding: 15px;
 }
+
 .eye-box {
-    // height: 50px;
-    // display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 0 5px 5px 0;
@@ -205,15 +332,14 @@ hr {
     font-size: large;
     font-weight: 500;
     border-radius: 4px;
-    padding: 14px, 32px, 14px, 32px;
-    gap: 10px;
+    padding: 14px 32px;
     margin-top: 30px;
 }
 
-// otp
+/* otp */
 .otp {
-    // width: 70%;
-    // height: 100vh;
+    /* width: 70%;
+    height: 100vh; */
 }
 
 .otp-first-section {
@@ -258,19 +384,16 @@ hr {
     font-size: large;
     font-weight: 500;
     border-radius: 4px;
-    padding: 14px, 32px, 14px, 32px;
-    gap: 10px;
+    padding: 14px 32px;
     margin-top: 100px;
-
 }
-
 
 ::ng-deep .otp-input {
     height: 38px !important;
     width: 42px !important;
     background-color: whitesmoke !important;
     border-radius: 10px !important;
-    border: 1px solid  #1EDD8D !important;
+    border: 1px solid #1EDD8D !important;
     font-size: 18px !important;
 }
 
@@ -285,23 +408,20 @@ hr {
     color: #F7F7FD;
     background: #C5C0DB;
     border-radius: 5px 0 0 5px;
-
 }
 
-select:focus{
+select:focus {
     outline: none;
 }
+
 .error-message {
     color: #ff4d4f;
     font-size: 12px;
     margin-top: 4px;
-    margin-bottom: 8px;
+    margin-bottom: 6px; /* Reduced from 8px */
 }
-//to make every input field black
-input{
+
+/* to make every input field black */
+input {
     color: black !important;
 }
-
-
-
-  

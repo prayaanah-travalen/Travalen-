@@ -49,7 +49,11 @@
                         <div class="error-message" *ngIf="userForm.controls['password'].errors?.['required'] && userForm.controls['password'].touched">
                             Password is required
                         </div>
-                        <button type="submit" class="pswd-btn-one" (click)="signIn()">Sign In</button>
+                        <div class="error-message warning" *ngIf="error">
+                            {{ error }}
+                          </div>
+                          
+                        <button type="submit" class="pswd-btn-one" (click)="signIn()">Sign In</button><br><br>
                         <a class="pswd-para-three" (click)="forgotPassword()">Forget Password?</a>
                     </div>
                 </div>

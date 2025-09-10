@@ -231,7 +231,9 @@ export class HotelManagmentComponent implements OnInit {
   
           // Notify user
           this.snackBar.open('Hotel updated successfully!', 'Close', { duration: 3000 });
-  
+          
+          
+
           // Switch to MODIFY mode and disable form
           this.hotelAction = 'MODIFY';
           this.hotelForm.disable();

@@ -12,6 +12,8 @@ import { SignInComponent } from '../sign-in/sign-in.component';
 })
 export class LandingComponent implements OnInit {
 
+  currentYear: number = new Date().getFullYear();
+  
   constructor(private router:Router,
     private dialog: Dialog) { }
 
