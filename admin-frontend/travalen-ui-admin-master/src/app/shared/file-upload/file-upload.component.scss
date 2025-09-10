@@ -66,3 +66,40 @@
     cursor: pointer;
 }
 
+.images-container,
+.display-flex {
+    display: flex;
+    flex-wrap: wrap;   /* wrap images to next line on small screens */
+    gap: 10px;
+}
+
+.images-container img,
+.img-preview {
+    width: 100px;       /* smaller width for mobile */
+    height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.preview-container {
+    position: relative;
+    margin-bottom: 10px; /* spacing between rows */
+}
+
+
+.display-flex {
+  display: flex;
+  flex-wrap: wrap;       /* wrap images to new lines */
+  gap: 10px;
+  max-height: 400px;     /* limit total height */
+  overflow-y: auto;      /* allow vertical scroll if too many */
+  padding: 5px;
+}
+
+.images-container img,
+.img-preview {
+  width: 80px;           /* smaller for multiple images */
+  height: 80px;
+  object-fit: cover;
+  border-radius: 5px;
+}

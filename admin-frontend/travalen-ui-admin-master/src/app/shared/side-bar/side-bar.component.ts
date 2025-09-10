@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit , HostListener} from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-side-bar',
@@ -111,7 +112,14 @@ export class SideBarComponent implements OnInit {
   isAdmin: boolean = false;
   isBookingAdmin: boolean = false;
 
-  constructor() { }
+
+
+  //h
+  isMobile = false;
+  menuOpen = false;
+
+  constructor(private router: Router) {}
+
 
   ngOnInit(): void {
 
@@ -159,6 +167,9 @@ export class SideBarComponent implements OnInit {
 
     
     
+
+
+    this.checkScreenSize();
   }
 
   sidebarOpen = false;
@@ -166,5 +177,20 @@ export class SideBarComponent implements OnInit {
   toggleSidebar() {
     this.sidebarOpen = !this.sidebarOpen;
   }
-  
+  @HostListener('window:resize')
+  onResize() {
+    this.checkScreenSize();
+  }
+
+  checkScreenSize() {
+    this.isMobile = window.innerWidth <= 768;
+  }
+
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen;
+  }
+
+  closeMenu() {
+    this.menuOpen = false;
+  }
 }

@@ -1,8 +1,11 @@
+
+
 /* Sidebar container */
 .left-side {
     margin-top: 50px;
     display: flex;
     flex-direction: column;
+    transition: background-color 0.3s ease;
 }
 
 /* Each menu item wrapper */
@@ -35,9 +38,9 @@
     transition: all 0.3s ease;
 }
 
-/* Hover background with soft shadow */
+/* Hover background with soft green */
 .list a.color:hover {
-    background-color: #e6fff6; /* soft green */
+    background-color: #e6fff6; /* light green */
     color: #1EDD8D;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
@@ -94,10 +97,13 @@
     transition: opacity 0s;
 }
 
-/* Responsive adjustments */
+/* Mobile adjustments */
 @media (max-width: 768px) {
     .left-side {
         margin-top: 30px;
+        background-color: #6ff396; /* light greenish background for sidebar */
+        padding: 15px;
+        border-radius: 10px;
     }
 
     .list a.color {
@@ -108,5 +114,77 @@
     .list a.color i.fa-solid {
         font-size: 18px;
         margin-right: 10px;
+    }
+
+    /* Reduce spacing after last menu item */
+    .left-side .list:last-child {
+        margin-bottom: 5px;
+    }
+
+    /* Slightly tighter spacing for all items on mobile */
+    .left-side .list {
+        margin-bottom: 7px;
+    }
+}
+@media (max-width: 768px) {
+    /* Sidebar container adjustments */
+    .side-bar {
+        min-height: auto; /* shrink to content */
+        padding: 0;
+        margin-bottom: 0;
+        border-right: none; /* optional: remove border */
+    }
+
+    .left-side {
+        margin-top: 0; /* remove top margin */
+        padding: 0;
+        background-color: transparent; /* only menu items have color */
+    }
+
+    /* Menu items styling */
+    .left-side .list {
+        background-color: #d9fbe6; /* light green */
+        padding: 10px 15px;
+        margin-bottom: 5px; /* small gap between items */
+        border-radius: 10px;
+        transition: background-color 0.3s ease;
+    }
+
+    .left-side .list:last-child {
+        margin-bottom: 0; /* remove extra space at bottom */
+    }
+
+    .left-side .list a.color:hover {
+        background-color: #b6f3cc; /* slightly darker on hover */
+        color: #1EDD8D;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+    }
+
+    .left-side .list a.color.active {
+        background-color: #1EDD8D;
+        color: white;
+        box-shadow: 0 4px 12px rgba(30, 221, 141, 0.3);
+    }
+
+    .list a.color i.fa-solid {
+        font-size: 18px;
+        margin-right: 10px;
+    }
+
+    /* Remove extra spacing between sidebar and content */
+    .content {
+        padding: 0;
+        margin: 0;
+    }
+
+    .content-body {
+        margin-top: 10px; /* minimal spacing */
+        padding: 0;
+    }
+
+    /* Make the row tight */
+    .row {
+        margin: 0;
+        gap: 0;
     }
 }

@@ -248,3 +248,25 @@
     .mat-date-range-input {
       width: 100%;
     }
+
+
+    /* Mobile / small screen adjustments */
+@media (max-width: 768px) {
+  .first-section .row {
+      display: flex;
+      flex-direction: column; /* stack vertically */
+      gap: 20px;              /* space between items */
+  }
+
+  .first-section .row .col-lg-4 {
+      width: 100%;            /* full width for each item */
+  }
+
+  .mat-form-field {
+      width: 100%;            /* date picker full width */
+  }
+
+  .dropdown {
+      width: 100%;            /* dropdown full width */
+  }
+}
