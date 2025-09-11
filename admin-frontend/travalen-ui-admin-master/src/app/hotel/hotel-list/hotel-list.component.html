@@ -1,3 +1,5 @@
+<h2 class="hotel-heading">Hotel Details</h2>
+
 <div class="button-div" >
   <button [routerLink]="['hotel/0']">Add Hotel</button>
 </div>
@@ -26,16 +28,23 @@
   
     <!-- Symbol Column -->
     <ng-container matColumnDef="action">
-      <th mat-header-cell *matHeaderCellDef> Action </th>
-      <td mat-cell *matCellDef="let element"><a  [routerLink]="['hotel',element.hotelCode]">View</a> </td>
+      <th mat-header-cell *matHeaderCellDef    class="center-header"> Action </th>
+      <td mat-cell *matCellDef="let element"><a  [routerLink]="['hotel',element.hotelCode]"   class="btn-view">View</a> </td>
     </ng-container>
 
     <ng-container matColumnDef="delete">
       <th mat-header-cell *matHeaderCellDef>  </th>
-      <td mat-cell *matCellDef="let element"><a class="error-text"  (click)="delete(element.hotelCode)">Delete</a> </td>
+      <td mat-cell *matCellDef="let element"><a class="error-text"  (click)="delete(element.hotelCode)"    class="btn-delete">Delete</a> </td>
     </ng-container>
   
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+
+    
+
+
+     
+    
   </table>
   

@@ -110,32 +110,182 @@
 // }
 
 /* Add-Destination Modal */
-.add-Destination {
-    width: 600px;
-    max-width: 95%;
-    background-color: #fff;
+
+
+
+// .add-Destination {
+//     width: 600px;
+//     max-width: 95%;
+//     background-color: #fff;
+//     padding: 20px;
+//     border-radius: 10px;
+//     box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+//     box-sizing: border-box;
+// }
+
+
+// .heading-add-destination {
+//     font-weight: bold;
+//     font-size: 20px;
+//     margin-bottom: 15px;
+// }
+
+
+// .labels {
+//     color: #98A2B3;
+//     font-size: 14px;
+//     margin-top: 10px;
+//     display: block;
+// }
+
+
+// .destination-name-text,
+// .location-text,
+// .descreption-text {
+//     width: 100%;
+//     border: none;
+//     outline: none;
+//     border-radius: 5px;
+//     background-color: whitesmoke;
+//     padding: 10px 15px;
+//     box-sizing: border-box;
+//     margin-bottom: 10px;
+// }
+
+
+// .location-text {
+//     width: 100%;
+// }
+
+// .location-border {
+//     width: 100%;
+//     height: 40px;
+//     background-color: whitesmoke;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     border-radius: 5px;
+//     color: #98A2B3;
+//     font-size: 18px;
+// }
+
+
+// .dotted-img-box {
+//     width: 100%;
+//     height: 25vh;
+//     border: 2px dotted #D9D9D9;
+//     margin-top: 20px;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     border-radius: 8px;
+// }
+
+// .img-box {
+//     width: 20vh;
+//     height: 8vh;
+//     color: #98A2B3;
+// }
+
+
+// .btn {
+//     display: flex;
+//     justify-content: flex-end;
+//     gap: 15px;
+//     margin-top: 30px;
+//     flex-wrap: wrap;
+// }
+
+
+// .btn-discard {
+//     width: 120px;
+//     height: 45px;
+//     border: 2px solid #98A2B3;
+//     outline: none;
+//     border-radius: 5px;
+//     color: #98A2B3;
+//     font-weight: bold;
+//     background-color: white;
+//     cursor: pointer;
+//     transition: 0.3s;
+// }
+
+// .btn-discard:hover {
+//     background-color: #f5f5f5;
+// }
+
+
+// .btn-add-destination {
+//     width: 150px;
+//     height: 45px;
+//     color: white;
+//     background-color: #1EDD8D;
+//     border: none;
+//     outline: none;
+//     font-weight: bold;
+//     border-radius: 5px;
+//     cursor: pointer;
+//     transition: 0.3s;
+// }
+
+// .btn-add-destination:hover {
+//     background-color: #16b57a;
+// }
+
+// /* Responsive adjustments */
+// @media (max-width: 576px) {
+//     .add-Destination {
+//         padding: 15px;
+//     }
+
+//     .btn {
+//         justify-content: center;
+//         gap: 10px;
+//     }
+
+//     .btn-discard,
+//     .btn-add-destination {
+//         width: 45%;
+//     }
+
+//     .destination-name-text,
+//     .location-text,
+//     .descreption-text {
+//         font-size: 14px;
+//         padding: 8px 12px;
+//     }
+// }
+
+
+body {
+    background-color: #f8f9fa;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
-    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Modal Heading */
+.add-Destination {
+    width: 100%;
+    max-width: 600px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+    margin: 0 auto;
+}
+
 .heading-add-destination {
     font-weight: bold;
     font-size: 20px;
     margin-bottom: 15px;
 }
 
-/* Labels */
 .labels {
     color: #98A2B3;
     font-size: 14px;
-    margin-top: 10px;
+    margin-top: 15px;
     display: block;
 }
 
-/* Text Inputs */
 .destination-name-text,
 .location-text,
 .descreption-text {
@@ -144,19 +294,20 @@
     outline: none;
     border-radius: 5px;
     background-color: whitesmoke;
-    padding: 10px 15px;
+    padding: 12px 15px;
     box-sizing: border-box;
     margin-bottom: 10px;
+    font-size: 15px;
 }
 
-/* Location input row adjustments */
-.location-text {
-    width: 100%;
+.descreption-text {
+    height: 120px;
+    resize: vertical;
 }
 
 .location-border {
     width: 100%;
-    height: 40px;
+    height: 44px;
     background-color: whitesmoke;
     display: flex;
     justify-content: center;
@@ -166,89 +317,189 @@
     font-size: 18px;
 }
 
-/* Image box styling */
 .dotted-img-box {
     width: 100%;
-    height: 25vh;
+    height: 180px;
     border: 2px dotted #D9D9D9;
     margin-top: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 8px;
+    flex-direction: column;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.dotted-img-box:hover {
+    background-color: #f8f9fa;
 }
 
 .img-box {
-    width: 20vh;
-    height: 8vh;
     color: #98A2B3;
+    text-align: center;
 }
 
-/* Buttons container */
-.btn {
+.logo {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+// .btn {
+//     display: flex;
+//     justify-content: flex-end;
+//     gap: 15px;
+//     margin-top: 30px;
+//     flex-wrap: wrap;
+// }
+
+
+
+
+
+
+
+// .btn-discard {
+//     width: 120px;
+//     height: 45px;
+//     border: 2px solid #98A2B3;
+//     outline: none;
+//     border-radius: 5px;
+//     color: #98A2B3;
+//     font-weight: bold;
+//     background-color: white;
+//     cursor: pointer;
+//     transition: all 0.3s;
+// }
+
+// .btn-discard:hover {
+//     background-color: #f5f5f5;
+//     transform: translateY(-2px);
+// }
+
+// .btn-add-destination {
+//     width: 150px;
+//     height: 45px;
+//     color: white;
+//     background-color: #1EDD8D;
+//     border: none;
+//     outline: none;
+//     font-weight: bold;
+//     border-radius: 5px;
+//     cursor: pointer;
+//     transition: all 0.3s;
+// }
+
+// .btn-add-destination:hover {
+//     background-color: #16b57a;
+//     transform: translateY(-2px);
+//     box-shadow: 0 4px 8px rgba(30, 221, 141, 0.2);
+// }
+// .btn-discard:focus,
+// .btn-add-destination:focus {
+//     outline: none;
+//     box-shadow: none;
+// }
+
+
+
+/* Container row to align buttons to right */
+.col-lg-12 {
     display: flex;
-    justify-content: flex-end;
-    gap: 15px; /* space between buttons */
+    justify-content: flex-end; /* Align buttons to the right */
+    gap: 15px;                  /* Space between buttons */
+    flex-wrap: wrap;             /* Wrap on small screens */
     margin-top: 30px;
-    flex-wrap: wrap;
 }
 
-/* Discard button */
+/* Discard Button */
 .btn-discard {
     width: 120px;
     height: 45px;
     border: 2px solid #98A2B3;
-    outline: none;
-    border-radius: 5px;
+    background-color: white;
     color: #98A2B3;
     font-weight: bold;
-    background-color: white;
+    border-radius: 5px;
     cursor: pointer;
-    transition: 0.3s;
+    outline: none;      /* Remove focus outline */
+    box-shadow: none;   /* Remove focus box shadow */
+    transition: all 0.3s;
 }
 
 .btn-discard:hover {
     background-color: #f5f5f5;
+    transform: translateY(-1px);
 }
 
-/* Add Destination button */
+/* Add Destination Button */
 .btn-add-destination {
     width: 150px;
     height: 45px;
-    color: white;
-    background-color: #1EDD8D;
     border: none;
-    outline: none;
+    background-color: #1EDD8D;
+    color: white;
     font-weight: bold;
     border-radius: 5px;
     cursor: pointer;
-    transition: 0.3s;
+    outline: none;      /* Remove focus outline */
+    box-shadow: none;   /* Remove focus box shadow */
+    transition: all 0.3s;
 }
 
 .btn-add-destination:hover {
     background-color: #16b57a;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(30, 221, 141, 0.2);
 }
 
 /* Responsive adjustments */
-@media (max-width: 576px) {
-    .add-Destination {
-        padding: 15px;
-    }
-
-    .btn {
-        justify-content: center;
+@media (max-width: 768px) {
+    // .add-Destination {
+    //     padding: 15px;
+    // }
+    
+    // .btn {
+    //     justify-content: center;
+    // }
+    
+    
+    .col-lg-12 {
+        justify-content: center; /* Center on smaller screens */
         gap: 10px;
+    }
+    
+    .btn-discard,
+    .btn-add-destination {
+        width: 45%;
+        min-width: 120px;
+    }
+    
+    .dotted-img-box {
+        height: 150px;
+    }
+}
+
+@media (max-width: 576px) {
+    .heading-add-destination {
+        text-align: center;
+    }
+    
+    // .btn-discard,
+    // .btn-add-destination {
+    //     width: 100%;
+    // }
+    
+    .location-border {
+        margin-top: 10px;
+    }
+    
+    .descreption-text {
+        height: 100px;
     }
 
     .btn-discard,
     .btn-add-destination {
-        width: 45%;
-    }
-
-    .destination-name-text,
-    .location-text,
-    .descreption-text {
-        font-size: 14px;
-        padding: 8px 12px;
+        width: 100%; /* Full width on extra small screens */
     }
 }

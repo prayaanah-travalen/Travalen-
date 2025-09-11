@@ -1,7 +1,7 @@
-<!-- Destination -->
+<!-- 
 <div class="Destination">
     <div class="container-fluid">
-        <!-- First-section -->
+    
         <div class="row">
             <div class="col-lg-6">
                 <p class="heading-Destination">Destination</p>
@@ -15,7 +15,7 @@
        
         <div class="row pb-3" *ngFor="let dest of destinations">
             <div class="col-lg-3">
-                <!-- <label class="labels">Images</label><br> -->
+          
                 <img [src]="dest.image">
             </div>
             <div class="col-lg-9">
@@ -32,14 +32,14 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <label class="labels">Description</label><br>
-                        <!-- <input class="long-text" type="text" name="Destination"> -->
+                        
                         <div class="long-text">{{dest.description}}</div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="btn">
-                            <!-- <button class="btn-edit">Edit</button> -->
+                            
                             <button class="btn-delete" (click)="delete(dest)">Delete</button>
                         </div>
                     </div>
@@ -51,4 +51,67 @@
 
     </div>
 </div> 
+ -->
 
+ <!-- Destination -->
+<div class="Destination">
+    <div class="container-fluid">
+        <!-- Header Section -->
+        <div class="row align-items-center">
+            <div class="col-md-6 col-12">
+                <p class="heading-Destination">Destination</p>
+            </div>
+            <div class="col-md-6 col-12">
+                <div class="outer">
+                    <button class="btn-Destination" (click)="addDestination()">
+                        <img src="./assets/images/Add.png" alt="Add">
+                        Add Destination
+                    </button>
+                    
+                </div>
+            </div>
+        </div>
+       
+        <!-- Destination Cards -->
+        <div class="destination-card" *ngFor="let dest of destinations">
+            <div class="row">
+                <!-- Image Section -->
+                <div class="col-lg-3 col-md-4 col-12 mb-3">
+                    <div class="image-container">
+                        <img [src]="dest.image" class="destination-image" alt="Destination">
+                    </div>
+                </div>
+                
+                <!-- Content Section -->
+                <div class="col-lg-9 col-md-8 col-12">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-12 col-12 mb-3">
+                            <label class="labels">Destination Name</label>
+                            <input class="text" type="text" name="Destination" [value]="dest.name">
+                        </div>
+                        <div class="col-lg-6 col-md-12 col-12 mb-3">
+                            <label class="labels">Location</label>
+                            <input class="text" type="text" name="Location" [value]="dest.location">
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-12 mb-3">
+                            <label class="labels">Description</label>
+                            <div class="long-text">{{dest.description}}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="btn-container">
+                                <button class="btn-delete" (click)="delete(dest)">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="separator">
+        </div>
+    </div>
+</div>

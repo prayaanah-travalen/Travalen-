@@ -1,3 +1,13 @@
+.hotel-heading {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #333;
+  }
+  
+
+
+
 .admin-container {
     width: 100%;
     padding: 10px;
@@ -48,7 +58,7 @@ th, td {
 
 /* Header row: full bold line */
 table.mat-table tr.mat-header-row th {
-    border-bottom: 3px solid #000;
+    border-bottom: 1px solid #383535;
 }
 
 /* Body rows: line under all except Action */
@@ -79,6 +89,23 @@ td.mat-cell.mat-column-action {
 .mobile-table {
     display: none;
 }
+
+.actions button {
+    padding: 10px 20px;   /* medium size */
+    font-size: 16px;      /* medium text */
+    border-radius: 5px;   /* slightly rounded corners */
+    background-color: #1EDD8D; /* optional: green background */
+    color: white;         /* text color */
+    border: none;         /* remove default border */
+    cursor: pointer;      /* pointer on hover */
+}
+
+.actions button:hover {
+    background-color: #17b77a; /* slightly darker on hover */
+}
+
+
+
 
 @media (max-width: 768px) {
     .desktop-table {

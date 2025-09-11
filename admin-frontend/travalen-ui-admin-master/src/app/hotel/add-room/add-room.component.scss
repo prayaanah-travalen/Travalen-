@@ -1,232 +1,267 @@
-// Add-Room
-// .add-room-modal
-// {
-//     width: 100%;
-//     height: 670px;
-//     background: #ffff;
-//     padding: 20px;
-//     overflow: scroll;
-// }
+/* Add-Room Modal */
 .add-room-modal {
-    width: 100%;
-    max-height: 90vh;   /* responsive, max 90% of viewport height */
-    background: #fff;
-    padding: 20px;
-    overflow-y: auto;   /* only vertical scroll if needed */
-    border-radius: 8px; /* optional, looks nicer */
-  }
-  
-.add-room
-{
-    font-weight: bold;
-    font-size: 20px;
-    margin-top: 10px;
-}
-.labels
-{
-    color:  #98A2B3;
-    margin-top: 8px;
-}
-.text
-{
-    border: none;
-    outline: none;
-    width: 100%;
-    height: 50px;
-    border-radius: 5px;
-    background-color:whitesmoke;
-    color: #98A2B3;
-    padding-left: 15px;
-}
-.room-tags
-{
-    height: 25vh;
-    // width: 50vh;
-    border-radius: 5px;
-    background-color: whitesmoke;
-}
-.add
-{
-    border: none;
-    outline: none;
-    height: 50px;
-    width: 200px;
-    margin-left: 35px;
-    margin-top: 20px;
-}
-.add-btn-border
-{
-    height: 50px;
-    width: 80px;
-    background-color: white;
-    margin-left: 35px;
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.add-btn
-{
-    width: 70px;
-    height: 35px;
-    color: white;
-    background-color: #1EDD8D;
-    border: none;
-    outline: none;
-    font-weight: bold;
-    border-radius: 5px;
-}
-.dotted-img-box
-{
-    // width: 104vh;
-    height: 25vh;
-    border: 2px dotted #D9D9D9;
-    margin-top: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.img-box
-{
-    width: 20vh;
-    height: 8vh;
-}
-.upload-img
-{
-    color: #98A2B3;   
-}
-// .btn-div
-// {
-//     float: right;
-//     width: 40vh;
-//     margin-left: 40px;
-//     margin-top: 30px;
-// }
-// .btn-discard
-// {
-//     width: 100px;
-//     height: 50px;
-//     border: 2px solid  #98A2B3;
-//     outline: none;
-//     border-radius: 5px;
-//     color:  #98A2B3 ;
-//     font-weight: bold; 
-//     background-color: white;  
-   
-// }
-// .btn-add-room
-// {
-//     width: 150px;
-//     height: 50px;
-//     color: white;
-//     background-color: #1EDD8D;
-//     border: none;
-//     outline: none;
-//     font-weight: bold;
-//     border-radius: 5px;
-//     margin-left: 20px; 
-//     float: right;
-// }
-
-input
-{
-    padding: 15px;
+  width: 100%;
+  max-height: 90vh;
+  background: #fff;
+  padding: 20px;
+  overflow-y: auto;
+  border-radius: 8px;
 }
 
-::ng-deep .mat-form-field-infix {
-    width: 100% !important;
-    border-radius: 5px !important;
-    line-height: 24px !important;
-    border: 1px solid rgba(0,0,0,.42) !important;
-    padding: 0 !important;
-
+.add-room {
+  font-weight: bold;
+  font-size: 20px;
+  margin-top: 10px;
 }
 
-::ng-deep .mat-form-field-appearance-legacy .mat-form-field-underline {
-    display: none;
+.labels {
+  color: #98A2B3;
+  margin-top: 8px;
 }
 
-::ng-deep .mat-form-field {
-    width: 100% !important;
+/* Style for all regular text inputs */
+.text {
+  border: none;
+  outline: none;
+  width: 100%;
+  height: 50px;
+  border-radius: 5px;
+  background-color: whitesmoke;
+  color: #98A2B3;
+  padding-left: 15px;
 }
 
-::ng-deep .mat-form-field-appearance-legacy .mat-form-field-label{
-    padding-left: 10px;
+.room-tags {
+  min-height: 25vh; /* Use min-height to allow content to grow */
+  border-radius: 5px;
+  background-color: whitesmoke;
+  padding: 10px;
 }
 
-.mat-select {
-    padding: 10px !important;
+.add {
+  border: none;
+  outline: none;
+  height: 50px;
+  width: 200px;
+  margin-left: 35px;
+  margin-top: 20px;
 }
-.dropdown {
-    border: 1px solid #d3cdcd;
-    padding: 10px;
-    border-radius: 5px;
-  }
-  /* Button container */
+
+.add-btn-border {
+  height: 50px;
+  width: 80px;
+  background-color: white;
+  margin-left: 35px;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-btn {
+  width: 70px;
+  height: 35px;
+  color: white;
+  background-color: #1EDD8D;
+  border: none;
+  outline: none;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+.dotted-img-box {
+  height: 25vh;
+  border: 2px dotted #D9D9D9;
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.img-box {
+  width: 20vh;
+  height: 8vh;
+}
+
+.upload-img {
+  color: #98A2B3;
+}
+
+input {
+  padding: 15px;
+}
+
+/* Selected value inside mat-select */
+.mat-select-value {
+  color: #333 !important;  // dark grey text
+}
+
+/* Label on focus */
+.mat-form-field-label {
+  color: #98A2B3 !important; // grey label
+}
+.mat-form-field-appearance-outline.mat-focused .mat-form-field-label {
+  color: #1EDD8D !important; // green on focus
+}
+
+/* Outline border */
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  border: 2px solid #D9D9D9 !important;
+}
+.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline {
+  border-color: #1EDD8D !important;
+}
+
+/* Dropdown panel */
+.mat-select-panel {
+  background-color: whitesmoke !important; // grey background
+}
+
+/* Options */
+.mat-option {
+  color: #333 !important; // grey text
+}
+.mat-option.mat-selected {
+  background-color: #1EDD8D !important; // green selected
+  color: white !important;
+}
+.mat-option:hover {
+  background-color: #17c47a !important; // slightly darker green hover
+  color: white !important;
+}
+
+/* Remove blue focus shadow in Firefox/Chrome */
+.mat-select-trigger:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+
+.mat-form-field {
+  width: 100%;
+  background-color: whitesmoke; 
+  border-radius: 5px;
+}
+
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  border-color: #1EDD8D !important; 
+  border: 2px solid #D9D9D9 !important; 
+}
+
+.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline {
+  border-color: #1EDD8D !important; 
+}
+
+.mat-form-field-appearance-outline .mat-form-field-flex {
+  border-color: #1EDD8D !important; 
+  padding: 0 15px; 
+}
+
+
+.mat-form-field-infix {
+  height: 50px; 
+  padding: 0 !important; 
+  display: flex;
+  align-items: center;
+}
+
+.mat-select-value {
+  color: #98A2B3;
+}
+
+.mat-select-trigger {
+  height: 100%;
+}
+
+.mat-form-field-infix {
+  height: 50px;
+  padding: 0 15px;
+  display: flex;
+  align-items: center;
+}
+
+.mat-select-value {
+  color: #333; 
+}
+
+.mat-form-field-label {
+  color: #98A2B3 !important; 
+}
+
+.mat-form-field-appearance-outline.mat-focused .mat-form-field-label {
+  color: #1EDD8D !important; 
+}
+.mat-form-field-label {
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  color: #98A2B3 !important;
+}
+
+/* Style the Room Amenities chips to match your color scheme */
+::ng-deep .mat-chip-list-wrapper .mat-chip {
+  background-color: #1EDD8D !important; /* Green background */
+  color: white !important; /* White text */
+  margin: 4px;
+}
+
+/* Style the remove icon on the chip */
+::ng-deep .mat-chip .mat-chip-remove {
+  color: white !important;
+  opacity: 1 !important;
+}
+
+/* Button container */
 .btn-div {
-    display: flex;
-    justify-content: flex-end; /* align buttons to the right */
-    gap: 15px; /* space between buttons */
-    margin-top: 30px;
-    margin-right: 10px; /* little padding from right edge */
-    flex-wrap: wrap; /* allow stacking on small screens */
-  }
-  
-  /* Discard button */
-  .btn-discard {
-    width: 120px;
-    height: 50px;
-    border: 2px solid #98A2B3;
-    border-radius: 5px;
-    background-color: white;
-    color: #98A2B3;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-  
-  .btn-discard:hover {
-    background-color: #f1f1f1;
-  }
-  
-  /* Save button */
-  .btn-add-room {
-    width: 150px;
-    height: 50px;
-    background-color: #1EDD8D;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-  
-  .btn-add-room:hover {
-    background-color: #17c47a;
-  }
-  
-  /* Mobile responsiveness */
-  @media (max-width: 576px) {
-    .btn-div {
-      justify-content: center; /* center buttons on mobile */
-    }
-    .btn-discard, .btn-add-room {
-      flex: 1 1 100%; /* full width on small screens */
-      max-width: 100%;
-    }
-  }
-  
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 30px;
+  margin-right: 10px;
+  flex-wrap: wrap;
+}
 
-  
-  /* Mobile responsiveness */
-  @media (max-width: 576px) {
-    .btn-div {
-      justify-content: center; /* center buttons on small screens */
-    }
-    .btn-discard, .btn-add-room {
-      flex: 1 1 100%; /* full width buttons */
-      max-width: 100%;
-    }
+/* Discard button */
+.btn-discard {
+  width: 120px;
+  height: 50px;
+  border: 2px solid #98A2B3;
+  border-radius: 5px;
+  background-color: white;
+  color: #98A2B3;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-discard:hover {
+  background-color: #f1f1f1;
+}
+
+/* Save button */
+.btn-add-room {
+  width: 150px;
+  height: 50px;
+  background-color: #1EDD8D;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-add-room:hover {
+  background-color: #17c47a;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 576px) {
+  .btn-div {
+    justify-content: center;
   }
-  
+  .btn-discard, .btn-add-room {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+}

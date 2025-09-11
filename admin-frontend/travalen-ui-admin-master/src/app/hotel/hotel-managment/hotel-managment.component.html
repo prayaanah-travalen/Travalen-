@@ -5,212 +5,281 @@
 	</div>
   
 	<mat-tab-group animationDuration="0ms">
-  
+	  
 	  <!-- HOTEL DETAILS TAB -->
 	  <mat-tab label="Hotel Details">
-		<form [formGroup]="hotelForm">
-		  <div class="col-lg-12">
+		<div class="container-fluid">
+		  <form [formGroup]="hotelForm">
 			<div class="hotel-details-long-bar">
-  
-			  <!-- Header -->
-			  <div class="row mb-3">
-				<div class="col-lg-6">
-				  <h4 class="long-bar-hotel-details">Hotel Details</h4>
-				</div>
-				<div class="col-lg-6 text-right">
-				  <button *ngIf="hotelAction === 'MODIFY'" class="btn-edit-details" (click)="enableEditMode()">
-					<img src="./assets/images/Edit.png"> Edit Details
-				  </button>
+			  
+			  <!-- Header Section -->
+			  <div class="form-header">
+				<div class="row align-items-center">
+				  <div class="col-12 col-md-6">
+					<h4 class="form-title">Hotel Details</h4>
+				  </div>
+				  <div class="col-12 col-md-6 text-end">
+					<button *ngIf="hotelAction === 'MODIFY'" class="btn btn-edit-details" (click)="enableEditMode()">
+					  <i class="fas fa-edit me-2"></i>Edit Details
+					</button>
+				  </div>
 				</div>
 			  </div>
   
-			  <!-- Main Row: Left = Form, Right = Amenities -->
-			  <div class="row">
-  
-				<!-- Left Column: Hotel Form -->
-				<div class="col-lg-8">
-  
-				  <!-- Hotel Info -->
-				  <div class="row mb-3">
-					<div class="col-lg-4">
-					  <label class="labels">Hotel Name</label>
-					  <input class="text" type="text" formControlName="hotelName">
+			  <!-- Main Form Content -->
+			  <div class="form-content">
+				
+				<!-- Basic Information Row -->
+				<div class="form-section">
+				  <div class="row g-3">
+					<div class="col-12 col-md-6 col-lg-4">
+					  <label class="form-label">Hotel Name</label>
+					  <input class="form-control" type="text" formControlName="hotelName">
 					</div>
-					<div class="col-lg-4">
-					  <label class="labels">Contact Address</label>
-					  <input class="text" type="text" formControlName="address">
+					<div class="col-12 col-md-6 col-lg-4">
+					  <label class="form-label">Contact Address</label>
+					  <input class="form-control" type="text" formControlName="address">
 					</div>
-					<div class="col-lg-4">
-					  <label class="labels">Email Address</label>
-					  <input class="text" type="text" formControlName="email">
-					</div>
-				  </div>
-  
-				  <!-- Website & Location -->
-				  <div class="row mb-3">
-					<div class="col-lg-6">
-					  <label class="labels">Website Link</label>
-					  <input class="text" type="text" formControlName="websiteLink">
-					</div>
-					<div class="col-lg-6">
-					  <label class="labels">Hotel Location</label>
-					  <input class="text" type="text" formControlName="location">
-					</div>
-				  </div>
-  
-				  <!-- Latitude & Longitude -->
-				  <div class="row mb-3">
-					<div class="col-lg-6">
-					  <label class="labels">Latitude</label>
-					  <input class="text" type="text" formControlName="latitude">
-					</div>
-					<div class="col-lg-6">
-					  <label class="labels">Longitude</label>
-					  <input class="text" type="text" formControlName="longitude">
-					</div>
-				  </div>
-  
-				  <!-- About & Rules -->
-				  <div class="row mb-3">
-					<div class="col-lg-12">
-					  <label class="labels">About Hotel</label>
-					  <textarea class="long-text" formControlName="about"></textarea>
-					</div>
-					<div class="col-lg-12">
-					  <label class="labels">Property Rules</label>
-					  <textarea class="long-text" formControlName="propertyRule"></textarea>
-					</div>
-				  </div>
-  
-				  <!-- Images Upload -->
-				  <div class="row mb-3">
-					<div class="col-lg-12">
-					  <app-file-upload
-						[disabled]="hotelAction === 'MODIFY'"
-						(imageEmitter)="imageEmitter($event)"
-						(deletedImageEmitter)="deletedImage($event)"
-						[savedImage]="savedImages">
-					  </app-file-upload>
-					</div>
-				  </div>
-  
-				  <!-- Action Buttons -->
-				  <div class="row justify-content-end mb-3">
-					<button *ngIf="hotelAction === 'ADD'" class="btn-edit-details" (click)="saveHotel()">Save Hotel</button>
-					<div *ngIf="hotelAction === 'EDIT'" class="btn-group-actions">
-					  <button class="btn-edit-details" (click)="updateHotel()">Update Hotel</button>
-					  <button class="btn-cancel" (click)="cancelEdit()">Cancel</button>
-					</div>
-				  </div>
-  
-				</div>
-  
-				<!-- Right Column: Amenities -->
-				<div class="col-lg-4">
-				  <label class="labels">Amenities</label>
-				  <div class="amenities">
-					<div class="display-flex mb-3">
-					  <mat-select class="dropdown" (selectionChange)="addAminity($event.value)" [disabled]="hotelAction === 'MODIFY'">
-						<mat-option *ngFor="let amenity of amenities" [value]="amenity">{{amenity.description}}</mat-option>
-					  </mat-select>
-					</div>
-					<div class="chip-container">
-					  <mat-chip-list #chipList [disabled]="hotelAction === 'MODIFY'">
-						<mat-chip *ngFor="let amenity of amenityList" [selectable]="selectable" [removable]="removable" (removed)="removeAmenity(amenity)">
-						  {{amenity}}
-						  <i matChipRemove class="fa fa-close mt-2"></i>
-						</mat-chip>
-					  </mat-chip-list>
+					<div class="col-12 col-lg-4">
+					  <label class="form-label">Email Address</label>
+					  <input class="form-control" type="email" formControlName="email">
 					</div>
 				  </div>
 				</div>
   
-			  </div>
-			</div>
-		  </div>
-		</form>
+				<!-- Website & Location Row -->
+				<div class="form-section">
+				  <div class="row g-3">
+					<div class="col-12 col-md-6">
+					  <label class="form-label">Website Link</label>
+					  <input class="form-control" type="url" formControlName="websiteLink">
+					</div>
+					<div class="col-12 col-md-6">
+					  <label class="form-label">Hotel Location</label>
+					  <input class="form-control" type="text" formControlName="location">
+					</div>
+				  </div>
+				</div>
+  
+				<!-- Coordinates Row -->
+				<div class="form-section">
+				  <div class="row g-3">
+					<div class="col-12 col-md-6">
+					  <label class="form-label">Latitude</label>
+					  <input class="form-control" type="text" formControlName="latitude">
+					</div>
+					<div class="col-12 col-md-6">
+					  <label class="form-label">Longitude</label>
+					  <input class="form-control" type="text" formControlName="longitude">
+					</div>
+				  </div>
+				</div>
+  
+				<!-- Amenities Section -->
+				<div class="form-section">
+				  <div class="row">
+					<div class="col-12">
+					  <label class="form-label">Amenities</label>
+					  <div class="amenities-container">
+						<div class="amenity-selector mb-3">
+						  <mat-select class="form-control"
+									  (selectionChange)="addAminity($event.value)"
+									  [disabled]="hotelAction === 'MODIFY'"
+									  placeholder="Select amenities">
+							<mat-option *ngFor="let amenity of amenities" [value]="amenity">
+							  {{ amenity.description }}
+							</mat-option>
+						  </mat-select>
+						</div>
+						
+						<div class="selected-amenities">
+						  <mat-chip-list #chipList [disabled]="hotelAction === 'MODIFY'">
+							<mat-chip *ngFor="let amenity of amenityList"
+									  [selectable]="selectable"
+									  [removable]="removable"
+									  (removed)="removeAmenity(amenity)"
+									  class="amenity-chip">
+							  {{ amenity }}
+							  <i matChipRemove class="fas fa-times ms-2"></i>
+							</mat-chip>
+						  </mat-chip-list>
+						</div>
+					  </div>
+					</div>
+				  </div>
+				</div>
+  
+				<!-- Description Section -->
+				<div class="form-section">
+				  <div class="row g-3">
+					<div class="col-12">
+					  <label class="form-label">About Hotel</label>
+					  <textarea class="form-control textarea-large" 
+								formControlName="about" 
+								rows="4"
+								placeholder="Describe your hotel..."></textarea>
+					</div>
+					<div class="col-12">
+					  <label class="form-label">Property Rules</label>
+					  <textarea class="form-control textarea-large" 
+								formControlName="propertyRule" 
+								rows="4"
+								placeholder="Enter property rules..."></textarea>
+					</div>
+				  </div>
+				</div>
+  
+				<!-- Image Upload Section -->
+				<div class="form-section">
+				  <div class="row">
+					<div class="col-12">
+					  <div class="upload-section">
+						<label class="form-label">Upload Hotel Images</label>
+						<app-file-upload
+						  [disabled]="hotelAction === 'MODIFY'"
+						  (imageEmitter)="imageEmitter($event)"
+						  (deletedImageEmitter)="deletedImage($event)"
+						  [savedImage]="savedImages">
+						</app-file-upload>
+					  </div>
+					</div>
+				  </div>
+				</div>
+  
+				<!-- Action Buttons -->
+				<div class="form-actions">
+				  <div class="d-flex justify-content-end gap-2 flex-wrap">
+					<button *ngIf="hotelAction === 'ADD'" 
+							class="btn btn-primary btn-save" 
+							(click)="saveHotel()">
+					  <i class="fas fa-save me-2"></i>Save Hotel
+					</button>
+					<div *ngIf="hotelAction === 'EDIT'" class="d-flex gap-2 flex-wrap">
+					  <button class="btn btn-primary btn-update" (click)="updateHotel()">
+						<i class="fas fa-sync me-2"></i>Update Hotel
+					  </button>
+					  <button class="btn btn-secondary btn-cancel" (click)="cancelEdit()">
+						<i class="fas fa-times me-2"></i>Cancel
+					  </button>
+					</div>
+				  </div>
+				</div>
+  
+			  </div> <!-- End form-content -->
+			</div> <!-- End hotel-details-long-bar -->
+		  </form>
+		</div>
 	  </mat-tab>
   
 	  <!-- ROOM DETAILS TAB -->
 	  <mat-tab label="Room Details" [disabled]="!isHotelLoaded">
-		<div class="col-lg-12">
+		<div class="container-fluid">
 		  <div class="room-details-long-bar">
-  
+			
 			<!-- Header -->
-			<div class="row mb-3">
-			  <div class="col-lg-8">
-				<h4 class="heading-room-details">Room Details</h4>
-			  </div>
-			  <div class="col-lg-2">
-				<input class="search-text" type="search" placeholder="Search">
-			  </div>
-			  <div class="col-lg-2">
-				<button class="btn-add-room" (click)="addRoom()">
-				  <img src="./assets/images/Add.png"> Add Room
-				</button>
+			<div class="form-header">
+			  <div class="row align-items-center g-3">
+				<div class="col-12 col-md-6 col-lg-8">
+				  <h4 class="form-title">Room Details</h4>
+				</div>
+				<div class="col-12 col-md-3 col-lg-2">
+				  <input class="form-control" type="search" placeholder="Search rooms...">
+				</div>
+				<div class="col-12 col-md-3 col-lg-2">
+				  <button class="btn btn-primary w-100" (click)="addRoom()">
+					<i class="fas fa-plus me-2"></i>Add Room
+				  </button>
+				</div>
 			  </div>
 			</div>
   
 			<!-- Rooms List -->
-			<div *ngFor="let room of hotel?.rooms" class="mb-4">
-			  <div class="row mb-2">
-				<div class="col-lg-4">
-				  <label class="labels">Room Name</label>
-				  <input class="text" type="text" [value]="room.roomName" disabled>
-				  <label class="labels">Room Price / per night</label>
-				  <input class="text" type="text" [value]="room.price" disabled>
-				</div>
-				<div class="col-lg-8">
-				  <label class="labels">Room Tags</label>
-				  <div class="room-tags display-flex">
-					<p *ngFor="let rmTag of room.roomTags" class="tags">{{rmTag}}</p>
+			<div class="rooms-container">
+			  <div *ngFor="let room of hotel?.rooms" class="room-card">
+				
+				<!-- Room Basic Info -->
+				<div class="row g-3 mb-3">
+				  <div class="col-12 col-md-6 col-lg-4">
+					<label class="form-label">Room Name</label>
+					<input class="form-control" type="text" [value]="room.roomName" disabled>
+				  </div>
+				  <div class="col-12 col-md-6 col-lg-4">
+					<label class="form-label">Room Price / per night</label>
+					<input class="form-control" type="text" [value]="room.price" disabled>
+				  </div>
+				  <div class="col-12 col-lg-4">
+					<label class="form-label">Number of Rooms</label>
+					<input class="form-control" type="text" [value]="room.noOfRooms" disabled>
 				  </div>
 				</div>
-			  </div>
   
-			  <div class="row mb-2">
-				<div class="col-lg-4">
-				  <label class="labels">Amenities</label>
-				  <div class="amenities display-flex">
-					<p *ngFor="let amnty of room.amenities" class="tags">{{amnty}}</p>
-				  </div>
-				</div>
-				<div class="col-lg-8">
-				  <label class="labels">Images</label>
-				  <div class="images-container row">
-					<div class="col-md mt-3" *ngFor="let image of room.roomImages">
-					  <img [src]="image.image">
+				<!-- Room Tags -->
+				<div class="row g-3 mb-3">
+				  <div class="col-12">
+					<label class="form-label">Room Tags</label>
+					<div class="tags-container">
+					  <span *ngFor="let rmTag of room.roomTags" class="tag">{{rmTag}}</span>
 					</div>
 				  </div>
 				</div>
-			  </div>
   
-			  <div class="row mb-2">
-				<div class="col-lg-4">
-				  <label class="labels">No of Rooms</label>
-				  <input class="text" type="text" [value]="room.noOfRooms" disabled>
-				  <label class="labels">Price Slab</label>
-				  <div class="priceSlab">
-					<span *ngFor="let price of room.priceSlab">{{price.priceSlabId.priceSlab}}</span>
+				<!-- Amenities & Package -->
+				<div class="row g-3 mb-3">
+				  <div class="col-12 col-md-6">
+					<label class="form-label">Room Amenities</label>
+					<div class="tags-container">
+					  <span *ngFor="let amnty of room.amenities" class="tag">{{amnty}}</span>
+					</div>
+				  </div>
+				  <div class="col-12 col-md-6">
+					<label class="form-label">Additional Package</label>
+					<mat-form-field class="w-100">
+					  <mat-select [value]="room.roomPackage" disabled>
+						<mat-option *ngFor="let pack of roomPackage" [value]="pack.parameterId">
+						  {{pack.description}}
+						</mat-option>
+					  </mat-select>
+					</mat-form-field>
 				  </div>
 				</div>
-				<div class="col-lg-6">
-				  <label class="labels">Additional Package</label>
-				  <mat-form-field>
-					<mat-select [value]="room.roomPackage" disabled>
-					  <mat-option *ngFor="let pack of roomPackage" [value]="pack.parameterId">{{pack.description}}</mat-option>
-					</mat-select>
-				  </mat-form-field>
-				</div>
-			  </div>
   
-			  <div class="row mb-3">
-				<div class="col-lg-12 btn">
-				  <button class="btn-edit" (click)="editRoom(room)">Edit</button>
-				  <button class="btn-delete" (click)="deleteRoom(room.hotelRoomId)">Delete</button>
+				<!-- Price Slab -->
+				<div class="row g-3 mb-3">
+				  <div class="col-12">
+					<label class="form-label">Price Slab</label>
+					<div class="price-slab-container">
+					  <span *ngFor="let price of room.priceSlab" class="price-slab-item">
+						{{price.priceSlabId.priceSlab}}
+					  </span>
+					</div>
+				  </div>
 				</div>
+  
+				<!-- Room Images -->
+				<div class="row g-3 mb-3">
+				  <div class="col-12">
+					<label class="form-label">Room Images</label>
+					<div class="room-images-grid">
+					  <div class="image-item" *ngFor="let image of room.roomImages">
+						<img [src]="image.image" alt="Room image" class="room-image">
+					  </div>
+					</div>
+				  </div>
+				</div>
+  
+				<!-- Room Actions -->
+				<div class="room-actions">
+				  <div class="d-flex gap-2 flex-wrap">
+					<button class="btn btn-outline-primary btn-sm" (click)="editRoom(room)">
+					  <i class="fas fa-edit me-1"></i>Edit
+					</button>
+					<button class="btn btn-outline-danger btn-sm" (click)="deleteRoom(room.hotelRoomId)">
+					  <i class="fas fa-trash me-1"></i>Delete
+					</button>
+				  </div>
+				</div>
+  
 			  </div>
-			  <hr>
 			</div>
 		  </div>
 		</div>
@@ -218,88 +287,151 @@
   
 	  <!-- FINANCES TAB -->
 	  <mat-tab label="Finances" [disabled]="!isHotelLoaded">
-		<form [formGroup]="financeForm">
-		  <div class="col-lg-12">
+		<div class="container-fluid">
+		  <form [formGroup]="financeForm">
 			<div class="finances-long-bar">
-			  <h4 class="heading-finances">Finances</h4>
-			  <p class="para-one">NOTE: The payment will be processed in INR.</p>
-  
-			  <div class="finances row">
-				<div class="col-lg-6">
-				  <label class="labels">Bank Country/Region</label><br>
-				  <input class="text" type="text" formControlName="country">
-				  <label class="labels">SWIFT Code</label><br>
-				  <input class="text" type="text" formControlName="swiftCode">
-				  <label class="labels">Account Number</label><br>
-				  <input class="text" type="text" formControlName="accountNumber">
-				  <label class="labels">PAN</label><br>
-				  <input class="text" type="text" formControlName="pan">
-				</div>
-				<div class="col-lg-6">
-				  <label class="labels">Bank Name</label><br>
-				  <input class="text" type="text" formControlName="bankName">
-				  <label class="labels">IFSC/Bank Code</label><br>
-				  <input class="text" type="text" formControlName="ifsc">
-				  <label class="labels">Account Holder Name</label><br>
-				  <input class="text" type="text" formControlName="accountHolderName">
+			  
+			  <div class="form-header">
+				<h4 class="form-title">Finances</h4>
+				<!-- <div class="alert alert-info"> -->
+					<div class="alert alert-light-green">
+				  <i class="fas fa-info-circle me-2"></i>
+				  NOTE: The payment will be processed in INR.
 				</div>
 			  </div>
   
-			  <div class="para-box">
-				<p class="para-two">Due to regulations established by the Indian government, we need your GST registration and PAN details. By submitting this information, you confirm that your PAN and state registration are accurate.</p>
-				<p class="para-two">IMPORTANT: As of 04/03/2019, any changes in your GST registration will only br taken into account from the moment you enter these details into our system. Note that it is not possible to apply any changes with a retroactive effect. This may have implication on the taxes we collect and pay to the tax authorities, that are applicable to your reservation (i.e. GST or TCS).</p> 
-			  </div>
-  
-			  <p class="para-three">Are you registered for GST purposes?</p>
-			  <label><input type="radio" value="yes" formControlName="registeredForGst"> Yes</label>
-			  <label><input type="radio" value="no" formControlName="registeredForGst"> No</label>
-  
-			  <div class="trade row">
-				<div class="col-lg-6">
-				  <label class="labels">Trade Name</label><br>
-				  <input class="text" type="text" formControlName="tradeName">
+			  <!-- Bank Details -->
+			  <div class="form-section">
+				<div class="row g-3">
+				  <div class="col-12 col-md-6">
+					<label class="form-label">Bank Country/Region</label>
+					<input class="form-control" type="text" formControlName="country">
+				  </div>
+				  <div class="col-12 col-md-6">
+					<label class="form-label">Bank Name</label>
+					<input class="form-control" type="text" formControlName="bankName">
+				  </div>
+				  <div class="col-12 col-md-6">
+					<label class="form-label">SWIFT Code</label>
+					<input class="form-control" type="text" formControlName="swiftCode">
+				  </div>
+				  <div class="col-12 col-md-6">
+					<label class="form-label">IFSC/Bank Code</label>
+					<input class="form-control" type="text" formControlName="ifsc">
+				  </div>
+				  <div class="col-12 col-md-6">
+					<label class="form-label">Account Number</label>
+					<input class="form-control" type="text" formControlName="accountNumber">
+				  </div>
+				  <div class="col-12 col-md-6">
+					<label class="form-label">Account Holder Name</label>
+					<input class="form-control" type="text" formControlName="accountHolderName">
+				  </div>
+				  <div class="col-12">
+					<label class="form-label">PAN</label>
+					<input class="form-control" type="text" formControlName="pan">
+				  </div>
 				</div>
-				<div class="col-lg-6">
-				  <label class="labels">GSTIN</label><br>
-				  <input class="text" type="text" formControlName="gstIn">
+			  </div>
+  
+			  <!-- GST Information -->
+			  <div class="form-section">
+				<div class="alert alert-warning">
+				  <p class="mb-2">Due to regulations established by the Indian government, we need your GST registration and PAN details. By submitting this information, you confirm that your PAN and state registration are accurate.</p>
+				  <p class="mb-0"><strong>IMPORTANT:</strong> As of 04/03/2019, any changes in your GST registration will only be taken into account from the moment you enter these details into our system.</p>
+				</div>
+  
+				<div class="mb-3">
+				  <label class="form-label fw-bold">Are you registered for GST purposes?</label>
+				  <div class="form-check-container">
+					<div class="form-check">
+					  <input class="form-check-input" type="radio" value="yes" formControlName="registeredForGst" id="gst-yes">
+					  <label class="form-check-label" for="gst-yes">Yes</label>
+					</div>
+					<div class="form-check">
+					  <input class="form-check-input" type="radio" value="no" formControlName="registeredForGst" id="gst-no">
+					  <label class="form-check-label" for="gst-no">No</label>
+					</div>
+				  </div>
+				</div>
+  
+				<div class="row g-3">
+				  <div class="col-12 col-md-6">
+					<label class="form-label">Trade Name</label>
+					<input class="form-control" type="text" formControlName="tradeName">
+				  </div>
+				  <div class="col-12 col-md-6">
+					<label class="form-label">GSTIN</label>
+					<input class="form-control" type="text" formControlName="gstIn">
+				  </div>
 				</div>
 			  </div>
   
-			  <div class="row mt-3 justify-right">
-				<button class="btn-edit" (click)="saveFinance()">Save</button>
+			  <!-- Save Button -->
+			  <div class="form-actions">
+				<div class="d-flex justify-content-end">
+				  <button class="btn btn-primary" (click)="saveFinance()">
+					<i class="fas fa-save me-2"></i>Save Finances
+				  </button>
+				</div>
 			  </div>
+  
 			</div>
-		  </div>
-		</form>
+		  </form>
+		</div>
 	  </mat-tab>
   
 	  <!-- CONTACT PERSON TAB -->
 	  <mat-tab label="Contact Person" [disabled]="!isHotelLoaded">
-		<form [formGroup]="contactForm">
-		  <div class="col-lg-12">
+		<div class="container-fluid">
+		  <form [formGroup]="contactForm">
 			<div class="finances-long-bar">
-			  <h4 class="heading-finances">Contact Person</h4>
-			  <div class="row">
-				<div class="col-lg-6">
-				  <label class="labels">First Name</label><br>
-				  <input class="text" type="text" formControlName="firstName">
-				  <label class="labels">Last Name</label><br>
-				  <input class="text" type="text" formControlName="lastName">
-				  <label class="labels">Phone No</label><br>
-				  <input class="text" type="text" formControlName="phone">
-				  <label class="labels">Whatsapp Number</label><br>
-				  <input class="text" type="text" formControlName="whatsapp">
-				  <label class="labels">Designation</label><br>
-				  <input class="text" type="text" formControlName="designation">
-				  <label class="labels">Email</label><br>
-				  <input class="text" type="text" formControlName="email">
+			  
+			  <div class="form-header">
+				<h4 class="form-title">Contact Person</h4>
+			  </div>
+  
+			  <div class="form-section">
+				<div class="row g-3">
+				  <div class="col-12 col-md-6">
+					<label class="form-label">First Name</label>
+					<input class="form-control" type="text" formControlName="firstName">
+				  </div>
+				  <div class="col-12 col-md-6">
+					<label class="form-label">Last Name</label>
+					<input class="form-control" type="text" formControlName="lastName">
+				  </div>
+				  <div class="col-12 col-md-6">
+					<label class="form-label">Phone Number</label>
+					<input class="form-control" type="tel" formControlName="phone">
+				  </div>
+				  <div class="col-12 col-md-6">
+					<label class="form-label">WhatsApp Number</label>
+					<input class="form-control" type="tel" formControlName="whatsapp">
+				  </div>
+				  <div class="col-12 col-md-6">
+					<label class="form-label">Email</label>
+					<input class="form-control" type="email" formControlName="email">
+				  </div>
+				  <div class="col-12 col-md-6">
+					<label class="form-label">Designation</label>
+					<input class="form-control" type="text" formControlName="designation">
+				  </div>
 				</div>
 			  </div>
+  
+			  <div class="form-actions">
+				<div class="d-flex justify-content-end">
+				  <button class="btn btn-primary" type="submit">
+					<i class="fas fa-save me-2"></i>Save Contact
+				  </button>
+				</div>
+			  </div>
+  
 			</div>
-		  </div>
-		</form>
+		  </form>
+		</div>
 	  </mat-tab>
   
 	</mat-tab-group>
   </div>
-  

@@ -1,3 +1,6 @@
+<h2 class="hotel-heading">Price Slab</h2>
+
+
 <div class="container-fluid price-container">
   <div class="actions">
     <button (click)="add()">Create Price Slab</button>
@@ -36,7 +39,7 @@
           <th mat-header-cell *matHeaderCellDef> Action </th>
           <td mat-cell *matCellDef="let element">
             <a class="edit" (click)="edit(element)">Edit</a> 
-            <a (click)="delete(element)">Delete</a> 
+            <a class="delete" (click)="delete(element)"   >Delete</a> 
           </td>
         </ng-container>
 

@@ -24,6 +24,16 @@
 // }
 
 // Base responsive table styles
+
+.hotel-heading {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+
+
 table {
   width: 100%;
   max-width: 100%;
@@ -211,6 +221,57 @@ a {
       }
   }
 }
+
+
+td.mat-cell {
+    padding: 4px 8px; /* adjust as needed */
+  }
+  
+  /* Center the text */
+  .center-header, td.mat-cell {
+    text-align: center;
+  }
+
+/* View button style */
+.btn-view {
+    
+    display: inline-block;
+    padding: 5px 12px;
+    background-color: #1EDD8D; /* Green */
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: background-color 0.3s;
+  }
+  
+  .btn-view:hover {
+    text-decoration: none;
+    background-color: #14a769;
+    color: white;
+  }
+  
+  /* Delete button style */
+  .btn-delete {
+    display: inline-block;
+     padding: 5px 12px;
+    background-color: #f44336; /* Red */
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: background-color 0.3s;
+  }
+
+  .btn-delete:hover {
+    text-decoration: none;
+    background-color: #d32f2f;
+    color: white;
+    cursor: pointer;
+  }
+.center-header {
+    text-align: center;
+  }
 
 // Mobile-first responsive breakpoints
 @media (max-width: 480px) {

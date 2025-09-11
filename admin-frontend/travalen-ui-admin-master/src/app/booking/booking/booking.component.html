@@ -1,185 +1,191 @@
-
-<!-- <div class="booking">
-  <div class="container-fluid">
-      <div class="header">
-          <div class="row">
-              <div class="col-lg-5">
-                  <p class="heading-booking">Booking</p>
-              </div>
-              <div class="col-lg-7">
-                  <div class="row">
-                      <div class="col-lg-6">
-                          <div class="row">
-                              <div class="col-lg-2">
-                                  <div class="search-box">
-                                      <i class="fas fa-search"></i>
-                                  </div>
-                              </div>
-                              <div class="col-lg-10">
-                                  <input class="search-text" type="search" placeholder="Search" aria-label="Search">
-                              </div>
-                          </div>
-                      </div>
-                      <div class="col-lg-3">
-                          <div class="date">
-                              
-                          </div>
-                      </div>
-                      <div class="col-lg-3">
-                          <button class="btn-download"><img src="./assets/images/Download.png">Download List</button>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div> -->
-
-
-
-
-     <!-- Booking -->
 <div class="booking">
-    <div class="container-fluid">
-      <div class="header">
-        <div class="row align-items-center">
-          <!-- Booking Title -->
-          <div class="col-lg-5 col-md-12">
-            <p class="heading-booking">Booking</p>
-          </div>
-  
-          <!-- Search, Datepicker, Download -->
-          <div class="col-lg-7 col-md-12">
-            
-            <div class="row align-items-center g-2">
-              <!-- Search Box -->
-              <div class="col-lg-6 col-md-8 col-sm-12">
-                <div class="input-group search-wrapper">
-                  <span class="search-icon"><i class="fas fa-search"></i></span>
-                  <input class="search-text" type="search" placeholder="Search" aria-label="Search"    [(ngModel)]="searchText" 
-                  (input)="filterBookings()" 
-                  (keyup.enter)="filterBookings()">
+  <div class="container-fluid">
+    <div class="header">
+      <div class="row align-items-center">
+        <div class="col-lg-5 col-md-12">
+          <p class="heading-booking">Booking</p>
+        </div>
+
+        <div class="col-lg-7 col-md-12">
+          <div class="header-actions">
+            <div class="search-col">
+              <div class="input-group search-wrapper">
+                <span class="search-icon"><i class="fas fa-search"></i></span>
+                <input
+                  class="search-text"
+                  type="search"
+                  placeholder="Search by guest name..."
+                  aria-label="Search"
+                  [(ngModel)]="searchText"
+                  (input)="filterBookings()"
+                  (keyup.enter)="filterBookings()"
+                />
+              </div>
+            </div>
+
+            <div class="date-col">
+              <div class="date-range-picker-wrapper">
+                <div class="date-range-container">
+                  <input
+                    class="date-range-input"
+                    type="date"
+                    placeholder="Start Date"
+                    [(ngModel)]="startDate"
+                    (change)="onDateRangeChange()"
+                    [max]="endDate"
+                  />
+                  <span class="date-separator">to</span>
+                  <input
+                    class="date-range-input"
+                    type="date"
+                    placeholder="End Date"
+                    [(ngModel)]="endDate"
+                    (change)="onDateRangeChange()"
+                    [min]="startDate"
+                  />
                 </div>
+                <button
+                  class="clear-dates-btn"
+                  *ngIf="startDate || endDate"
+                  (click)="clearDateRange()"
+                >
+                  <i class="fas fa-times"></i>
+                </button>
               </div>
-  
-              <!-- Datepicker -->
-<div class="col-lg-3 col-md-4 col-sm-12">
+            </div>
 
-  <div class="date-picker-wrapper">
-    <input 
-      class="datepicker-input" 
-      type="date" 
-      placeholder="Start Date" 
-      [(ngModel)]="firstDay" 
-      (change)="dateChange()"
-    >
-    <input 
-      class="datepicker-input" 
-      type="date" 
-      placeholder="End Date" 
-      [(ngModel)]="lastDay" 
-      (change)="dateChange()"
-    >
-  </div>
-
-
-
-</div>
-
-
-  
-              <!-- Download Button -->
-              <div class="col-lg-3 col-md-12 col-sm-12">
-                <button class="btn-download"><img src="./assets/images/Download.png"> Download List</button>
-              </div>
+            <div class="download-col">
+              <button
+                class="btn-download"
+                (click)="downloadExcel()"
+                [disabled]="bookings.length === 0"
+              >
+                <i class="fas fa-download"></i>
+                Download Excel
+              </button>
             </div>
           </div>
         </div>
       </div>
+    </div> <!-- end header -->
+  </div> <!-- end container-fluid -->
+</div> <!-- end booking -->
 
+<div class="booking-list">
+  <table mat-table [dataSource]="bookings" class="mat-elevation-z8">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef class="width-250">Name</th>
+      <td mat-cell *matCellDef="let element">
+        <!-- <a (click)="bookingDetails(element)">
+          {{element.guestDetails.firstName}} {{element.guestDetails.lastName}}
+        </a> -->
+        <!-- <a (click)="bookingDetails(element)">{{element.guestDetails.firstName}} {{element.guestDetails.lastName}}</a> -->
+        <a (click)="bookingDetails(element)">
+          {{element.guestDetails?.firstName || 'No Name'}}
+          {{element.guestDetails?.lastName || ''}}
+        </a>
+        
+        <span class="menu" mat-icon-button (click)="onContextMenu($event, element)" aria-label="">
+          <img src="../../../../assets/images/more-icon.svg" alt="" />
+        </span>
+      </td>
+    </ng-container>
 
+    <ng-container matColumnDef="location">
+      <th mat-header-cell *matHeaderCellDef>Location</th>
+      <td mat-cell *matCellDef="let element">
+        <span *ngFor="let loc of element.location; let last = last">
+          {{loc.location}}<span *ngIf="!last"> | </span>
+        </span>
+      </td>
+    </ng-container>
 
+    <ng-container matColumnDef="bookingDate">
+      <th mat-header-cell *matHeaderCellDef>Booking Date</th>
+      <td mat-cell *matCellDef="let element">{{formatDate(element.bookingDate)}}</td>
+    </ng-container>
 
-      <div class="booking-list">
-          <table mat-table [dataSource]="bookings" class="mat-elevation-z8">
+    <ng-container matColumnDef="phone">
+      <th mat-header-cell *matHeaderCellDef>Phone</th>
+      <td mat-cell *matCellDef="let element">{{element.guestDetails.phone}}</td>
+    </ng-container>
 
-              
-              <ng-container matColumnDef="name">
-                  <th mat-header-cell *matHeaderCellDef class="width-250"> Name </th>
-                  <td mat-cell *matCellDef="let element"> 
-                      <a (click)="bookingDetails(element)">{{element.guestDetails.firstName}} {{element.guestDetails.lastName}}</a>
-                      <span class="menu" mat-icon-button (click)="onContextMenu($event, element)" aria-label="">
-                          <img src="../../../../assets/images/more-icon.svg" alt="" />
-                      </span>
-                  </td>
-              </ng-container>
-            
-              
-              <ng-container matColumnDef="location">
-                <th mat-header-cell *matHeaderCellDef> Location </th>
-                <td mat-cell *matCellDef="let element"> <span *ngFor="let loc of element.location">{{loc.location}} <span *ngIf=" element.location &&  element.location.length > 1">|</span></span> </td>
-              </ng-container>
-            
-              
-              <ng-container matColumnDef="bookingDate">
-                <th mat-header-cell *matHeaderCellDef> Booking Date </th>
-                <td mat-cell *matCellDef="let element"> {{element.bookingDate}} </td>
-              </ng-container>
-              
-              <ng-container matColumnDef="phone">
-                  <th mat-header-cell *matHeaderCellDef> Phone </th>
-                  <td mat-cell *matCellDef="let element"> {{element.guestDetails.phone}} </td>
-                </ng-container>
-              
-            
-             
-              <ng-container matColumnDef="noOfGuests">
-                <th mat-header-cell *matHeaderCellDef> No Of Guests </th>
-                <td mat-cell *matCellDef="let element">{{element.adults}} Adult(s) {{element.children}} Child(ren)</td>
-              </ng-container>
+    <ng-container matColumnDef="noOfGuests">
+      <th mat-header-cell *matHeaderCellDef>No Of Guests</th>
+      <td mat-cell *matCellDef="let element">
+        {{element.adults}} Adult(s), {{element.children}} Child(ren)
+      </td>
+    </ng-container>
 
-              <ng-container matColumnDef="roomType">
-                  <th mat-header-cell *matHeaderCellDef> No of Hotels </th>
-                  <td mat-cell *matCellDef="let element">{{element.bookingDetails.length}} </td>
-                </ng-container>
-                <ng-container matColumnDef="status">
-                  <th mat-header-cell *matHeaderCellDef> Booking Status </th>
-                  <td mat-cell *matCellDef="let element">{{element.status}} </td>
-                </ng-container>
-                <ng-container matColumnDef="payment">
-                  <th mat-header-cell *matHeaderCellDef> Payment Status </th>
-                  <td mat-cell *matCellDef="let element">
-                      <span *ngFor="let pay of element.payment">
-                          <span  *ngIf="element.status === 'CANCELLED' && pay.transactionType === 'REFUND'">{{pay.transactionType}} {{pay.status}}</span>
-                          <span  *ngIf="element.status !== 'CANCELLED'">{{pay.status}}</span>
-                      </span> </td>
-                </ng-container>
-               
-            
-              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            </table>
+    <ng-container matColumnDef="roomType">
+      <th mat-header-cell *matHeaderCellDef>No of Hotels</th>
+      <td mat-cell *matCellDef="let element">
+        {{element.bookingDetails.length}}
+      </td>
+    </ng-container>
 
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef>Booking Status</th>
+      <td mat-cell *matCellDef="let element">
+        <span class="status-badge" [ngClass]="getStatusClass(element.status)">
+          {{element.status}}
+        </span>
+      </td>
+    </ng-container>
 
-            <div *ngIf="bookings.length === 0" class="no-booking-message">
-              <i class="fas fa-calendar-times"></i>
-              <p>No bookings found for the selected date or search criteria.</p>
-            </div>
+    <ng-container matColumnDef="payment">
+      <th mat-header-cell *matHeaderCellDef>Payment Status</th>
+      <td mat-cell *matCellDef="let element">
+        <span *ngFor="let pay of element.payment">
+          <span
+            class="payment-badge"
+            [ngClass]="getPaymentStatusClass(pay, element.status)"
+            *ngIf="element.status === 'CANCELLED' && pay.transactionType === 'REFUND'"
+          >
+            {{pay.transactionType}} {{pay.status}}
+          </span>
+          <span
+            class="payment-badge"
+            [ngClass]="getPaymentStatusClass(pay, element.status)"
+            *ngIf="element.status !== 'CANCELLED'"
+          >
+            {{pay.status}}
+          </span>
+        </span>
+      </td>
+    </ng-container>
 
-      </div>
-      <!-- Booking-Details -->
-    
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
 
+  <div *ngIf="bookings.length === 0" class="no-booking-message">
+    <i class="fas fa-calendar-times"></i>
+    <p>No bookings found for the selected date range or search criteria.</p>
+    <small *ngIf="startDate || endDate || searchText">
+      Try adjusting your filters or clearing the search.
+    </small>
   </div>
-</div>
-<!-- CONTEXT MENU-->
-<div #trigger="matMenuTrigger" style="visibility: hidden; position: fixed" [style.left]="obContextMenuPosition.x"
-[style.top]="obContextMenuPosition.y" [matMenuTriggerFor]="contextMenu"></div>
+</div> <!-- end booking-list -->
+
+<!-- CONTEXT MENU -->
+<div
+  #trigger="matMenuTrigger"
+  style="visibility: hidden; position: fixed"
+  [style.left]="obContextMenuPosition.x"
+  [style.top]="obContextMenuPosition.y"
+  [matMenuTriggerFor]="contextMenu"
+></div>
 
 <mat-menu #contextMenu="matMenu" #menu="matMenu">
-<span *ngFor="let item of actionCtxMenuList">
-  <button mat-menu-item class="orderbook_menu_button" (click)="onContextMenuItemClick(item)">
+  <span *ngFor="let item of actionCtxMenuList">
+    <button
+      mat-menu-item
+      class="orderbook_menu_button"
+      (click)="onContextMenuItemClick(item)"
+    >
       <div [class]="item.icon"></div>
- <!--  <img src="{{ '../../../../assets/images/sidebar-watchlist/' + item.icon }}" alt="" />--> 
-    <span>{{ item.title }}</span>
-  </button>
-</span>
+      <span>{{ item.title }}</span>
+    </button>
+  </span>
 </mat-menu>

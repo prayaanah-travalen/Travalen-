@@ -8,6 +8,7 @@ import { Hotel, HotelImage, RoomModel } from 'src/app/data-access/model/hotel.mo
 import { PriceSlabModel } from 'src/app/data-access/model/price-slab.model';
 import { HotelService } from 'src/app/data-access/services/hotel.service';
 import { UtilService } from 'src/app/data-access/services/utils.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-add-room',
@@ -55,7 +56,9 @@ export class AddRoomComponent implements OnInit {
     @Inject(DIALOG_DATA) public data: { hotelCode: number, room: RoomModel, action:string},
     private utilService: UtilService,
     private hotelService: HotelService,
-    private dialog: DialogRef) { }
+    private dialog: DialogRef,
+    private snackBar: MatSnackBar 
+    ) { }
 
   ngOnInit(): void {
     this.getPriceSlab();
@@ -137,6 +140,14 @@ export class AddRoomComponent implements OnInit {
     this.validate();
     if(!this.roomForm.valid){
       this.submitted = true;
+
+    //  toaster message for form validation failure
+    this.snackBar.open('Please fill in all required fields.', 'Dismiss', {
+      duration: 3000,
+      panelClass: ['error-snackbar']
+    });
+
+
       return false;
     }
    
@@ -168,14 +179,49 @@ export class AddRoomComponent implements OnInit {
     }
 
 
-    this.hotelService.saveRoom(req, this.roomImages).subscribe(resp=>{
-      if(resp.response !== null && resp.success === "SUCCESS") {
+  //   this.hotelService.saveRoom(req, this.roomImages).subscribe(resp=>{
+  //     if(resp.response !== null && resp.success === "SUCCESS") {
+  //       this.dialog.close();
+  //    }
+  //   })
+  //   this.submitted = false;
+  //   return true;
+  // }
+
+  
+  this.hotelService.saveRoom(req, this.roomImages).subscribe({
+    next: (resp) => {
+      if (resp.response !== null && resp.success === "SUCCESS") {
+        // Success Toaster Message
+        this.snackBar.open('Room saved successfully!', 'Dismiss', {
+          duration: 3000,
+          panelClass: ['success-snackbar']
+        });
         this.dialog.close();
-     }
-    })
-    this.submitted = false;
-    return true;
-  }
+      } else {
+        // Failure Toaster Message based on API response
+        this.snackBar.open('Failed to save room. Please try again.', 'Dismiss', {
+          duration: 3000,
+          panelClass: ['error-snackbar']
+        });
+      }
+    },
+    error: (err) => {
+      // Error Toaster Message for network or server errors
+      console.error('API Error:', err);
+      this.snackBar.open('An unexpected error occurred. Please try again later.', 'Dismiss', {
+        duration: 3000,
+        panelClass: ['error-snackbar']
+      });
+    }
+  });
+
+  this.submitted = false;
+  return true;
+}
+
+
+
 
   validate() {
     if(this.roomForm.get('priceSlab')?.getRawValue() <= 0) {
@@ -191,6 +237,11 @@ export class AddRoomComponent implements OnInit {
 
     return true;
   }
+
+
+
+
+
   
   deletedImage(event:number) {
     this.deletedImages.push(event);

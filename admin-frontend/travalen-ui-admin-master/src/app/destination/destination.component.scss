@@ -81,6 +81,211 @@
 //     margin-left: 30px;
 // }
 
+
+
+/* Container */
+
+
+
+// .Destination {
+//     width: 100%;
+//     min-height: 100vh;
+//     background-color: white;
+//     padding: 20px;
+// }
+
+
+// .heading-Destination {
+//     font-weight: bold;
+//     font-size: 21px;
+//     margin-top: 20px;
+// }
+
+
+// .outer {
+//     float: right;
+// }
+
+
+// .btn-Destination {
+//     width: 200px;
+//     height: 40px;
+//     color: white;
+//     background-color: #1EDD8D;
+//     border: none;
+//     outline: none;
+//     font-weight: bold;
+//     border-radius: 5px;
+//     margin-top: 20px;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     gap: 8px;
+//     cursor: pointer;
+// }
+
+// .btn-Destination img {
+//     width: 18px;
+//     height: 18px;
+// }
+
+
+// .labels {
+//     color: #98A2B3;
+//     font-size: 14px;
+// }
+
+
+// .text {
+//     width: 100%;
+//     height: 40px;
+//     border: none;
+//     outline: none;
+//     border-radius: 5px;
+//     margin-top: 10px;
+//     background-color: whitesmoke;
+//     padding-left: 15px;
+//     box-sizing: border-box;
+// }
+
+
+// .long-text {
+//     width: 100%;
+//     height: 22vh;
+//     border: none;
+//     outline: none;
+//     border-radius: 5px;
+//     background-color: whitesmoke;
+//     padding: 15px;
+//     box-sizing: border-box;
+//     overflow-y: auto;
+// }
+
+
+// .btn {
+//     float: right;
+// }
+
+
+// .btn-delete {
+//     width: 130px;
+//     height: 50px;
+//     border: 2px solid #e74c3c;
+//     outline: none;
+//     border-radius: 5px;
+//     color: #e74c3c; 
+//     font-weight: bold;
+//     background-color: white;
+//     margin-left: 30px;
+//     cursor: pointer;
+//     transition: all 0.3s ease;
+// }
+
+// .btn-delete:hover {
+//     background-color: #e74c3c; 
+//     color: white; 
+//     box-shadow: 0 4px 10px rgba(231, 76, 60, 0.3); 
+// }
+
+
+
+// .btn-edit {
+//     width: 100px;
+//     height: 50px;
+//     border: 2px solid #1EDD8D;
+//     outline: none;
+//     border-radius: 5px;
+//     color: #1EDD8D;
+//     font-weight: bold;
+//     background-color: white;
+//     cursor: pointer;
+//     transition: 0.3s;
+// }
+
+// .btn-edit:hover {
+//     background-color: #1EDD8D;
+//     color: white;
+// }
+
+
+// .add-destination-dialog {
+//     width: 90%;
+//     max-width: 400px;
+//     background-color: white;
+//     border-radius: 10px;
+//     padding: 20px;
+//     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+//     display: flex;
+//     flex-direction: column;
+//     gap: 15px;
+//     box-sizing: border-box;
+// }
+
+
+// .dialog-buttons {
+//     display: flex;
+//     justify-content: flex-end;
+//     gap: 10px;
+//     margin-top: 10px;
+// }
+
+// .dialog-buttons .btn-add {
+//     background-color: #1EDD8D;
+//     color: white;
+//     border: none;
+//     outline: none;
+//     padding: 10px 20px;
+//     font-weight: bold;
+//     border-radius: 5px;
+//     cursor: pointer;
+//     transition: 0.3s;
+// }
+
+// .dialog-buttons .btn-add:hover {
+//     background-color: #16b57a;
+// }
+
+// .dialog-buttons .btn-discard {
+//     background-color: #f0f0f0;
+//     color: #333;
+//     border: none;
+//     outline: none;
+//     padding: 10px 20px;
+//     font-weight: bold;
+//     border-radius: 5px;
+//     cursor: pointer;
+//     transition: 0.3s;
+// }
+
+// .dialog-buttons .btn-discard:hover {
+//     background-color: #e0e0e0;
+// }
+
+
+// @media (max-width: 576px) {
+//     .btn-Destination {
+//         width: 100%;
+//         justify-content: center;
+//     }
+
+//     .add-destination-dialog {
+//         width: 95%;
+//         padding: 15px;
+//     }
+
+//     .dialog-buttons {
+//         flex-direction: column;
+//         gap: 10px;
+//     }
+
+//     .dialog-buttons .btn-add,
+//     .dialog-buttons .btn-discard {
+//         width: 100%;
+//     }
+// }
+
+
+
 /* Container */
 .Destination {
     width: 100%;
@@ -94,11 +299,14 @@
     font-weight: bold;
     font-size: 21px;
     margin-top: 20px;
+    margin-bottom: 0;
 }
 
 /* Add Destination button container */
 .outer {
-    float: right;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
 }
 
 /* Add Destination button */
@@ -111,12 +319,16 @@
     outline: none;
     font-weight: bold;
     border-radius: 5px;
-    margin-top: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-Destination:hover {
+    background-color: #25c783;;
 }
 
 .btn-Destination img {
@@ -124,10 +336,38 @@
     height: 18px;
 }
 
+/* Destination Card */
+.destination-card {
+    margin-bottom: 30px;
+    padding: 20px 0;
+}
+
+/* Image Container */
+.image-container {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 8px;
+    background-color: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.destination-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
 /* Labels */
 .labels {
     color: #98A2B3;
     font-size: 14px;
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
 }
 
 /* Text input */
@@ -137,16 +377,21 @@
     border: none;
     outline: none;
     border-radius: 5px;
-    margin-top: 10px;
     background-color: whitesmoke;
     padding-left: 15px;
     box-sizing: border-box;
+    font-size: 14px;
+}
+
+.text:focus {
+    background-color: #f0f0f0;
+    box-shadow: 0 0 0 2px rgba(30, 221, 141, 0.2);
 }
 
 /* Long text input */
 .long-text {
     width: 100%;
-    height: 22vh;
+    min-height: 120px;
     border: none;
     outline: none;
     border-radius: 5px;
@@ -154,34 +399,36 @@
     padding: 15px;
     box-sizing: border-box;
     overflow-y: auto;
+    font-size: 14px;
+    line-height: 1.5;
 }
 
-/* Buttons container */
-.btn {
-    float: right;
+/* Button Container */
+.btn-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 15px;
 }
 
 /* Delete button */
 .btn-delete {
     width: 130px;
     height: 50px;
-    border: 2px solid #e74c3c; /* nice red border */
+    border: 2px solid red;
     outline: none;
     border-radius: 5px;
-    color: #e74c3c; /* matching red text */
+    color: red;
     font-weight: bold;
     background-color: white;
-    margin-left: 30px;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
 .btn-delete:hover {
-    background-color: #e74c3c; /* bright red background on hover */
-    color: white; /* white text on hover */
-    box-shadow: 0 4px 10px rgba(231, 76, 60, 0.3); /* subtle shadow for depth */
+    background-color: red;
+    color: white;
+    box-shadow: 0 4px 10px rgba(255, 0, 0, 0.3);
 }
-
 
 /* Edit button (if used) */
 .btn-edit {
@@ -195,6 +442,7 @@
     background-color: white;
     cursor: pointer;
     transition: 0.3s;
+    margin-right: 10px;
 }
 
 .btn-edit:hover {
@@ -202,79 +450,94 @@
     color: white;
 }
 
-/* Small Add/Discard Dialog Styling */
-.add-destination-dialog {
-    width: 90%;
-    max-width: 400px;
-    background-color: white;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    box-sizing: border-box;
-}
-
-/* Dialog buttons */
-.dialog-buttons {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.dialog-buttons .btn-add {
-    background-color: #1EDD8D;
-    color: white;
+/* Separator */
+.separator {
     border: none;
-    outline: none;
-    padding: 10px 20px;
-    font-weight: bold;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.3s;
+    border-top: 1px solid #e0e0e0;
+    margin: 20px 0;
 }
 
-.dialog-buttons .btn-add:hover {
-    background-color: #16b57a;
-}
-
-.dialog-buttons .btn-discard {
-    background-color: #f0f0f0;
-    color: #333;
-    border: none;
-    outline: none;
-    padding: 10px 20px;
-    font-weight: bold;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.dialog-buttons .btn-discard:hover {
-    background-color: #e0e0e0;
-}
-
-/* Responsive adjustments */
-@media (max-width: 576px) {
-    .btn-Destination {
-        width: 100%;
-        justify-content: center;
-    }
-
-    .add-destination-dialog {
-        width: 95%;
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+    .Destination {
         padding: 15px;
     }
-
-    .dialog-buttons {
-        flex-direction: column;
-        gap: 10px;
+    
+    .heading-Destination {
+        font-size: 25px;
+        text-align: center;
+        margin-bottom: 15px;
     }
-
-    .dialog-buttons .btn-add,
-    .dialog-buttons .btn-discard {
+    
+    .outer {
+        justify-content: center;
+        margin-top: 10px;
+    }
+    
+    .btn-Destination {
         width: 100%;
+        max-width: 250px;
+    }
+    
+    .destination-card {
+        margin-bottom: 25px;
+        padding: 15px 0;
+    }
+    
+    .image-container {
+        height: 150px;
+        margin-bottom: 20px;
+    }
+    
+    .long-text {
+        min-height: 100px;
+    }
+    
+    .btn-container {
+        justify-content: center;
+    }
+    
+    .btn-delete {
+        width: 120px;
+        height: 45px;
+    }
+}
+
+@media (max-width: 576px) {
+    .Destination {
+        padding: 10px;
+    }
+    
+    .heading-Destination {
+        font-size: 16px;
+    }
+    
+    .btn-Destination {
+        width: 100%;
+        font-size: 14px;
+    }
+    
+    .image-container {
+        height: 120px;
+    }
+    
+    .text {
+        height: 35px;
+        font-size: 13px;
+    }
+    
+    .long-text {
+        min-height: 80px;
+        font-size: 13px;
+    }
+    
+    .btn-delete {
+        width: 100px;
+        height: 40px;
+        font-size: 13px;
+    }
+    
+    .labels {
+        font-size: 13px;
     }
 }

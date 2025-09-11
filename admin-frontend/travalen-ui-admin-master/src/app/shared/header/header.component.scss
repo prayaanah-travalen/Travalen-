@@ -345,8 +345,11 @@ li{
 /* Small devices (mobile) */
 @media (max-width: 768px) {
   .header .display-flex {
-    flex-direction: column;
-    align-items: flex-start;
+    // flex-direction: column;
+    flex-direction: row; 
+
+    // align-items: flex-start;
+    flex-wrap: wrap;
     gap: 10px;
   }
 
