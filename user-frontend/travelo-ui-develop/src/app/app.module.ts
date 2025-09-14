@@ -5,6 +5,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 // Routing
 import { AppRoutingModule } from './app-routing.module';
+import { RouterModule } from '@angular/router'; // <-- needed for router-outlet
 
 // Material & UI
 import { MatDialogModule } from '@angular/material/dialog';
@@ -16,7 +17,6 @@ import { DemoComponent } from './demo/demo.component';
 
 // Shared Modules
 import { AppLoaderModule } from './shared/app-loader/app-loader.module';
-// import { GoogleMapComponent } from './shared/google-map/google-map.component'; // optional: declare in SharedModule if needed
 import { AlertComponent } from './shared/alert/alert.component';
 
 // Feature Modules
@@ -28,33 +28,36 @@ import { LoaderService } from './shared/app-loader/services/loader.service';
 import { LoaderInterceptorService } from './shared/app-loader/services/loader-interceptor.service';
 
 // Google Maps
-import { AgmCoreModule } from '@agm/core'; // or migrate to @angular/google-maps
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
     AppComponent,
     DemoComponent,
-    // AlertComponent, // if used in AppComponent template
-    // GoogleMapComponent, // should ideally be in a SharedModule
+     // declared if used in AppComponent template
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    RouterModule, // <-- needed for <router-outlet>
     MatDialogModule,
     HttpClientModule,
     AppLoaderModule,
     ToastrModule.forRoot(),
 
+
+    AlertComponent,
     // Feature Modules
     SearchPageModule,
     HotelDetailsModule,
 
-    // Google Maps Module
-    AgmCoreModule.forRoot({
-      apiKey:'AIzaSyAvcDy5ZYc2ujCS6TTtI3RYX5QmuoV8Ffw'
-    }),
+    // Google Maps Module with generic type fix
+  //   AgmCoreModule.forRoot({
+  //     apiKey: 'AIzaSyAvcDy5ZYc2ujCS6TTtI3RYX5QmuoV8Ffw'
+  //   }) as unknown as AgmCoreModule, 
   ],
+
   providers: [
     LoaderService,
     {
