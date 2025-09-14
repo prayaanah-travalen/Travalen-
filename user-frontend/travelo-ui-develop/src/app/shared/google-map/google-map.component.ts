@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AgmCoreModule, MouseEvent } from '@agm/core';
+//import { AgmCoreModule, MouseEvent } from '@agm/core';
 import { CommonModule, NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
