@@ -13,7 +13,7 @@ import { AppLoaderModule } from './shared/app-loader/app-loader.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ToastrModule } from 'ngx-toastr';
-import { AgmCoreModule } from '@agm/core';
+//import { AgmCoreModule } from '@agm/core';
 import { GoogleMapComponent } from './shared/google-map/google-map.component';
 import { AlertComponent } from './shared/alert/alert.component';
 
@@ -38,11 +38,11 @@ import { AlertComponent } from './shared/alert/alert.component';
     AppLoaderModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    AgmCoreModule.forRoot({
+ //   AgmCoreModule.forRoot({
       // please get your own API key here:
       // https://developers.google.com/maps/documentation/javascript/get-api-key?hl=en
-      apiKey: 'AIzaSyAvcDy5ZYc2ujCS6TTtI3RYX5QmuoV8Ffw',
-    }),
+     // apiKey: 'AIzaSyAvcDy5ZYc2ujCS6TTtI3RYX5QmuoV8Ffw',
+    //}),
   ],
   providers: [ LoaderService,
     {
