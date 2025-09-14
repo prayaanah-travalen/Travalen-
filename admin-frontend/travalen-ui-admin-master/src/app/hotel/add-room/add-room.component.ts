@@ -175,9 +175,11 @@ export class AddRoomComponent implements OnInit {
    
     let req= {
       hotelCode: this.data.hotelCode,
-      roomDetails: room
-    }
+      roomDetails: room,
+     
 
+    }
+    console.log('Payload being sent:', req);
 
   //   this.hotelService.saveRoom(req, this.roomImages).subscribe(resp=>{
   //     if(resp.response !== null && resp.success === "SUCCESS") {

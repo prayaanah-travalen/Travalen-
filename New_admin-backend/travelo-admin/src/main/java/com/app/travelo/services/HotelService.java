@@ -11,6 +11,9 @@ public interface HotelService {
     List<HotelDto> getHotels();
 
     ResponseDto<HotelRoomDto>  saveRoom(HotelRoomReqDto room, List<MultipartFile> roomImages);
+    
+    
+//    ResponseDto<HotelRoomSaveResponseDto> saveRoom(HotelRoomReqDto room, List<MultipartFile> roomImages);
 
     HotelDto getHotelById(Long id);
 

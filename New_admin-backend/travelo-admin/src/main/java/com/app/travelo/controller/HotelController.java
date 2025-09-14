@@ -26,8 +26,20 @@ public class HotelController {
 
     @PostMapping(value="/room/save",  consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE })
     public  ResponseEntity<ResponseDto<HotelRoomDto> > saveRoom(@RequestPart("room") HotelRoomReqDto room, @RequestPart(name="roomImages", required = false) List<MultipartFile> roomImages) {
-        return new ResponseEntity<>( hotelService.saveRoom(room, roomImages), HttpStatus.OK);
+        
+   	return new ResponseEntity<>( hotelService.saveRoom(room, roomImages), HttpStatus.OK);
+    	
+
     }
+    
+//    @PostMapping(value="/room/save", consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE })
+//    public ResponseEntity<ResponseDto<HotelRoomSaveResponseDto>> saveRoom(
+//            @RequestPart("room") HotelRoomReqDto room,
+//            @RequestPart(name="roomImages", required = false) List<MultipartFile> roomImages) {
+//
+//        return ResponseEntity.ok(hotelService.saveRoom(room, roomImages));
+//    }
+
 
     @PostMapping(value="/delete")
     public  ResponseEntity<ResponseDto<String>> deleteHotel(@RequestBody HotelRequestDto hotel) {

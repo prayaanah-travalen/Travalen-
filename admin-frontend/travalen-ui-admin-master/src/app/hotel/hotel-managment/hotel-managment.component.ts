@@ -518,3 +518,4 @@ export class HotelManagmentComponent implements OnInit {
     });
   }
 }
+

@@ -32,7 +32,11 @@
     </div> 
   </div>
 </div> -->
+
 <!-- first-section -->
+
+
+
 <div class="first-section">
   <nav class="navbar navbar-expand-lg">
     <div class="container">
@@ -81,7 +85,7 @@
   </div>
 </div>
 
-<!-- second-section -->
+
 <div class="second-section">
   <div class="container">
     <div class="row">
@@ -115,7 +119,6 @@
   </div>
 
 
-  <!-- popular-destination -->
 
   <div class="contents">
     <p class="mini-heading" style="font-size: 25px;">Explore Top <span style="color: #1EDD8D; padding-left: 5px; font-size: 25px;">Destinations</span></p>
@@ -148,7 +151,7 @@
     </div>
   </div>
 
-  <!-- bottom-section -->
+ 
 
   <div class="container">
     <p class="bottom-main-heading" style="font-size: 25px;">We Offer <span style="color: #1EDD8D; padding-left: 5px;">Best Services</span></p>
@@ -215,4 +218,216 @@
       </div>
     </div>
   </div>
-</div>
+</div> 
+
+
+<!-- navbar.component.html -->
+
+<!-- 
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" [class.scrolled]="isScrolled">
+  <div class="container">
+   
+    <a class="navbar-brand" href="#">
+      <img src="./assets/image/logo.png" class="logo" alt="Logo">
+    </a>
+
+    
+    <button 
+      class="navbar-toggler" 
+      type="button" 
+      (click)="toggleMobileMenu()"
+      [attr.aria-expanded]="isMobileMenuOpen"
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+   
+    <div class="collapse navbar-collapse justify-content-end" [class.show]="isMobileMenuOpen">
+      <ul class="navbar-nav me-3">
+        <li class="nav-item">
+          <a 
+            class="nav-link" 
+            [class.active]="activeSection === 'about'" 
+            href="#about"
+            (click)="scrollToSection('about', $event)">
+            <i class="fas fa-info-circle me-1"></i>About
+          </a>
+        </li>
+        <li class="nav-item">
+          <a 
+            class="nav-link" 
+            [class.active]="activeSection === 'top-destinations'" 
+            href="#top-destinations"
+            (click)="scrollToSection('top-destinations', $event)">
+            <i class="fas fa-map-marked-alt me-1"></i>Top Destinations
+          </a>
+        </li>
+        <li class="nav-item">
+          <a 
+            class="nav-link" 
+            [class.active]="activeSection === 'services'" 
+            href="#services"
+            (click)="scrollToSection('services', $event)">
+            <i class="fas fa-concierge-bell me-1"></i>Services
+          </a>
+        </li>
+      </ul>
+
+      <a 
+        href="#list-hotel" 
+        class="btn btn-primary"
+        (click)="scrollToSection('list-hotel', $event)">
+        <i class="fas fa-plus-circle me-2"></i>List Your Hotel
+      </a>
+    </div>
+  </div>
+</nav>
+
+
+<section class="hero-section">
+  <div class="hero-overlay"></div>
+  <div class="hero-content text-center">
+    <h1>Explore the World with Travalen</h1>
+    <p class="lead">Discover amazing places and unforgettable experiences</p>
+    <a href="#top-destinations" class="btn btn-primary mt-3">Explore Now</a>
+  </div>
+</section>
+
+
+ <section class="about" id="about">
+  <div class="about-container">
+      <div class="about-content">
+          <h2>About <span class="highlight">Us</span></h2>
+          <p>travalen.in is a new age online travel portal to provide budget & economical holidays for customers. travalen.in is a part of Prayaanah Holidays Pvt Ltd. which started its operations from 2015 onwards.</p>
+          <p>Prayaanah Holidays Pvt Ltd. is established towards the point of providing an all end customized package for groups & individuals especially domestic tourism.</p>
+          
+          <div class="about-stats">
+              <div class="stat-item">
+                  <div class="stat-number">8+</div>
+                  <div class="stat-text">Years Experience</div>
+              </div>
+              <div class="stat-item">
+                  <div class="stat-number">5000+</div>
+                  <div class="stat-text">Happy Customers</div>
+              </div>
+              <div class="stat-item">
+                  <div class="stat-number">50+</div>
+                  <div class="stat-text">Destinations</div>
+              </div>
+          </div>
+      </div>
+      <div class="about-icons">
+          <div class="about-icon">
+              <i class="fas fa-ship"></i>
+              <h3>Houseboat Cruises</h3>
+          </div>
+          <div class="about-icon">
+              <i class="fas fa-mountain"></i>
+              <h3>Mountain Treks</h3>
+          </div>
+          <div class="about-icon">
+              <i class="fas fa-utensils"></i>
+              <h3>Local Cuisine</h3>
+          </div>
+          <div class="about-icon">
+              <i class="fas fa-spa"></i>
+              <h3>Ayurveda Retreats</h3>
+          </div>
+      </div>
+  </div>
+</section>
+
+
+
+    <section class="destinations" id="destinations">
+      <div class="destinations-container">
+          <div class="section-header">
+              <h2>Explore Top <span class="highlight">Destinations</span></h2>
+              <p>Discover the most beautiful places in Kerala with our curated selection of destinations</p>
+          </div>
+          <div class="destinations-carousel">
+              <div class="destination-card">
+                  <div class="destination-img">
+       
+                    <img src="assets/images/Rectangle 31.png" alt="Munnar" loading="lazy">
+                  </div>
+                  <div class="destination-content">
+                      <h3>Munnar</h3>
+                      <p>Beautiful hill station with tea plantations</p>
+                      <div class="destination-meta">
+                          <div class="destination-price">From ₹5,999</div>
+                          <div class="destination-rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.8</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="destination-card">
+                <div class="destination-img">
+                    <img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1092&q=80" alt="Alleppey" loading="lazy">
+                  </div>
+                  <div class="destination-content">
+                      <h3>Alleppey</h3>
+                      <p>Famous for its backwaters and houseboats</p>
+                      <div class="destination-meta">
+                          <div class="destination-price">From ₹4,499</div>
+                          <div class="destination-rating">
+                              <i class="fas fa-star"></i>
+                              <span>4.7</span>
+                            </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="destination-card">
+                      <div class="destination-img">
+                          <img src="https://images.unsplash.com/photo-1588416499018-d8c621b1b3cf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Kumarakom" loading="lazy">
+                          
+                    </div>
+                    <div class="destination-content">
+                        <h3>Kumarakom</h3>
+                        <p>Bird sanctuary and serene backwaters</p>
+                        <div class="destination-meta">
+                            <div class="destination-price">From ₹6,299</div>
+                            <div class="destination-rating">
+                                <i class="fas fa-star"></i>
+                                <span>4.9</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="destination-card">
+                  <div class="destination-img">
+                      <img src="https://images.unsplash.com/photo-1626010053516-10453e13a75a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Wayanad" loading="lazy">
+                  </div>
+                  <div class="destination-content">
+                      <h3>Wayanad</h3>
+                      <p>Lush green forests and wildlife</p>
+                      <div class="destination-meta">
+                          <div class="destination-price">From ₹5,499</div>
+                          <div class="destination-rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.6</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="destination-card">
+              <div class="destination-img">
+                  <img src="https://images.unsplash.com/photo-1612495035616-4b7716ad46d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Kovalam" loading="lazy">
+                </div>
+                <div class="destination-content">
+                    <h3>Kovalam</h3>
+                    <p>Famous beach with lighthouse</p>
+                    <div class="destination-meta">
+                        <div class="destination-price">From ₹3,999</div>
+                        <div class="destination-rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.5</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </section> -->

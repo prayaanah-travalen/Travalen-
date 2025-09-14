@@ -158,6 +158,8 @@ public class HotelServiceImpl implements HotelService {
 
         return hotels.stream().map(this::toHotelDto).collect(Collectors.toList());
     }
+    
+    
 
     @Override
     @Transactional
@@ -167,14 +169,14 @@ public class HotelServiceImpl implements HotelService {
             HotelEntity hotelEntity = hotelRepo.getHotelsById(room.getHotelCode());
 
             if(Objects.nonNull(hotelEntity)) {
-                deletedRoomImages(room.getRoomDetails().getDeletedImages()); /* delete room images **/
+                deletedRoomImages(room.getRoomDetails().getDeletedImages()); 
 
                 HotelRoomEntity roomEntity =  toRoomEntity(room, hotelEntity, roomImages);
 
                 List<RoomImageEntity> images = new ArrayList<>();
                 if(Objects.nonNull(roomImages)) images = toRoomImageEntity(roomImages, roomEntity);
 
-                /* update existing room **/
+                
                 if(Objects.nonNull(room.getRoomDetails().getHotelRoomId())) {
                     List<RoomTagEntity> roomTags = roomTagRepo.findByRoomCode(room.getRoomDetails().getHotelRoomId());
                     roomTagRepo.deleteAll(roomTags);
@@ -197,7 +199,7 @@ public class HotelServiceImpl implements HotelService {
                 }
 
                 roomEntity.setRoomImages(images);
-                /* end of update existing room **/
+              
 
                 HotelRoomEntity savedRooms = hotelRoomRepo.save(roomEntity);
                 response.setResponse( toHotelRoomDto(savedRooms));
@@ -213,6 +215,32 @@ public class HotelServiceImpl implements HotelService {
         }
         return response;
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     @Override
     public HotelDto getHotelById(Long id)  {
@@ -240,6 +268,7 @@ public class HotelServiceImpl implements HotelService {
             response.setErrorCode("500");
             log.debug(Arrays.toString(e.getStackTrace()));
         }
+        
 
         return response;
     }

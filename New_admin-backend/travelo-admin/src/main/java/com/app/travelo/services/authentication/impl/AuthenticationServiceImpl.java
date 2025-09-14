@@ -93,9 +93,13 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             if(Objects.isNull(user)) {
                 Set<HotelEntity> hotel = new HashSet<>();
 
-                hotel.add( HotelEntity.builder().hotelName(req.getHotelName()).active(false).build());
+                // done for checking login
+//                hotel.add( HotelEntity.builder().hotelName(req.getHotelName()).active(false).build());
                 
 
+                hotel.add(HotelEntity.builder().hotelName(req.getHotelName()).availability(false).build());
+                
+                
                 user = UserEntity.builder()
                         .userName(req.getFirstName())
                         .emailId(req.getEmailId())
