@@ -1,0 +1,47 @@
+.policies-modal
+{
+    // width: 60%;
+    height: 500px;
+    background-color: white;
+}
+.o
+{
+    width: 30%;
+}
+.terms
+{
+    margin-left: 25px;
+    width: 80px;
+    color: #3C3C3C;
+    font-size: 25px;
+    font-weight: 500;
+}
+.back
+{
+    color: #969696;
+    font-size: 15px;
+    font-weight: 400;
+    margin-left: 20px;
+    cursor: pointer;
+}
+.policies
+{
+    margin-left: 40px;
+}
+.para
+{
+    
+    color: #969696;
+}
+
+.title {
+    font-size: 20px;
+}
+
+.policies-modal:focus{
+    outline: none !important;
+}
+
+.policies-modal:focus-visible{
+    outline: none !important;
+}

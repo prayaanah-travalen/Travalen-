@@ -1,0 +1,293 @@
+<!-- navbar -->
+<app-navbar></app-navbar>
+<form [formGroup]="bookingForm">
+    <!-- payment-select-section -->
+    <div class="container-fluid">
+        <div class="content">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="pay-booking">
+                        <div class="row">
+                            <div class="col-md">
+                                <a>
+                                    <p class="location mt-1"><i class="fa-solid fa-money-bill-transfer"></i> Budget </p>
+                                </a>
+                            </div>
+
+                            <div class="col-md" *ngFor="let price of priceSlabs">
+                                <div class="price-slab action ">
+                                    <label>
+                                        <input type="checkbox" [value]="price.id"
+                                            [checked]="selectedPriceSlabIds.indexOf(price.id) >= 0" disabled>
+                                        <span><i class="fa-solid fa-indian-rupee-sign"></i>{{price.priceSlab}}</span>
+                                    </label>
+                                </div>
+
+                            </div>
+                            <!-- <div class="col-md">
+                        <a>
+                        <p class="location"><i class="fa-solid fa-pencil"></i></p>
+                        </a>
+                    </div> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 text-right">
+                    <p class="path"><a [routerLink]="['/home']">Home</a> <i class="fa-solid fa-chevron-left"></i> <a [routerLink]="['/hotels']">Hotels in
+                            {{selectedLocation}} </a> <i class="fa-solid fa-chevron-left"></i> <span *ngIf="hotel">{{hotel.hotelName}}</span></p>
+                </div>
+            </div>
+
+            <!-- booking -->
+            <div class="booking">
+                <div class="">
+                    <div class="row">
+                        <div class="col-md">
+                            <a>
+                                <p class="location"><i class="fa-solid fa-location-dot"></i> Location </p>
+                            </a>
+                            <div class="loc-chips">
+                                <mat-chip-list #chipList>
+                                    <mat-chip *ngFor="let location of searchInput?.location" [selectable]="selectable"
+                                        [removable]="removable">
+                                        {{location.location}}
+                                    </mat-chip>
+                                </mat-chip-list>
+                            </div>
+                        </div>
+                        <div class="col-md">
+                            <a>
+                                <p class="location"><i class="fa-solid fa-calendar-days"></i> Check in </p>
+                            </a>
+                            <div class="selected-disp">{{searchInput?.checkIn}}</div>
+                        </div>
+                        <div class="col-md">
+                            <a>
+                                <p class="location"><i class="fa-solid fa-calendar-days"></i> Check Out </p>
+                            </a>
+                            <div class="selected-disp">{{searchInput?.checkOut}}</div>
+                        </div>
+                        <div class="col-md">
+                            <a>
+                                <p class="location"><i class="fa-solid fa-user"></i> No. Guests </p>
+                            </a>
+                            <div class="selected-disp">
+                                <span class="guests">{{searchInput?.adults}} Adults</span>
+                                <span>{{searchInput?.children}} Child<span
+                                        *ngIf="searchInput && searchInput.children && searchInput.children > 1">ren</span></span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <!-- left-body-section -->
+                <div class="col-12 col-lg-5 mb-3">
+                    <div class="carousel-item active">
+                        <img [src]="selectedHotelImg" class="d-block htl-img-w" alt="...">
+                    </div>
+                    <!-- <div class="curosel">
+                        <div id="carouselExample" class="carousel slide">
+                            <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img [src]="selectedHotelImg" class="d-block htl-img-w" alt="...">
+                            </div>
+                            
+                            </div>
+            
+                        </div>
+                    </div> -->
+                </div>
+                <div class="col-12 col-lg-1  htl-images">
+                    <div *ngFor="let image of hotel?.images">
+                        <img [src]="image.image" class="carosel-img" (click)="selectedHotelImg = image.image">
+                    </div>
+
+                </div>
+                <!-- Right-body-section -->
+                <div class="col-12 col-lg-6" *ngIf="hotel && hotel !== null">
+                    <div class="right-body-section">
+                        <p class="heading-whispering">{{hotel.hotelName}}</p>
+                        <p class="heading-whispering-rating">{{hotel.starRating ? hotel.starRating : 0}}</p>
+                        <div class="cards-propety">
+                            <p class="cards-propety-location"><i class="fa-solid fa-location-dot"></i>
+                                {{hotel.location.location}} </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-lg mb-4">
+                            <div class="box">
+                                <p class="box-heading">About the hotel</p>
+                                <p class="box-content"> {{hotel.about}}
+
+                                    {{hotel.websiteLink}} </p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-3">
+                            <div>
+                                <img src="./assets/image/Rectangle 47.png" class="map-img">
+                                <!-- <app-google-map></app-google-map> -->
+                            </div>
+                            <div>
+                                <button type="button" class="btn btn-outline-primary" (click)="picker.open()">
+                                    <span
+                                        *ngIf="bookingForm.value.checkIn === '' || bookingForm.value.checkOut === ''">Select
+                                        Dates</span>
+                                    <span
+                                        *ngIf="bookingForm.value.checkIn !== '' && bookingForm.value.checkOut !== ''">{{bookingForm.value.checkIn
+                                        | date}}
+                                        - {{bookingForm.value.checkOut | date}}</span>
+                                </button>
+                                <mat-form-field>
+                                    <!-- <mat-label>Enter a date range</mat-label> -->
+                                    <mat-date-range-input [rangePicker]="picker" [min]="tillDateDisable"
+                                        [max]="maxDateEnable">
+                                        <input matStartDate placeholder="Start date" formControlName="checkIn"
+                                            [min]="tillDateDisable" [max]="maxDateEnable">
+                                        <input matEndDate placeholder="End date" formControlName="checkOut"
+                                            [min]="tillDateDisable" [max]="maxDateEnable">
+                                    </mat-date-range-input>
+                                    <!-- <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint> -->
+                                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-date-range-picker #picker></mat-date-range-picker>
+                                </mat-form-field>
+                            </div>
+                            <div>
+                                <button type="button" class="btn btn-outline-secondary" (click)="addToList()">Add to
+                                    List</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-md">
+                    <div class="amenity-container">
+                        <span class="amenity mr-10">
+                            Amenity
+                            <!-- <p class="amenity">Amenity</p> -->
+                        </span>
+                        <span class="mr-10 fecility-icon" *ngFor="let amnty of hotel?.amenities">
+                            <i class="fa-solid fa-utensils"></i> {{amnty}}
+                            <!-- <a>
+                                <p class="fecility-icon"><i class="fa-solid fa-utensils"></i> {{amnty}} </p>
+                            </a> -->
+                        </span>
+
+                        <!-- <span class="">
+                            <p class="see-more">See more</p>
+                        </span> -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- select-room-portion -->
+            <div class="select-room-portion">
+                <p class="select-room">Select Room</p>
+                <div class="row">
+                    <div class="col-12 col-lg-6">
+                        <div *ngFor="let room of hotel?.rooms"
+                            [ngClass]="room.noOfAvailableRooms === 0 ? 'selected-room' : 'selected-room'">
+                            <div>
+                                <div class="row">
+                                    <div class="col-12 col-lg-4"><img
+                                            [src]="room.roomImages.length ? room.roomImages[0].image : './assets/image/Group 102.png'"
+                                            class="selected-room-img"></div>
+                                    <div class="col-12 col-lg-8">
+                                        <div class="cottage-heading p-2">
+                                            <p class="cottage">{{room.roomName}}</p>
+                                            <button type="button" class="btn btn-primary btn-sm"
+                                                (click)="selectRoom(room)"
+                                                *ngIf="(!room.noOfSelectedRooms || room.noOfSelectedRooms == 0) && room.noOfAvailableRooms > 0">Select
+                                                Room</button>
+                                            <div *ngIf="room.noOfSelectedRooms && room.noOfSelectedRooms > 0"
+                                                class="room-add-sub">
+                                                <button (click)="decrement(room)">-</button>
+                                                <input type="text" [value]="room.noOfSelectedRooms" readonly>
+                                                <button (click)="increment(room)">+</button>
+                                            </div>
+                                            <div class="display-flex">
+                                                <div class="add-on" *ngFor="let tag of room.roomTags">{{tag |
+                                                    titlecase}}</div>
+                                            </div>
+                                            <div class="display-flex mt-3">
+                                                <div class="add-on" *ngFor="let amnty of room.amenities">
+                                                    <i class="fa-solid {{getIconClass(amnty)}}"></i>{{amnty |
+                                                    titlecase}}
+                                                </div>
+                                                <!-- <div class="col-md"><p class="more">See more</p></div> -->
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="col-12 col-lg-6">
+                        <div class="selected-room">
+                            <p class="near-destination">Near By Popular Destinations</p>
+                            <div class="destination-details" *ngFor="let dest of popularDest">
+                                <div class="row">
+                                    <div class="col-12 col-lg-3">
+                                        <img [src]="dest.image" class="destination-img">
+                                    </div>
+                                    <div class="col-12 col-lg-9">
+                                        <div class="display-flex space-between">
+                                            <div class="destination-content">
+                                                {{dest.description}}
+
+                                            </div>
+                                            <!-- <div class="distance">5 KM</div> -->
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- <div class="user">
+                            <p class="user-heading">User Ratings</p>
+                            <div class="destination-details">
+                                <div class="row">
+                                    <div class="col-12 col-lg-3">
+                                        <p class="user-rating">4.6</p>
+                                    </div>
+                                    <div class="col-12 col-lg-3">
+                                        <p class="excellent">Excellent </p>
+                                        <p class="excellent-review">103 reviews 95 ratings</p>
+                                    </div>
+                                    <div class="col-12 col-lg-6">
+                                        <p class="destination-content">perspiciatis unde omnis iste natus error sit
+                                            voluptatem accusantium doloremque laudantium, toSed ut perspiciatis unde omnis
+                                            iste natus error sit voluptatem accusantium </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</form>
+<app-reservation *ngIf="bookingReq"></app-reservation>
+
+<!-- Popular destination -->
+<app-popular-destination></app-popular-destination>
+
+<!-- get in touch section -->
+<app-get-in-touch></app-get-in-touch>
+
+<!-- footer -->
+<app-footer></app-footer>

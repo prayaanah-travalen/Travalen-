@@ -1,0 +1,86 @@
+@import '@angular/cdk/overlay-prebuilt.css';
+// @import "@font/nunito";
+
+.error {
+    border: 1px solid red !important;
+}
+.error-text{
+    color: red;
+}
+html, body { height: 100%; }
+body { 
+    margin: 0;
+    // font-family: Roboto, "Helvetica Neue", sans-serif; 
+    // font-family: var(--fontFamily-nunito);
+    // font-family: 'Nunito' !important;
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+body {
+    font-family: 'Nunito' !important;
+}
+
+.display-flex {
+    display: flex;
+}
+
+.space-between {
+    justify-content: space-between;
+}
+
+.mr-10 {
+    margin-right: 10px;
+}
+
+.pl-0 {
+    padding-left: 0;
+}
+.pr-10 {
+    padding-right: 10px ;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.path a {
+    color: #1EDD8D !important;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.path {
+    font-size: 15px !important;
+    color: #969696;
+}
+
+.text-right {
+
+    text-align: right;
+}
+
+.pull-right {
+    float: right;
+}
+
+.text-left{
+    text-align: left;
+}
+
+.text-right{
+    text-align: right;
+}
+
+::ng-deep .cdk-dialog-container:focus{
+    outline: none !important;
+}
+
+.f-italic {
+    font-style: italic;
+}
+
+.path i {
+    margin-left: 5px;
+    font-size: 13px;
+}
+

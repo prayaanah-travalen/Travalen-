@@ -1,0 +1,51 @@
+.heading {
+    color: #3c3c3c;
+    font-size: 25px;
+    // padding-left: 60px;
+    font-weight: bold;
+    padding-top: 30px;
+    margin: 0;
+  }
+  .mini-heading {
+    // padding-left: 60px;
+    color: #969696;
+    font-size: 18px;
+    padding-bottom: 20px;
+    padding-top: 15px;
+  }
+  .popular-img {
+    width: 300px;
+    height: 250px;
+    border-radius: 10px;
+  }
+  .contents {
+    // width: 98%;
+    padding-bottom: 50px;
+    margin-bottom: 100px;
+    margin: 0 30px;
+    
+  }
+  .carrousel {
+    display: grid;
+    grid-auto-flow: column;
+    scroll-behavior: auto;
+    gap: 1.2rem;
+    overflow-y: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    // margin-left: 50px;
+  }
+  .carrousel::-webkit-scrollbar {
+    display: none;
+  }
+  .card {
+    scroll-snap-align: start;
+    border-radius: 30px;
+    min-height: 250px;
+    min-width: 300px;
+    display: flex;
+    // align-items: center;
+    justify-content: center;
+    border: none;
+  }

@@ -1,0 +1,26 @@
+.policy_container{
+    background: #fff;
+   
+    // padding: 20px;
+}
+
+.content {
+    max-height: 450px;
+    overflow: auto;
+}
+
+// h3{
+//     font-weight: 700;
+// }
+
+a{
+    cursor: pointer;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  .head{
+    border-bottom: 1px solid #8080802e;
+  }

@@ -1,0 +1,83 @@
+// get in touch section
+.get-in-touch {
+    background: url("~src/assets/image/Rectangle 29.svg") no-repeat center;
+    // height: 100vh;
+    // margin-right: 45px;
+    // margin-left: 60px;
+    margin: 0 30px;
+    padding: 123px 50px;
+    background-size: cover;
+
+  }
+  .get-in-touch-title {
+    color: #ffffff;
+    font-size: 25px;
+    font-weight: 500;
+    // padding-top: 180px;
+  }
+  .get-in-touch-minititle {
+    color: #ffffff;
+    font-size: 15px;
+  }
+  .get-in-touch-booking {
+    // width: 70%;
+    background-color: white;
+    // height: 100px;
+    border-radius: 5px;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+  }
+  .customer {
+    margin: 25px;
+  }
+  .btn.btn-primary.subscribe {
+    background-color: #1edd8d;
+    border: none;
+    margin: 30px 0;
+    // width: 200px;
+  }
+  .location {
+    color: #969696;
+    padding: 35px 0;
+    font-size: 17px;
+    font-weight: 400;
+    margin: 0;
+  }
+  .fa-solid.fa-envelope{
+    color: #1edd8d;
+    padding-right: 15px;
+  }
+  .fa-solid.fa-user{
+    color: #1edd8d;
+    padding-right: 15px;
+  }
+
+  input {
+    border: none;
+    width: 90%;
+  }
+
+  input:focus {
+    border: none;
+    outline: none;
+  }
+
+
+  @media (min-width:320px)  and (max-device-width : 480px) { /* smartphones, iPhone, portrait 480x320 phones */ 
+    input {
+      width: 79%;
+    }
+  
+  }
+  @media (min-width:481px)  and (max-device-width : 640px)  { /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */ 
+    input {
+      width: 79%;
+    }
+  }
+  
+  
+  
+  @media (min-width:641px) and (max-device-width : 960px) { /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */ 
+    input {
+      width: 79%;
+    }
+  }  

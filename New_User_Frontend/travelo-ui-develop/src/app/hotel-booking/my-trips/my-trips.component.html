@@ -1,0 +1,55 @@
+<!-- navbar -->
+<app-navbar></app-navbar>
+
+<div class="container-fluid">
+	<div class="content mt-4">
+		<div class="row">
+			<div class="col-md-6">
+				<h2 class="">My Trips</h2>
+			</div>
+			
+			<div class="col-md-6 p-0 text-right">
+				<p class="path"><a [routerLink]="['/home']">Home</a> <i class="fa-solid fa-chevron-left"></i> My Trips</p>
+			</div>
+		</div>
+
+		<div class="body" *ngFor="let trip of bookings">
+			<div class="row">
+				<div class="col-md">
+					<p class="mini-heading">Location</p>
+					<p class="count"><span *ngFor="let loc of trip.location">{{loc.location}} <span *ngIf=" trip.location &&  trip.location.length > 1">|</span></span></p>
+				</div>
+				<div class="col-md">
+					<p class="mini-heading">Check in</p>
+					<p class="count">{{trip.checkIn | date:'mediumDate'}}</p>
+				</div>
+				<div class="col-md">
+					<p class="mini-heading">Check out</p>
+					<p class="count">{{trip.checkOut | date:'mediumDate'}}</p>
+				</div>
+				<div class="col-md">
+					<p class="mini-heading">No. Guests</p>
+					<p class="count">{{trip.adults}} Adults {{trip.children}} Child</p>
+				</div>
+				<div class="col-md">
+					<p class="mini-heading">Total</p>
+					<p class="count">{{trip.amount}}</p>
+				</div>
+				<div class="col-md">
+					<p class="mini-heading">Status</p>
+					<p class="count">{{(trip.status ? trip.status : 'Pending') | titlecase}}</p>
+				</div>
+				<div class="col-md">
+					<button type="button" class="btn btn-outline-success" *ngIf="trip.bookingId && trip.status !== 'CANCELLED' && trip.status === 'BOOKED'" (click)="cancel(trip.bookingId)">Cancel Trip</button>
+				</div>
+				<div class="col-md">
+					<button type="button" class="btn btn-primary"  *ngIf="trip.bookingId && (trip.status !== 'CANCELLED')  && trip.status === 'BOOKED'" (click)="postpone()">Postpone Trip</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</div>
+
+
+<app-footer></app-footer>

@@ -1,0 +1,236 @@
+<!-- navbar -->
+<app-navbar></app-navbar>
+
+<!-- first-section -->
+<div class="first-section">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <p class="title">Start your unforgettable<br> Journey with us.</p>
+        <p class="mini-title">The best travel for your journey begins now </p>
+        <div class="container-fluid">
+          <div class="booking">
+            <div class="container-fluid">
+              <form [formGroup]="searchForm">
+                <div class="row">
+                  <div class="col-md">
+                    <!-- <p class="location"><img src="./assets/image/location_on.png"> Location </p> -->
+                    <div class="location mt-1">
+                      <img src="./assets/image/location_on.png">
+                      <div>
+                        <input type="text" placeholder="Location" formControlName="location" [matAutocomplete]="auto"
+                          class="location-input">
+                        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelectionChange($event)">
+                          <mat-option *ngFor="let loc of filteredLocations | async" [value]="loc">
+                            {{loc.location}}
+                          </mat-option>
+                        </mat-autocomplete>
+                      </div>
+                    </div>
+                    <div [ngClass]="selectedLocation.length ? 'selected-disp' : ''">
+                      <mat-chip-list #chipList>
+                        <mat-chip *ngFor="let location of selectedLocation" [selectable]="selectable"
+                          [removable]="removable" (removed)="remove(location)">
+                          {{location.location}}
+                          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                        </mat-chip>
+                      </mat-chip-list>
+                    </div>
+                  </div>
+                  <div class="col-md">
+                    <div class="location">
+                      <div class="date-picker"><app-date-picker (dateEmitter)="dateEmitter($event, 'checkin')"
+                          [displayLabel]="'Check In'" [tillDateDisable]="tillDateDisable"
+                          [maxDateEnable]="maxDateEnable"> </app-date-picker>
+                      </div>
+                      <!-- <span class="label">Check in</span>  -->
+                    </div>
+                    <div [ngClass]="searchForm.value.checkIn !== '' ? 'selected-disp' : ''">
+                      {{searchForm.value.checkIn}}
+                    </div>
+                  </div>
+                  <div class="col-md">
+                    <div class="location">
+                      <div class="date-picker"><app-date-picker (dateEmitter)="dateEmitter($event, 'checkout')"
+                          [displayLabel]="'Check Out'" [tillDateDisable]="tillDateDisable"
+                          [maxDateEnable]="maxDateEnable"> </app-date-picker>
+                      </div>
+                      <!-- <span class="label">Check in</span>  -->
+                    </div>
+                    <div [ngClass]="searchForm.value.checkOut !== '' ? 'selected-disp' : ''">
+                      {{searchForm.value.checkOut}}
+                    </div>
+                  </div>
+                  <div class="col-md">
+                    <div class="location">
+                      <a class=" mt-1" (click)="openNoOfGuest()"><i class="fa-solid fa-user" cdkOverlayOrigin
+                          #trigger="cdkOverlayOrigin"></i> No. Guests </a>
+                      <ng-template cdkConnectedOverlay [cdkConnectedOverlayOrigin]="trigger"
+                        [cdkConnectedOverlayOpen]="isNoOfGuestOpen">
+                        <div class="guest-overlay ">
+                          <div class="display-flex space-between mb-2">
+                            <label>Adults</label> <input type="text" [value]="searchForm.value.adults"
+                              formControlName="adults" min="1">
+                          </div>
+                          <div class="display-flex space-between mb-2">
+                            <label>Children</label> <input type="text" [value]="searchForm.value.children"
+                              formControlName="children" min="1">
+                          </div>
+                          <button class="pull-right" (click)="continue()">Continue</button>
+                        </div>
+                      </ng-template>
+                    </div>
+                    <div
+                      [ngClass]="((searchForm.value.adults && searchForm.value.adults > 0 )|| (searchForm.value.children && searchForm.value.children > 0)) ? 'selected-disp pl-0' : 'disp-none'">
+                      {{searchForm.value.adults}} Adult(s) {{searchForm.value.children}} Child(ren)
+                    </div>
+
+                  </div>
+                  <div class="col-md">
+                    <button type="button" class="btn btn-primary search" (click)="search()">Search</button>
+                  </div>
+                  <div class="error-text text-right mb-2" role="alert" *ngIf="!searchForm.valid">
+                    Please select all fields
+                  </div>
+
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="heading-photo-div">
+            <img src="./assets/image/Group 24.png" class="heading-photo">
+          </div>
+          <div class="heading-photo1-div">
+            <img src="./assets/image/Group 25.png" class="heading-photo1">
+          </div>
+          <div class="heading-photo2-div">
+            <img src="./assets/image/Group 23.png" class="heading-photo2">
+          </div>
+        </div>
+      </div>
+      <!-- <div class="col">
+        <div class="first-right-section">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-8">
+                <div>
+                  <img src="./assets/image/Group 24.png" class="heading-photo">
+                </div>
+                <div>
+                  <img src="./assets/image/Group 25.png" class="heading-photo1">
+                </div>
+               
+              </div>
+              <div class="col-md-4">
+                <img src="./assets/image/Group 23.png" class="heading-photo2">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+    </div>
+  </div>
+</div>
+
+<!-- popular destination -->
+<app-popular-destination></app-popular-destination>
+
+
+<!-- Third Section -->
+
+<!-- <div class="container-fluid">
+  <div class="offer-contents">
+    <p class="heading">Offers For You </p>
+    <p class="mini-heading">Check out our special offers and discounts</p>
+    
+    <div>
+      <div class="carousel">
+        <article class="cards">
+          <div class="first-part"><img src="./assets/image/Rectangle 21.png" class="offer-img"></div>
+          <div class="second-part">
+            <p class="second-part-heading">Grab Up to 50% OFF* on your stay at Lemon Tree Hotels</p>
+            <p class="second-part-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore </p>
+            <div class="coupn-code">
+              <a class="coupn-code-number">1234abc</a>
+              <img src="./assets/image/content_copy.png" class="content-copy-img">
+            </div>
+          </div>
+        </article>
+        <article class="cards">
+          <div class="first-part"><img src="./assets/image/Rectangle 21 (1).png" class="offer-img"></div>
+          <div class="second-part">
+            <p class="second-part-heading">Grab Up to 50% OFF* on your stay at Lemon Tree Hotels</p>
+            <p class="second-part-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore </p>
+            <div class="coupn-code">
+              <a class="coupn-code-number">1234abc</a>
+              <img src="./assets/image/content_copy.png" class="content-copy-img">
+            </div>
+          </div>
+        </article>
+        <article class="cards">
+          <div class="first-part"><img src="./assets/image/Rectangle 21 (2).png" class="offer-img"></div>
+          <div class="second-part">
+            <p class="second-part-heading">Grab Up to 50% OFF* on your stay at Lemon Tree Hotels</p>
+            <p class="second-part-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore </p>
+            <div class="coupn-code">
+              <a class="coupn-code-number">1234abc</a>
+              <img src="./assets/image/content_copy.png" class="content-copy-img">
+            </div>
+          </div>
+        </article>
+        <article class="cards">
+          <div class="first-part"><img src="./assets/image/Rectangle 21.png" class="offer-img"></div>
+          <div class="second-part">
+            <p class="second-part-heading">Grab Up to 50% OFF* on your stay at Lemon Tree Hotels</p>
+            <p class="second-part-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore </p>
+            <div class="coupn-code">
+              <a class="coupn-code-number">1234abc</a>
+              <img src="./assets/image/content_copy.png" class="content-copy-img">
+            </div>
+          </div>
+        </article>
+        <article class="cards">
+          <div class="first-part"><img src="./assets/image/Rectangle 21 (1).png" class="offer-img"></div>
+          <div class="second-part">
+            <p class="second-part-heading">Grab Up to 50% OFF* on your stay at Lemon Tree Hotels</p>
+            <p class="second-part-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore </p>
+            <div class="coupn-code">
+              <a class="coupn-code-number">1234abc</a>
+              <img src="./assets/image/content_copy.png" class="content-copy-img">
+            </div>
+          </div>
+        </article>
+        <article class="cards">
+          <div class="first-part"><img src="./assets/image/Rectangle 21 (2).png" class="offer-img"></div>
+          <div class="second-part">
+            <p class="second-part-heading">Grab Up to 50% OFF* on your stay at Lemon Tree Hotels</p>
+            <p class="second-part-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore </p>
+            <div class="coupn-code">
+              <a class="coupn-code-number">1234abc</a>
+              <img src="./assets/image/content_copy.png" class="content-copy-img">
+            </div>
+          </div>
+        </article>
+        <article class="cards">
+          <div class="first-part"><img src="./assets/image/Rectangle 21.png" class="offer-img"></div>
+          <div class="second-part">
+            <p class="second-part-heading">Grab Up to 50% OFF* on your stay at Lemon Tree Hotels</p>
+            <p class="second-part-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore </p>
+            <div class="coupn-code">
+              <a class="coupn-code-number">1234abc</a>
+              <img src="./assets/image/content_copy.png" class="content-copy-img">
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<!-- get in touch section -->
+<app-get-in-touch></app-get-in-touch>
+
+
+
+<!-- footer -->
+<app-footer></app-footer>

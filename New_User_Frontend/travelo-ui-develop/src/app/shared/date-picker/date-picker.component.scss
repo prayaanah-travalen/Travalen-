@@ -1,0 +1,136 @@
+
+
+.date-picker-container {
+    box-sizing: border-box;
+    // @include flex-align-center($gap: 10px);
+    // border: 1px solid var(--border-color-primary);
+    border-radius: 4px;
+    display: flex;
+}
+
+.date-picker {
+    height: 52px;
+    text-align: center;
+    padding: 4px 0;
+}
+
+.date-input {
+    border: none;
+    // padding: 16px;
+    width: 0px;
+    cursor: inherit;
+}
+
+::ng-deep .header-btn-icon {
+    width: 17px;
+}
+
+::ng-deep .header-btn {
+    width: 24px;
+    height: 24px;
+    border: 0.75px solid #E8EBED;
+    border-radius: 3px;
+    background: none;
+    padding: 2px;
+}
+
+::ng-deep .header {
+    // @include flex-align-center;
+    padding: 0.5em;
+}
+
+::ng-deep .header-label {
+    flex: 1;
+    height: 1em;
+    font-family: 'Open Sans medium';
+    text-align: center;
+}
+
+::ng-deep .double-arrow .mat-icon {
+    margin: -22%;
+}
+
+::ng-deep .mat-calendar-period-button {
+    left: 30% !important;
+    // @include font-semibold (13px);
+    // color: var(--text-color-primary);
+}
+
+::ng-deep .mat-calendar-previous-button {
+    right: 74% !important;
+    width: 30px;
+    height: 30px;
+
+    /* Light Mode/Background/Tertiary */
+
+    border: 0.75px solid #E8EBED;
+    border-radius: 3px;
+}
+
+::ng-deep .mat-calendar-next-button {
+    right: 5% !important;
+    width: 30px;
+    height: 30px;
+
+    /* Light Mode/Background/Tertiary */
+
+    border: 0.75px solid #E8EBED;
+    border-radius: 3px;
+}
+
+::ng-deep .mat-calendar-next-button::after {
+
+    width: 8px !important;
+    height: 8px !important;
+    margin: auto !important;
+}
+
+::ng-deep .mat-calendar-previous-button::after {
+
+    width: 8px !important;
+    height: 8px !important;
+    margin: auto !important;
+}
+
+
+
+.date-input:focus {
+    outline: none;
+}
+
+::ng-deep {
+    .date-picker-container {
+        .mat-icon-button {
+            background: url("~src/assets/image/calendar_month.png") no-repeat center;
+            background-repeat: no-repeat;
+            background-position: center;
+            width: 30px;
+            height: 30px;
+            // left: -12px;
+            top: -3px;
+
+            svg {
+                display: none;
+            }
+        }
+    }
+    .mat-calendar-arrow{
+        fill: var(--text-color-primary);
+    }
+
+}
+
+// input::placeholder{
+//     color: #969696;
+//     padding: 15px 0;
+//     font-size: 17px;
+//     font-weight: 400;
+//     margin: 0;
+//     display: flex;
+// }
+
+a {
+    padding-top: 4px;
+    cursor: pointer;
+    margin-left: 5px;
+}
