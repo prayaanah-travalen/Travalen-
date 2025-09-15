@@ -1,73 +1,78 @@
-import { Component, OnInit } from '@angular/core';
-import { AgmCoreModule, MouseEvent } from '@agm/core';
-import { CommonModule, NgFor } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+// import { Component, OnInit } from '@angular/core';
+// import { AgmCoreModule} from '@agm/core';
+// import { CommonModule, NgFor } from '@angular/common';
+// import { FormsModule } from '@angular/forms';
 
-@Component({
-  selector: 'app-google-map',
-  templateUrl: './google-map.component.html',
-  styleUrls: ['./google-map.component.scss'],
-  standalone:true,
-  imports:[ AgmCoreModule,
-  CommonModule,
-  FormsModule,
-NgFor]
-})
-export class GoogleMapComponent implements OnInit {
+// @Component({
+//   selector: 'app-google-map',
+//   templateUrl: './google-map.component.html',
+//   styleUrls: ['./google-map.component.scss'],
+//   standalone:true,
+//   imports:[ AgmCoreModule,
+//   CommonModule,
+//   FormsModule,
+// NgFor]
+// })
+// export class GoogleMapComponent implements OnInit {
 
-  constructor() { }
+//   constructor() { }
 
-  ngOnInit(): void {}
+//   ngOnInit(): void {}
 
-    zoom: number = 8;
+//     zoom: number = 8;
   
-  // initial center position for the map
-  lat: number = 51.673858;
-  lng: number = 7.815982;
+ 
+//   lat: number = 51.673858;
+//   lng: number = 7.815982;
 
-  clickedMarker(label: string, index: number) {
-  }
+//   clickedMarker(label: string, index: number) {
+//   }
   
-  mapClicked($event: MouseEvent) {
-    this.markers.push({
-      lat: $event.coords.lat,
-      lng: $event.coords.lng,
-      draggable: true,
-      label:''
-    });
-  }
+//   mapClicked($event: MouseEvent) {
+//     this.markers.push({
+//       lat: $event.coords.lat,
+//       lng: $event.coords.lng,
+//       draggable: true,
+//       label:''
+//     });
+//   }
+
+
   
-  markerDragEnd(m: marker, $event: MouseEvent) {
-  }
+//   markerDragEnd(m: marker, $event: MouseEvent) {
+//   }
+
+ 
   
-  markers: marker[] = [
-	  {
-		  lat: 51.673858,
-		  lng: 7.815982,
-		  label: 'A',
-		  draggable: true
-	  },
-	  {
-		  lat: 51.373858,
-		  lng: 7.215982,
-		  label: 'B',
-		  draggable: false
-	  },
-	  {
-		  lat: 51.723858,
-		  lng: 7.895982,
-		  label: 'C',
-		  draggable: true
-	  }
-  ]
+  
+//   markers: marker[] = [
+// 	  {
+// 		  lat: 51.673858,
+// 		  lng: 7.815982,
+// 		  label: 'A',
+// 		  draggable: true
+// 	  },
+// 	  {
+// 		  lat: 51.373858,
+// 		  lng: 7.215982,
+// 		  label: 'B',
+// 		  draggable: false
+// 	  },
+// 	  {
+// 		  lat: 51.723858,
+// 		  lng: 7.895982,
+// 		  label: 'C',
+// 		  draggable: true
+// 	  }
+//   ]
   
 
-}
+// }
 
-// just an interface for type safety.
-interface marker {
-	lat: number;
-	lng: number;
-	label: string;
-	draggable: boolean;
-}
+
+// interface marker {
+// 	lat: number;
+// 	lng: number;
+// 	label: string;
+// 	draggable: boolean;
+// }

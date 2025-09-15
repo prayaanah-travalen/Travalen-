@@ -1,4 +1,4 @@
-<agm-map 
+<!-- <agm-map 
   [latitude]="lat"
   [longitude]="lng"
   [zoom]="zoom"
@@ -28,4 +28,27 @@
       [editable]="true">
   </agm-circle>
 
-</agm-map>
+</agm-map> -->
+
+<google-map
+  height="400px"
+  width="100%"
+  [center]="center"
+  [zoom]="zoom"
+  (mapClick)="addMarker($event)">
+
+  <map-marker
+    *ngFor="let m of markers"
+    [position]="{ lat: m.lat, lng: m.lng }"
+    [label]="m.label"
+    [options]="{ draggable: m.draggable }">
+  </map-marker>
+
+  <!-- Circle example -->
+  <map-circle
+    [center]="circleCenter"
+    [radius]="5000"
+    [options]="{ fillColor: 'red', draggable: true, editable: true }">
+  </map-circle>
+
+</google-map>

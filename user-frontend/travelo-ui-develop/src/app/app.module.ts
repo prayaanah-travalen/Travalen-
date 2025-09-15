@@ -52,11 +52,13 @@ import { AgmCoreModule } from '@agm/core';
     SearchPageModule,
     HotelDetailsModule,
 
-    // Google Maps Module with generic type fix
-  //   AgmCoreModule.forRoot({
-  //     apiKey: 'AIzaSyAvcDy5ZYc2ujCS6TTtI3RYX5QmuoV8Ffw'
-  //   }) as unknown as AgmCoreModule, 
-  ],
+    
+ 
+
+  AgmCoreModule.forRoot({
+    apiKey: 'AIzaSyAvcDy5ZYc2ujCS6TTtI3RYX5QmuoV8Ffw'
+  }), 
+],
 
   providers: [
     LoaderService,
