@@ -161,6 +161,66 @@ public class HotelServiceImpl implements HotelService {
     
     
 
+//    @Override
+//    @Transactional
+//    public ResponseDto<HotelRoomDto>  saveRoom(HotelRoomReqDto room, List<MultipartFile> roomImages) {
+//        ResponseDto<HotelRoomDto>  response = new ResponseDto<>();
+//        try {
+//            HotelEntity hotelEntity = hotelRepo.getHotelsById(room.getHotelCode());
+//
+//            if(Objects.nonNull(hotelEntity)) {
+//                deletedRoomImages(room.getRoomDetails().getDeletedImages()); 
+//
+//                HotelRoomEntity roomEntity =  toRoomEntity(room, hotelEntity, roomImages);
+//
+//                List<RoomImageEntity> images = new ArrayList<>();
+//                if(Objects.nonNull(roomImages)) images = toRoomImageEntity(roomImages, roomEntity);
+//
+//                
+//                if(Objects.nonNull(room.getRoomDetails().getHotelRoomId())) {
+//                    List<RoomTagEntity> roomTags = roomTagRepo.findByRoomCode(room.getRoomDetails().getHotelRoomId());
+//                    roomTagRepo.deleteAll(roomTags);
+//
+//                    List<RoomAmenityEntity> roomAmenities = roomAmenityRepo.findByRoomCode(room.getRoomDetails().getHotelRoomId());
+//                    roomAmenityRepo.deleteAll(roomAmenities);
+//
+//                    List<PriceSlabRoomsEntity> roomPriceSlabs = roomPriceSlabRepo.findByRoomId(room.getRoomDetails().getHotelRoomId());
+//                    roomPriceSlabRepo.deleteAll(roomPriceSlabs);
+//
+//                    Optional<HotelRoomEntity> existingRoom =  hotelRoomRepo.findById(room.getRoomDetails().getHotelRoomId());
+//
+//                    if(existingRoom.isPresent()) {
+//                        roomEntity.setHotelRoomId(existingRoom.get().getHotelRoomId());
+//                        if(!existingRoom.get().getRoomImages().isEmpty()) {
+//                           images.addAll(existingRoom.get().getRoomImages());
+//                        }
+//
+//                    }
+//                }
+//
+//                roomEntity.setRoomImages(images);
+//              
+//
+//                HotelRoomEntity savedRooms = hotelRoomRepo.save(roomEntity);
+//                response.setResponse( toHotelRoomDto(savedRooms));
+//                response.setSuccess("SUCCESS");
+//            } else {
+//                response.setErrorMessage("Hotel not found");
+//                response.setErrorCode("400");
+//            }
+//        } catch(Exception e) {
+//            response.setErrorMessage("Something went wrong");
+//            response.setErrorCode("500");
+//            log.info(Arrays.toString(e.getStackTrace()));
+//        }
+//        return response;
+//    }
+//    
+    
+    
+    
+    
+    
     @Override
     @Transactional
     public ResponseDto<HotelRoomDto>  saveRoom(HotelRoomReqDto room, List<MultipartFile> roomImages) {
@@ -169,14 +229,14 @@ public class HotelServiceImpl implements HotelService {
             HotelEntity hotelEntity = hotelRepo.getHotelsById(room.getHotelCode());
 
             if(Objects.nonNull(hotelEntity)) {
-                deletedRoomImages(room.getRoomDetails().getDeletedImages()); 
+                deletedRoomImages(room.getRoomDetails().getDeletedImages()); /* delete room images **/
 
                 HotelRoomEntity roomEntity =  toRoomEntity(room, hotelEntity, roomImages);
 
                 List<RoomImageEntity> images = new ArrayList<>();
                 if(Objects.nonNull(roomImages)) images = toRoomImageEntity(roomImages, roomEntity);
 
-                
+                /* update existing room **/
                 if(Objects.nonNull(room.getRoomDetails().getHotelRoomId())) {
                     List<RoomTagEntity> roomTags = roomTagRepo.findByRoomCode(room.getRoomDetails().getHotelRoomId());
                     roomTagRepo.deleteAll(roomTags);
@@ -199,7 +259,7 @@ public class HotelServiceImpl implements HotelService {
                 }
 
                 roomEntity.setRoomImages(images);
-              
+                /* end of update existing room **/
 
                 HotelRoomEntity savedRooms = hotelRoomRepo.save(roomEntity);
                 response.setResponse( toHotelRoomDto(savedRooms));
@@ -215,13 +275,6 @@ public class HotelServiceImpl implements HotelService {
         }
         return response;
     }
-    
-    
-    
-    
-    
-    
-    
     
     
     
