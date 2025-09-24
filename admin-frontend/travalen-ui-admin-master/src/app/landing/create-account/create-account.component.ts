@@ -185,6 +185,45 @@ export class CreateAccountComponent implements OnInit {
     })
   }
 
+//   verifyOtp() {
+//     this.otpError = '';
+//     if(this.otp === '') {
+//       this.otpError = "Please enter valid otp";
+//       return;
+//     }
+    
+//     let req = {
+//       emailId: this.userForm.get('email')?.getRawValue(),
+//       password: this.userForm.get('password')?.getRawValue(),
+//       firstName: this.userForm.get('fname')?.getRawValue(),
+//       lastName: this.userForm.get('lname')?.getRawValue(),
+//       phoneNo: this.userForm.get('phone')?.getRawValue(),
+//       countryCode:  this.userForm.get('countryCode')?.getRawValue(),
+//       otp:  this.otp,
+//       designation:  this.userForm.get('designation')?.getRawValue(),
+//       hotelName:  this.userForm.get('hotelName')?.getRawValue(),
+//       whatsappNumber:  this.userForm.get('whatsappNumCcode')?.getRawValue() + this.userForm.get('whatsappNum')?.getRawValue(),
+//     }
+
+//     this.accountService.verifyOtp(req).subscribe(resp=>{
+//         if(resp.status === 'SUCCESS') {
+//           localStorage.setItem("auth", resp.jwt);
+          
+//           // Store hotel ID if available
+//           if (resp.hotelCode) {
+//             localStorage.setItem("hotelId", resp.hotelCode.toString());
+//           }
+          
+//           this.dialogRef.close();
+//           this.router.navigateByUrl("/travalen/dashboard");
+//         } else {
+//           this.otpError = resp.message;
+//         }
+//     })
+// }
+
+
+
   signIn() {
     this.dialogRef.close();
     this.dialog.open(SignInComponent)

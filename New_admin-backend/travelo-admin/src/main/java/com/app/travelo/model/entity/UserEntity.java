@@ -49,6 +49,7 @@ public class UserEntity {
     private String password;
 
     @ManyToMany(mappedBy = "user", cascade = { CascadeType.ALL })
+//    @ManyToMany(mappedBy = "users", cascade = { CascadeType.ALL })
     private Set<HotelEntity> hotels;
 
     @Column(name="user_type")

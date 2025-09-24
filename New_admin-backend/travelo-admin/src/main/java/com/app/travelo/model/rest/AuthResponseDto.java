@@ -13,4 +13,7 @@ public class AuthResponseDto {
     private String status;
     private String message;
     private String jwt;
+    
+//    private Long hotelCode;  
+//    private String hotelName;  
 }

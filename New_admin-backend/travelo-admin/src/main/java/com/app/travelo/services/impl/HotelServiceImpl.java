@@ -63,17 +63,111 @@ public class HotelServiceImpl implements HotelService {
     @Autowired
     private RoomPriceSlabRepository roomPriceSlabRepo;
 
+//    @Transactional
+//    @Override
+//    public ResponseDto<HotelDto> saveHotel(HotelRequestDto hotel, List<MultipartFile> hotelImages) {
+//        ResponseDto<HotelDto> response = new ResponseDto<>();
+//        try {
+//            LocationEntity location = locationRepo.findByLocation(hotel.getLocation());
+//            LocationEntity locationEntity = null;
+//            if (Objects.nonNull(location)) {
+//                locationEntity = location;
+//            } else {
+//                locationEntity = locationRepo.save(LocationEntity.builder().location(hotel.getLocation()).build());
+//            }
+//
+//            deletedHotelImages(hotel.getDeletedImages()); 
+//
+//            HotelEntity htlEntity = HotelEntity.builder()
+//                    .hotelName(hotel.getHotelName())
+//                    .location(locationEntity)
+//                    .city(hotel.getCity())
+//                    .state(hotel.getState())
+//                    .address(hotel.getAddress())
+//                    .country(hotel.getCountry())
+//                    .postalCode(hotel.getPostalCode())
+//                    .starRating(hotel.getStarRating())
+//                    .about(hotel.getAbout())
+//                    .email(hotel.getEmail())
+//                    .websiteLink(hotel.getWebsiteLink())
+//                   .user(getUserDetails())
+//                    .latitude(hotel.getLatitude())
+//                    .longitude(hotel.getLongitude())
+//                    .propertyRule(hotel.getPropertyRule())
+//                    .availability(true)
+//                    .build();
+//            htlEntity.setAmenities(toHotelAmenities(hotel.getAmenities(), htlEntity));
+//
+//            List<HotelImageEntity> images = new ArrayList<>();
+//            if(Objects.nonNull(hotelImages))  images = toHotelImageEntityFromMultipart(hotelImages, htlEntity);
+//            
+//            if(Objects.nonNull(hotel.getHotelCode())) {
+//
+//                List<HotelAmenityEntity> hotelAmenities = hotelAmenityRepo.findByHotelCode(hotel.getHotelCode());
+//                hotelAmenityRepo.deleteAll(hotelAmenities);
+//
+//                HotelEntity existingHotel = hotelRepo.getHotelsById(hotel.getHotelCode());
+//                if(Objects.nonNull(existingHotel)) {
+//                    htlEntity.setHotelCode(existingHotel.getHotelCode());
+//                    if(!existingHotel.getHotelImages().isEmpty()) {
+//                       images.addAll(existingHotel.getHotelImages());
+//                    }
+//                }
+//            }
+//
+//            htlEntity.setHotelImages(images);
+//
+//            HotelEntity savedEntity = hotelRepo.save(htlEntity);
+//            response.setResponse(toHotelDto(savedEntity));
+//            response.setSuccess("SUCCESS");
+//
+//        } catch(Exception e) {
+//            response.setErrorMessage("Something went wrong");
+//            response.setErrorCode("500");
+//            log.debug(Arrays.toString(e.getStackTrace()));
+//            log.info(e.getMessage());
+//        }
+//        return response;
+//    }
+    
     @Transactional
     @Override
     public ResponseDto<HotelDto> saveHotel(HotelRequestDto hotel, List<MultipartFile> hotelImages) {
         ResponseDto<HotelDto> response = new ResponseDto<>();
         try {
+            log.info("Starting hotel save process for: {}", hotel.getHotelName());
+            
+            // Validate required fields
+            if (hotel.getHotelName() == null || hotel.getHotelName().trim().isEmpty()) {
+                response.setErrorMessage("Hotel name is required");
+                response.setErrorCode("400");
+                return response;
+            }
+            
+            if (hotel.getLocation() == null || hotel.getLocation().trim().isEmpty()) {
+                response.setErrorMessage("Location is required");
+                response.setErrorCode("400");
+                return response;
+            }
+
+            // Handle location
             LocationEntity location = locationRepo.findByLocation(hotel.getLocation());
             LocationEntity locationEntity = null;
             if (Objects.nonNull(location)) {
                 locationEntity = location;
+                log.info("Found existing location: {}", location.getLocation());
             } else {
                 locationEntity = locationRepo.save(LocationEntity.builder().location(hotel.getLocation()).build());
+                log.info("Created new location: {}", locationEntity.getLocation());
+            }
+
+            // Handle user details
+            Set<UserEntity> userDetails = getUserDetails();
+            if (userDetails == null || userDetails.isEmpty() || userDetails.contains(null)) {
+                log.error("User details not found or invalid");
+                response.setErrorMessage("User authentication required");
+                response.setErrorCode("401");
+                return response;
             }
 
             deletedHotelImages(hotel.getDeletedImages()); /* Delete hotel images **/
@@ -90,44 +184,85 @@ public class HotelServiceImpl implements HotelService {
                     .about(hotel.getAbout())
                     .email(hotel.getEmail())
                     .websiteLink(hotel.getWebsiteLink())
-                    .user(getUserDetails())
+                    .user(userDetails)
                     .latitude(hotel.getLatitude())
                     .longitude(hotel.getLongitude())
                     .propertyRule(hotel.getPropertyRule())
                     .availability(true)
+                    .active(true) // Explicitly set active
                     .build();
-            htlEntity.setAmenities(toHotelAmenities(hotel.getAmenities(), htlEntity));
+
+            // Handle amenities
+            if (hotel.getAmenities() != null && !hotel.getAmenities().isEmpty()) {
+                htlEntity.setAmenities(toHotelAmenities(hotel.getAmenities(), htlEntity));
+            }
 
             List<HotelImageEntity> images = new ArrayList<>();
-            if(Objects.nonNull(hotelImages))  images = toHotelImageEntityFromMultipart(hotelImages, htlEntity);
+            if (Objects.nonNull(hotelImages) && !hotelImages.isEmpty()) {
+                images = toHotelImageEntityFromMultipart(hotelImages, htlEntity);
+            }
+
             /* Update existing hotel **/
-            if(Objects.nonNull(hotel.getHotelCode())) {
+            if (Objects.nonNull(hotel.getHotelCode())) {
+                log.info("Updating existing hotel with code: {}", hotel.getHotelCode());
 
                 List<HotelAmenityEntity> hotelAmenities = hotelAmenityRepo.findByHotelCode(hotel.getHotelCode());
                 hotelAmenityRepo.deleteAll(hotelAmenities);
 
                 HotelEntity existingHotel = hotelRepo.getHotelsById(hotel.getHotelCode());
-                if(Objects.nonNull(existingHotel)) {
+                if (Objects.nonNull(existingHotel)) {
                     htlEntity.setHotelCode(existingHotel.getHotelCode());
-                    if(!existingHotel.getHotelImages().isEmpty()) {
-                       images.addAll(existingHotel.getHotelImages());
+                    if (existingHotel.getHotelImages() != null && !existingHotel.getHotelImages().isEmpty()) {
+                        images.addAll(existingHotel.getHotelImages());
                     }
+                } else {
+                    log.error("Hotel with code {} not found for update", hotel.getHotelCode());
+                    response.setErrorMessage("Hotel not found for update");
+                    response.setErrorCode("404");
+                    return response;
                 }
             }
 
             htlEntity.setHotelImages(images);
 
+            log.info("Saving hotel entity: {}", htlEntity.getHotelName());
             HotelEntity savedEntity = hotelRepo.save(htlEntity);
+            log.info("Hotel saved successfully with ID: {}", savedEntity.getHotelCode());
+
             response.setResponse(toHotelDto(savedEntity));
             response.setSuccess("SUCCESS");
 
-        } catch(Exception e) {
-            response.setErrorMessage("Something went wrong");
+        } catch (Exception e) {
+            response.setErrorMessage("Something went wrong: " + e.getMessage());
             response.setErrorCode("500");
-            log.debug(Arrays.toString(e.getStackTrace()));
-            log.info(e.getMessage());
+            log.error("Error saving hotel: {}", hotel != null ? hotel.getHotelName() : "null", e);
         }
         return response;
+    }
+
+    // Improved getUserDetails method
+    private Set<UserEntity> getUserDetails() {
+        try {
+            String loginUserName = CommonUtil.getLoginUserName();
+            if (loginUserName == null || loginUserName.trim().isEmpty()) {
+                log.error("Login user name is null or empty");
+                return null;
+            }
+            
+            UserEntity user = userRepo.getUser(loginUserName);
+            if (user == null) {
+                log.error("User not found for username: {}", loginUserName);
+                return null;
+            }
+            
+            Set<UserEntity> userSet = new HashSet<>();
+            userSet.add(user);
+            log.info("Retrieved user details for: {}", loginUserName);
+            return userSet;
+        } catch (Exception e) {
+            log.error("Error getting user details", e);
+            return null;
+        }
     }
 
     private void deletedHotelImages(List<Long> deletedImages) {
@@ -161,61 +296,7 @@ public class HotelServiceImpl implements HotelService {
     
     
 
-//    @Override
-//    @Transactional
-//    public ResponseDto<HotelRoomDto>  saveRoom(HotelRoomReqDto room, List<MultipartFile> roomImages) {
-//        ResponseDto<HotelRoomDto>  response = new ResponseDto<>();
-//        try {
-//            HotelEntity hotelEntity = hotelRepo.getHotelsById(room.getHotelCode());
-//
-//            if(Objects.nonNull(hotelEntity)) {
-//                deletedRoomImages(room.getRoomDetails().getDeletedImages()); 
-//
-//                HotelRoomEntity roomEntity =  toRoomEntity(room, hotelEntity, roomImages);
-//
-//                List<RoomImageEntity> images = new ArrayList<>();
-//                if(Objects.nonNull(roomImages)) images = toRoomImageEntity(roomImages, roomEntity);
-//
-//                
-//                if(Objects.nonNull(room.getRoomDetails().getHotelRoomId())) {
-//                    List<RoomTagEntity> roomTags = roomTagRepo.findByRoomCode(room.getRoomDetails().getHotelRoomId());
-//                    roomTagRepo.deleteAll(roomTags);
-//
-//                    List<RoomAmenityEntity> roomAmenities = roomAmenityRepo.findByRoomCode(room.getRoomDetails().getHotelRoomId());
-//                    roomAmenityRepo.deleteAll(roomAmenities);
-//
-//                    List<PriceSlabRoomsEntity> roomPriceSlabs = roomPriceSlabRepo.findByRoomId(room.getRoomDetails().getHotelRoomId());
-//                    roomPriceSlabRepo.deleteAll(roomPriceSlabs);
-//
-//                    Optional<HotelRoomEntity> existingRoom =  hotelRoomRepo.findById(room.getRoomDetails().getHotelRoomId());
-//
-//                    if(existingRoom.isPresent()) {
-//                        roomEntity.setHotelRoomId(existingRoom.get().getHotelRoomId());
-//                        if(!existingRoom.get().getRoomImages().isEmpty()) {
-//                           images.addAll(existingRoom.get().getRoomImages());
-//                        }
-//
-//                    }
-//                }
-//
-//                roomEntity.setRoomImages(images);
-//              
-//
-//                HotelRoomEntity savedRooms = hotelRoomRepo.save(roomEntity);
-//                response.setResponse( toHotelRoomDto(savedRooms));
-//                response.setSuccess("SUCCESS");
-//            } else {
-//                response.setErrorMessage("Hotel not found");
-//                response.setErrorCode("400");
-//            }
-//        } catch(Exception e) {
-//            response.setErrorMessage("Something went wrong");
-//            response.setErrorCode("500");
-//            log.info(Arrays.toString(e.getStackTrace()));
-//        }
-//        return response;
-//    }
-//    
+ 
     
     
     
@@ -606,9 +687,9 @@ public class HotelServiceImpl implements HotelService {
                 .build();
     }
 
-    private Set<UserEntity> getUserDetails() {
-        Set<UserEntity> userSet = new HashSet<>();
-        userSet.add(userRepo.getUser(CommonUtil.getLoginUserName()));
-        return userSet;
-    }
+//    private Set<UserEntity> getUserDetails() {
+//        Set<UserEntity> userSet = new HashSet<>();
+//        userSet.add(userRepo.getUser(CommonUtil.getLoginUserName()));
+//        return userSet;
+//    }
 }

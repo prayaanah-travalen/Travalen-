@@ -68,9 +68,14 @@ public class HotelEntity {
     @Column(name= "availability")
     private Boolean availability;
 
-    @Column(name= "availability", insertable = false, updatable = false)
-    private Boolean active;
-
+//    @Column(name= "availability", insertable = false, updatable = false)
+//    private Boolean active;
+    
+    @Column(name = "active", nullable = false)
+    private Boolean active = true;
+   
+    
+    
     @OneToMany(mappedBy = "hotelCode", cascade = CascadeType.ALL)
     private List<HotelImageEntity> hotelImages;
 
@@ -87,6 +92,7 @@ public class HotelEntity {
             inverseJoinColumns = { @JoinColumn(name = "user_id") }
     )
     Set< UserEntity > user = new HashSet< UserEntity>();
+//    Set< UserEntity > users = new HashSet< UserEntity>();
 
     @OneToOne(mappedBy = "hotel", cascade = CascadeType.ALL)
     private FinanceEntity finance;

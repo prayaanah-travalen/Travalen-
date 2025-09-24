@@ -2,11 +2,13 @@ package com.app.travelo.services.authentication.impl;
 
 import com.app.travelo.model.common.EmailDetailDto;
 import com.app.travelo.model.entity.HotelEntity;
+import com.app.travelo.model.entity.LocationEntity;
 import com.app.travelo.model.entity.RoleEntity;
 import com.app.travelo.model.entity.UserEntity;
 import com.app.travelo.model.enums.UserType;
 import com.app.travelo.model.rest.*;
 import com.app.travelo.repositories.HotelRepository;
+import com.app.travelo.repositories.LocationRepository;
 import com.app.travelo.repositories.RoleRepository;
 import com.app.travelo.repositories.UserRepository;
 import com.app.travelo.services.authentication.AuthenticationService;
@@ -39,6 +41,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Autowired
     private HotelRepository hotelRepo;
+    
+    @Autowired
+    private LocationRepository locationRepo;
 
 
     @Override
@@ -54,6 +59,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         throw new UsernameNotFoundException("User not found");
 
     }
+    
+    
 
     @Override
     public List<GrantedAuthority> getAuthorities(String emailId) {
@@ -76,8 +83,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .build();
 
 
-        emailService.sendEmailWithHtmlTemplate(emailDto);
-//        emailService.sendSimpleMail(emailDto);
+
         return "Email send";
     }
 
@@ -96,9 +102,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                
                 hotel.add( HotelEntity.builder().hotelName(req.getHotelName()).active(false).build());
                 
-                // done for checking login
-//                hotel.add(HotelEntity.builder().hotelName(req.getHotelName()).availability(false).build());
-                
+ 
                 
                 user = UserEntity.builder()
                         .userName(req.getFirstName())
@@ -138,6 +142,88 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         }
         return "success";
     }
+    
+    
+//    @Override
+//    public String saveNewUser(AuthRequestDto req) {
+//        try {
+//            UserEntity user = userRepo.getUser(req.getEmailId());
+//            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+//            Set<RoleEntity> roles = new HashSet<>();
+//            RoleEntity roleEntity = roleRepo.findByRoleName("Hotel Admin");
+//            roles.add(roleEntity);
+//
+//           
+//            Set<HotelEntity> hotels = new HashSet<>();
+//
+//            if (Objects.isNull(user)) {
+//               
+//                LocationEntity defaultLocation = locationRepo.findByLocation("TBD");
+//                if (Objects.isNull(defaultLocation)) {
+//                    defaultLocation = locationRepo.save(LocationEntity.builder().location("TBD").build());
+//                }
+//
+//                
+//                HotelEntity hotel = HotelEntity.builder()
+//                        .hotelName(req.getHotelName())
+//                        .location(defaultLocation)
+//                        .address("TBD")
+//                        .email(req.getEmailId())
+//                        .availability(false) 
+//                        .build();
+//
+//                hotels.add(hotel);
+//
+//                
+//                user = UserEntity.builder()
+//                        .userName(req.getFirstName())
+//                        .emailId(req.getEmailId())
+//                        .phone(req.getPhoneNo())
+//                        .password(passwordEncoder.encode(req.getPassword()))
+//                        .roles(roles)
+//                        .countryCode(req.getCountryCode())
+//                        .userType(UserType.EXTERNAL.name())
+//                        .firstName(req.getFirstName())
+//                        .lastName(req.getLastName())
+//                        .status("active")
+//                        .contactNumber(req.getContactNumber())
+//                        .contactPerson(req.getContactPerson())
+//                        .designation(req.getDesignation())
+//                        .whatsappNumber(req.getWhatsappNumber())
+//                        .hotelName(req.getHotelName())
+//                        .hotels(hotels)
+//                        .build();
+//            } else {
+//            
+//                user.setUserName(req.getFirstName());
+//                user.setEmailId(req.getEmailId());
+//                user.setPhone(req.getPhoneNo());
+//                user.setPassword(passwordEncoder.encode(req.getPassword()));
+//                user.setRoles(roles);
+//                user.setCountryCode(req.getCountryCode());
+//                user.setUserType(UserType.EXTERNAL.name());
+//                user.setFirstName(req.getFirstName());
+//                user.setLastName(req.getLastName());
+//                user.setStatus("active");
+//
+//                
+//                if (user.getHotels() != null && !user.getHotels().isEmpty()) {
+//                    hotels = user.getHotels();
+//                }
+//            }
+//
+//          
+//            UserEntity savedUser = userRepo.save(user);
+//
+//          
+//            return "success:" + (hotels.isEmpty() ? "NA" : hotels.iterator().next().getHotelCode());
+//
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
+
+    
 
     @Override
     public String sendOtp(AuthRequestDto req) {

@@ -3,7 +3,8 @@ import { FileModel } from "./file.model";
 export interface HotelReqModel {
     hotelCode?: number,
     hotelName?: string,
-    location?: number,
+    // location?: number,
+     location?:string,
     address?: string,
     postalCode?: string,
     city?: string,

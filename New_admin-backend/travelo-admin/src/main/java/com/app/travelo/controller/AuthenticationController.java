@@ -1,9 +1,12 @@
 package com.app.travelo.controller;
 
+import com.app.travelo.model.entity.HotelEntity;
+import com.app.travelo.model.entity.UserEntity;
 import com.app.travelo.model.rest.AuthRequestDto;
 import com.app.travelo.model.rest.AuthResponseDto;
 import com.app.travelo.model.rest.ResponseDto;
 import com.app.travelo.model.rest.UserDto;
+import com.app.travelo.repositories.UserRepository;
 import com.app.travelo.services.authentication.AuthenticationService;
 import com.app.travelo.services.authentication.UserDetailsService;
 import com.app.travelo.services.email.OtpService;
@@ -38,6 +41,9 @@ public class AuthenticationController {
 
     @Autowired
     private OtpService otpService;
+    
+    @Autowired
+    private UserRepository userRepo;
 
     @RequestMapping({ "hello" })
     public String firstPage() {
@@ -151,6 +157,61 @@ public class AuthenticationController {
 
         return new ResponseEntity<>(returnMap, HttpStatus.OK);
     }
+    
+//    @PostMapping(value = "/auth/verifyOtp")
+//    public ResponseEntity<AuthResponseDto> verifyOtp(@RequestBody AuthRequestDto authenticationRequest) {
+//        AuthResponseDto returnMap = null;
+//        try {
+//            
+//            if (authenticationRequest.getOtp().equals(otpService.getCacheOtp(authenticationRequest.getEmailId()))) {
+//
+//                authService.saveNewUser(authenticationRequest);
+//
+//                
+//                String jwtToken = createAuthenticationToken(authenticationRequest);
+//
+//                
+//                UserEntity user = userRepo.getUser(authenticationRequest.getEmailId());
+//                Long hotelCode = null;
+//                String hotelName = null;
+//                if (user.getHotels() != null && !user.getHotels().isEmpty()) {
+//                    HotelEntity hotel = user.getHotels().iterator().next();
+//                    hotelCode = hotel.getHotelCode();
+//                    hotelName = hotel.getHotelName();
+//                }
+//
+//             
+//                returnMap = AuthResponseDto.builder()
+//                        .status("SUCCESS")
+//                        .message("OTP verified successfully")
+//                        .jwt(jwtToken)
+//                        .hotelCode(hotelCode)
+//                        .hotelName(hotelName)
+//                        .build();
+//
+//                otpService.clearOtp(authenticationRequest.getEmailId());
+//            } else {
+//                returnMap = AuthResponseDto.builder()
+//                        .status("FAILED")
+//                        .message("OTP is either expired or incorrect")
+//                        .jwt("")
+//                        .hotelCode(null)
+//                        .hotelName(null)
+//                        .build();
+//            }
+//        } catch (Exception e) {
+//            returnMap = AuthResponseDto.builder()
+//                    .status("FAILED")
+//                    .message(e.getMessage())
+//                    .jwt("")
+//                    .hotelCode(null)
+//                    .hotelName(null)
+//                    .build();
+//        }
+//
+//        return new ResponseEntity<>(returnMap, HttpStatus.OK);
+//    }
+
 
     @PostMapping(value = "/auth/changePassword")
     public ResponseEntity<AuthResponseDto> changePassword(@RequestBody AuthRequestDto authenticationRequest){
