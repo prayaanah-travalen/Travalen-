@@ -16,9 +16,13 @@ public interface HotelRepository extends JpaRepository<HotelEntity, Long> {
             "where uh.user_id=:userId and htl.availability = true", nativeQuery = true)
     List<HotelEntity> getHotels(@Param("userId") Long userId);
 
+//    @Query(value = "SELECT htl.* FROM hotel htl " +
+//            "where htl.hotel_code= :hotelCode and htl.availability = true", nativeQuery = true)
+//    HotelEntity getHotelsById(@Param("hotelCode") Long hotelCode);
+    
     @Query(value = "SELECT htl.* FROM hotel htl " +
-            "where htl.hotel_code= :hotelCode and htl.availability = true", nativeQuery = true)
-    HotelEntity getHotelsById(@Param("hotelCode") Long hotelCode);
+            "where htl.hotel_code= :hotelCode", nativeQuery = true)
+    HotelEntity getHotelsByIdForUpdate(@Param("hotelCode") Long hotelCode);
 
     @Query(value = "SELECT htl.* FROM hotel htl " +
             "where htl.availability = true", nativeQuery = true)
