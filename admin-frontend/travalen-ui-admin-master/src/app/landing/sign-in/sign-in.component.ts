@@ -18,6 +18,7 @@ export class SignInComponent implements OnInit {
   });
   error: any;
   showPass: boolean = false;
+  isLoading: boolean = false; // Add loading state
 
   showPasswordSec: boolean = false;
   showEmailSec: boolean = true;
@@ -55,13 +56,23 @@ export class SignInComponent implements OnInit {
       password: this.userForm.get('password')?.getRawValue()
     }
 
-    this.accountService.signIn(req).subscribe(resp=>{
-      if(resp.status === 'SUCCESS') {
-        localStorage.setItem("auth", resp.jwt);
-        this.dialogRef.close();
-        this.router.navigateByUrl("/travalen/dashboard");
-      } else {
-        this.error = resp.message || "Invalid email or password. Please try again.";
+    this.isLoading = true; // Start loading
+    this.error = null; // Clear previous errors
+
+    this.accountService.signIn(req).subscribe({
+      next: (resp) => {
+        if(resp.status === 'SUCCESS') {
+          localStorage.setItem("auth", resp.jwt);
+          this.dialogRef.close();
+          this.router.navigateByUrl("/travalen/dashboard");
+        } else {
+          this.error = resp.message || "Invalid email or password. Please try again.";
+        }
+        this.isLoading = false; // Stop loading
+      },
+      error: (err) => {
+        this.error = "An error occurred. Please try again.";
+        this.isLoading = false; // Stop loading on error
       }
     });
 

@@ -20,6 +20,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -69,40 +70,79 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     }
 
+    
     @Override
     public String userRegister(AuthRequestDto req) {
         UserEntity user = userRepo.getUser(req.getEmailId());
         if(Objects.nonNull(user)) {
-            return "User already exist";
+            // Check if user is already active
+            if ("active".equals(user.getStatus())) {
+                return "User already exists and is active. Please sign in instead.";
+            }
+            // If user exists but isn't active, allow OTP resend
         }
-        String body =  "<html>Dear "+ req.getFirstName() +",<br><br>  Your OTP is " + otpService.generateOtp(req.getEmailId()) + ". Use this otp to log in to Travalen Partner Application. This otp is valid for only 5 minutes. <br><br> Regards, <br> Team Travalen</html>";
+        
+        // Generate OTP
+        String otp = otpService.generateOtp(req.getEmailId());
+        
+        // Prepare email content with HTML formatting
+        String body = "<html>Dear "+ req.getFirstName() +",<br><br>  Your OTP is " + otp + 
+                     ". Use this OTP to register for Travalen Partner Application. This OTP is valid for only 5 minutes. <br><br> Regards, <br> Team Travalen</html>";
+        
         EmailDetailDto emailDto = EmailDetailDto.builder()
                 .subject("OTP verification for Travalen Application")
                 .msgBody(body)
                 .recipient(req.getEmailId())
                 .build();
 
-
-
-        return "Email send";
+        // Send email with error handling
+        try {
+            emailService.sendEmailWithHtmlTemplate(emailDto);
+            return "OTP sent to your email";
+        } catch (Exception e) {
+            // Clear OTP if email fails
+            otpService.clearOtp(req.getEmailId());
+            throw new RuntimeException("Failed to send OTP email: " + e.getMessage(), e);
+        }
     }
-
+    
     @Override
+    @Transactional
     public String saveNewUser(AuthRequestDto req) {
         try {
             UserEntity user = userRepo.getUser(req.getEmailId());
-
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             Set<RoleEntity> roles = new HashSet<>();
             RoleEntity roleEntity = roleRepo.findByRoleName("Hotel Admin");
             roles.add(roleEntity);
+            
+            HotelEntity savedHotel;
+            
             if(Objects.isNull(user)) {
-                Set<HotelEntity> hotel = new HashSet<>();
-
-               
-                hotel.add( HotelEntity.builder().hotelName(req.getHotelName()).active(false).build());
+                // Create a default location if needed
+                LocationEntity defaultLocation = locationRepo.findByLocation("TBD");
+                if (Objects.isNull(defaultLocation)) {
+                    defaultLocation = locationRepo.save(LocationEntity.builder().location("TBD").build());
+                }
                 
- 
+                // Create hotel with all required fields
+                HotelEntity newHotel = HotelEntity.builder()
+                    .hotelName(req.getHotelName())
+                    .location(defaultLocation)
+                    .address("TBD") // Default address to be updated later
+                    .email(req.getEmailId()) // Use the user's email
+                    .availability(true)
+                    .active(true)
+                    .build();
+                
+                // Save hotel first to get the hotel code
+                savedHotel = hotelRepo.save(newHotel);
+                
+                // Refresh the hotel entity to ensure we have the latest data
+                savedHotel = hotelRepo.findById(savedHotel.getHotelCode()).orElse(savedHotel);
+                
+                Set<HotelEntity> hotel = new HashSet<>();
+                hotel.add(savedHotel);
                 
                 user = UserEntity.builder()
                         .userName(req.getFirstName())
@@ -123,6 +163,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                         .hotels(hotel)
                         .build();
             } else {
+                // Update existing user
                 user.setUserName(req.getFirstName());
                 user.setEmailId(req.getEmailId());
                 user.setPhone(req.getPhoneNo());
@@ -133,96 +174,59 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 user.setFirstName(req.getFirstName());
                 user.setLastName(req.getLastName());
                 user.setStatus("active");
+                user.setContactNumber(req.getContactNumber());
+                user.setContactPerson(req.getContactPerson());
+                user.setDesignation(req.getDesignation());
+                user.setWhatsappNumber(req.getWhatsappNumber());
+                user.setHotelName(req.getHotelName());
+                
+                // If the user doesn't have a hotel yet, create one
+                if (user.getHotels() == null || user.getHotels().isEmpty()) {
+                    LocationEntity defaultLocation = locationRepo.findByLocation("TBD");
+                    if (Objects.isNull(defaultLocation)) {
+                        defaultLocation = locationRepo.save(LocationEntity.builder().location("TBD").build());
+                    }
+                    
+                    HotelEntity newHotel = HotelEntity.builder()
+                        .hotelName(req.getHotelName())
+                        .location(defaultLocation)
+                        .address("TBD")
+                        .email(req.getEmailId())
+                        .availability(true)
+                        .active(true)
+                        .build();
+                        
+                    // Save hotel first to get the hotel code
+                    savedHotel = hotelRepo.save(newHotel);
+                    
+                    // Refresh the hotel entity to ensure we have the latest data
+                    savedHotel = hotelRepo.findById(savedHotel.getHotelCode()).orElse(savedHotel);
+                    
+                    Set<HotelEntity> hotel = new HashSet<>();
+                    hotel.add(savedHotel);
+                    user.setHotels(hotel);
+                } else {
+                    // Use existing hotel
+                    savedHotel = user.getHotels().iterator().next();
+                    // Refresh the hotel entity to ensure we have the latest data
+                    savedHotel = hotelRepo.findById(savedHotel.getHotelCode()).orElse(savedHotel);
+                }
             }
 
-            userRepo.save(user);
+            UserEntity savedUser = userRepo.save(user);
+            
+            // Ensure hotel code is not null
+            if (savedHotel.getHotelCode() == null) {
+                throw new RuntimeException("Hotel code is null after saving");
+            }
+            
+            // Return the hotel code for frontend use
+            return "success:" + savedHotel.getHotelCode();
         }
         catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Error saving user: " + e.getMessage(), e);
         }
-        return "success";
     }
-    
-    
-//    @Override
-//    public String saveNewUser(AuthRequestDto req) {
-//        try {
-//            UserEntity user = userRepo.getUser(req.getEmailId());
-//            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-//            Set<RoleEntity> roles = new HashSet<>();
-//            RoleEntity roleEntity = roleRepo.findByRoleName("Hotel Admin");
-//            roles.add(roleEntity);
-//
-//           
-//            Set<HotelEntity> hotels = new HashSet<>();
-//
-//            if (Objects.isNull(user)) {
-//               
-//                LocationEntity defaultLocation = locationRepo.findByLocation("TBD");
-//                if (Objects.isNull(defaultLocation)) {
-//                    defaultLocation = locationRepo.save(LocationEntity.builder().location("TBD").build());
-//                }
-//
-//                
-//                HotelEntity hotel = HotelEntity.builder()
-//                        .hotelName(req.getHotelName())
-//                        .location(defaultLocation)
-//                        .address("TBD")
-//                        .email(req.getEmailId())
-//                        .availability(false) 
-//                        .build();
-//
-//                hotels.add(hotel);
-//
-//                
-//                user = UserEntity.builder()
-//                        .userName(req.getFirstName())
-//                        .emailId(req.getEmailId())
-//                        .phone(req.getPhoneNo())
-//                        .password(passwordEncoder.encode(req.getPassword()))
-//                        .roles(roles)
-//                        .countryCode(req.getCountryCode())
-//                        .userType(UserType.EXTERNAL.name())
-//                        .firstName(req.getFirstName())
-//                        .lastName(req.getLastName())
-//                        .status("active")
-//                        .contactNumber(req.getContactNumber())
-//                        .contactPerson(req.getContactPerson())
-//                        .designation(req.getDesignation())
-//                        .whatsappNumber(req.getWhatsappNumber())
-//                        .hotelName(req.getHotelName())
-//                        .hotels(hotels)
-//                        .build();
-//            } else {
-//            
-//                user.setUserName(req.getFirstName());
-//                user.setEmailId(req.getEmailId());
-//                user.setPhone(req.getPhoneNo());
-//                user.setPassword(passwordEncoder.encode(req.getPassword()));
-//                user.setRoles(roles);
-//                user.setCountryCode(req.getCountryCode());
-//                user.setUserType(UserType.EXTERNAL.name());
-//                user.setFirstName(req.getFirstName());
-//                user.setLastName(req.getLastName());
-//                user.setStatus("active");
-//
-//                
-//                if (user.getHotels() != null && !user.getHotels().isEmpty()) {
-//                    hotels = user.getHotels();
-//                }
-//            }
-//
-//          
-//            UserEntity savedUser = userRepo.save(user);
-//
-//          
-//            return "success:" + (hotels.isEmpty() ? "NA" : hotels.iterator().next().getHotelCode());
-//
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
-
     
 
     @Override
@@ -246,6 +250,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         if(Objects.nonNull(user)) {
             user.setPassword(passwordEncoder.encode(req.getPassword()));
+            userRepo.save(user); // Added save operation
         } else {
             return "User not exist";
         }

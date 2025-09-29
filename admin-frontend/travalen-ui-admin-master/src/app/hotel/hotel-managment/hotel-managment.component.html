@@ -1,7 +1,8 @@
 <div class="tab-container-wrapper">
-	<div *ngIf="isSaving" class="loading-overlay">
+	<div *ngIf="isSaving || isLoadingHotel" class="loading-overlay">
 	  <mat-spinner diameter="40"></mat-spinner>
-	  <span>Saving changes...</span>
+	  <!-- <span>Saving changes...</span> -->
+	  <span>{{ isSaving ? 'Saving changes...' : 'Loading hotel...' }}</span>
 	</div>
   
 	<mat-tab-group animationDuration="0ms">
@@ -382,7 +383,8 @@
 	  </mat-tab>
   
 	  <!-- CONTACT PERSON TAB -->
-	  <mat-tab label="Contact Person" [disabled]="!isHotelLoaded">
+
+	  <!-- <mat-tab label="Contact Person" [disabled]="!isHotelLoaded">
 		<div class="container-fluid">
 		  <form [formGroup]="contactForm">
 			<div class="finances-long-bar">
@@ -431,7 +433,64 @@
 			</div>
 		  </form>
 		</div>
-	  </mat-tab>
+	  </mat-tab> -->
+
+	  <!-- CONTACT PERSON TAB -->
+<mat-tab label="Contact Person" [disabled]="!isHotelLoaded">
+	<div class="container-fluid">
+	  <form [formGroup]="contactForm" (ngSubmit)="saveContact()">
+		<div class="finances-long-bar">
+		  
+		  <div class="form-header">
+			<h4 class="form-title">Contact Person</h4>
+		  </div>
+  
+		  <div class="form-section">
+			<div class="row g-3">
+			  <div class="col-12 col-md-6">
+				<label class="form-label">First Name</label>
+				<input class="form-control" type="text" formControlName="firstName" required>
+			  </div>
+			  <div class="col-12 col-md-6">
+				<label class="form-label">Last Name</label>
+				<input class="form-control" type="text" formControlName="lastName" required>
+			  </div>
+			  <div class="col-12 col-md-6">
+				<label class="form-label">Phone Number</label>
+				<input class="form-control" type="tel" formControlName="phone" required>
+			  </div>
+			  <div class="col-12 col-md-6">
+				<label class="form-label">WhatsApp Number</label>
+				<input class="form-control" type="tel" formControlName="whatsapp">
+			  </div>
+			  <div class="col-12 col-md-6">
+				<label class="form-label">Email</label>
+				<input class="form-control" type="email" formControlName="email" required>
+			  </div>
+			  <div class="col-12 col-md-6">
+				<label class="form-label">Designation</label>
+				<input class="form-control" type="text" formControlName="designation" required>
+			  </div>
+			</div>
+		  </div>
+  
+		  <div class="form-actions">
+			<div class="d-flex justify-content-end">
+			  <button type="submit" class="btn btn-primary" [disabled]="isSaving">
+				<i class="fas fa-save me-2"></i>
+				<span *ngIf="!isSaving">Save Contact</span>
+				<span *ngIf="isSaving">
+				  <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+				  Saving...
+				</span>
+			  </button>
+			</div>
+		  </div>
+  
+		</div>
+	  </form>
+	</div>
+  </mat-tab>
   
 	</mat-tab-group>
   </div>

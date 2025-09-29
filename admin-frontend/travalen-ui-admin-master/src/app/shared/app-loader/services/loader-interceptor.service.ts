@@ -1,7 +1,8 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { LoaderService } from './loader.service';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +10,8 @@ import { LoaderService } from './loader.service';
 export class LoaderInterceptorService implements HttpInterceptor {
 
   private loaderCounter: number = 0;
-
   private requests: HttpRequest<any>[] = [];
+  
   constructor(private loaderService: LoaderService) { }
 
   removeRequest(req: HttpRequest<any>) {
@@ -22,46 +23,40 @@ export class LoaderInterceptorService implements HttpInterceptor {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (req.headers.get("disableLoader") === undefined || req.headers.get("disableLoader") === null || req.headers.get("disableLoader") === 'false') {
-      this.showLoader()
+    // Check if loader should be shown
+    const disableLoader = req.headers.get("disableLoader");
+    const shouldShowLoader = disableLoader === undefined || disableLoader === null || disableLoader === 'false';
+    
+    if (shouldShowLoader) {
+      this.showLoader();
     }
-    if (req.headers.get("disableLoader") !== undefined && req.headers.get("disableLoader") !== null) {
-      req.headers.delete('disableLoader')
+    
+    // Create a new request without the disableLoader header if it exists
+    let newReq = req;
+    if (disableLoader !== undefined && disableLoader !== null) {
+      newReq = req.clone({ headers: req.headers.delete('disableLoader') });
     }
-    this.requests.push(req);
+    
+    this.requests.push(newReq);
 
-    return Observable.create((observer: { next: (arg0: HttpResponse<any>) => void; error: (arg0: any) => void; complete: () => void; }) => {
-      const subscription = next.handle(req)
-        .subscribe(
-          event => {
-            if (event instanceof HttpResponse) {
-              
-              this.removeRequest(req);
-              observer.next(event);
-            }
-          },
-          err => {
-            this.removeRequest(req);
-            observer.error(err.status);
-            if (err.status === 401 || err.status === 403) {
-             localStorage.clear()
-              window.location.reload();
-            }
-          },
-          () => {
-            this.removeRequest(req);
-            observer.complete();
-          });
-      return () => {
-        this.removeRequest(req);
-        subscription.unsubscribe();
-      };
-    });
+    return next.handle(newReq).pipe(
+      catchError(err => {
+        this.removeRequest(newReq);
+        
+        // Handle authentication errors
+        if (err.status === 401 || err.status === 403) {
+          localStorage.clear();
+          window.location.reload();
+        }
+        
+        // Pass the full error object, not just the status
+        return throwError(err);
+      })
+    );
   }
 
   protected showLoader() {
     this.loaderCounter++;
-    //if not loading show
     if (!this.loaderService.isLoading.value) {
       this.loaderService.isLoading.next(true);
     }
@@ -70,7 +65,6 @@ export class LoaderInterceptorService implements HttpInterceptor {
   protected hideLoader() {
     if (this.loaderCounter === 0) return;
     this.loaderCounter--;
-    //hide loader if counter is 0 and showing
     if (this.loaderCounter === 0 && this.loaderService.isLoading.value) {
       this.loaderService.isLoading.next(false);
     }

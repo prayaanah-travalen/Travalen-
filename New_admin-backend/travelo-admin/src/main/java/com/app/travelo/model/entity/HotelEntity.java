@@ -11,8 +11,10 @@ import java.util.Set;
 @Setter
 @Entity
 @Builder
+
 @AllArgsConstructor
-@EqualsAndHashCode
+//@EqualsAndHashCode
+@EqualsAndHashCode(exclude = {"finance"}) 
 @NoArgsConstructor
 @Table(name = "hotel")
 public class HotelEntity {
@@ -96,5 +98,8 @@ public class HotelEntity {
 
     @OneToOne(mappedBy = "hotel", cascade = CascadeType.ALL)
     private FinanceEntity finance;
+    
+    @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<ContactPersonEntity> contactPersons;
 
 }

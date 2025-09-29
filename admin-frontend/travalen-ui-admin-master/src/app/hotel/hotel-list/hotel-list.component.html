@@ -3,8 +3,14 @@
 <div class="button-div" >
   <button [routerLink]="['hotel/0']">Add Hotel</button>
 </div>
-<table mat-table [dataSource]="hotels" class="mat-elevation-z8">
 
+<div *ngIf="isLoading" class="loading-container">
+  <mat-spinner diameter="40"></mat-spinner>
+  <span>Loading hotels...</span>
+</div>
+
+<table mat-table [dataSource]="hotels" class="mat-elevation-z8"   *ngIf="!isLoading">
+  <!-- <table mat-table [dataSource]="hotels" class="mat-elevation-z8"> -->
     <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
   

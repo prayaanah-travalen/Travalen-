@@ -32,4 +32,7 @@ public class AuthRequestDto implements Serializable {
 
     private String designation;
 
+    
+    private Long hotelCode; 
+    
 }

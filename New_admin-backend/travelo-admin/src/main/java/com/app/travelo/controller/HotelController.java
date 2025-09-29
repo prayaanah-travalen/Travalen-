@@ -53,5 +53,10 @@ public class HotelController {
 
         return new ResponseEntity<>(hotelService.getHotelById(id), HttpStatus.OK);
     }
+    
+    @PostMapping("/contact/save")
+    public ResponseEntity<ResponseDto<ContactPersonDto>> saveContactPerson(@RequestBody ContactPersonDto contactPerson) {
+        return new ResponseEntity<>(hotelService.saveContactPerson(contactPerson), HttpStatus.OK);
+    }
 
 }

@@ -15,9 +15,13 @@ export class ForgetPasswordComponent implements OnInit {
   showemail: boolean = true;
   showPasswordSec: boolean = false;
 
-  
   showPass: boolean = false;
   showConfirmPass: boolean = false;
+
+  // Loading states
+  isLoadingSendOtp: boolean = false;
+  isLoadingVerifyOtp: boolean = false;
+  isLoadingSubmit: boolean = false;
 
   userForm = this.fb.group({
     email: ["",[Validators.email]],
@@ -28,10 +32,12 @@ export class ForgetPasswordComponent implements OnInit {
   otp: string = '';
   otpError: string = '';
 
-  constructor( private accountService: AccountService,
+  constructor(
+    private accountService: AccountService,
     private fb: NonNullableFormBuilder,
     private router: Router,
-    private dialogRef: DialogRef,) { }
+    private dialogRef: DialogRef,
+  ) { }
 
   ngOnInit(): void {
   }
@@ -42,7 +48,6 @@ export class ForgetPasswordComponent implements OnInit {
     this.showPasswordSec = false;
   }
 
-  
   showPassSec() {
     this.showOtp = false;
     this.showemail = false;
@@ -58,15 +63,25 @@ export class ForgetPasswordComponent implements OnInit {
       return false;
     }
 
-    let req= {
+    this.isLoadingSendOtp = true;
+    this.error = '';
+
+    let req = {
       emailId: this.userForm.get('email')?.getRawValue()
     }
 
-    this.accountService.sendOtp(req).subscribe(resp=>{
-      if(resp.status === 'SUCCESS') {
-        this.showOtpSec();
-      } else {
-        this.error = resp.message;
+    this.accountService.sendOtp(req).subscribe({
+      next: (resp) => {
+        this.isLoadingSendOtp = false;
+        if(resp.status === 'SUCCESS') {
+          this.showOtpSec();
+        } else {
+          this.error = resp.message;
+        }
+      },
+      error: (err) => {
+        this.isLoadingSendOtp = false;
+        this.error = 'Failed to send OTP. Please try again.';
       }
     });
 
@@ -81,19 +96,30 @@ export class ForgetPasswordComponent implements OnInit {
     this.otpError = '';
     if(this.otp === '') {
       this.otpError = "Please enter valid otp";
-    }
-    let req = {
-      emailId: this.userForm.get('email')?.getRawValue(),
-      otp:  this.otp
+      return;
     }
 
-    this.accountService.forgotPassOtpVerify(req).subscribe(resp=>{
+    this.isLoadingVerifyOtp = true;
+
+    let req = {
+      emailId: this.userForm.get('email')?.getRawValue(),
+      otp: this.otp
+    }
+
+    this.accountService.forgotPassOtpVerify(req).subscribe({
+      next: (resp) => {
+        this.isLoadingVerifyOtp = false;
         if(resp.status === 'SUCCESS') {
-         this.showPassSec();
+          this.showPassSec();
         } else {
           this.otpError = resp.message;
         }
-    })
+      },
+      error: (err) => {
+        this.isLoadingVerifyOtp = false;
+        this.otpError = 'Failed to verify OTP. Please try again.';
+      }
+    });
   }
 
   submit() {
@@ -104,24 +130,32 @@ export class ForgetPasswordComponent implements OnInit {
 
     if(this.userForm.get('password')?.getRawValue() !== this.userForm.get('confirmPassword')?.getRawValue()) {
       this.userForm.controls['confirmPassword'].setErrors({ 'required': null });
-      // this.userForm.controls['password'].setErrors({ 'required': null });
     }
 
     if(!this.userForm.valid) {
       return false;
     }
+
+    this.isLoadingSubmit = true;
     
-    let req= {
+    let req = {
       emailId: this.userForm.get('email')?.getRawValue(),
       password: this.userForm.get('password')?.getRawValue()
     }
 
-    this.accountService.chamgePassword(req).subscribe(resp=>{
-      if(resp.status === 'SUCCESS') {
-        localStorage.setItem("auth", resp.jwt);
-        this.dialogRef.close();
-        this.router.navigateByUrl("/travalen/dashboard");
-      } 
+    this.accountService.chamgePassword(req).subscribe({
+      next: (resp) => {
+        this.isLoadingSubmit = false;
+        if(resp.status === 'SUCCESS') {
+          localStorage.setItem("auth", resp.jwt);
+          this.dialogRef.close();
+          this.router.navigateByUrl("/travalen/dashboard");
+        }
+      },
+      error: (err) => {
+        this.isLoadingSubmit = false;
+        this.error = 'Failed to reset password. Please try again.';
+      }
     });
    
     return true;

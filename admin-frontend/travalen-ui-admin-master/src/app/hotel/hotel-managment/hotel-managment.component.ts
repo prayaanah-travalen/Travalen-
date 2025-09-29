@@ -13,6 +13,7 @@ import { FinanceModel } from 'src/app/data-access/model/finance.model';
 import { CommonParamModel } from 'src/app/data-access/model/common-param.model';
 import { UtilService } from 'src/app/data-access/services/utils.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { UserStateService } from 'src/app/data-access/services/user-state.service';
 
 @Component({
   selector: 'app-hotel-managment',
@@ -84,6 +85,8 @@ export class HotelManagmentComponent implements OnInit {
   roomPackage: CommonParamModel[] = [];
   amenities: CommonParamModel[] = [];
 
+
+  isLoadingHotel = false;
   // Getter to check if hotel is loaded and has a hotel code
   get isHotelLoaded(): boolean {
     return !!(this.hotel?.hotelCode);
@@ -96,7 +99,8 @@ export class HotelManagmentComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private financeService: FinanceService,
     private utilService: UtilService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private userStateService: UserStateService
   ) { }
 
   ngOnInit(): void {
@@ -140,61 +144,15 @@ export class HotelManagmentComponent implements OnInit {
     this.hotelImages = [];
   }
 
-  // updateHotel(): void {
-  //   if (!this.validate() || !this.hotelForm.valid) {
-  //     this.markFormGroupTouched(this.hotelForm);
-  //     return;
-  //   }
 
-  //   this.isSaving = true;
-
-  //   let req: HotelReqModel = {
-  //     hotelName: this.hotelForm.get('hotelName')?.getRawValue(),
-  //     location: this.hotelForm.get('location')?.getRawValue(),
-  //     address: this.hotelForm.get('address')?.getRawValue(),
-  //     websiteLink: this.hotelForm.get('websiteLink')?.getRawValue(), // Fixed: Now properly included
-  //     amenities: this.amenityList, // Fixed: Now properly included
-  //     about: this.hotelForm.get('about')?.getRawValue(),
-  //     propertyRule: this.hotelForm.get('propertyRule')?.getRawValue(),
-  //     deletedImages: this.deletedImages,
-  //     email: this.hotelForm.get('email')?.getRawValue(),
-  //     latitude: this.hotelForm.get('latitude')?.getRawValue(), // Fixed: Now properly included
-  //     longitude: this.hotelForm.get('longitude')?.getRawValue(), // Fixed: Now properly included
-  //     hotelCode: this.hotelCode
-  //   };
-
-  //   this.hotelService.saveHotelWithFormData(req, this.hotelImages).subscribe({
-  //     next: (resp) => {
-  //       this.isSaving = false;
-  //       if (resp.response) {
-  //         this.hotel = resp.response;
-  //         this.setFormFields(this.hotel); 
-
-  //         this.savedImages = this.hotel.images;
-  //         this.hotelImages = [];
-  //         this.deletedImages = [];
-  //         this.snackBar.open('Hotel updated successfully!', 'Close', { duration: 3000 });
-  //         this.hotelAction = 'MODIFY';
-  //         this.hotelForm.disable();
-  //       }
-  //     },
-  //     error: (err) => {
-  //       this.isSaving = false;
-  //       console.error('Error updating hotel:', err);
-  //       this.snackBar.open('Error updating hotel!', 'Close', { duration: 3000 });
-  //     }
-  //   });
-  // }
-
+  
   updateHotel(): void {
-   
     if (!this.validate() || !this.hotelForm.valid) {
       this.markFormGroupTouched(this.hotelForm);
       return;
     }
   
     this.isSaving = true;
-  
     
     let req: HotelReqModel = {
       hotelName: this.hotelForm.get('hotelName')?.getRawValue(),
@@ -208,19 +166,24 @@ export class HotelManagmentComponent implements OnInit {
       email: this.hotelForm.get('email')?.getRawValue(),
       latitude: this.hotelForm.get('latitude')?.getRawValue(),
       longitude: this.hotelForm.get('longitude')?.getRawValue(),
-      hotelCode: this.hotelCode
+      // FIX: Always include hotelCode when updating
+      hotelCode: this.hotelCode 
     };
-  
     
+    // Rest of the method remains the same...
     this.hotelService.saveHotelWithFormData(req, this.hotelImages).subscribe({
       next: (resp) => {
         this.isSaving = false;
         if (resp.response) {
           this.hotel = resp.response;
-  
+          // Update hotelCode from response if needed
+          if (resp.response.hotelCode) {
+            this.hotelCode = resp.response.hotelCode;
+            localStorage.setItem("hotelId", JSON.stringify(this.hotelCode));
+          }
           
           this.setFormFields(this.hotel);
-  
+          this.userStateService.updateHotelName(this.hotel.hotelName || '');
           
           if (resp.response.images) {
             this.savedImages = [...resp.response.images];
@@ -229,11 +192,8 @@ export class HotelManagmentComponent implements OnInit {
           this.hotelImages = [];
           this.deletedImages = [];
   
-          // Notify user
           this.snackBar.open('Hotel updated successfully!', 'Close', { duration: 3000 });
           
-          
-
           // Switch to MODIFY mode and disable form
           this.hotelAction = 'MODIFY';
           this.hotelForm.disable();
@@ -246,7 +206,8 @@ export class HotelManagmentComponent implements OnInit {
       }
     });
   }
-  
+ 
+
 
   getHotelById() {
     let hotelId = 0;
@@ -261,19 +222,33 @@ export class HotelManagmentComponent implements OnInit {
       this.hotelForm.enable();
       return;
     }
+  
+    this.isLoadingHotel = true;
+    this.hotelService.getHotelById(hotelId).subscribe({
+      next: (resp) => {
+        if (resp !== null) {
+          this.hotel = resp;
+          // FIX: Add this line to properly set the hotelCode property
+          this.hotelCode = this.hotel.hotelCode; 
+          localStorage.setItem("hotelId", JSON.stringify(this.hotel?.hotelCode));
 
-    this.hotelService.getHotelById(hotelId).subscribe(resp => {
-      if (resp !== null) {
-        this.hotel = resp;
-        localStorage.setItem("hotelId", JSON.stringify(this.hotel?.hotelCode));
-        this.setFormFields(this.hotel);
-        this.savedImages = this.hotel.images;
-        this.hotelAction = 'MODIFY';
-        this.disableEnableForm();
+          this.userStateService.updateHotelName(this.hotel.hotelName || '');
+
+          this.setFormFields(this.hotel);
+          this.savedImages = this.hotel.images;
+          this.hotelAction = 'MODIFY';
+          this.disableEnableForm();
+        }
+        this.isLoadingHotel = false;
+      },
+      error: (err) => {
+        console.error('Error loading hotel details:', err);
+        this.isLoadingHotel = false;
+        this.snackBar.open('Error loading hotel details', 'Close', { duration: 3000 });
       }
     });
   }
-
+  
   disableEnableForm() {
     if (this.hotelAction === 'MODIFY') {
       this.hotelForm.disable();
@@ -301,38 +276,68 @@ export class HotelManagmentComponent implements OnInit {
     this.hotelImages = event;
   }
 
+  
+
+ 
+
   saveHotel() {
+    console.log('=== SAVE HOTEL DEBUG INFO ===');
+    console.log('Form valid:', this.hotelForm.valid);
+    console.log('Form errors:', this.hotelForm.errors);
+    console.log('Form values:', this.hotelForm.getRawValue());
+    console.log('Amenity list:', this.amenityList);
+    console.log('Hotel images count:', this.hotelImages?.length || 0);
+    console.log('Hotel code:', this.hotelCode);
+  
     if (!this.validate() || !this.hotelForm.valid) {
+      console.log('VALIDATION FAILED');
+      console.log('Hotel Name valid:', this.hotelForm.get('hotelName')?.valid);
+      console.log('Location valid:', this.hotelForm.get('location')?.valid);
+      console.log('Address valid:', this.hotelForm.get('address')?.valid);
+      console.log('Email valid:', this.hotelForm.get('email')?.valid);
       this.markFormGroupTouched(this.hotelForm);
       return;
     }
-
+  
+    console.log('Validation passed, proceeding with save...');
     this.isSaving = true;
-
+  
     let req: HotelReqModel = {
       hotelName: this.hotelForm.get('hotelName')?.getRawValue(),
       location: this.hotelForm.get('location')?.getRawValue(),
       address: this.hotelForm.get('address')?.getRawValue(),
-      websiteLink: this.hotelForm.get('websiteLink')?.getRawValue(), // Fixed: Now properly included
-      amenities: this.amenityList, // Fixed: Now properly included
+      websiteLink: this.hotelForm.get('websiteLink')?.getRawValue(),
+      amenities: this.amenityList,
       about: this.hotelForm.get('about')?.getRawValue(),
       propertyRule: this.hotelForm.get('propertyRule')?.getRawValue(),
       deletedImages: this.deletedImages,
       email: this.hotelForm.get('email')?.getRawValue(),
-      latitude: this.hotelForm.get('latitude')?.getRawValue(), // Fixed: Now properly included
-      longitude: this.hotelForm.get('longitude')?.getRawValue() // Fixed: Now properly included
+      latitude: this.hotelForm.get('latitude')?.getRawValue(),
+      longitude: this.hotelForm.get('longitude')?.getRawValue()
     };
-
-    if (this.hotelCode > 0) {
-      req['hotelCode'] = this.hotelCode;
+  
+    if (this.hotelCode && this.hotelCode > 0) {
+      req.hotelCode = this.hotelCode;
     }
-
+  
+    console.log('Saving hotel request:', req);
+    console.log('Hotel images count:', this.hotelImages?.length || 0);
+  
     this.hotelService.saveHotelWithFormData(req, this.hotelImages).subscribe({
       next: (resp) => {
         this.isSaving = false;
-        if (resp.response) {
+        console.log('Save response:', resp);
+  
+        if (resp && resp.response) {
           this.hotel = resp.response;
-          localStorage.setItem("hotelId", JSON.stringify(this.hotel?.hotelCode));
+  
+          if (!this.hotelCode || this.hotelCode === 0) {
+            this.hotelCode = this.hotel.hotelCode;
+            localStorage.setItem("hotelId", JSON.stringify(this.hotel?.hotelCode));
+          }
+          
+          this.userStateService.updateHotelName(this.hotel.hotelName || '');
+
           this.setFormFields(this.hotel);
           this.savedImages = this.hotel.images;
           this.hotelImages = [];
@@ -340,15 +345,33 @@ export class HotelManagmentComponent implements OnInit {
           this.snackBar.open('Hotel saved successfully!', 'Close', { duration: 3000 });
           this.hotelAction = 'MODIFY';
           this.hotelForm.disable();
+        } else {
+          const errorMessage = resp?.errorMessage || 'Error saving hotel';
+          console.error('Save failed:', errorMessage);
+          this.snackBar.open(errorMessage, 'Close', { duration: 5000 });
         }
       },
       error: (err) => {
         this.isSaving = false;
         console.error('Error saving hotel:', err);
-        this.snackBar.open('Error saving hotel!', 'Close', { duration: 3000 });
+  
+        let errorMessage = 'Error saving hotel!';
+        if (err.error && err.error.errorMessage) {
+          errorMessage = err.error.errorMessage;
+        } else if (err.message) {
+          errorMessage = err.message;
+        } else if (err.status) {
+          errorMessage = `Server returned ${err.status}: ${err.statusText}`;
+        }
+  
+        this.snackBar.open(errorMessage, 'Close', { duration: 5000 });
       }
     });
   }
+  
+  
+  
+
 
   validate(): boolean {
     const hotelName = this.hotelForm.get('hotelName')?.getRawValue();
@@ -417,7 +440,8 @@ export class HotelManagmentComponent implements OnInit {
         phone: hotel.conatctDetails[0].contactNumber,
         designation: hotel.conatctDetails[0].designation,
         firstName: hotel.conatctDetails[0].firstName,
-        lastName: hotel.conatctDetails[0].lastNamestName,
+        // lastName: hotel.conatctDetails[0].lastNamestName,
+        lastName: hotel.conatctDetails[0].lastName,
         email: hotel.conatctDetails[0].email,
       });
     }
@@ -517,5 +541,65 @@ export class HotelManagmentComponent implements OnInit {
       }
     });
   }
+
+
+  // Add this method to HotelManagmentComponent.ts
+saveContact(): void {
+  if (!this.hotel?.hotelCode) {
+    this.snackBar.open('Please save hotel details first', 'Close', { duration: 3000 });
+    return;
+  }
+
+  if (this.contactForm.invalid) {
+    this.markFormGroupTouched(this.contactForm);
+    this.snackBar.open('Please fill all required fields', 'Close', { duration: 3000 });
+    return;
+  }
+
+  this.isSaving = true;
+
+  const contactData = {
+    hotelCode: this.hotel.hotelCode,
+    firstName: this.contactForm.get('firstName')?.getRawValue(),
+    lastName: this.contactForm.get('lastName')?.getRawValue(),
+    phone: this.contactForm.get('phone')?.getRawValue(),
+    whatsapp: this.contactForm.get('whatsapp')?.getRawValue(),
+    email: this.contactForm.get('email')?.getRawValue(),
+    designation: this.contactForm.get('designation')?.getRawValue()
+  };
+
+  this.hotelService.saveContactPerson(contactData).subscribe({
+    next: (resp) => {
+      this.isSaving = false;
+      if (resp.success === "SUCCESS") {
+        this.snackBar.open('Contact person saved successfully!', 'Close', { duration: 3000 });
+        // Update the hotel object with the new contact details
+        if (resp.response) {
+          if (!this.hotel.conatctDetails) {
+            this.hotel.conatctDetails = [];
+          }
+          
+          // Check if contact already exists
+          const existingIndex = this.hotel.conatctDetails.findIndex(
+            contact => contact.email === resp.response.email
+          );
+          
+          if (existingIndex >= 0) {
+            this.hotel.conatctDetails[existingIndex] = resp.response;
+          } else {
+            this.hotel.conatctDetails.push(resp.response);
+          }
+        }
+      } else {
+        this.snackBar.open(resp.errorMessage || 'Error saving contact person', 'Close', { duration: 3000 });
+      }
+    },
+    error: (err) => {
+      this.isSaving = false;
+      console.error('Error saving contact person:', err);
+      this.snackBar.open('Error saving contact person', 'Close', { duration: 3000 });
+    }
+  });
+}
 }
 

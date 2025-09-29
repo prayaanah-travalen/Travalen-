@@ -1,5 +1,6 @@
 <div class="account-container">
 	<form [formGroup]="userForm">
+		<!-- Create Account Section -->
 		<div class="create-account" *ngIf="showCreateAcc">
 			<div class="container-fluid">
 				<div class="row">
@@ -30,94 +31,103 @@
 				</div>
 			</div>
 		</div>
-		<!-- contact details -->
-		<!-- <div class="contact-details" *ngIf="showContact">
+
+		<!-- Contact Details Section -->
+		<div class="contact-details" *ngIf="showContact">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-lg-6">
 						<div class="contact-details-first-section">
-							<img src="./assets/images/color logo.png">
-							<p class="contact-details-para-one">Contact Details.</p>
-							<p class="contact-details-para-two">Enter your full name and phone number to ensure the security of
-								your account.</p>
-							<label class="labels">Hotel Name</label><br>
-							<input
-								[ngClass]="userForm.controls['hotelName'].touched && (userForm.controls['hotelName'].errors || !userForm.controls['hotelName'].valid) ? 'error text'  : 'text' "
-								type="text" placeholder="Hotel Name" formControlName="hotelName">
-							<div class="error-message" *ngIf="userForm.controls['hotelName'].errors?.['required'] && userForm.controls['hotelName'].touched">
-								Hotel name is required
-							</div>
-
-							<label class="labels">First Name</label><br>
-							<input
-								[ngClass]="userForm.controls['fname'].touched && (userForm.controls['fname'].errors || !userForm.controls['fname'].valid) ? 'error text'  : 'text' "
-								type="text" placeholder="First Name" formControlName="fname">
-							<div class="error-message" *ngIf="userForm.controls['fname'].errors?.['required'] && userForm.controls['fname'].touched">
-								First name is required
-							</div>
-							<div class="error-message" *ngIf="userForm.controls['fname'].errors?.['pattern'] && userForm.controls['fname'].touched">
-								First name should only contain letters and spaces
-							</div>
-
-							<label class="labels">Last Name</label><br>
-							<input
-								[ngClass]="userForm.controls['lname'].touched && (userForm.controls['lname'].errors || !userForm.controls['lname'].valid) ? 'error text'  : 'text' "
-								type="text" placeholder="Last Name" formControlName="lname">
-							<div class="error-message" *ngIf="userForm.controls['lname'].errors?.['required'] && userForm.controls['lname'].touched">
-								Last name is required
-							</div>
-							<div class="error-message" *ngIf="userForm.controls['lname'].errors?.['pattern'] && userForm.controls['lname'].touched">
-								Last name should only contain letters and spaces
-							</div>
-
-							<label class="labels">Phone Number</label><br>
-							<div class="row">
-								<div class="">
-								<span>
-									<select formControlName="countryCode"
-									[ngClass]="userForm.controls['countryCode'].touched && (userForm.controls['countryCode'].errors || !userForm.controls['countryCode'].valid) ? 'error code'  : 'code' ">
-									<option *ngFor="let code of countryCodes" [value]="code.dial_code">{{code.dial_code}}</option>
-									</select>
-								</span>
-								<input class="Ph-No-text"
-									[ngClass]="userForm.controls['phone'].touched && (userForm.controls['phone'].errors || !userForm.controls['phone'].valid) ? 'error Ph-No-text'  : 'Ph-No-text' "
-									type="text" placeholder="Phone Number" formControlName="phone">
+							<div class="contact-form-content">
+								<div class="form-header">
+									<img src="./assets/images/color logo.png">
+									<p class="contact-details-para-one">Contact Details.</p>
+									<p class="contact-details-para-two">Enter your full name and phone number to ensure the security of your account.</p>
 								</div>
-							</div>
-							<div class="error-message" *ngIf="userForm.controls['phone'].errors?.['required'] && userForm.controls['phone'].touched">
-								Phone number is required
-							</div>
-							<div class="error-message" *ngIf="userForm.controls['phone'].errors?.['pattern'] && userForm.controls['phone'].touched">
-								Please enter a valid phone number
-							</div>
+								
+								<div class="form-fields">
+									<label class="labels">Hotel Name</label><br>
+									<input
+										[ngClass]="userForm.controls['hotelName'].touched && (userForm.controls['hotelName'].errors || !userForm.controls['hotelName'].valid) ? 'error text'  : 'text' "
+										type="text" placeholder="Hotel Name" formControlName="hotelName">
+									<div class="error-message" *ngIf="userForm.controls['hotelName'].errors?.['required'] && userForm.controls['hotelName'].touched">
+										Hotel name is required
+									</div>
 
-							<label class="labels">Whatsapp Number</label><br>
-							<div class="row">
-								<div class="">
-									<span>
-										<select formControlName="whatsappNumCcode"
-											[ngClass]="userForm.controls['whatsappNumCcode'].touched && (userForm.controls['whatsappNumCcode'].errors || !userForm.controls['whatsappNumCcode'].valid) ? 'error code'  : 'code' ">
+									<label class="labels">First Name</label><br>
+									<input
+										[ngClass]="userForm.controls['fname'].touched && (userForm.controls['fname'].errors || !userForm.controls['fname'].valid) ? 'error text'  : 'text' "
+										type="text" placeholder="First Name" formControlName="fname">
+									<div class="error-message" *ngIf="userForm.controls['fname'].errors?.['required'] && userForm.controls['fname'].touched">
+										First name is required
+									</div>
+									<div class="error-message" *ngIf="userForm.controls['fname'].errors?.['pattern'] && userForm.controls['fname'].touched">
+										First name should only contain letters and spaces
+									</div>
+
+									<label class="labels">Last Name</label><br>
+									<input
+										[ngClass]="userForm.controls['lname'].touched && (userForm.controls['lname'].errors || !userForm.controls['lname'].valid) ? 'error text'  : 'text' "
+										type="text" placeholder="Last Name" formControlName="lname">
+									<div class="error-message" *ngIf="userForm.controls['lname'].errors?.['required'] && userForm.controls['lname'].touched">
+										Last name is required
+									</div>
+									<div class="error-message" *ngIf="userForm.controls['lname'].errors?.['pattern'] && userForm.controls['lname'].touched">
+										Last name should only contain letters and spaces
+									</div>
+
+									<label class="labels">Phone Number</label><br>
+									<div class="row">
+										<div class="">
+										<span>
+											<select formControlName="countryCode"
+											[ngClass]="userForm.controls['countryCode'].touched && (userForm.controls['countryCode'].errors || !userForm.controls['countryCode'].valid) ? 'error code'  : 'code' ">
 											<option *ngFor="let code of countryCodes" [value]="code.dial_code">{{code.dial_code}}</option>
-										</select>
-									</span>
-									<input class="Ph-No-text"
-									[ngClass]="userForm.controls['whatsappNum'].touched && (userForm.controls['whatsappNum'].errors || !userForm.controls['whatsappNum'].valid) ? 'error Ph-No-text'  : 'Ph-No-text' "
-									type="text" placeholder="Phone Number" formControlName="whatsappNum">
+											</select>
+										</span>
+										<input class="Ph-No-text"
+											[ngClass]="userForm.controls['phone'].touched && (userForm.controls['phone'].errors || !userForm.controls['phone'].valid) ? 'error Ph-No-text'  : 'Ph-No-text' "
+											type="text" placeholder="Phone Number" formControlName="phone">
+										</div>
+									</div>
+									<div class="error-message" *ngIf="userForm.controls['phone'].errors?.['required'] && userForm.controls['phone'].touched">
+										Phone number is required
+									</div>
+									<div class="error-message" *ngIf="userForm.controls['phone'].errors?.['pattern'] && userForm.controls['phone'].touched">
+										Please enter a valid phone number
+									</div>
+
+									<label class="labels">Whatsapp Number</label><br>
+									<div class="row">
+										<div class="">
+											<span>
+												<select formControlName="whatsappNumCcode"
+													[ngClass]="userForm.controls['whatsappNumCcode'].touched && (userForm.controls['whatsappNumCcode'].errors || !userForm.controls['whatsappNumCcode'].valid) ? 'error code'  : 'code' ">
+													<option *ngFor="let code of countryCodes" [value]="code.dial_code">{{code.dial_code}}</option>
+												</select>
+											</span>
+											<input class="Ph-No-text"
+											[ngClass]="userForm.controls['whatsappNum'].touched && (userForm.controls['whatsappNum'].errors || !userForm.controls['whatsappNum'].valid) ? 'error Ph-No-text'  : 'Ph-No-text' "
+											type="text" placeholder="Phone Number" formControlName="whatsappNum">
+										</div>
+									</div>
+									<div class="error-message" *ngIf="userForm.controls['whatsappNum'].errors?.['pattern'] && userForm.controls['whatsappNum'].touched">
+										Please enter a valid phone number
+									</div>
+									
+									<label class="labels">Designation</label><br>
+									<input
+										[ngClass]="userForm.controls['designation'].touched && (userForm.controls['designation'].errors || !userForm.controls['designation'].valid) ? 'error text'  : 'text' "
+										type="text" placeholder="designation" formControlName="designation">
+									<div class="error-message" *ngIf="userForm.controls['designation'].errors?.['required'] && userForm.controls['designation'].touched">
+										Designation is required
+									</div>
+								</div>
+
+								<div class="form-footer">
+									<button type="button" class="contact-details-btn-one" (click)="showPassowrdSection()">Continue</button>
 								</div>
 							</div>
-							<div class="error-message" *ngIf="userForm.controls['whatsappNum'].errors?.['pattern'] && userForm.controls['whatsappNum'].touched">
-								Please enter a valid phone number
-							</div>
-							
-							<label class="labels">Designation</label><br>
-							<input
-								[ngClass]="userForm.controls['designation'].touched && (userForm.controls['designation'].errors || !userForm.controls['designation'].valid) ? 'error text'  : 'text' "
-								type="text" placeholder="designation" formControlName="designation">
-							<div class="error-message" *ngIf="userForm.controls['designation'].errors?.['required'] && userForm.controls['designation'].touched">
-								Designation is required
-							</div>
-
-							<button type="button" class="contact-details-btn-one" (click)="showPassowrdSection()">Continue</button>
 						</div>
 					</div>
 					<div class="col-lg-6 p-0">
@@ -125,113 +135,9 @@
 					</div>
 				</div>
 			</div>
-		</div> -->
+		</div>
 
-<!-- contact details -->
-<div class="contact-details" *ngIf="showContact">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="contact-details-first-section">
-                    <div class="contact-form-content">
-                        <div class="form-header">
-                            <img src="./assets/images/color logo.png">
-                            <p class="contact-details-para-one">Contact Details.</p>
-                            <p class="contact-details-para-two">Enter your full name and phone number to ensure the security of your account.</p>
-                        </div>
-                        
-                        <div class="form-fields">
-                            <label class="labels">Hotel Name</label><br>
-                            <input
-                                [ngClass]="userForm.controls['hotelName'].touched && (userForm.controls['hotelName'].errors || !userForm.controls['hotelName'].valid) ? 'error text'  : 'text' "
-                                type="text" placeholder="Hotel Name" formControlName="hotelName">
-                            <div class="error-message" *ngIf="userForm.controls['hotelName'].errors?.['required'] && userForm.controls['hotelName'].touched">
-                                Hotel name is required
-                            </div>
-
-                            <label class="labels">First Name</label><br>
-                            <input
-                                [ngClass]="userForm.controls['fname'].touched && (userForm.controls['fname'].errors || !userForm.controls['fname'].valid) ? 'error text'  : 'text' "
-                                type="text" placeholder="First Name" formControlName="fname">
-                            <div class="error-message" *ngIf="userForm.controls['fname'].errors?.['required'] && userForm.controls['fname'].touched">
-                                First name is required
-                            </div>
-                            <div class="error-message" *ngIf="userForm.controls['fname'].errors?.['pattern'] && userForm.controls['fname'].touched">
-                                First name should only contain letters and spaces
-                            </div>
-
-                            <label class="labels">Last Name</label><br>
-                            <input
-                                [ngClass]="userForm.controls['lname'].touched && (userForm.controls['lname'].errors || !userForm.controls['lname'].valid) ? 'error text'  : 'text' "
-                                type="text" placeholder="Last Name" formControlName="lname">
-                            <div class="error-message" *ngIf="userForm.controls['lname'].errors?.['required'] && userForm.controls['lname'].touched">
-                                Last name is required
-                            </div>
-                            <div class="error-message" *ngIf="userForm.controls['lname'].errors?.['pattern'] && userForm.controls['lname'].touched">
-                                Last name should only contain letters and spaces
-                            </div>
-
-                            <label class="labels">Phone Number</label><br>
-                            <div class="row">
-                                <div class="">
-                                <span>
-                                    <select formControlName="countryCode"
-                                    [ngClass]="userForm.controls['countryCode'].touched && (userForm.controls['countryCode'].errors || !userForm.controls['countryCode'].valid) ? 'error code'  : 'code' ">
-                                    <option *ngFor="let code of countryCodes" [value]="code.dial_code">{{code.dial_code}}</option>
-                                    </select>
-                                </span>
-                                <input class="Ph-No-text"
-                                    [ngClass]="userForm.controls['phone'].touched && (userForm.controls['phone'].errors || !userForm.controls['phone'].valid) ? 'error Ph-No-text'  : 'Ph-No-text' "
-                                    type="text" placeholder="Phone Number" formControlName="phone">
-                                </div>
-                            </div>
-                            <div class="error-message" *ngIf="userForm.controls['phone'].errors?.['required'] && userForm.controls['phone'].touched">
-                                Phone number is required
-                            </div>
-                            <div class="error-message" *ngIf="userForm.controls['phone'].errors?.['pattern'] && userForm.controls['phone'].touched">
-                                Please enter a valid phone number
-                            </div>
-
-                            <label class="labels">Whatsapp Number</label><br>
-                            <div class="row">
-                                <div class="">
-                                    <span>
-                                        <select formControlName="whatsappNumCcode"
-                                            [ngClass]="userForm.controls['whatsappNumCcode'].touched && (userForm.controls['whatsappNumCcode'].errors || !userForm.controls['whatsappNumCcode'].valid) ? 'error code'  : 'code' ">
-                                            <option *ngFor="let code of countryCodes" [value]="code.dial_code">{{code.dial_code}}</option>
-                                        </select>
-                                    </span>
-                                    <input class="Ph-No-text"
-                                    [ngClass]="userForm.controls['whatsappNum'].touched && (userForm.controls['whatsappNum'].errors || !userForm.controls['whatsappNum'].valid) ? 'error Ph-No-text'  : 'Ph-No-text' "
-                                    type="text" placeholder="Phone Number" formControlName="whatsappNum">
-                                </div>
-                            </div>
-                            <div class="error-message" *ngIf="userForm.controls['whatsappNum'].errors?.['pattern'] && userForm.controls['whatsappNum'].touched">
-                                Please enter a valid phone number
-                            </div>
-                            
-                            <label class="labels">Designation</label><br>
-                            <input
-                                [ngClass]="userForm.controls['designation'].touched && (userForm.controls['designation'].errors || !userForm.controls['designation'].valid) ? 'error text'  : 'text' "
-                                type="text" placeholder="designation" formControlName="designation">
-                            <div class="error-message" *ngIf="userForm.controls['designation'].errors?.['required'] && userForm.controls['designation'].touched">
-                                Designation is required
-                            </div>
-                        </div>
-
-                        <div class="form-footer">
-                            <button type="button" class="contact-details-btn-one" (click)="showPassowrdSection()">Continue</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 p-0">
-                <img src="./assets/images/Group.png" class="img">
-            </div>
-        </div>
-    </div>
-</div>
-		<!-- create password -->
+		<!-- Create Password Section -->
 		<div class="create-password" *ngIf="showPassword">
 			<div class="container-fluid">
 				<div class="row">
@@ -291,7 +197,13 @@
 								Passwords do not match
 							</div>
 							<div class="error-text">{{error}}</div>
-							<button type="button" class="create-pswd-btn-one" (click)="createAccount()">Create Account</button>
+							<button type="button" class="create-pswd-btn-one" (click)="createAccount()" [disabled]="isCreatingAccount">
+								<span *ngIf="!isCreatingAccount">Create Account</span>
+								<span *ngIf="isCreatingAccount" class="spinner-container">
+									<span class="spinner"></span>
+									Creating Account...
+								</span>
+							</button>
 						</div>
 					</div>
 					<div class="col-lg-6 p-0">
@@ -301,7 +213,8 @@
 			</div>
 		</div>
 	</form>
-  <!-- otp -->
+
+	<!-- OTP Section -->
 	<div class="otp" *ngIf="showOtp">
 		<div class="container-fluid">
 			<div class="row">
@@ -318,7 +231,13 @@
 									<div class="error-text">{{otpError}}</div>
 								</div>
 							</div>
-							<button class="otp-btn-one" (click)="verifyOtp()">Verify</button>
+							<button class="otp-btn-one" (click)="verifyOtp()" [disabled]="isVerifyingOtp">
+								<span *ngIf="!isVerifyingOtp">Verify</span>
+								<span *ngIf="isVerifyingOtp" class="spinner-container">
+									<span class="spinner"></span>
+									Verifying...
+								</span>
+							</button>
 						</div>
 					</div>
 				</div>
@@ -329,4 +248,3 @@
 		</div>
 	</div>
 </div>
-<!-- create account -->

@@ -18,4 +18,7 @@ public interface HotelService {
     ResponseDto<String> deleteRoom(HotelRoomReqDto room);
 
     ResponseDto<String> deleteHotel(HotelRequestDto hotel);
+    
+ 
+    ResponseDto<ContactPersonDto> saveContactPerson(ContactPersonDto contactPerson);
 }

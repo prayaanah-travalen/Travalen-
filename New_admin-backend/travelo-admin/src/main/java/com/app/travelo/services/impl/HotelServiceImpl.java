@@ -62,206 +62,37 @@ public class HotelServiceImpl implements HotelService {
 
     @Autowired
     private RoomPriceSlabRepository roomPriceSlabRepo;
+    
+    @Autowired
+    private ContactPersonRepository contactPersonRepo;
 
-//    @Transactional
-//    @Override
-//    public ResponseDto<HotelDto> saveHotel(HotelRequestDto hotel, List<MultipartFile> hotelImages) {
-//        ResponseDto<HotelDto> response = new ResponseDto<>();
-//        try {
-//            LocationEntity location = locationRepo.findByLocation(hotel.getLocation());
-//            LocationEntity locationEntity = null;
-//            if (Objects.nonNull(location)) {
-//                locationEntity = location;
-//            } else {
-//                locationEntity = locationRepo.save(LocationEntity.builder().location(hotel.getLocation()).build());
-//            }
-//
-//            deletedHotelImages(hotel.getDeletedImages()); 
-//
-//            HotelEntity htlEntity = HotelEntity.builder()
-//                    .hotelName(hotel.getHotelName())
-//                    .location(locationEntity)
-//                    .city(hotel.getCity())
-//                    .state(hotel.getState())
-//                    .address(hotel.getAddress())
-//                    .country(hotel.getCountry())
-//                    .postalCode(hotel.getPostalCode())
-//                    .starRating(hotel.getStarRating())
-//                    .about(hotel.getAbout())
-//                    .email(hotel.getEmail())
-//                    .websiteLink(hotel.getWebsiteLink())
-//                   .user(getUserDetails())
-//                    .latitude(hotel.getLatitude())
-//                    .longitude(hotel.getLongitude())
-//                    .propertyRule(hotel.getPropertyRule())
-//                    .availability(true)
-//                    .build();
-//            htlEntity.setAmenities(toHotelAmenities(hotel.getAmenities(), htlEntity));
-//
-//            List<HotelImageEntity> images = new ArrayList<>();
-//            if(Objects.nonNull(hotelImages))  images = toHotelImageEntityFromMultipart(hotelImages, htlEntity);
-//            
-//            if(Objects.nonNull(hotel.getHotelCode())) {
-//
-//                List<HotelAmenityEntity> hotelAmenities = hotelAmenityRepo.findByHotelCode(hotel.getHotelCode());
-//                hotelAmenityRepo.deleteAll(hotelAmenities);
-//
-//                HotelEntity existingHotel = hotelRepo.getHotelsById(hotel.getHotelCode());
-//                if(Objects.nonNull(existingHotel)) {
-//                    htlEntity.setHotelCode(existingHotel.getHotelCode());
-//                    if(!existingHotel.getHotelImages().isEmpty()) {
-//                       images.addAll(existingHotel.getHotelImages());
-//                    }
-//                }
-//            }
-//
-//            htlEntity.setHotelImages(images);
-//
-//            HotelEntity savedEntity = hotelRepo.save(htlEntity);
-//            response.setResponse(toHotelDto(savedEntity));
-//            response.setSuccess("SUCCESS");
-//
-//        } catch(Exception e) {
-//            response.setErrorMessage("Something went wrong");
-//            response.setErrorCode("500");
-//            log.debug(Arrays.toString(e.getStackTrace()));
-//            log.info(e.getMessage());
-//        }
-//        return response;
-//    }
-    
-    
-//    @Transactional
-//    @Override
-//    public ResponseDto<HotelDto> saveHotel(HotelRequestDto hotel, List<MultipartFile> hotelImages) {
-//        ResponseDto<HotelDto> response = new ResponseDto<>();
-//        try {
-//            log.info("Starting hotel save process for: {}", hotel.getHotelName());
-//            
-//            // Validate required fields
-//            if (hotel.getHotelName() == null || hotel.getHotelName().trim().isEmpty()) {
-//                response.setErrorMessage("Hotel name is required");
-//                response.setErrorCode("400");
-//                return response;
-//            }
-//            
-//            if (hotel.getLocation() == null || hotel.getLocation().trim().isEmpty()) {
-//                response.setErrorMessage("Location is required");
-//                response.setErrorCode("400");
-//                return response;
-//            }
-//
-//         
-//            LocationEntity location = locationRepo.findByLocation(hotel.getLocation());
-//            LocationEntity locationEntity = null;
-//            if (Objects.nonNull(location)) {
-//                locationEntity = location;
-//                log.info("Found existing location: {}", location.getLocation());
-//            } else {
-//                locationEntity = locationRepo.save(LocationEntity.builder().location(hotel.getLocation()).build());
-//                log.info("Created new location: {}", locationEntity.getLocation());
-//            }
-//
-//          
-//            Set<UserEntity> userDetails = getUserDetails();
-//            if (userDetails == null || userDetails.isEmpty() || userDetails.contains(null)) {
-//                log.error("User details not found or invalid");
-//                response.setErrorMessage("User authentication required");
-//                response.setErrorCode("401");
-//                return response;
-//            }
-//
-//            deletedHotelImages(hotel.getDeletedImages());
-//
-//            HotelEntity htlEntity = HotelEntity.builder()
-//                    .hotelName(hotel.getHotelName())
-//                    .location(locationEntity)
-//                    .city(hotel.getCity())
-//                    .state(hotel.getState())
-//                    .address(hotel.getAddress())
-//                    .country(hotel.getCountry())
-//                    .postalCode(hotel.getPostalCode())
-//                    .starRating(hotel.getStarRating())
-//                    .about(hotel.getAbout())
-//                    .email(hotel.getEmail())
-//                    .websiteLink(hotel.getWebsiteLink())
-//                    .user(userDetails)
-//                    .latitude(hotel.getLatitude())
-//                    .longitude(hotel.getLongitude())
-//                    .propertyRule(hotel.getPropertyRule())
-//                    .availability(true)
-//                    .active(true) 
-//                    .build();
-//
-//           
-//            if (hotel.getAmenities() != null && !hotel.getAmenities().isEmpty()) {
-//                htlEntity.setAmenities(toHotelAmenities(hotel.getAmenities(), htlEntity));
-//            }
-//
-//            List<HotelImageEntity> images = new ArrayList<>();
-//            if (Objects.nonNull(hotelImages) && !hotelImages.isEmpty()) {
-//                images = toHotelImageEntityFromMultipart(hotelImages, htlEntity);
-//            }
-//
-//           
-//            if (Objects.nonNull(hotel.getHotelCode())) {
-//                log.info("Updating existing hotel with code: {}", hotel.getHotelCode());
-//
-//                List<HotelAmenityEntity> hotelAmenities = hotelAmenityRepo.findByHotelCode(hotel.getHotelCode());
-//                hotelAmenityRepo.deleteAll(hotelAmenities);
-//
-//                HotelEntity existingHotel = hotelRepo.getHotelsById(hotel.getHotelCode());
-//                if (Objects.nonNull(existingHotel)) {
-//                    htlEntity.setHotelCode(existingHotel.getHotelCode());
-//                    if (existingHotel.getHotelImages() != null && !existingHotel.getHotelImages().isEmpty()) {
-//                        images.addAll(existingHotel.getHotelImages());
-//                    }
-//                } else {
-//                    log.error("Hotel with code {} not found for update", hotel.getHotelCode());
-//                    response.setErrorMessage("Hotel not found for update");
-//                    response.setErrorCode("404");
-//                    return response;
-//                }
-//            }
-//
-//            htlEntity.setHotelImages(images);
-//
-//            log.info("Saving hotel entity: {}", htlEntity.getHotelName());
-//            HotelEntity savedEntity = hotelRepo.save(htlEntity);
-//            log.info("Hotel saved successfully with ID: {}", savedEntity.getHotelCode());
-//
-//            response.setResponse(toHotelDto(savedEntity));
-//            response.setSuccess("SUCCESS");
-//
-//        } catch (Exception e) {
-//            response.setErrorMessage("Something went wrong: " + e.getMessage());
-//            response.setErrorCode("500");
-//            log.error("Error saving hotel: {}", hotel != null ? hotel.getHotelName() : "null", e);
-//        }
-//        return response;
-//    }
-    
+
+
     @Transactional
     @Override
     public ResponseDto<HotelDto> saveHotel(HotelRequestDto hotel, List<MultipartFile> hotelImages) {
         ResponseDto<HotelDto> response = new ResponseDto<>();
         try {
-            log.info("Starting hotel save process for: {}", hotel.getHotelName());
+            log.info("=== HOTEL SAVE PROCESS STARTED ===");
+            log.info("Hotel Name: {}", hotel.getHotelName());
+            log.info("Location: {}", hotel.getLocation());
+            log.info("Hotel Code: {}", hotel.getHotelCode());
+            log.info("Images count: {}", hotelImages != null ? hotelImages.size() : 0);
+            log.info("Amenities: {}", hotel.getAmenities());
 
-            // ===== Validation =====
+            // Basic field validation
             if (hotel.getHotelName() == null || hotel.getHotelName().trim().isEmpty()) {
                 response.setErrorMessage("Hotel name is required");
                 response.setErrorCode("400");
                 return response;
             }
-
             if (hotel.getLocation() == null || hotel.getLocation().trim().isEmpty()) {
                 response.setErrorMessage("Location is required");
                 response.setErrorCode("400");
                 return response;
             }
 
-            // ===== Handle Location =====
+            // Handle location
             LocationEntity location = locationRepo.findByLocation(hotel.getLocation());
             LocationEntity locationEntity;
             if (Objects.nonNull(location)) {
@@ -274,10 +105,11 @@ public class HotelServiceImpl implements HotelService {
                 log.info("Created new location: {}", locationEntity.getLocation());
             }
 
-            // ===== Handle User Details =====
+            // Get user details
             Set<UserEntity> userDetails = getUserDetails();
+            log.info("User details found: {}", userDetails != null && !userDetails.isEmpty());
             if (userDetails == null || userDetails.isEmpty() || userDetails.contains(null)) {
-                log.error("User details not found or invalid");
+                log.error("USER DETAILS ARE NULL OR INVALID");
                 response.setErrorMessage("User authentication required");
                 response.setErrorCode("401");
                 return response;
@@ -285,17 +117,14 @@ public class HotelServiceImpl implements HotelService {
 
             HotelEntity htlEntity;
 
-            // ===== Update Existing Hotel =====
-            if (Objects.nonNull(hotel.getHotelCode())) {
+            // Check if hotel code is valid (not null and greater than 0)
+            if (hotel.getHotelCode() != null && hotel.getHotelCode() > 0) {
                 log.info("Updating existing hotel with code: {}", hotel.getHotelCode());
-
-//                HotelEntity existingHotel = hotelRepo.getHotelsById(hotel.getHotelCode());
                 HotelEntity existingHotel = hotelRepo.getHotelsByIdForUpdate(hotel.getHotelCode());
 
-
                 if (Objects.nonNull(existingHotel)) {
-                    // update fields
                     htlEntity = existingHotel;
+                    // Update fields using direct setters instead of builder methods
                     htlEntity.setHotelName(hotel.getHotelName());
                     htlEntity.setLocation(locationEntity);
                     htlEntity.setCity(hotel.getCity());
@@ -313,21 +142,27 @@ public class HotelServiceImpl implements HotelService {
                     htlEntity.setPropertyRule(hotel.getPropertyRule());
                     htlEntity.setActive(true);
 
-                    // update amenities
+                    // Handle amenities
                     List<HotelAmenityEntity> hotelAmenities = hotelAmenityRepo.findByHotelCode(hotel.getHotelCode());
                     hotelAmenityRepo.deleteAll(hotelAmenities);
                     if (hotel.getAmenities() != null && !hotel.getAmenities().isEmpty()) {
                         htlEntity.setAmenities(toHotelAmenities(hotel.getAmenities(), htlEntity));
                     }
 
-                    // delete requested images
-                    deletedHotelImages(hotel.getDeletedImages());
+                    // Properly handle deleted images
+                    if (hotel.getDeletedImages() != null && !hotel.getDeletedImages().isEmpty()) {
+                        deletedHotelImages(hotel.getDeletedImages());
+                    }
 
-                    // handle new + existing images
+                    // Handle images - keep existing images that aren't deleted and add new ones
                     List<HotelImageEntity> images = new ArrayList<>();
+                    
+                    // Add new images if any
                     if (Objects.nonNull(hotelImages) && !hotelImages.isEmpty()) {
                         images.addAll(toHotelImageEntityFromMultipart(hotelImages, htlEntity));
                     }
+                    
+                    // Add existing images that aren't marked for deletion
                     if (existingHotel.getHotelImages() != null) {
                         existingHotel.getHotelImages().forEach(img -> {
                             if (hotel.getDeletedImages() == null || !hotel.getDeletedImages().contains(img.getImageId())) {
@@ -343,9 +178,9 @@ public class HotelServiceImpl implements HotelService {
                     response.setErrorCode("404");
                     return response;
                 }
-            }
-            // ===== Create New Hotel =====
-            else {
+            } else {
+                // Create new hotel using builder pattern
+                log.info("Creating new hotel entry");
                 htlEntity = HotelEntity.builder()
                         .hotelName(hotel.getHotelName())
                         .location(locationEntity)
@@ -377,7 +212,7 @@ public class HotelServiceImpl implements HotelService {
                 htlEntity.setHotelImages(images);
             }
 
-            // ===== Save Entity =====
+            // Save entity
             log.info("Saving hotel entity: {}", htlEntity.getHotelName());
             HotelEntity savedEntity = hotelRepo.save(htlEntity);
             log.info("Hotel saved successfully with ID: {}", savedEntity.getHotelCode());
@@ -386,18 +221,15 @@ public class HotelServiceImpl implements HotelService {
             response.setSuccess("SUCCESS");
 
         } catch (Exception e) {
+            log.error("CRITICAL ERROR in saveHotel for {}: {}", hotel != null ? hotel.getHotelName() : "null", e.getMessage(), e);
             response.setErrorMessage("Something went wrong: " + e.getMessage());
             response.setErrorCode("500");
-            log.error("Error saving hotel: {}", hotel != null ? hotel.getHotelName() : "null", e);
         }
         return response;
     }
 
-    
-    
-    
 
-    // Improved getUserDetails method
+    
     private Set<UserEntity> getUserDetails() {
         try {
             String loginUserName = CommonUtil.getLoginUserName();
@@ -412,15 +244,32 @@ public class HotelServiceImpl implements HotelService {
                 return null;
             }
             
+            // Verify user has appropriate role
+            List<String> roles = CommonUtil.getUserRole();
+            if (roles == null || roles.isEmpty()) {
+                log.error("No roles found for user: {}", loginUserName);
+                return null;
+            }
+            
+            // Check if user has any of the allowed roles (case-insensitive)
+            boolean hasPermission = roles.stream()
+                .anyMatch(role -> "Super Admin".equalsIgnoreCase(role) || "Hotel Admin".equalsIgnoreCase(role));
+                
+            if (!hasPermission) {
+                log.error("User {} does not have permission to save hotels. Roles: {}", loginUserName, roles);
+                return null;
+            }
+            
             Set<UserEntity> userSet = new HashSet<>();
             userSet.add(user);
-            log.info("Retrieved user details for: {}", loginUserName);
+            log.info("Retrieved user details for: {} with roles: {}", loginUserName, roles);
             return userSet;
         } catch (Exception e) {
             log.error("Error getting user details", e);
             return null;
         }
     }
+    
 
     private void deletedHotelImages(List<Long> deletedImages) {
         List<HotelImageEntity> images = hotelImageRepo.findAllById(deletedImages);
@@ -518,34 +367,6 @@ public class HotelServiceImpl implements HotelService {
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-//    @Override
-//    public HotelDto getHotelById(Long id)  {
-//
-//        HotelEntity hotel= hotelRepo.getHotelsById(id);
-//        
-//        if(Objects.nonNull(hotel)){
-//            return toHotelDto(hotel);
-//        }
-//        return null;
-//
-//    }
     @Override
     public HotelDto getHotelById(Long id)  {
         HotelEntity hotel = hotelRepo.getHotelsByIdForUpdate(id);
@@ -578,25 +399,7 @@ public class HotelServiceImpl implements HotelService {
         return response;
     }
 
-//    @Override
-//    public ResponseDto<String> deleteHotel(HotelRequestDto hotel) {
-//        ResponseDto<String> response = new ResponseDto<>();
-//        try {
-//            HotelEntity hotelEntity= hotelRepo.getHotelsById(hotel.getHotelCode());
-//            if(Objects.nonNull(hotelEntity)) {
-//                hotelEntity.setAvailability(false);
-//                hotelRepo.save(hotelEntity);
-//                response.setSuccess("SUCCESS");
-//            }
-//
-//        } catch (Exception e) {
-//            response.setErrorMessage("Something went wrong");
-//            response.setErrorCode("500");
-//            log.debug(Arrays.toString(e.getStackTrace()));
-//        }
-//
-//        return response;
-//    }
+
     @Override
     public ResponseDto<String> deleteHotel(HotelRequestDto hotel) {
         ResponseDto<String> response = new ResponseDto<>();
@@ -857,6 +660,21 @@ public class HotelServiceImpl implements HotelService {
     }
 
     public HotelDto toHotelDto(HotelEntity htl) {
+    	
+    	 // Get contact persons for this hotel
+        List<ContactPersonDto> contactPersons = contactPersonRepo.findByHotelCode(htl.getHotelCode())
+            .stream()
+            .map(cp -> ContactPersonDto.builder()
+                .id(cp.getId())
+                .hotelCode(cp.getHotel().getHotelCode())
+                .firstName(cp.getFirstName())
+                .lastName(cp.getLastName())
+                .phone(cp.getPhone())
+                .whatsapp(cp.getWhatsapp())
+                .email(cp.getEmail())
+                .designation(cp.getDesignation())
+                .build())
+            .collect(Collectors.toList());
 
         return  HotelDto.builder()
                 .hotelCode(htl.getHotelCode())
@@ -875,12 +693,78 @@ public class HotelServiceImpl implements HotelService {
                 .amenities(htl.getAmenities().stream().map(HotelAmenityEntity::getAmenity).collect(Collectors.toList()))
                 .latitude(htl.getLatitude())
                 .longitude(htl.getLongitude())
+                
+                .contactDetails(contactPersons) 
                 .build();
     }
 
-//    private Set<UserEntity> getUserDetails() {
-//        Set<UserEntity> userSet = new HashSet<>();
-//        userSet.add(userRepo.getUser(CommonUtil.getLoginUserName()));
-//        return userSet;
-//    }
+    
+    
+    @Override
+    @Transactional
+    public ResponseDto<ContactPersonDto> saveContactPerson(ContactPersonDto contactPerson) {
+        ResponseDto<ContactPersonDto> response = new ResponseDto<>();
+        try {
+            log.info("Saving contact person for hotel: {}", contactPerson.getHotelCode());
+            
+            // Get the hotel entity
+            HotelEntity hotel = hotelRepo.getHotelsByIdForUpdate(contactPerson.getHotelCode());
+            if (Objects.isNull(hotel)) {
+                response.setErrorMessage("Hotel not found");
+                response.setErrorCode("404");
+                return response;
+            }
+            
+            // Create or update contact person entity
+            ContactPersonEntity contactEntity;
+            if (contactPerson.getId() != null && contactPerson.getId() > 0) {
+                // Update existing contact person
+                contactEntity = contactPersonRepo.findById(contactPerson.getId())
+                    .orElseThrow(() -> new RuntimeException("Contact person not found"));
+                
+                contactEntity.setFirstName(contactPerson.getFirstName());
+                contactEntity.setLastName(contactPerson.getLastName());
+                contactEntity.setPhone(contactPerson.getPhone());
+                contactEntity.setWhatsapp(contactPerson.getWhatsapp());
+                contactEntity.setEmail(contactPerson.getEmail());
+                contactEntity.setDesignation(contactPerson.getDesignation());
+            } else {
+                // Create new contact person
+                contactEntity = ContactPersonEntity.builder()
+                    .hotel(hotel)
+                    .firstName(contactPerson.getFirstName())
+                    .lastName(contactPerson.getLastName())
+                    .phone(contactPerson.getPhone())
+                    .whatsapp(contactPerson.getWhatsapp())
+                    .email(contactPerson.getEmail())
+                    .designation(contactPerson.getDesignation())
+                    .build();
+            }
+            
+            // Save the contact person
+            ContactPersonEntity savedContact = contactPersonRepo.save(contactEntity);
+            
+            // Convert to DTO and return response
+            ContactPersonDto responseDto = ContactPersonDto.builder()
+                .id(savedContact.getId())
+                .hotelCode(savedContact.getHotel().getHotelCode())
+                .firstName(savedContact.getFirstName())
+                .lastName(savedContact.getLastName())
+                .phone(savedContact.getPhone())
+                .whatsapp(savedContact.getWhatsapp())
+                .email(savedContact.getEmail())
+                .designation(savedContact.getDesignation())
+                .build();
+                
+            response.setResponse(responseDto);
+            response.setSuccess("SUCCESS");
+            
+        } catch (Exception e) {
+            log.error("Error saving contact person: {}", e.getMessage(), e);
+            response.setErrorMessage("Something went wrong: " + e.getMessage());
+            response.setErrorCode("500");
+        }
+        return response;
+    }
+
 }

@@ -29,4 +29,6 @@ public class HotelDto {
     private String email;
     private String latitude;
     private String longitude;
+    
+    private List<ContactPersonDto> contactDetails;
 }

@@ -160,4 +160,10 @@ export class HotelService {
   deleteHotelRoom(req:any) {
     return this.commonService.httpPOST("hotel/room/delete", req);
  }
+
+
+ // Add this method to HotelService.ts
+saveContactPerson(contactData: any) {
+  return this.commonService.httpPOST("hotel/contact/save", contactData);
+}
 }

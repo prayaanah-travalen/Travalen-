@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 @RestController
 @RequestMapping("api")
@@ -119,6 +120,8 @@ public class AuthenticationController {
 
         return new ResponseEntity<>(returnMap, HttpStatus.OK);
     }
+    
+    
 
     //create auth token
     public String createAuthenticationToken(AuthRequestDto authenticationRequest) throws Exception {
@@ -136,81 +139,65 @@ public class AuthenticationController {
 
         return jwtTokenUtil.generateToken(userDetails, authService.getUserDetail(authenticationRequest.getEmailId()));
     }
-
+    
     @PostMapping(value = "/auth/verifyOtp")
-    public ResponseEntity<AuthResponseDto> verifyOtp(@RequestBody AuthRequestDto authenticationRequest){
+    public ResponseEntity<AuthResponseDto> verifyOtp(@RequestBody AuthRequestDto authenticationRequest) {
         AuthResponseDto returnMap = null;
-        try{
-            //verify otp
-            if(authenticationRequest.getOtp().equals(otpService.getCacheOtp(authenticationRequest.getEmailId()))){
-                authService.saveNewUser(authenticationRequest);
+        try {
+            if (authenticationRequest.getOtp().equals(otpService.getCacheOtp(authenticationRequest.getEmailId()))) {
+                String result = authService.saveNewUser(authenticationRequest);
                 String jwtToken = createAuthenticationToken(authenticationRequest);
-                returnMap = toAuthResponseDto("SUCCESS","Otp verified successfully", jwtToken);
+                
+                Long hotelCode = null;
+                String hotelName = null;
+                
+                if (result.startsWith("success:")) {
+                    try {
+                        // Extract the hotel code part after "success:"
+                        String codeStr = result.substring(7);
+                        
+                        // If the hotel code starts with a colon, remove it and any other non-numeric characters
+                        if (codeStr.startsWith(":")) {
+                            codeStr = codeStr.substring(1);
+                        }
+                        
+                        // Remove any remaining non-numeric characters
+                        codeStr = codeStr.replaceAll("[^0-9]", "");
+                        
+                        // Parse the cleaned string as Long if it's not empty
+                        if (!codeStr.isEmpty()) {
+                            hotelCode = Long.parseLong(codeStr);
+                            hotelName = authenticationRequest.getHotelName();
+                        } else {
+                            // Log the issue but continue with null hotel code
+                            System.err.println("Warning: Hotel code is empty after cleaning");
+                        }
+                    } catch (NumberFormatException e) {
+                        // Log the error but continue with null hotel code
+                        System.err.println("Error parsing hotel code: " + e.getMessage());
+                    }
+                }
+                
+                returnMap = AuthResponseDto.builder()
+                        .status("SUCCESS")
+                        .message("OTP verified successfully")
+                        .jwt(jwtToken)
+                        .hotelCode(hotelCode)
+                        .hotelName(hotelName)
+                        .build();
+                        
                 otpService.clearOtp(authenticationRequest.getEmailId());
-            }else{
-                returnMap = toAuthResponseDto("FAILED","Otp is either expired or incorrect","");
+            } else {
+                returnMap = toAuthResponseDto("FAILED","OTP is either expired or incorrect","");
             }
-
-        } catch (Exception e){
+        } catch (Exception e) {
             returnMap = toAuthResponseDto("FAILED",e.getMessage(),"");
         }
-
         return new ResponseEntity<>(returnMap, HttpStatus.OK);
     }
     
-//    @PostMapping(value = "/auth/verifyOtp")
-//    public ResponseEntity<AuthResponseDto> verifyOtp(@RequestBody AuthRequestDto authenticationRequest) {
-//        AuthResponseDto returnMap = null;
-//        try {
-//            
-//            if (authenticationRequest.getOtp().equals(otpService.getCacheOtp(authenticationRequest.getEmailId()))) {
-//
-//                authService.saveNewUser(authenticationRequest);
-//
-//                
-//                String jwtToken = createAuthenticationToken(authenticationRequest);
-//
-//                
-//                UserEntity user = userRepo.getUser(authenticationRequest.getEmailId());
-//                Long hotelCode = null;
-//                String hotelName = null;
-//                if (user.getHotels() != null && !user.getHotels().isEmpty()) {
-//                    HotelEntity hotel = user.getHotels().iterator().next();
-//                    hotelCode = hotel.getHotelCode();
-//                    hotelName = hotel.getHotelName();
-//                }
-//
-//             
-//                returnMap = AuthResponseDto.builder()
-//                        .status("SUCCESS")
-//                        .message("OTP verified successfully")
-//                        .jwt(jwtToken)
-//                        .hotelCode(hotelCode)
-//                        .hotelName(hotelName)
-//                        .build();
-//
-//                otpService.clearOtp(authenticationRequest.getEmailId());
-//            } else {
-//                returnMap = AuthResponseDto.builder()
-//                        .status("FAILED")
-//                        .message("OTP is either expired or incorrect")
-//                        .jwt("")
-//                        .hotelCode(null)
-//                        .hotelName(null)
-//                        .build();
-//            }
-//        } catch (Exception e) {
-//            returnMap = AuthResponseDto.builder()
-//                    .status("FAILED")
-//                    .message(e.getMessage())
-//                    .jwt("")
-//                    .hotelCode(null)
-//                    .hotelName(null)
-//                    .build();
-//        }
-//
-//        return new ResponseEntity<>(returnMap, HttpStatus.OK);
-//    }
+    
+
 
 
     @PostMapping(value = "/auth/changePassword")

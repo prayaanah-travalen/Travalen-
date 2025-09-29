@@ -15,6 +15,8 @@ export class HotelListComponent implements OnInit {
 
   hotels: Hotel[] = [];
 
+  isLoading = false;
+
   constructor(private hotelService:HotelService,
     private dialog: Dialog) { }
 
@@ -22,25 +24,58 @@ export class HotelListComponent implements OnInit {
    this.getHotels();
   }
 
-  getHotels() {
-    this.hotelService.getHotels().subscribe(resp=>{
-      this.hotels = resp;
-    })
+  // getHotels() {
+  //   this.hotelService.getHotels().subscribe(resp=>{
+  //     this.hotels = resp;
+  //   })
     
+  // }
+
+  getHotels() {
+    this.isLoading = true;
+    this.hotelService.getHotels().subscribe({
+      next: (resp) => {
+        this.hotels = resp;
+        this.isLoading = false;
+      },
+      error: (err) => {
+        console.error('Error loading hotels:', err);
+        this.isLoading = false;
+      }
+    });
   }
 
-  delete(hotelcode: number) {
+  // delete(hotelcode: number) {
 
-    this.dialog.open(Confirmation).closed.subscribe(resp=>{
-      if(resp === true) {
-        let req: HotelReqModel = {
-          hotelCode: hotelcode
-        }
-          this.hotelService.deleteHotel(req).subscribe(resp=> this.getHotels());
-      }
-    })
+  //   this.dialog.open(Confirmation).closed.subscribe(resp=>{
+  //     if(resp === true) {
+  //       let req: HotelReqModel = {
+  //         hotelCode: hotelcode
+  //       }
+  //         this.hotelService.deleteHotel(req).subscribe(resp=> this.getHotels());
+  //     }
+  //   })
 
     
+  // }
+  delete(hotelcode: number) {
+    this.dialog.open(Confirmation).closed.subscribe(resp => {
+      if (resp === true) {
+        let req: HotelReqModel = {
+          hotelCode: hotelcode
+        };
+        this.isLoading = true;
+        this.hotelService.deleteHotel(req).subscribe({
+          next: () => {
+            this.getHotels(); // Refresh the list after deletion
+          },
+          error: (err) => {
+            console.error('Error deleting hotel:', err);
+            this.isLoading = false;
+          }
+        });
+      }
+    });
   }
 
 }

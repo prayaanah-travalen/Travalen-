@@ -21,6 +21,10 @@ export class CreateAccountComponent implements OnInit {
   showPass: boolean = false;
   showConfirmPass: boolean | undefined;
 
+  // Loading states
+  isCreatingAccount: boolean = false;
+  isVerifyingOtp: boolean = false;
+
   otp: string = '';
   otpError: string = '';
 
@@ -61,7 +65,6 @@ export class CreateAccountComponent implements OnInit {
   }
 
   showContactSection() {
-    // Only validate if the Continue button was clicked
     if (this.userForm.controls['email'].touched) {
       if(!this.userForm.controls['email'].valid) {
         return false;
@@ -77,7 +80,6 @@ export class CreateAccountComponent implements OnInit {
   }
 
   showPassowrdSection() {
-    // Mark all required fields as touched to trigger validation
     Object.keys(this.userForm.controls).forEach(key => {
       const control = this.userForm.get(key);
       if (key !== 'whatsappNum' && key !== 'whatsappNumCcode' && key !== 'password' && key !== 'confirmPassword') {
@@ -85,7 +87,6 @@ export class CreateAccountComponent implements OnInit {
       }
     });
 
-    // Check if all required fields in the contact section are valid
     const contactFields = ['hotelName', 'fname', 'lname', 'phone', 'countryCode', 'designation'];
     const isContactValid = contactFields.every(field => this.userForm.get(field)?.valid);
 
@@ -115,23 +116,71 @@ export class CreateAccountComponent implements OnInit {
     this.showContact = false;
   }
 
+  // createAccount() {
+  //   this.error = '';
+    
+  //   this.userForm.controls['password'].markAsTouched();
+  //   this.userForm.controls['confirmPassword'].markAsTouched();
+
+  //   if (!this.userForm.controls['password'].valid || !this.userForm.controls['confirmPassword'].valid) {
+  //     return false;
+  //   }
+
+  //   if (this.userForm.get('password')?.value !== this.userForm.get('confirmPassword')?.value) {
+  //     this.userForm.controls['confirmPassword'].setErrors({ passwordMismatch: true });
+  //     return false;
+  //   }
+    
+    
+  //   this.isCreatingAccount = true;
+    
+  //   let req = {
+  //     emailId: this.userForm.get('email')?.getRawValue(),
+  //     password: this.userForm.get('password')?.getRawValue(),
+  //     firstName: this.userForm.get('fname')?.getRawValue(),
+  //     lastName: this.userForm.get('lname')?.getRawValue(),
+  //     phoneNo: this.userForm.get('phone')?.getRawValue(),
+  //     countryCode: this.userForm.get('countryCode')?.getRawValue(),
+  //     designation: this.userForm.get('designation')?.getRawValue(),
+  //     hotelName: this.userForm.get('hotelName')?.getRawValue(),
+  //     whatsappNumber: this.userForm.get('whatsappNumCcode')?.getRawValue() + this.userForm.get('whatsappNum')?.getRawValue(),
+  //   }
+
+  //   this.accountService.createAccount(req).subscribe({
+  //     next: (resp) => {
+  //       this.isCreatingAccount = false;
+  //       if (resp.status === 'SUCCESS') {
+  //         this.showOtpSection();
+  //       } else {
+  //         this.error = resp.message;
+  //       }
+  //     },
+  //     error: (err) => {
+  //       this.isCreatingAccount = false;
+  //       this.error = 'An error occurred. Please try again.';
+  //     }
+  //   });
+   
+  //   return true;
+  // }
+
   createAccount() {
     this.error = '';
     
-    // Mark password fields as touched to trigger validation
     this.userForm.controls['password'].markAsTouched();
     this.userForm.controls['confirmPassword'].markAsTouched();
 
-    // Check if password fields are valid
     if (!this.userForm.controls['password'].valid || !this.userForm.controls['confirmPassword'].valid) {
-      return false;
+        return false;
     }
 
-    // Check if passwords match
     if (this.userForm.get('password')?.value !== this.userForm.get('confirmPassword')?.value) {
-      this.userForm.controls['confirmPassword'].setErrors({ passwordMismatch: true });
-      return false;
+        this.userForm.controls['confirmPassword'].setErrors({ passwordMismatch: true });
+        return false;
     }
+    
+    // Set loading state to true
+    this.isCreatingAccount = true;
     
     let req = {
       emailId: this.userForm.get('email')?.getRawValue(),
@@ -145,84 +194,128 @@ export class CreateAccountComponent implements OnInit {
       whatsappNumber: this.userForm.get('whatsappNumCcode')?.getRawValue() + this.userForm.get('whatsappNum')?.getRawValue(),
     }
 
-    this.accountService.createAccount(req).subscribe(resp => {
-      if (resp.status === 'SUCCESS') {
-        this.showOtpSection();
-      } else {
-        this.error = resp.message;
+    this.accountService.createAccount(req).subscribe({
+      next: (resp) => {
+        this.isCreatingAccount = false;
+        if (resp.status === 'SUCCESS') {
+          // Check if the message indicates the user already exists
+          if (resp.message && resp.message.includes("already exists")) {
+            this.error = resp.message;
+            // Provide option to go to sign in or resend OTP
+            setTimeout(() => {
+              if (confirm(resp.message + " Would you like to sign in instead?")) {
+                this.signIn();
+              }
+            }, 500);
+          } else {
+            this.showOtpSection();
+          }
+        } else {
+          this.error = resp.message;
+        }
+      },
+      error: (err) => {
+        this.isCreatingAccount = false;
+        this.error = err.error?.message || 'An error occurred. Please try again.';
       }
     });
    
     return true;
-  }
+}
+
+  // verifyOtp() {
+  //   this.otpError = '';
+  //   if(this.otp === '') {
+  //       this.otpError = "Please enter valid otp";
+  //       return;
+  //   }
+    
+   
+  //   this.isVerifyingOtp = true;
+    
+  //   let req = {
+  //       emailId: this.userForm.get('email')?.getRawValue(),
+  //       password: this.userForm.get('password')?.getRawValue(),
+  //       firstName: this.userForm.get('fname')?.getRawValue(),
+  //       lastName: this.userForm.get('lname')?.getRawValue(),
+  //       phoneNo: this.userForm.get('phone')?.getRawValue(),
+  //       countryCode:  this.userForm.get('countryCode')?.getRawValue(),
+  //       otp:  this.otp,
+  //       designation:  this.userForm.get('designation')?.getRawValue(),
+  //       hotelName:  this.userForm.get('hotelName')?.getRawValue(),
+  //       whatsappNumber:  this.userForm.get('whatsappNumCcode')?.getRawValue() + this.userForm.get('whatsappNum')?.getRawValue(),
+  //   }
+
+  //   this.accountService.verifyOtp(req).subscribe({
+  //     next: (resp) => {
+  //       if(resp.status === 'SUCCESS') {
+  //           localStorage.setItem("auth", resp.jwt);
+            
+  //           if (resp.hotelCode) {
+  //               localStorage.setItem("hotelId", resp.hotelCode.toString());
+  //           }
+            
+          
+  //           this.dialogRef.close();
+  //           this.router.navigateByUrl("/travalen/dashboard");
+  //       } else {
+  //           this.isVerifyingOtp = false;
+  //           this.otpError = resp.message;
+  //       }
+  //     },
+  //     error: (err) => {
+  //       this.isVerifyingOtp = false;
+  //       this.otpError = 'An error occurred. Please try again.';
+  //     }
+  //   });
+  // }
 
   verifyOtp() {
     this.otpError = '';
     if(this.otp === '') {
-      this.otpError = "Please enter valid otp";
+        this.otpError = "Please enter valid OTP";
+        return;
     }
-    let req = {
-      emailId: this.userForm.get('email')?.getRawValue(),
-      password: this.userForm.get('password')?.getRawValue(),
-      firstName: this.userForm.get('fname')?.getRawValue(),
-      lastName: this.userForm.get('lname')?.getRawValue(),
-      phoneNo: this.userForm.get('phone')?.getRawValue(),
-      countryCode:  this.userForm.get('countryCode')?.getRawValue(),
-      otp:  this.otp,
-      designation:  this.userForm.get('designation')?.getRawValue(),
-      hotelName:  this.userForm.get('hotelName')?.getRawValue(),
-      whatsappNumber:  this.userForm.get('whatsappNumCcode')?.getRawValue()+this.userForm.get('whatsappNumber')?.getRawValue(),
-    }
-
-    this.accountService.verifyOtp(req).subscribe(resp=>{
-        if(resp.status === 'SUCCESS') {
-          localStorage.setItem("auth", resp.jwt);
-          this.dialogRef.close();
-          this.router.navigateByUrl("/travalen/dashboard");
-        } else {
-          this.otpError = resp.message;
-        }
-    })
-  }
-
-//   verifyOtp() {
-//     this.otpError = '';
-//     if(this.otp === '') {
-//       this.otpError = "Please enter valid otp";
-//       return;
-//     }
     
-//     let req = {
-//       emailId: this.userForm.get('email')?.getRawValue(),
-//       password: this.userForm.get('password')?.getRawValue(),
-//       firstName: this.userForm.get('fname')?.getRawValue(),
-//       lastName: this.userForm.get('lname')?.getRawValue(),
-//       phoneNo: this.userForm.get('phone')?.getRawValue(),
-//       countryCode:  this.userForm.get('countryCode')?.getRawValue(),
-//       otp:  this.otp,
-//       designation:  this.userForm.get('designation')?.getRawValue(),
-//       hotelName:  this.userForm.get('hotelName')?.getRawValue(),
-//       whatsappNumber:  this.userForm.get('whatsappNumCcode')?.getRawValue() + this.userForm.get('whatsappNum')?.getRawValue(),
-//     }
+    // Set loading state to true
+    this.isVerifyingOtp = true;
+    
+    let req = {
+        emailId: this.userForm.get('email')?.getRawValue(),
+        password: this.userForm.get('password')?.getRawValue(),
+        firstName: this.userForm.get('fname')?.getRawValue(),
+        lastName: this.userForm.get('lname')?.getRawValue(),
+        phoneNo: this.userForm.get('phone')?.getRawValue(),
+        countryCode:  this.userForm.get('countryCode')?.getRawValue(),
+        otp:  this.otp,
+        designation:  this.userForm.get('designation')?.getRawValue(),
+        hotelName:  this.userForm.get('hotelName')?.getRawValue(),
+        whatsappNumber:  this.userForm.get('whatsappNumCcode')?.getRawValue() + this.userForm.get('whatsappNum')?.getRawValue(),
+    }
 
-//     this.accountService.verifyOtp(req).subscribe(resp=>{
-//         if(resp.status === 'SUCCESS') {
-//           localStorage.setItem("auth", resp.jwt);
-          
-//           // Store hotel ID if available
-//           if (resp.hotelCode) {
-//             localStorage.setItem("hotelId", resp.hotelCode.toString());
-//           }
-          
-//           this.dialogRef.close();
-//           this.router.navigateByUrl("/travalen/dashboard");
-//         } else {
-//           this.otpError = resp.message;
-//         }
-//     })
-// }
-
-
+    this.accountService.verifyOtp(req).subscribe({
+      next: (resp) => {
+        if(resp.status === 'SUCCESS') {
+            localStorage.setItem("auth", resp.jwt);
+            
+            if (resp.hotelCode) {
+                localStorage.setItem("hotelId", resp.hotelCode.toString());
+            }
+            
+            // Keep loading state true while navigating
+            this.dialogRef.close();
+            this.router.navigateByUrl("/travalen/dashboard");
+        } else {
+            this.isVerifyingOtp = false;
+            this.otpError = resp.message || "Invalid OTP. Please try again.";
+        }
+      },
+      error: (err) => {
+        this.isVerifyingOtp = false;
+        this.otpError = err.error?.message || 'An error occurred. Please try again.';
+      }
+    });
+}
 
   signIn() {
     this.dialogRef.close();

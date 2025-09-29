@@ -10,7 +10,8 @@ import java.util.List;
 @Entity
 @Builder
 @AllArgsConstructor
-@EqualsAndHashCode
+//@EqualsAndHashCode
+@EqualsAndHashCode(exclude = {"hotel"}) 
 @NoArgsConstructor
 @Table(name = "finance")
 public class FinanceEntity {

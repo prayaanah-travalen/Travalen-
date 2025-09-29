@@ -39,9 +39,9 @@
                         <label class="labels">Password</label><br>
                         <div class="pass">
                             <input [ngClass]="userForm.controls['password'].touched && (userForm.controls['password'].errors || !userForm.controls['password'].valid) ? 'error pswd-text'  : 'pswd-text' "
-                                [type]="showPass ? 'text' : 'password'" placeholder="Enter a Password" formControlName="password">
+                                [type]="showPass ? 'text' : 'password'" placeholder="Enter a Password" formControlName="password" [disabled]="isLoading">
                             <span class="eye-box">
-                                <button type="button" (click)="showPass = !showPass">
+                                <button type="button" (click)="showPass = !showPass" [disabled]="isLoading">
                                 <img [src]="showPass ? './assets/images/eye on.png' : './assets/images/eye off.png'" class="eye">
                                 </button>
                             </span>
@@ -51,10 +51,16 @@
                         </div>
                         <div class="error-message warning" *ngIf="error">
                             {{ error }}
-                          </div>
+                        </div>
                           
-                        <button type="submit" class="pswd-btn-one" (click)="signIn()">Sign In</button><br><br>
-                        <a class="pswd-para-three" (click)="forgotPassword()">Forget Password?</a>
+                        <button type="submit" class="pswd-btn-one" (click)="signIn()" [disabled]="isLoading">
+                            <span *ngIf="!isLoading">Sign In</span>
+                            <span *ngIf="isLoading" class="spinner-container">
+                                <span class="spinner"></span>
+                                Signing In...
+                            </span>
+                        </button><br><br>
+                        <a class="pswd-para-three" (click)="forgotPassword()" [class.disabled]="isLoading">Forget Password?</a>
                     </div>
                 </div>
                 <div class="col-lg-6 p-0">

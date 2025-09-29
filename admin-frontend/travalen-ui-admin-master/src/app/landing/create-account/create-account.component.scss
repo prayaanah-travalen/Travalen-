@@ -22,7 +22,46 @@ input, select {
   }
   
 
-
+/* Loading Spinner Styles */
+.spinner-container {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .spinner {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  /* Disabled button state */
+  button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+  
+  /* Alternative spinner style (if you prefer a different look) */
+  .spinner-alt {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid transparent;
+    border-top-color: #ffffff;
+    border-bottom-color: #ffffff;
+    border-radius: 50%;
+    animation: spin 1s ease infinite;
+  }
 
 
 /* create-account */
