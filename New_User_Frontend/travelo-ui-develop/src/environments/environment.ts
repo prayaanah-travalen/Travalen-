@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
     //baseURl: "http://travalen-env-2.eba-twvgm2pi.ap-south-1.elasticbeanstalk.com/api/",
-    baseURl:"http://localhost:8092",
+    baseURl:"http://localhost:8080",
     // baseURl: "/api/",
     adminUrl: "htt",
     rkey: "rzp_test_8PqYGfA76cE7rm"
