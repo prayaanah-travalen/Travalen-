@@ -4,6 +4,8 @@ package com.app.travelo.controller;
 import com.app.travelo.model.rest.*;
 import com.app.travelo.services.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -43,9 +45,18 @@ public class HotelController {
         return new ResponseEntity<>( hotelService.deleteRoom(room), HttpStatus.OK);
     }
 
+//    @GetMapping("/hotels")
+//    public ResponseEntity<List<HotelDto>> getHotels() {
+//        return new ResponseEntity<>(hotelService.getHotels(), HttpStatus.OK);
+//    }
+
     @GetMapping("/hotels")
-    public ResponseEntity<List<HotelDto>> getHotels() {
-        return new ResponseEntity<>(hotelService.getHotels(), HttpStatus.OK);
+    public ResponseEntity<Page<HotelDto>> getHotels(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+
+        Page<HotelDto> hotels = hotelService.hotels(PageRequest.of(page, size));
+        return ResponseEntity.ok(hotels);
     }
 
     @GetMapping("")

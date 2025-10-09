@@ -8,6 +8,8 @@ import com.app.travelo.services.HotelService;
 import com.app.travelo.util.CommonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -228,8 +230,12 @@ public class HotelServiceImpl implements HotelService {
         return response;
     }
 
+    @Override
+    public List<HotelDto> getHotels() {
+        return List.of();
+    }
 
-    
+
     private Set<UserEntity> getUserDetails() {
         try {
             String loginUserName = CommonUtil.getLoginUserName();
@@ -281,33 +287,51 @@ public class HotelServiceImpl implements HotelService {
         roomImageRepo.deleteAll(images);
     }
 
+//    @Override
+//    public List<HotelDto> getHotels() {
+//        List<HotelEntity> hotels = new ArrayList<>();
+//        List<String> roles = CommonUtil.getUserRole();
+//        if(Objects.nonNull(roles) && !roles.isEmpty()) {
+//            if(roles.contains("Super Admin")) {
+//                hotels = hotelRepo.getAllHotels();
+//            } else {
+//                UserEntity user = userRepo.getUser(CommonUtil.getLoginUserName());
+//                if(Objects.nonNull(user)) {
+//                    hotels= hotelRepo.getHotels(user.getUserId());
+//                }
+//
+//            }
+//        }
+//
+//        return hotels.stream().map(this::toHotelDto).collect(Collectors.toList());
+//    }
+
     @Override
-    public List<HotelDto> getHotels() {
-        List<HotelEntity> hotels = new ArrayList<>();
+    public Page<HotelDto> hotels(Pageable pageable) {
+        Page<HotelEntity> hotels;
         List<String> roles = CommonUtil.getUserRole();
-        if(Objects.nonNull(roles) && !roles.isEmpty()) {
-            if(roles.contains("Super Admin")) {
-                hotels = hotelRepo.getAllHotels();
+
+        if (roles != null && !roles.isEmpty()) {
+            if (roles.contains("Super Admin")) {
+                hotels = hotelRepo.getAllHotels(pageable);
             } else {
                 UserEntity user = userRepo.getUser(CommonUtil.getLoginUserName());
-                if(Objects.nonNull(user)) {
-                    hotels= hotelRepo.getHotels(user.getUserId());
+                if (user != null) {
+                    hotels = hotelRepo.findHotels(user.getUserId(), pageable);
+                } else {
+                    hotels = Page.empty();
                 }
-
             }
+        } else {
+            hotels = Page.empty();
         }
 
-        return hotels.stream().map(this::toHotelDto).collect(Collectors.toList());
-    }
-    
-    
+        return hotels.map(this::toHotelDto);
 
- 
-    
-    
-    
-    
-    
+    }
+
+
+
     @Override
     @Transactional
     public ResponseDto<HotelRoomDto>  saveRoom(HotelRoomReqDto room, List<MultipartFile> roomImages) {
@@ -660,7 +684,7 @@ public class HotelServiceImpl implements HotelService {
     }
 
     public HotelDto toHotelDto(HotelEntity htl) {
-    	
+
     	 // Get contact persons for this hotel
         List<ContactPersonDto> contactPersons = contactPersonRepo.findByHotelCode(htl.getHotelCode())
             .stream()
@@ -693,13 +717,13 @@ public class HotelServiceImpl implements HotelService {
                 .amenities(htl.getAmenities().stream().map(HotelAmenityEntity::getAmenity).collect(Collectors.toList()))
                 .latitude(htl.getLatitude())
                 .longitude(htl.getLongitude())
-                
-                .contactDetails(contactPersons) 
+
+                .contactDetails(contactPersons)
                 .build();
     }
 
-    
-    
+
+
     @Override
     @Transactional
     public ResponseDto<ContactPersonDto> saveContactPerson(ContactPersonDto contactPerson) {

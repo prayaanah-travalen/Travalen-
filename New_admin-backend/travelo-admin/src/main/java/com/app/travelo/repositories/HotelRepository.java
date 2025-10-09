@@ -1,6 +1,10 @@
 package com.app.travelo.repositories;
 
 import com.app.travelo.model.entity.HotelEntity;
+import com.app.travelo.services.HotelProjection;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -24,16 +28,36 @@ public interface HotelRepository extends JpaRepository<HotelEntity, Long> {
             "where htl.hotel_code= :hotelCode", nativeQuery = true)
     HotelEntity getHotelsByIdForUpdate(@Param("hotelCode") Long hotelCode);
 
-    @Query(value = "SELECT htl.* FROM hotel htl " +
-            "where htl.availability = true", nativeQuery = true)
-    List<HotelEntity> getAllHotels();
-    
+//    @Query(value = "SELECT htl.* FROM hotel htl " +
+//            "where htl.availability = true", nativeQuery = true)
+//    List<HotelEntity> getAllHotels();
+
+    @Query(value = "SELECT * FROM hotel htl WHERE htl.availability = true",
+            countQuery = "SELECT count(*) FROM hotel htl WHERE htl.availability = true",
+            nativeQuery = true)
+    Page<HotelEntity> getAllHotels(Pageable pageable);
+
+//    @Query(value = "SELECT h FROM HotelEntity h LEFT JOIN FETCH h.location WHERE h.availability = true",
+//            countQuery = "SELECT count(h) FROM HotelEntity h WHERE h.availability = true")
+//    Page<HotelEntity> getAllHotels(Pageable pageable);
+
     @Query(value = "SELECT htl.* FROM hotel htl " +
             "INNER JOIN users_hotel uh ON htl.hotel_code= uh.hotel_code " +
             "where uh.user_id=:userId", nativeQuery = true) // Removed availability condition
     List<HotelEntity> getHotels(@Param("userId") Long userId);
-    
-    
+
+    @Query(value = "SELECT htl.* FROM hotel htl " +
+            "INNER JOIN users_hotel uh ON htl.hotel_code = uh.hotel_code " +
+            "WHERE uh.user_id = :userId",
+            countQuery = "SELECT count(*) FROM hotel htl " +
+                    "INNER JOIN users_hotel uh ON htl.hotel_code = uh.hotel_code " +
+                    "WHERE uh.user_id = :userId",
+            nativeQuery = true)
+    Page<HotelEntity> findHotels(@Param("userId") Long userId, Pageable pageable);
+
+
+
+
 
 //    @Query(value = "SELECT htl.hotel_code, htl.hotel_name, htl.city, htl.state, htl.email, " +
 //            "htl.star_rating, htl.availability, htl.active, loc.location_id, loc.location " +
@@ -47,7 +71,7 @@ public interface HotelRepository extends JpaRepository<HotelEntity, Long> {
 //            "INNER JOIN users_hotel uh ON htl.hotel_code = uh.hotel_code " +
 //            "WHERE uh.user_id = :userId", nativeQuery = true)
 //    List<Object[]> getHotelsByUserBasic(@Param("userId") Long userId);
-//    
+//
     
    
 

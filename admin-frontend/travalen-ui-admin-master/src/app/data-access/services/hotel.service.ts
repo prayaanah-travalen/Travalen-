@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HotelReqModel, RoomReqModel } from '../model/hotel-req.model';
 import { CommonService } from './common.service';
-import { map } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Hotel, HotelImage, RoomModel, RoomPriceSlabModel } from '../model/hotel.model';
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -9,6 +9,7 @@ import { DomSanitizer } from '@angular/platform-browser';
   providedIn: 'root'
 })
 export class HotelService {
+  http: any;
 
   constructor(private commonService: CommonService,
     private sanitizer: DomSanitizer) { }
@@ -28,20 +29,45 @@ export class HotelService {
     return this.commonService.httpPOST("hotel/save", payload);
   }
 
-  getHotels() {
+  // getHotels() {
     
-    return this.commonService.httpGET("hotel/hotels")
-      .pipe(map(res=>{
-        let hotelList: Hotel[] = [];
-        res.map( (htl:any)=>{
-          let hotel = this.toHotelModel(htl);
-          if(hotel !== null)   hotelList.push(hotel);
-        })
-        return hotelList;
-      }
+  //   return this.commonService.httpGET("hotel/hotels")
+  //     .pipe(map(res=>{
+  //       let hotelList: Hotel[] = [];
+  //       res.map( (htl:any)=>{
+  //         let hotel = this.toHotelModel(htl);
+  //         if(hotel !== null)   hotelList.push(hotel);
+  //       })
+  //       return hotelList;
+  //     }
 
-    ));
-  }
+  //   ));
+  // }
+
+  getHotels(page: number = 0, size: number = 5): Observable<{
+  content: Hotel[],
+  totalElements: number,
+  totalPages: number,
+  pageable: { pageNumber: number, pageSize: number }
+}> {
+  const url = `hotel/hotels?page=${page}&size=${size}`;
+  return this.commonService.httpGET(url).pipe(
+    map((res: any) => {
+      return {
+        content: (res.content || res).map((htl: any) => this.toHotelModel(htl)).filter((h: null) => h !== null),
+        totalElements: res.totalElements ?? (res.length || 0),
+        totalPages: res.totalPages ?? 1,
+        pageable: {
+          pageNumber: res.pageable?.pageNumber ?? page,
+          pageSize: res.pageable?.pageSize ?? size
+        }
+      };
+    })
+  );
+}
+
+
+
 
   toRoomModel(hotelRooms: any[]): RoomModel[] {
     return hotelRooms.map(rm=>{

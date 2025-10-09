@@ -1,5 +1,6 @@
 import { Dialog, DialogRef } from '@angular/cdk/dialog';
 import { Component, OnInit } from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
 import { HotelReqModel } from 'src/app/data-access/model/hotel-req.model';
 import { Hotel } from 'src/app/data-access/model/hotel.model';
 import { HotelService } from 'src/app/data-access/services/hotel.service';
@@ -17,6 +18,10 @@ export class HotelListComponent implements OnInit {
 
   isLoading = false;
 
+  page = 0;
+  size = 5;
+  totalElements = 0;
+
   constructor(private hotelService:HotelService,
     private dialog: Dialog) { }
 
@@ -31,19 +36,44 @@ export class HotelListComponent implements OnInit {
     
   // }
 
-  getHotels() {
-    this.isLoading = true;
-    this.hotelService.getHotels().subscribe({
-      next: (resp) => {
-        this.hotels = resp;
-        this.isLoading = false;
-      },
-      error: (err) => {
-        console.error('Error loading hotels:', err);
-        this.isLoading = false;
-      }
-    });
+  // getHotels() {
+  //   this.isLoading = true;
+  //   this.hotelService.getHotels().subscribe({
+  //     next: (resp) => {
+  //       this.hotels = resp;
+  //       this.isLoading = false;
+  //     },
+  //     error: (err) => {
+  //       console.error('Error loading hotels:', err);
+  //       this.isLoading = false;
+  //     }
+  //   });
+  // }
+
+  onPageChange(event: PageEvent) {
+    this.page = event.pageIndex;
+    this.size = event.pageSize;
+    this.getHotels(this.page, this.size);
   }
+
+  getHotels(page: number = this.page, size: number = this.size) {
+  this.isLoading = true;
+
+  this.hotelService.getHotels(page, size).subscribe({
+    next: (resp) => {
+      this.hotels = resp.content;                 // array of Hotel
+      this.totalElements = resp.totalElements;    // total items
+      this.page = resp.pageable.pageNumber;       // current page
+      this.size = resp.pageable.pageSize;         // page size
+      this.isLoading = false;
+    },
+    error: (err) => {
+      console.error('Error loading hotels:', err);
+      this.isLoading = false;
+    }
+  });
+}
+
 
   // delete(hotelcode: number) {
 
