@@ -45,12 +45,15 @@
   
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-
-    
-
-
      
     
   </table>
+
+  <mat-paginator
+  [length]="totalElements"
+  [pageSize]="size"
+  [pageIndex]="page"
+  [pageSizeOptions]="[5, 10, 25, 50]"
+  (page)="onPageChange($event)">
+</mat-paginator>
   

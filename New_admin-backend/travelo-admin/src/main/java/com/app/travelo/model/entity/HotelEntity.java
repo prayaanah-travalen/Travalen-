@@ -1,6 +1,7 @@
 package com.app.travelo.model.entity;
 
 import lombok.*;
+import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -78,23 +79,30 @@ public class HotelEntity {
    
     
     
-    @OneToMany(mappedBy = "hotelCode", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "hotelCode", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<HotelImageEntity> hotelImages;
 
-    @OneToMany(mappedBy = "hotelCode" , cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "hotelCode" , cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<HotelRoomEntity> rooms;
 
-    @OneToMany(mappedBy = "hotelCode", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "hotelCode", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<HotelAmenityEntity> amenities;
 
-    @ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
+//    @ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
+//    @JoinTable(
+//            name = "users_hotel",
+//            joinColumns = { @JoinColumn(name = "hotel_code") },
+//            inverseJoinColumns = { @JoinColumn(name = "user_id") }
+//    )
+//    Set< UserEntity > user = new HashSet< UserEntity>();
+
+    @ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
     @JoinTable(
             name = "users_hotel",
             joinColumns = { @JoinColumn(name = "hotel_code") },
             inverseJoinColumns = { @JoinColumn(name = "user_id") }
     )
-    Set< UserEntity > user = new HashSet< UserEntity>();
-//    Set< UserEntity > users = new HashSet< UserEntity>();
+    Set<UserEntity> user = new HashSet<>();
 
     @OneToOne(mappedBy = "hotel", cascade = CascadeType.ALL)
     private FinanceEntity finance;
