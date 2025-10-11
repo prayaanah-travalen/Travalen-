@@ -1,6 +1,7 @@
 package com.app.travelo.controller;
 
 
+import com.app.travelo.model.entity.HotelAmenityEntity;
 import com.app.travelo.model.rest.*;
 import com.app.travelo.services.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,17 @@ public class HotelController {
     @PostMapping(value="/save",  consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE })
     public  ResponseEntity<ResponseDto<HotelDto>> saveHotel(@RequestPart("hotel") HotelRequestDto hotel, @RequestPart(name="hotelImages", required = false) List<MultipartFile> hotelImages) {
         return new ResponseEntity<>(hotelService.saveHotel(hotel, hotelImages), HttpStatus.OK);
+    }
+
+    @PostMapping("/add-amenities")
+    public ResponseEntity<HotelAmenityEntity> addAmenity(@RequestBody HotelAmenityEntity amenity) {
+        HotelAmenityEntity savedAmenity = hotelService.addAmenity(amenity);
+        return ResponseEntity.ok(savedAmenity);
+    }
+
+    @GetMapping("/amenities")
+    public ResponseEntity<List<HotelAmenityEntity>> getAmenities() {
+        return ResponseEntity.ok(hotelService.getAllAmenities());
     }
 
     @PostMapping(value="/room/save",  consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE })

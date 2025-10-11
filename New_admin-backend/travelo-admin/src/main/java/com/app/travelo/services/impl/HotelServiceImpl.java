@@ -216,6 +216,7 @@ public class HotelServiceImpl implements HotelService {
 
             // Save entity
             log.info("Saving hotel entity: {}", htlEntity.getHotelName());
+//            log.info("Saving hotel: {}", htlEntity);
             HotelEntity savedEntity = hotelRepo.save(htlEntity);
             log.info("Hotel saved successfully with ID: {}", savedEntity.getHotelCode());
 
@@ -228,6 +229,17 @@ public class HotelServiceImpl implements HotelService {
             response.setErrorCode("500");
         }
         return response;
+    }
+
+    @Override
+    public HotelAmenityEntity addAmenity(HotelAmenityEntity amenity) {
+        Optional<HotelAmenityEntity> existing = hotelAmenityRepo.findByAmenity(amenity.getAmenity());
+        return existing.orElseGet(() -> hotelAmenityRepo.save(amenity));
+    }
+
+    @Override
+    public List<HotelAmenityEntity> getAllAmenities() {
+        return hotelAmenityRepo.findAll();
     }
 
     @Override

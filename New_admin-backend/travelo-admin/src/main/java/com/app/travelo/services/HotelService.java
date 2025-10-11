@@ -1,5 +1,6 @@
 package com.app.travelo.services;
 
+import com.app.travelo.model.entity.HotelAmenityEntity;
 import com.app.travelo.model.rest.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -9,6 +10,10 @@ import java.util.List;
 
 public interface HotelService {
     ResponseDto<HotelDto> saveHotel(HotelRequestDto hotel, List<MultipartFile> hotelImages);
+
+    HotelAmenityEntity addAmenity(HotelAmenityEntity amenity);
+
+    List<HotelAmenityEntity> getAllAmenities();
 
     List<HotelDto> getHotels();
 
