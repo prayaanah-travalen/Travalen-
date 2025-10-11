@@ -90,7 +90,17 @@
 							<mat-option *ngFor="let amenity of amenities" [value]="amenity">
 							  {{ amenity.description }}
 							</mat-option>
+							<mat-option [value]="'OTHER'">Other</mat-option>
 						  </mat-select>
+						</div>
+
+						<!-- Textbox for Other -->
+						<div *ngIf="showOtherInput" class="other-amenity-input mb-3 d-flex align-items-center gap-2">
+						<input type="text" class="form-control" placeholder="Enter new amenity"
+								[(ngModel)]="otherAmenity" [ngModelOptions]="{standalone: true}">
+						<button type="button" class="btn btn-primary" (click)="addOtherAmenity()">
+							Add
+						</button>
 						</div>
 						
 						<div class="selected-amenities">

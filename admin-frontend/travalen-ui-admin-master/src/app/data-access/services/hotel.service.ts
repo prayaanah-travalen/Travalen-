@@ -122,6 +122,29 @@ export class HotelService {
     ));
   }
 
+  getAllAmenities() {
+  const endPoint = `hotel/amenities`;
+  return this.commonService.httpGET(endPoint)
+    .pipe(
+      map((amenities: any[]) => amenities.map(a => this.toAmenityModel(a)))
+    );
+  }
+
+  addAmenity(amenity: { amenity: string }) {
+    const endPoint = `hotel/add-amenities`;
+    return this.commonService.httpPOST(endPoint, amenity)
+      .pipe(map(a => this.toAmenityModel(a)));
+  }
+
+  // Model transformer (optional helper)
+  private toAmenityModel(a: any) {
+    return {
+      id: a.id,
+      description: a.description
+    };
+  }
+
+
   toHotelImage(images:any) {
     return images.map((img: any)=> {
       let objectURL = 'data:image/png;base64,' + img.image;

@@ -84,6 +84,8 @@ export class HotelManagmentComponent implements OnInit {
   amenityList: any[] = [];
   roomPackage: CommonParamModel[] = [];
   amenities: CommonParamModel[] = [];
+  showOtherInput: boolean = false;
+  otherAmenity: string = '';
 
 
   isLoadingHotel = false;
@@ -258,10 +260,14 @@ export class HotelManagmentComponent implements OnInit {
   }
 
   addAminity(amenity: any) {
+    if (amenity === 'OTHER') {
+    this.showOtherInput = true;
+  } else {
+    this.showOtherInput = false;
     if (amenity && amenity.description && !this.amenityList.includes(amenity.description)) {
       this.amenityList.push(amenity.description);
       this.hotelForm.patchValue({ amenity: '' });
-    }
+    } }
   }
 
   removeAmenity(amenity: string) {
@@ -270,6 +276,24 @@ export class HotelManagmentComponent implements OnInit {
       this.amenityList.splice(index, 1);
       this.announcer.announce(`Removed ${amenity}`);
     }
+  }
+
+  addOtherAmenity() {
+    if (!this.otherAmenity?.trim()) return;
+
+    // Call backend to save new amenity
+    this.hotelService.addAmenity({ amenity: this.otherAmenity }).subscribe({
+      next: (savedAmenity: any) => {
+        console.log("Amenity description: ", savedAmenity);
+        this.amenityList.push(this.otherAmenity);
+        this.hotelForm.patchValue({ amenity: '' });
+        this.otherAmenity = '';
+        this.showOtherInput = false;
+      },
+      error: (err: any) => {
+        console.error('Failed to add amenity', err);
+      }
+    });
   }
 
   imageEmitter(event: File[]) {

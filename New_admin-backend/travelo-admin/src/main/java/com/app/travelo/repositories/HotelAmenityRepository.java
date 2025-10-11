@@ -6,10 +6,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface HotelAmenityRepository extends JpaRepository<HotelAmenityEntity,Long> {
 
     @Query("select ha from HotelAmenityEntity ha where ha.hotelCode.hotelCode=:hotelCode")
     List<HotelAmenityEntity> findByHotelCode(Long hotelCode);
+    Optional<HotelAmenityEntity> findByAmenity(String amenity);
 }

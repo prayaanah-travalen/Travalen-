@@ -1,10 +1,8 @@
 package com.app.travelo.repositories;
 
 import com.app.travelo.model.entity.HotelEntity;
-import com.app.travelo.services.HotelProjection;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
