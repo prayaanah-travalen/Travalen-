@@ -83,7 +83,7 @@ export class HotelManagmentComponent implements OnInit {
   hotelCode: number = 0;
   amenityList: any[] = [];
   roomPackage: CommonParamModel[] = [];
-  amenities: CommonParamModel[] = [];
+  amenities: any[] = [];
   showOtherInput: boolean = false;
   otherAmenity: string = '';
 
@@ -279,22 +279,29 @@ export class HotelManagmentComponent implements OnInit {
   }
 
   addOtherAmenity() {
-    if (!this.otherAmenity?.trim()) return;
+  if (!this.otherAmenity?.trim()) return;
+  console.log("Amenity added:", this.otherAmenity);
+  const newAmenity = { amenity: this.otherAmenity };
 
-    // Call backend to save new amenity
-    this.hotelService.addAmenity({ amenity: this.otherAmenity }).subscribe({
-      next: (savedAmenity: any) => {
-        console.log("Amenity description: ", savedAmenity);
-        this.amenityList.push(this.otherAmenity);
-        this.hotelForm.patchValue({ amenity: '' });
-        this.otherAmenity = '';
-        this.showOtherInput = false;
-      },
-      error: (err: any) => {
-        console.error('Failed to add amenity', err);
-      }
-    });
-  }
+  this.hotelService.addAmenity(newAmenity).subscribe({
+    next: (savedAmenity: any) => {
+      console.log("Amenity added:", savedAmenity);
+
+      this.amenities.push(savedAmenity);
+      this.amenityList.push(savedAmenity.description);
+
+      this.hotelForm.patchValue({ amenity: '' });
+      this.otherAmenity = '';
+      this.showOtherInput = false;
+    },
+    error: (err: any) => {
+      console.error('Failed to add amenity', err);
+    }
+  });
+}
+
+
+
 
   imageEmitter(event: File[]) {
     this.hotelImages = event;

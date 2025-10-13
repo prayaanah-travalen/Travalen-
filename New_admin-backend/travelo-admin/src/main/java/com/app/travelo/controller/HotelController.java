@@ -13,7 +13,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("api/hotel")
@@ -28,9 +30,14 @@ public class HotelController {
     }
 
     @PostMapping("/add-amenities")
-    public ResponseEntity<HotelAmenityEntity> addAmenity(@RequestBody HotelAmenityEntity amenity) {
+    public ResponseEntity<Map<String, Object>> addAmenity(@RequestBody HotelAmenityEntity amenity) {
         HotelAmenityEntity savedAmenity = hotelService.addAmenity(amenity);
-        return ResponseEntity.ok(savedAmenity);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("id", savedAmenity.getAmenityId());
+        response.put("description", savedAmenity.getAmenity()); // <-- use description here
+
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/amenities")

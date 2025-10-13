@@ -1,5 +1,6 @@
 package com.app.travelo.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @EqualsAndHashCode
 @NoArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "hotel_amenity")
 public class HotelAmenityEntity {
     @Id
@@ -23,6 +25,7 @@ public class HotelAmenityEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "hotel_code")
+    @JsonIgnoreProperties({"amenities", "hibernateLazyInitializer", "handler"})
     private HotelEntity hotelCode;
 
 }

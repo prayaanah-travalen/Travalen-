@@ -231,9 +231,16 @@ public class HotelServiceImpl implements HotelService {
         return response;
     }
 
+//    @Override
+//    public HotelAmenityEntity addAmenity(HotelAmenityEntity amenity) {
+//        Optional<HotelAmenityEntity> existing = hotelAmenityRepo.findByAmenity(amenity.getAmenity());
+//        return existing.orElseGet(() -> hotelAmenityRepo.save(amenity));
+//    }
+
     @Override
     public HotelAmenityEntity addAmenity(HotelAmenityEntity amenity) {
         Optional<HotelAmenityEntity> existing = hotelAmenityRepo.findByAmenity(amenity.getAmenity());
+        // If already exists, just return it instead of saving duplicate
         return existing.orElseGet(() -> hotelAmenityRepo.save(amenity));
     }
 
