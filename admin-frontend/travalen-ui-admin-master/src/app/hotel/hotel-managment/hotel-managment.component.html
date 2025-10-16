@@ -147,6 +147,7 @@
 					<div class="col-12">
 					  <div class="upload-section">
 						<label class="form-label">Upload Hotel Images</label>
+						<small class="text-muted d-block mb-2">Supports only JPG/JPEG images</small>
 						<app-file-upload
 						  [disabled]="hotelAction === 'MODIFY'"
 						  (imageEmitter)="imageEmitter($event)"
@@ -157,6 +158,44 @@
 					</div>
 				  </div>
 				</div>
+
+				<!-- <div class="form-section">
+  <div class="upload-section">
+    <label class="form-label">Upload Hotel Images</label>
+    <small class="text-muted d-block mb-2">
+      Supports only JPG/JPEG images
+    </small>
+
+    <div class="upload-wrapper">
+
+  <app-file-upload
+    [disabled]="hotelAction === 'MODIFY'"
+    (imageEmitter)="imageEmitter($event)"
+    (deletedImageEmitter)="deletedImage($event)"
+  ></app-file-upload>
+
+
+  <div class="image-list-wrapper">
+    <div
+      cdkDropList
+      [cdkDropListData]="savedImages"
+      class="image-list"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <div class="image-item" *ngFor="let img of savedImages; let i = index" cdkDrag>
+        <img [src]="img.displayUrl" alt="hotel image" />
+        <div class="drag-handle" cdkDragHandle>☰</div>
+        <button type="button" class="delete-btn" (click)="imageDeleted(i)">×</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+</div> -->
+
+
+
   
 				<!-- Action Buttons -->
 				<div class="form-actions">

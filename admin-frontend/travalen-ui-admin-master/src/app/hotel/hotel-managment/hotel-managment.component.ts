@@ -14,6 +14,7 @@ import { CommonParamModel } from 'src/app/data-access/model/common-param.model';
 import { UtilService } from 'src/app/data-access/services/utils.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserStateService } from 'src/app/data-access/services/user-state.service';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-hotel-managment',
@@ -306,10 +307,6 @@ export class HotelManagmentComponent implements OnInit {
   imageEmitter(event: File[]) {
     this.hotelImages = event;
   }
-
-  
-
- 
 
   saveHotel() {
     console.log('=== SAVE HOTEL DEBUG INFO ===');

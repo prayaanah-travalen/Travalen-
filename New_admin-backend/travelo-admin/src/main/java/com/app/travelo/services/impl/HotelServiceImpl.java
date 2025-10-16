@@ -587,7 +587,7 @@ public class HotelServiceImpl implements HotelService {
             booked = booking.stream().mapToInt(bk->bk.getBookingDetails().stream().mapToInt(BookingDetailsEntity::getNoOfRooms).sum()).sum();
         }
 
-       return HotelRoomDto.builder()
+        return HotelRoomDto.builder()
                 .hotelRoomId(rm.getHotelRoomId())
                 .price(rm.getPrice())
                 .hotelCode(rm.getHotelCode().getHotelCode())
@@ -596,15 +596,24 @@ public class HotelServiceImpl implements HotelService {
                 .priceSlab(toPriceSlabRoomList(rm.getPriceSlab()))
                 .roomName(rm.getRoomName())
                 .roomImages(toRoomImageList(rm.getRoomImages()))
-                .amenities(rm.getAmenities().stream().map(RoomAmenityEntity::getAmenity).collect(Collectors.toList()))
-                .roomTags(rm.getRoomTags().stream().map(RoomTagEntity::getRoomTag).collect(Collectors.toList()))
+                .amenities(
+                        rm.getAmenities() != null
+                                ? rm.getAmenities().stream().map(RoomAmenityEntity::getAmenity).collect(Collectors.toList())
+                                : Collections.emptyList()
+                )
+                .roomTags(
+                        rm.getRoomTags() != null
+                                ? rm.getRoomTags().stream().map(RoomTagEntity::getRoomTag).collect(Collectors.toList())
+                                : Collections.emptyList()
+                )
                 .bedType(rm.getBedType())
                 .noOfRooms(rm.getNoOfRooms())
-                .noOfAvailableRooms( rm.getNoOfRooms() - booked)
+                .noOfAvailableRooms(rm.getNoOfRooms() - booked)
                 .roomPackage(rm.getMealsPackage())
                 .extraBedCostAdult(rm.getExtraBedCostAdult())
                 .extraBedCostChild(rm.getExtraBedCostChild())
                 .build();
+
     }
 
 
@@ -719,10 +728,15 @@ public class HotelServiceImpl implements HotelService {
                 .build())
             .collect(Collectors.toList());
 
-        return  HotelDto.builder()
+        return HotelDto.builder()
                 .hotelCode(htl.getHotelCode())
                 .hotelName(htl.getHotelName())
-                .location(LocationDto.builder().locationId(htl.getLocation().getLocationId()).location(htl.getLocation().getLocation()).build())
+                .location(htl.getLocation() != null
+                        ? LocationDto.builder()
+                        .locationId(htl.getLocation().getLocationId())
+                        .location(htl.getLocation().getLocation())
+                        .build()
+                        : null)
                 .state(htl.getState())
                 .city(htl.getCity())
                 .address(htl.getAddress())
@@ -733,12 +747,17 @@ public class HotelServiceImpl implements HotelService {
                 .propertyRule(htl.getPropertyRule())
                 .websiteLink(htl.getWebsiteLink())
                 .email(htl.getEmail())
-                .amenities(htl.getAmenities().stream().map(HotelAmenityEntity::getAmenity).collect(Collectors.toList()))
+                .amenities(htl.getAmenities() != null
+                        ? htl.getAmenities().stream()
+                        .filter(Objects::nonNull)
+                        .map(HotelAmenityEntity::getAmenity)
+                        .collect(Collectors.toList())
+                        : Collections.emptyList())
                 .latitude(htl.getLatitude())
                 .longitude(htl.getLongitude())
-
                 .contactDetails(contactPersons)
                 .build();
+
     }
 
 

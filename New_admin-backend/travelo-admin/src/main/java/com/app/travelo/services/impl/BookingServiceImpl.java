@@ -196,22 +196,40 @@ public class BookingServiceImpl implements BookingService {
         return HotelRoomDto.builder()
                 .hotelRoomId(rm.getHotelRoomId())
                 .price(rm.getPrice())
-                .hotelCode(rm.getHotelCode().getHotelCode())
+                .hotelCode(rm.getHotelCode() != null ? rm.getHotelCode().getHotelCode() : null)
                 .roomDescription(rm.getRoomDescription())
                 .occupancy(rm.getOccupancy())
                 .roomName(rm.getRoomName())
-                .amenities(rm.getAmenities().stream().map(RoomAmenityEntity::getAmenity).collect(Collectors.toList()))
-                .roomTags(rm.getRoomTags().stream().map(RoomTagEntity::getRoomTag).collect(Collectors.toList()))
+                .amenities(rm.getAmenities() != null
+                        ? rm.getAmenities().stream()
+                        .filter(Objects::nonNull)
+                        .map(RoomAmenityEntity::getAmenity)
+                        .collect(Collectors.toList())
+                        : Collections.emptyList())
+                .roomTags(rm.getRoomTags() != null
+                        ? rm.getRoomTags().stream()
+                        .filter(Objects::nonNull)
+                        .map(RoomTagEntity::getRoomTag)
+                        .collect(Collectors.toList())
+                        : Collections.emptyList())
                 .bedType(rm.getBedType())
                 .build();
+
     }
 
     public HotelDto toHotelDto(HotelEntity htl) {
 
-        return  HotelDto.builder()
+        return HotelDto.builder()
                 .hotelCode(htl.getHotelCode())
                 .hotelName(htl.getHotelName())
-                .location(LocationDto.builder().locationId(htl.getLocation().getLocationId()).location(htl.getLocation().getLocation()).build())
+                .location(
+                        htl.getLocation() != null
+                                ? LocationDto.builder()
+                                .locationId(htl.getLocation().getLocationId())
+                                .location(htl.getLocation().getLocation())
+                                .build()
+                                : null
+                )
                 .state(htl.getState())
                 .city(htl.getCity())
                 .address(htl.getAddress())
@@ -220,8 +238,15 @@ public class BookingServiceImpl implements BookingService {
                 .propertyRule(htl.getPropertyRule())
                 .websiteLink(htl.getWebsiteLink())
                 .email(htl.getEmail())
-                .amenities(htl.getAmenities().stream().map(HotelAmenityEntity::getAmenity).collect(Collectors.toList()))
+                .amenities(
+                        htl.getAmenities() != null
+                                ? htl.getAmenities().stream()
+                                .map(HotelAmenityEntity::getAmenity)
+                                .collect(Collectors.toList())
+                                : Collections.emptyList()
+                )
                 .build();
+
     }
 
     private LocationDto toLocationDto(LocationEntity location) {
