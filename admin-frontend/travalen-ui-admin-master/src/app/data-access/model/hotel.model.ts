@@ -1,4 +1,4 @@
-import { SafeResourceUrl } from "@angular/platform-browser";
+import { SafeResourceUrl, SafeUrl } from "@angular/platform-browser";
 import { LocationModel } from "./location.model"
 import { PriceSlabModel } from "./price-slab.model";
 
@@ -27,6 +27,7 @@ export interface HotelImage {
     image: any,
     imageName: string,
     imageByte: any
+    displayUrl: SafeUrl; // for rendering only
 }
 
 export interface RoomModel {

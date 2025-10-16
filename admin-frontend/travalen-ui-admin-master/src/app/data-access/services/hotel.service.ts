@@ -145,20 +145,35 @@ export class HotelService {
   }
 
 
-  toHotelImage(images:any) {
-    return images.map((img: any)=> {
-      let objectURL = 'data:image/png;base64,' + img.image;
-      let images: HotelImage = {
-        imageId: img.imageId,
-        // image: img.image
-        image: this.sanitizer.bypassSecurityTrustUrl(objectURL),
-        imageName: img.imageName,
-        imageByte: img.image
-      }
-      return images
-    })
+  // toHotelImage(images:any) {
+  //   return images.map((img: any)=> {
+  //     let objectURL = 'data:image/png;base64,' + img.image;
+  //     let images: HotelImage = {
+  //       imageId: img.imageId,
+  //       // image: img.image
+  //       image: this.sanitizer.bypassSecurityTrustUrl(objectURL),
+  //       imageName: img.imageName,
+  //       imageByte: img.image
+  //     }
+  //     return images
+  //   })
 
-  }
+  // }
+
+  toHotelImage(images: any) {
+  return images.map((img: any) => {
+    let objectURL = 'data:image/png;base64,' + img.image;
+    let hotelImage: HotelImage = {
+      imageId: img.imageId,
+      image: this.sanitizer.bypassSecurityTrustUrl(objectURL),
+      imageName: img.imageName,
+      imageByte: img.image,
+      displayUrl: this.sanitizer.bypassSecurityTrustUrl(objectURL)
+    };
+    return hotelImage;
+  });
+}
+
 
   toHotelModel(htl: any) {
     if(htl && htl !== null) {

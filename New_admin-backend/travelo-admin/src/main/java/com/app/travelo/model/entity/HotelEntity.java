@@ -4,6 +4,7 @@ import lombok.*;
 import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -86,7 +87,7 @@ public class HotelEntity {
     private List<HotelRoomEntity> rooms;
 
     @OneToMany(mappedBy = "hotelCode", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<HotelAmenityEntity> amenities;
+    private List<HotelAmenityEntity> amenities = new ArrayList<>();
 
 //    @ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
 //    @JoinTable(

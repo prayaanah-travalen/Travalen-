@@ -10,6 +10,7 @@ import { LoaderService } from './shared/app-loader/services/loader.service';
 import { AppLoaderModule } from './shared/app-loader/app-loader.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 
 
@@ -26,8 +27,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     ToastrModule.forRoot(),
     AppLoaderModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule
+    MatSnackBarModule,
     // NgbModule
+    DragDropModule
   ],
   providers: [
      LoaderService,
