@@ -221,8 +221,6 @@ export class HotelManagmentComponent implements OnInit {
       hotelId = JSON.parse(cachedSearchInput);
       console.log("hotelId inside if: ", hotelId);
     }
-
-    console.log("hotelId: ", hotelId);
     
     if (hotelId === 0) {
       // New hotel case
@@ -230,8 +228,6 @@ export class HotelManagmentComponent implements OnInit {
       this.hotelForm.enable();
       return;
     }
-
-    console.log("hotelId: ", hotelId);
   
     this.isLoadingHotel = true;
     this.hotelService.getHotelById(hotelId).subscribe({
