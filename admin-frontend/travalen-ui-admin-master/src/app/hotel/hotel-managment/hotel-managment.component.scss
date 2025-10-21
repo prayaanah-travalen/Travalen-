@@ -239,8 +239,17 @@ body {
 }
 
 /* ====================== ROOM DETAILS STYLES ====================== */
-.rooms-container {
+.rooms-container, .finance-container {
   padding: 30px;
+}
+
+.save-finance-btn {
+  margin-right: 30px;
+}
+
+.save-contact-btn {
+  margin-right: 30px;
+  margin-bottom: 30px;
 }
 
 .room-card {
