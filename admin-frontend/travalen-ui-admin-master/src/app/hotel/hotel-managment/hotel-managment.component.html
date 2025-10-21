@@ -352,6 +352,7 @@
 			  </div>
   
 			  <!-- Bank Details -->
+			   <div class="finance-container">
 			  <div class="form-section">
 				<div class="row g-3">
 				  <div class="col-12 col-md-6">
@@ -384,6 +385,7 @@
 				  </div>
 				</div>
 			  </div>
+			  </div>
   
 			  <!-- GST Information -->
 			  <div class="form-section">
@@ -391,7 +393,7 @@
 				  <p class="mb-2">Due to regulations established by the Indian government, we need your GST registration and PAN details. By submitting this information, you confirm that your PAN and state registration are accurate.</p>
 				  <p class="mb-0"><strong>IMPORTANT:</strong> As of 04/03/2019, any changes in your GST registration will only be taken into account from the moment you enter these details into our system.</p>
 				</div>
-  
+  <div class="finance-container">
 				<div class="mb-3">
 				  <label class="form-label fw-bold">Are you registered for GST purposes?</label>
 				  <div class="form-check-container">
@@ -421,12 +423,12 @@
 			  <!-- Save Button -->
 			  <div class="form-actions">
 				<div class="d-flex justify-content-end">
-				  <button class="btn btn-primary" (click)="saveFinance()">
+				  <button class="btn btn-primary save-finance-btn" (click)="saveFinance()">
 					<i class="fas fa-save me-2"></i>Save Finances
 				  </button>
 				</div>
 			  </div>
-  
+  </div>
 			</div>
 		  </form>
 		</div>
@@ -495,7 +497,7 @@
 			<h4 class="form-title">Contact Person</h4>
 		  </div>
   
-		  <div class="form-section">
+		  <div class="form-section finance-container">
 			<div class="row g-3">
 			  <div class="col-12 col-md-6">
 				<label class="form-label">First Name</label>
@@ -526,7 +528,7 @@
   
 		  <div class="form-actions">
 			<div class="d-flex justify-content-end">
-			  <button type="submit" class="btn btn-primary" [disabled]="isSaving">
+			  <button type="submit" class="btn btn-primary save-contact-btn" [disabled]="isSaving">
 				<i class="fas fa-save me-2"></i>
 				<span *ngIf="!isSaving">Save Contact</span>
 				<span *ngIf="isSaving">

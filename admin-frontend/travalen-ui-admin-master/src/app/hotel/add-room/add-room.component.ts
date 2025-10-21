@@ -199,7 +199,7 @@ export class AddRoomComponent implements OnInit {
           duration: 3000,
           panelClass: ['success-snackbar']
         });
-        this.dialog.close();
+        this.dialog.close(true);
       } else {
         // Failure Toaster Message based on API response
         this.snackBar.open('Failed to save room. Please try again.', 'Dismiss', {

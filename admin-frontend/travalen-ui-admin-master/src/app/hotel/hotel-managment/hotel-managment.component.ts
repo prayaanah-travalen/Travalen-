@@ -213,11 +213,16 @@ export class HotelManagmentComponent implements OnInit {
 
 
   getHotelById() {
+    console.log("inside get hotel");
     let hotelId = 0;
     let cachedSearchInput = localStorage.getItem("hotelId");
+    console.log("cachedSearchInput: ", cachedSearchInput);
     if (cachedSearchInput && cachedSearchInput !== null) {
       hotelId = JSON.parse(cachedSearchInput);
+      console.log("hotelId inside if: ", hotelId);
     }
+
+    console.log("hotelId: ", hotelId);
     
     if (hotelId === 0) {
       // New hotel case
@@ -225,12 +230,16 @@ export class HotelManagmentComponent implements OnInit {
       this.hotelForm.enable();
       return;
     }
+
+    console.log("hotelId: ", hotelId);
   
     this.isLoadingHotel = true;
     this.hotelService.getHotelById(hotelId).subscribe({
       next: (resp) => {
+        console.log("resp: ", resp);
         if (resp !== null) {
           this.hotel = resp;
+          console.log("rooms: ", this.hotel.rooms);
           // FIX: Add this line to properly set the hotelCode property
           this.hotelCode = this.hotel.hotelCode; 
           localStorage.setItem("hotelId", JSON.stringify(this.hotel?.hotelCode));
@@ -361,8 +370,10 @@ export class HotelManagmentComponent implements OnInit {
   
           if (!this.hotelCode || this.hotelCode === 0) {
             this.hotelCode = this.hotel.hotelCode;
-            localStorage.setItem("hotelId", JSON.stringify(this.hotel?.hotelCode));
           }
+
+          localStorage.setItem("hotelId", JSON.stringify(this.hotel?.hotelCode));
+          console.log("local storage hotelId: ", localStorage.getItem("hotelId"));
           
           this.userStateService.updateHotelName(this.hotel.hotelName || '');
 
@@ -478,16 +489,34 @@ export class HotelManagmentComponent implements OnInit {
     this.amenityList = hotel.amenities ? [...hotel.amenities] : [];
   }
 
+  // addRoom() {
+  //   this.dialog.open(AddRoomComponent, {
+  //     data: {
+  //       hotelCode: this.hotel.hotelCode,
+  //       action: "ADD"
+  //     }
+  //   }).closed.subscribe(resp => {
+  //     this.getHotelById();
+  //   });
+  // }
+
   addRoom() {
-    this.dialog.open(AddRoomComponent, {
-      data: {
-        hotelCode: this.hotel.hotelCode,
-        action: "ADD"
-      }
-    }).closed.subscribe(resp => {
-      this.getHotelById();
-    });
-  }
+  const dialogRef = this.dialog.open(AddRoomComponent, {
+    data: {
+      hotelCode: this.hotel.hotelCode,
+      action: "ADD"
+    }
+  });
+
+  dialogRef.closed.subscribe((resp) => {
+    console.log('Dialog closed:', resp);
+    if (resp) {
+      console.log("resp is true");
+      this.getHotelById(); // reload the hotel details
+    }
+  });
+}
+
 
   editRoom(room: RoomModel) {
     this.dialog.open(AddRoomComponent, {
